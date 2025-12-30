@@ -96,11 +96,13 @@
         </div>
 
         <!-- Mobile Search Dropdown -->
-        <div id="mobile-search-area" class="hidden md:hidden px-4 pb-4 border-t border-slate-100 bg-white">
+        <div id="mobile-search-area" class="hidden md:hidden px-4 pb-4 border-t border-slate-100 bg-white shadow-lg">
              <div class="relative mt-3">
                 <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
                 <input type="text" id="mobile-search" onkeyup="filterToolsMobile()" placeholder="Araç ara..." class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 bg-slate-50">
             </div>
+            <!-- Mobile Search Results Container -->
+            <div id="mobile-results" class="hidden mt-4 space-y-2 max-h-60 overflow-y-auto"></div>
         </div>
     </header>
 
@@ -234,6 +236,9 @@
 
         // --- GEMINI API HELPER ---
         async function callGemini(prompt, systemPrompt) {
+            if(!apiKey) {
+                 return "Lütfen geçerli bir API Anahtarı giriniz. (Google Gemini API)";
+            }
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
@@ -347,7 +352,7 @@
             { id: 'karzarar', cat: 'Finans', name: 'Kâr Marjı', inputs: [{id:'cost',l:'Maliyet',p:'100'}, {id:'sell',l:'Satış Fiyatı',p:'150'}], btn:'Analiz Et', color:'blue' },
             { id: 'bilesik', cat: 'Finans', name: 'Bileşik Faiz', inputs: [{id:'p',l:'Anapara',p:'10000'}, {id:'r',l:'Yıllık Getiri %',p:'20'}, {id:'t',l:'Yıl',p:'5'}], btn:'Hesapla', color:'blue' },
             { id: 'kk_asgari', cat: 'Finans', name: 'K.K. Asgari Ödeme', inputs: [{id:'lim',l:'Kart Limiti',p:'50000'}, {id:'debt',l:'Dönem Borcu',p:'15000'}], btn:'Hesapla', color:'blue' },
-            { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu', inputs: [{id:'price',l:'Satış Bedeli',p:'3000000'}], btn:'Hesapla', color:'blue' },
+            { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu (Tek Taraf)', inputs: [{id:'price',l:'Satış Bedeli',p:'3000000'}], btn:'Hesapla', color:'blue' },
             { id: 'zam', cat: 'Finans', name: 'Maaş Zam', inputs: [{id:'curr',l:'Mevcut Maaş',p:'17002'}, {id:'rate',l:'Zam %',p:'30'}], btn:'Hesapla', color:'blue' },
 
             // 3. SAĞLIK
@@ -363,7 +368,7 @@
             { id: 'makro', cat: 'Sağlık', name: 'Günlük Makro İhtiyacı', inputs: [{id:'cal',l:'Hedef Kalori',p:'2000'}], btn:'Planla', color:'green' },
             { id: 'su', cat: 'Sağlık', name: 'Su Tüketimi', inputs: [{id:'w',l:'Kilo (kg)',p:'70'}], btn:'Hesapla', color:'green' },
             { id: 'gebelik', cat: 'Sağlık', name: 'Doğum Tarihi (SAT)', inputs: [{id:'date',l:'Son Adet Tarihi',type:'date'}], btn:'Hesapla', color:'green' },
-            { id: 'sigara', cat: 'Sağlık', name: 'Sigara Maliyeti', inputs: [{id:'price',l:'Paket Fiyatı',p:'60'}, {id:'daily',l:'Günlük Adet',p:'20'}], btn:'Zararı Gör', color:'green' },
+            { id: 'sigara', cat: 'Sağlık', name: 'Sigara Maliyeti', inputs: [{id:'price',l:'Paket Fiyatı',p:'60'}, {id:'daily',l:'Günlük Adet (Tek)',p:'20'}], btn:'Zararı Gör', color:'green' },
             { id: 'nabiz', cat: 'Sağlık', name: 'Spor Nabız Aralığı', inputs: [{id:'age',l:'Yaş',p:'30'}], btn:'Hesapla', color:'green' },
 
             // 4. EĞİTİM & MATEMATİK
@@ -530,6 +535,33 @@
             filterTools();
         }
 
+        function filterToolsMobile() {
+            const q = document.getElementById('mobile-search').value.toLowerCase();
+            const container = document.getElementById('mobile-results');
+            if(!container) return;
+
+            container.innerHTML = '';
+            if(q.length < 2) { container.classList.add('hidden'); return; }
+
+            const matches = tools.filter(t => t.name.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q));
+
+            if(matches.length > 0) {
+                container.classList.remove('hidden');
+                matches.forEach(t => {
+                    const btn = document.createElement('button');
+                    btn.className = 'w-full text-left px-4 py-3 bg-slate-50 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center justify-between group';
+                    btn.innerHTML = `<span>${t.name}</span> <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-blue-400"></i>`;
+                    btn.onclick = () => {
+                        switchTab(t.id);
+                        document.getElementById('mobile-search-area').classList.add('hidden');
+                    };
+                    container.appendChild(btn);
+                });
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
         // --- CORE CALCULATORS ---
         function showRes(id, mainTxt, detailTxt = '') {
             const r = document.getElementById(`res-${id}`);
@@ -547,6 +579,11 @@
             const q = getVal('ai_asistan', 'q');
             if(!q) return;
             showRes('ai_asistan', '<i class="fa-solid fa-spinner fa-spin"></i> Düşünüyorum...', '');
+
+            if(!apiKey) {
+                showRes('ai_asistan', 'Lütfen kod içerisine geçerli bir API Anahtarı giriniz (Google Gemini).');
+                return;
+            }
 
             try {
                 const answer = await callGemini(q, "Sen yardımsever ve zeki bir hesaplama asistanısın. Kullanıcının matematiksel, finansal, mantıksal veya genel kültür sorularını Türkçe olarak yanıtla. Cevabın kısa, net ve anlaşılır olsun. Eğer bir hesaplama yapıyorsan işlemi adım adım kısaca açıkla.");
@@ -567,6 +604,11 @@
 
             if(!w || !h) return;
             showRes('ai_diyet', '<i class="fa-solid fa-spinner fa-spin"></i> Plan hazırlanıyor...', '');
+
+            if(!apiKey) {
+                showRes('ai_diyet', 'Lütfen kod içerisine geçerli bir API Anahtarı giriniz (Google Gemini).');
+                return;
+            }
 
             const prompt = `Kilo: ${w}kg, Boy: ${h}cm, Hedef: ${goal}. Bana 1 günlük örnek bir beslenme planı oluştur.`;
             const sys = "Sen uzman bir diyetisyensin. Verilen bilgilere göre kişiye özel, sağlıklı ve uygulanabilir 1 günlük örnek beslenme programı (Kahvaltı, Öğle, Akşam, Ara Öğün) oluştur. Cevabın Türkçe ve liste formatında olsun. Kalori miktarını da tahmini olarak belirt.";
@@ -617,7 +659,7 @@
         // 3. Kıdem
         function calc_kidem() {
             const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); const sal = getNum('kidem','salary');
-            if (!s || !e || !sal || isNaN(s) || isNaN(e)) return;
+            if (isNaN(s.getTime()) || isNaN(e.getTime()) || !sal) return;
 
             const diffTime = Math.abs(e - s);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -632,7 +674,7 @@
 
             const gross = sal * tenureYears;
             const net = gross * 0.99241;
-            showRes('kidem', `${net.toLocaleString('tr-TR', {maximumFractionDigits: 2})} TL`, `${years} Yıl ${months} Ay ${days} Gün`);
+            showRes('kidem', `${net.toLocaleString('tr-TR', {maximumFractionDigits: 2, minimumFractionDigits: 2})} TL`, `${years} Yıl ${months} Ay ${days} Gün Hizmet`);
         }
 
         // 4. BMI
@@ -664,7 +706,12 @@
         function calc_nabiz() { const a=getNum('nabiz','age'); showRes('nabiz', (220-a)+' bpm (Max)'); }
         function calc_su() { showRes('su', (getNum('su','w')*0.033).toFixed(1)+' Litre'); }
         function calc_gebelik() { const d=new Date(getVal('gebelik','date')); d.setDate(d.getDate()+280); showRes('gebelik', d.toLocaleDateString('tr-TR')); }
-        function calc_sigara() { const p=getNum('sigara','price'), d=getNum('sigara','daily'); showRes('sigara', (p*d*365).toLocaleString()+' TL / Yıl'); }
+        function calc_sigara() {
+            const p = getNum('sigara','price');
+            const d = getNum('sigara','daily');
+            const cost = p * (d / 20) * 365;
+            showRes('sigara', cost.toLocaleString('tr-TR', {maximumFractionDigits: 0}) + ' TL / Yıl');
+        }
         function calc_yuzde() { const a=getNum('yuzde','a'), b=getNum('yuzde','b'); showRes('yuzde', (a*b/100).toFixed(2)); }
         function calc_sinav() { const v=getNum('sinav','v'), f=getNum('sinav','f'); const av=v*0.4+f*0.6; showRes('sinav', av.toFixed(1), av>=50?'Geçti':'Kaldı'); }
         function calc_takdir() { const a=getNum('takdir','avg'); showRes('takdir', a>=85?'Takdir':a>=70?'Teşekkür':'Belge Yok'); }
@@ -672,10 +719,19 @@
         function calc_kelime() { showRes('kelime', getVal('kelime','txt').trim().split(/\s+/).filter(x=>x).length+' Kelime'); }
         function calc_internet() { const s=getNum('internet','size'), sp=getNum('internet','spd'); showRes('internet', ((s*8192)/sp/60).toFixed(1)+' Dakika'); }
         function calc_yakit() { const k=getNum('yakit','km'), l=getNum('yakit','lit'), p=getNum('yakit','pr'); showRes('yakit', ((k/100)*l*p).toFixed(2)+' TL'); }
-        function calc_yas() { const d=new Date(getVal('yas','date')); const n=new Date(); showRes('yas', (n.getFullYear()-d.getFullYear())+' Yaş'); }
+        function calc_yas() {
+            const d = new Date(getVal('yas','date'));
+            const n = new Date();
+            let age = n.getFullYear() - d.getFullYear();
+            const m = n.getMonth() - d.getMonth();
+            if (m < 0 || (m === 0 && n.getDate() < d.getDate())) {
+                age--;
+            }
+            showRes('yas', age + ' Yaş');
+        }
         function calc_gun() { const d1=new Date(getVal('gun','d1')), d2=new Date(getVal('gun','d2')); showRes('gun', Math.floor(Math.abs((d2-d1)/864e5))+' Gün'); }
         function calc_sifre() {
-            const l=getNum('sifre','len');
+            const l = getNum('sifre','len');
             const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
             let retVal = "";
             for (let i = 0; i < l; ++i) {
