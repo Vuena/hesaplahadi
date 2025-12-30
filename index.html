@@ -230,13 +230,19 @@
     </footer>
 
     <script>
-        const apiKey = ""; // API Key execution environment tarafından sağlanır
+        let apiKey = localStorage.getItem('gemini_api_key') || "";
 
         // --- GEMINI API HELPER ---
-        async function callGemini(prompt, systemPrompt) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        async function callGemini(userPrompt, systemPrompt) {
+            if (!apiKey) {
+                apiKey = window.prompt("Lütfen Gemini API Anahtarınızı girin (Sadece tarayıcınızda saklanır):");
+                if (apiKey) localStorage.setItem('gemini_api_key', apiKey);
+                else throw new Error("API Key eksik");
+            }
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
+                contents: [{ parts: [{ text: userPrompt }] }],
                 systemInstruction: { parts: [{ text: systemPrompt }] }
             };
 
@@ -248,7 +254,14 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-                    if (!response.ok) throw new Error(response.statusText);
+                    if (!response.ok) {
+                        if (response.status === 400 || response.status === 403) {
+                            localStorage.removeItem('gemini_api_key');
+                            apiKey = ""; // Reset for next try
+                            throw new Error("Geçersiz API Anahtarı. Lütfen tekrar deneyin.");
+                        }
+                        throw new Error(response.statusText);
+                    }
                     const data = await response.json();
                     return data.candidates[0].content.parts[0].text;
                 } catch (error) {
@@ -554,7 +567,7 @@
                 const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
                 showRes('ai_asistan', formatted);
             } catch (e) {
-                showRes('ai_asistan', 'Üzgünüm, şu an bağlantı kuramıyorum. Lütfen daha sonra tekrar deneyin.');
+                showRes('ai_asistan', 'Bağlantı Hatası: ' + (e.message || 'Bilinmeyen hata'), 'API Anahtarınızı kontrol edip tekrar deneyin.');
             }
         }
 
@@ -576,7 +589,7 @@
                 const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
                 showRes('ai_diyet', formatted);
             } catch (e) {
-                showRes('ai_diyet', 'Plan oluşturulamadı. Lütfen tekrar deneyin.');
+                showRes('ai_diyet', 'Plan oluşturulamadı: ' + (e.message || 'Hata'), 'Lütfen API anahtarınızı kontrol edin.');
             }
         }
 
