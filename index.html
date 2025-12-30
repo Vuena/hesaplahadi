@@ -230,16 +230,12 @@
     </footer>
 
     <script>
-        let apiKey = localStorage.getItem('gemini_api_key') || "";
+        // API Key Obfuscation (Simple Base64) - Not foolproof but hides it from plain sight
+        const _k = "QUl6YVN5Qzh6SGxSTkZvck1peW5tM01qUnFNc3RvWjRNczBwQVdR";
+        const apiKey = atob(_k);
 
         // --- GEMINI API HELPER ---
         async function callGemini(userPrompt, systemPrompt) {
-            if (!apiKey) {
-                apiKey = window.prompt("Lütfen Gemini API Anahtarınızı girin (Sadece tarayıcınızda saklanır):");
-                if (apiKey) localStorage.setItem('gemini_api_key', apiKey);
-                else throw new Error("API Key eksik");
-            }
-
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: userPrompt }] }],
@@ -254,14 +250,7 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-                    if (!response.ok) {
-                        if (response.status === 400 || response.status === 403) {
-                            localStorage.removeItem('gemini_api_key');
-                            apiKey = ""; // Reset for next try
-                            throw new Error("Geçersiz API Anahtarı. Lütfen tekrar deneyin.");
-                        }
-                        throw new Error(response.statusText);
-                    }
+                    if (!response.ok) throw new Error(response.statusText);
                     const data = await response.json();
                     return data.candidates[0].content.parts[0].text;
                 } catch (error) {
