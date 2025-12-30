@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KDV, Tevkifat, Kredi, Kıdem Tazminatı ve Yapay Zeka destekli hesaplama araçları. HesaplaHadi ile iş ve günlük hayatınızı kolaylaştırın.">
-    <meta name="keywords" content="kdv hesaplama, yapay zeka hesaplama, diyet listesi hazırla, kredi hesaplama, maaş hesaplama, kıdem tazminatı">
+    <meta name="description" content="HesaplaHadi ile KDV, Tevkifat, Kredi, Kıdem Tazminatı ve Yapay Zeka destekli hesaplama araçlarını ücretsiz kullanın. Finans, sağlık ve eğitim hesaplamaları tek adreste.">
+    <meta name="keywords" content="kdv hesaplama, yapay zeka hesaplama, diyet listesi hazırla, kredi hesaplama, maaş hesaplama, kıdem tazminatı, tevkifat hesaplama">
     <meta name="author" content="HesaplaHadi">
     <meta name="robots" content="index, follow">
     <title>HesaplaHadi - Finans, Vergi ve AI Destekli Hesaplama Araçları</title>
 
-    <!-- JSON-LD Structured Data for SEO -->
-    <script type="application/ld+json">
+    <!-- JSON-LD Structured Data for SEO (Main Site) -->
+    <script type="application/ld+json" id="main-schema">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
@@ -26,68 +26,112 @@
       }
     }
     </script>
+    <!-- Dynamic Tool Schema will be injected here -->
+    <script type="application/ld+json" id="tool-schema">{}</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
 
-        .tab-active { border-bottom: 3px solid #2563eb; color: #1d4ed8; font-weight: 700; background-color: #eff6ff; }
-        .tab-inactive { color: #64748b; border-bottom: 3px solid transparent; }
-        .sidebar-active { background-color: #eff6ff; color: #2563eb; font-weight: 600; border-right: 3px solid #2563eb; }
-        .sidebar-inactive { color: #475569; border-right: 3px solid transparent; }
-        .sidebar-inactive:hover { background-color: #f8fafc; color: #2563eb; }
+        /* Glassmorphism & Premium UI */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
 
-        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-item { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-left: 3px solid transparent; }
+        .nav-active {
+            background: linear-gradient(90deg, #eff6ff 0%, rgba(255,255,255,0) 100%);
+            color: #2563eb;
+            font-weight: 600;
+            border-left: 3px solid #2563eb;
+            padding-left: 1.25rem !important;
+        }
 
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .input-premium {
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .input-premium:focus {
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            outline: none;
+            transform: translateY(-1px);
+        }
 
-        input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); border-color: #3b82f6; outline: none; }
+        .btn-calc {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-calc:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+        }
+        .btn-calc:active { transform: translateY(0); }
 
-        .cat-header { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 800; padding: 1.2rem 0.75rem 0.5rem; border-bottom: 1px solid #f1f5f9; margin-bottom: 0.25rem; position: sticky; top: 0; background: white; z-index: 10; }
-        .result-box { margin-top: 1.5rem; padding: 1.5rem; border-radius: 0.75rem; text-align: center; box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05); }
-        .btn-calc { width: 100%; padding: 0.875rem; border-radius: 0.5rem; font-weight: 700; color: white; transition: all 0.2s; margin-top: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .btn-calc:active { transform: scale(0.98); box-shadow: none; }
+        .result-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .result-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08); }
 
-        /* Markdown-like output styling for AI response */
-        .ai-output ul { list-style-type: disc; padding-left: 1.5rem; text-align: left; margin-top: 0.5rem; }
-        .ai-output li { margin-bottom: 0.25rem; }
-        .ai-output strong { color: #1e293b; }
+        .cat-header {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            font-weight: 700;
+            padding: 1.5rem 1rem 0.5rem;
+        }
 
-        /* SEO Content Styling */
-        .seo-content h2 { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-        .seo-content p { color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
+        .animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Cookie Banner Animation */
-        #cookie-banner { transition: transform 0.5s ease-in-out; }
+        .info-panel h2 { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .info-panel p { color: #475569; margin-bottom: 1rem; line-height: 1.7; }
+        .info-panel ul, .info-panel ol { margin-bottom: 1rem; padding-left: 1.5rem; color: #475569; }
+        .info-panel li { margin-bottom: 0.5rem; }
+
+        /* Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        #cookie-banner { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .translate-y-full { transform: translateY(100%); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen text-slate-800">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200">
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2 group" onclick="switchTab('kdv')">
-                <div class="bg-blue-700 text-white p-2.5 rounded-xl group-hover:bg-blue-800 transition shadow-sm">
-                    <i class="fa-solid fa-calculator text-xl"></i>
+            <a href="#kdv" class="flex items-center space-x-2 group" onclick="switchTab('kdv')">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                    <i class="fa-solid fa-calculator text-lg"></i>
                 </div>
                 <div class="leading-tight">
                     <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                    <span class="text-[10px] text-slate-500 font-bold tracking-wide uppercase">Profesyonel Araçlar</span>
+                    <span class="text-[10px] text-slate-500 font-bold tracking-wide uppercase">Premium Araçlar</span>
                 </div>
             </a>
 
-            <div class="flex-1 max-w-xl mx-6 relative hidden md:block">
+            <div class="flex-1 max-w-xl mx-8 relative hidden md:block">
                 <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
-                <input type="text" id="global-search" onkeyup="filterTools()" placeholder="Vergi, kredi, yapay zeka..." class="w-full pl-11 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition bg-slate-50 focus:bg-white shadow-sm">
+                <input type="text" id="global-search" onkeyup="filterTools()" placeholder="Ne hesaplamak istersiniz?" class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition shadow-sm input-premium">
             </div>
 
             <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                <span class="flex items-center gap-1 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-100"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Destekli</span>
+                <a href="#ai_asistan" onclick="switchTab('ai_asistan')" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Asistan</span>
+                </a>
             </div>
 
             <button class="md:hidden text-slate-600 p-2 hover:bg-slate-100 rounded-lg transition" onclick="document.getElementById('mobile-search-area').classList.toggle('hidden')">
@@ -99,7 +143,7 @@
         <div id="mobile-search-area" class="hidden md:hidden px-4 pb-4 border-t border-slate-100 bg-white">
              <div class="relative mt-3">
                 <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
-                <input type="text" id="mobile-search" onkeyup="filterToolsMobile()" placeholder="Araç ara..." class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 bg-slate-50">
+                <input type="text" id="mobile-search" onkeyup="filterToolsMobile()" placeholder="Araç ara..." class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 bg-slate-50 input-premium">
             </div>
         </div>
     </header>
@@ -109,13 +153,13 @@
 
         <!-- Left Sidebar (Navigation) -->
         <nav class="hidden lg:block lg:col-span-3 space-y-4">
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden h-[calc(100vh-120px)] flex flex-col sticky top-24">
-                <div class="bg-slate-50 px-5 py-4 border-b border-slate-200 flex justify-between items-center shrink-0">
-                    <h3 class="font-bold text-slate-700">Kategoriler</h3>
+            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden h-[calc(100vh-120px)] flex flex-col sticky top-24">
+                <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+                    <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
                     <i class="fa-solid fa-layer-group text-slate-400"></i>
                 </div>
-                <div id="sidebar-list" class="overflow-y-auto custom-scroll p-3 space-y-1 flex-1">
-                    <!-- Javascript populates this based on category structure -->
+                <div id="sidebar-list" class="overflow-y-auto custom-scroll p-2 space-y-1 flex-1">
+                    <!-- JS Populated -->
                 </div>
             </div>
         </nav>
@@ -128,109 +172,86 @@
                 <!-- JS Populated -->
             </div>
 
-            <!-- Top Ad Unit -->
-            <div class="ad-placeholder h-32 w-full rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center text-slate-400 text-sm font-semibold overflow-hidden relative">
-                <span>Google Ads (Yatay Banner)</span>
-                <span class="text-xs font-normal mt-1 opacity-70">728x90 veya Responsive</span>
-                <div class="absolute top-1 right-2 text-[10px] text-slate-300">Reklam</div>
-            </div>
-
             <!-- DYNAMIC TOOL AREA -->
             <div id="tool-container">
                 <!-- Tools injected by JS -->
             </div>
 
-            <!-- SEO Content Section (Bottom) -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 seo-content mt-8">
-                <h1 class="text-2xl font-bold text-slate-800 mb-4">Türkiye'nin En Akıllı Hesaplama Araçları</h1>
-                <p>HesaplaHadi, finansal planlamadan sağlık verilerine, eğitimden günlük yaşama kadar ihtiyaç duyduğunuz tüm matematiksel işlemleri saniyeler içinde gerçekleştirmenizi sağlar. Yeni <strong>Yapay Zeka (AI)</strong> destekli araçlarımızla artık sadece sayılarla değil, sorularınızla da sonuca ulaşabilirsiniz.</p>
-
-                <h2>Neden HesaplaHadi?</h2>
-                <p>Özellikle <strong>KDV Tevkifat Hesaplama</strong> aracımız, ticari işlemlerinizde size hız kazandırırken, <strong>AI Asistanımız</strong> standart formüllerin yetersiz kaldığı karmaşık problemlerde size rehberlik eder.</p>
-
-                <h2>Popüler Hesaplamalar</h2>
-                <ul class="list-disc pl-5 text-slate-600 text-sm space-y-1 mb-4">
-                    <li><strong>AI Diyetisyen:</strong> Kişisel verilerinize göre anlık beslenme önerileri alın.</li>
-                    <li><strong>Kıdem Tazminatı:</strong> Çalışma sürenize göre hak ettiğiniz tazminatı öğrenin.</li>
-                    <li><strong>KDV Tevkifat:</strong> Fatura keserken tevkifat tutarlarını anında görün.</li>
-                </ul>
+            <!-- Dynamic Info Panel (FAQ & Details) -->
+            <article id="info-panel" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel mt-8 animate-slide-up hidden">
+                <!-- Content injected by JS -->
             </article>
 
         </main>
 
         <!-- Right Sidebar (Ads & Popular) -->
         <aside class="col-span-1 lg:col-span-3 space-y-6">
-            <!-- Sidebar Ad 1 -->
-            <div class="ad-placeholder h-64 w-full rounded-2xl border-2 border-dashed border-slate-300 bg-white flex flex-col items-center justify-center text-slate-400 text-sm font-semibold relative">
-                <span>Google Ads (Kare)</span>
-                <span class="text-xs font-normal mt-1 opacity-70">300x250</span>
-                <div class="absolute top-1 right-2 text-[10px] text-slate-300">Reklam</div>
-            </div>
-
             <!-- Popular Widget -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 class="font-bold text-sm text-slate-800 mb-4 uppercase tracking-wider border-b pb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-500"></i> Çok Arananlar
+                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
                 </h4>
-                <ul class="text-sm space-y-3 text-slate-600 font-medium" id="popular-list">
-                    <li class="cursor-pointer hover:text-indigo-600 hover:bg-indigo-50 p-2 rounded transition flex items-center justify-between" onclick="switchTab('ai_asistan')">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-robot text-indigo-500"></i> AI Asistan</span> <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                <ul class="text-sm space-y-2 text-slate-600 font-medium" id="popular-list">
+                    <li class="cursor-pointer hover:text-indigo-600 hover:bg-indigo-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.hash='#ai_asistan'">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-indigo-500 group-hover:scale-110 transition"></i> AI Asistan</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2 rounded transition flex items-center justify-between" onclick="switchTab('kdv')">
-                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.hash='#kdv'">
+                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2 rounded transition flex items-center justify-between" onclick="switchTab('tevkifat')">
-                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.hash='#tevkifat'">
+                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2 rounded transition flex items-center justify-between" onclick="switchTab('kidem')">
-                        <span>Kıdem Tazminatı</span> <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.hash='#kidem'">
+                        <span>Kıdem Tazminatı</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     </li>
                 </ul>
             </div>
 
-            <!-- Sidebar Ad 2 (Sticky Candidate) -->
-            <div class="ad-placeholder h-[600px] w-full rounded-2xl border-2 border-dashed border-slate-300 bg-white flex flex-col items-center justify-center text-slate-400 text-sm font-semibold sticky top-24 relative">
+            <!-- Sidebar Ad -->
+            <div class="ad-placeholder h-[400px] w-full rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-400 text-sm font-semibold relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-transparent to-slate-100 opacity-0 group-hover:opacity-100 transition duration-700"></div>
                 <span>Google Ads (Dikey)</span>
                 <span class="text-xs font-normal mt-1 opacity-70">300x600</span>
-                <div class="absolute top-1 right-2 text-[10px] text-slate-300">Reklam</div>
+                <div class="absolute top-2 right-2 text-[9px] text-slate-300 uppercase tracking-widest border border-slate-200 px-1 rounded">Reklam</div>
             </div>
         </aside>
 
     </div>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-lg p-4 z-50 transform translate-y-full">
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="text-sm text-slate-600 text-center md:text-left">
-                <p><strong>Çerez Politikası:</strong> Sitemizde deneyiminizi iyileştirmek ve reklamları kişiselleştirmek için çerezler kullanılmaktadır. Sitemizi kullanarak bunu kabul etmiş sayılırsınız.</p>
+                <p><strong>Çerez Politikası:</strong> Sitemizde deneyiminizi iyileştirmek ve reklamları kişiselleştirmek için çerezler kullanılmaktadır. Devam ederek kabul etmiş sayılırsınız.</p>
             </div>
             <div class="flex gap-3">
-                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-6 rounded-lg transition">Kabul Et</button>
+                <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition shadow-lg shadow-slate-900/20">Tamam</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t border-slate-800">
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <div class="mb-6">
-                <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-                <p class="text-xs mt-2 opacity-60">Türkiye'nin ücretsiz hesaplama platformu.</p>
+            <div class="mb-8">
+                <span class="text-3xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+                <p class="text-sm mt-3 opacity-60 max-w-md mx-auto">Türkiye'nin en kapsamlı ve ücretsiz finansal hesaplama platformu. Yapay zeka destekli araçlarla işlerinizi hızlandırın.</p>
             </div>
-            <div class="flex justify-center space-x-6 text-sm font-medium mb-8">
+            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mb-10 text-slate-300">
                 <a href="#" class="hover:text-white transition">Hakkımızda</a>
                 <a href="#" class="hover:text-white transition">Gizlilik Politikası</a>
                 <a href="#" class="hover:text-white transition">Kullanım Şartları</a>
                 <a href="#" class="hover:text-white transition">İletişim</a>
+                <a href="sitemap.xml" class="hover:text-white transition">Sitemap</a>
             </div>
-            <div class="text-xs text-slate-600 border-t border-slate-800 pt-6">
+            <div class="text-xs text-slate-600 border-t border-slate-800 pt-8">
                 &copy; 2026 HesaplaHadi. Tüm hakları saklıdır. Veriler bilgilendirme amaçlıdır.
             </div>
         </div>
     </footer>
 
     <script>
-        // API Key Obfuscation (Simple Base64) - Not foolproof but hides it from plain sight
+        // API Key Obfuscation
         const _k = "QUl6YVN5Qzh6SGxSTkZvck1peW5tM01qUnFNc3RvWjRNczBwQVdR";
         const apiKey = atob(_k);
 
@@ -242,111 +263,74 @@
                 systemInstruction: { parts: [{ text: systemPrompt }] }
             };
 
-            const delays = [1000, 2000, 4000, 8000, 16000];
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 3; i++) {
                 try {
                     const response = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-
                     const data = await response.json();
-
-                    if (!response.ok) {
-                         const errorMessage = data.error?.message || response.statusText || "Bilinmeyen API Hatası";
-                         throw new Error(errorMessage);
-                    }
-
+                    if (!response.ok) throw new Error(data.error?.message || response.statusText);
                     return data.candidates[0].content.parts[0].text;
                 } catch (error) {
-                    if (i === 4) throw error;
-                    await new Promise(r => setTimeout(r, delays[i]));
+                    if (i === 2) throw error;
+                    await new Promise(r => setTimeout(r, 1000));
                 }
             }
         }
 
-        // --- COOKIE LOGIC ---
-        function checkCookies() {
-            if(!localStorage.getItem('cookiesAccepted')) {
-                setTimeout(() => {
-                    document.getElementById('cookie-banner').classList.remove('translate-y-full');
-                }, 1000);
-            }
-        }
-        function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookie-banner').classList.add('translate-y-full');
-        }
+        // --- COOKIE & UTILS ---
+        function checkCookies() { if(!localStorage.getItem('cookiesAccepted')) setTimeout(()=>document.getElementById('cookie-banner').classList.remove('translate-y-full'), 1000); }
+        function acceptCookies() { localStorage.setItem('cookiesAccepted','true'); document.getElementById('cookie-banner').classList.add('translate-y-full'); }
 
-        // --- COPY RESULT LOGIC ---
         function copyResult(id) {
             const val = document.getElementById(`val-${id}`).innerText;
             const btn = document.getElementById(`btn-copy-${id}`);
-
-            const showSuccess = () => {
-                const originalHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Kopyalandı';
-                btn.classList.add('bg-green-100', 'text-green-700', 'border-green-200');
-                setTimeout(() => {
-                    btn.innerHTML = originalHtml;
-                    btn.classList.remove('bg-green-100', 'text-green-700', 'border-green-200');
-                }, 2000);
-            };
-
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(val).then(showSuccess).catch(err => {
-                    console.error('Async clipboard failed', err);
-                    fallbackCopy();
-                });
-            } else {
-                fallbackCopy();
-            }
-
-            function fallbackCopy() {
-                const textArea = document.createElement("textarea");
-                textArea.value = val;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showSuccess();
-                } catch (err) {
-                    console.error('Kopyalama hatası', err);
-                }
-                document.body.removeChild(textArea);
-            }
+            navigator.clipboard.writeText(val).then(() => {
+                const h = btn.innerHTML; btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(()=>btn.innerHTML=h, 1500);
+            }).catch(e => console.error(e));
         }
 
-        // --- TOOL CONFIGURATION ---
-
+        // --- TOOL DATA & CONTENT ---
         const tools = [
-            // 1. YAPAY ZEKA
             { id: 'ai_asistan', cat: 'Yapay Zeka', name: 'AI Hesaplama Asistanı', inputs: [
-                {id:'q',l:'Hesaplama Sorunuzu Yazın',type:'textarea',p:'Örn: 50.000 TL krediyi %3.5 faizle 12 ayda ödersem aylık taksit ne olur? veya İstanbul ile New York saat farkı nedir?'}
-            ], btn:'✨ Yapay Zekaya Sor', color:'indigo', desc:'Karmaşık finansal, matematiksel veya mantıksal sorularınızı yapay zekaya sorun.' },
-
-            // 2. FİNANS & VERGİ
+                {id:'q',l:'Sorunuzu detaylıca yazın',type:'textarea',p:'Örn: 100.000 TL kredi için 24 ay vade ve %3.99 faizle aylık taksit ne olur?'}
+            ], btn:'Yapay Zekaya Sor', color:'indigo', desc:'Finansal, matematiksel veya günlük hesaplama sorularınızı yapay zekaya sorun.',
+              meta: { t: 'Yapay Zeka Hesaplama Asistanı - HesaplaHadi', d: 'Karmaşık finansal ve matematiksel sorularınızı yapay zekaya sorun. Anlık ve doğru cevaplar alın.' },
+              faq: {
+                  h: 'AI Asistan Nasıl Kullanılır?',
+                  c: '<p>AI Asistan, Google Gemini altyapısını kullanarak sorularınızı yanıtlar. Kredi hesaplamaları, döviz çevirileri, matematik problemleri veya genel kültür soruları sorabilirsiniz.</p>'
+              }
+            },
             { id: 'kdv', cat: 'Finans', name: 'KDV Hesaplama', inputs: [
-                {id:'amt',l:'Tutar (TL)',p:'1000'},
-                {id:'rate',l:'KDV Oranı',type:'select',opts:['%1 (Gıda vb.)','%10 (Tekstil vb.)','%20 (Genel)']},
-                {id:'type',l:'Hesaplama',type:'select',opts:['KDV Dahil','KDV Hariç']}
-            ], btn:'Hesapla', color:'blue', desc:'KDV tutarını hızlıca hesaplayın (Tevkifat için özel aracımızı kullanın).' },
-
+                {id:'amt',l:'Tutar (TL)',p:'1000'}, {id:'rate',l:'KDV Oranı',type:'select',opts:['%1 (Gıda)','%10 (Tekstil)','%20 (Genel)']}, {id:'type',l:'İşlem Türü',type:'select',opts:['KDV Dahil','KDV Hariç']}
+            ], btn:'Hesapla', color:'blue', desc:'KDV Dahil ve Hariç tutarları güncel oranlarla (%1, %10, %20) hesaplayın.',
+              meta: { t: '2026 KDV Hesaplama Aracı - Dahil ve Hariç Hesapla', d: 'Güncel KDV oranları ile KDV dahil ve hariç tutarları kolayca hesaplayın. %1, %10 ve %20 oran desteği.' },
+              schema: { "@type": "Calculator", "name": "KDV Hesaplama", "description": "KDV dahil ve hariç tutar hesaplama aracı.", "category": "Finance" },
+              faq: {
+                  h: 'KDV Nasıl Hesaplanır?',
+                  c: '<p><strong>KDV Dahil Hesaplama:</strong> Tutar x (1 + Vergi Oranı) formülü kullanılır. Örneğin 100 TL + %20 KDV = 120 TL.</p><p><strong>KDV Hariç Hesaplama:</strong> Tutar / (1 + Vergi Oranı) formülü kullanılır. Örneğin 120 TL (KDV Dahil) / 1.20 = 100 TL.</p>'
+              }
+            },
             { id: 'tevkifat', cat: 'Finans', name: 'KDV Tevkifat Hesaplama', inputs: [
-                {id:'amt',l:'Tutar (TL)',p:'1000'},
-                {id:'rate',l:'KDV Oranı',type:'select',opts:['%1','%10','%20']},
-                {id:'tev',l:'Tevkifat Oranı',type:'select',opts:['2/10','3/10','4/10','5/10','7/10','9/10']},
-                {id:'type',l:'Hesaplama',type:'select',opts:['KDV Hariç','KDV Dahil']}
-            ], btn:'Hesapla', color:'blue', desc:'Tevkifatlı faturalar için kesinti ve beyan tutarlarını hesaplayın.' },
-
+                {id:'amt',l:'Tutar (TL)',p:'1000'}, {id:'rate',l:'KDV Oranı',type:'select',opts:['%1','%10','%20']}, {id:'tev',l:'Tevkifat Oranı',type:'select',opts:['2/10','3/10','4/10','5/10','7/10','9/10']}, {id:'type',l:'Hesaplama',type:'select',opts:['KDV Hariç','KDV Dahil']}
+            ], btn:'Hesapla', color:'blue', desc:'Tevkifatlı fatura kesimi için alıcı ve satıcı paylarını hesaplayın.',
+              meta: { t: 'KDV Tevkifat Hesaplama - Fatura Oluşturma Aracı', d: 'Tevkifatlı faturalarınız için KDV kesintisi ve ödenecek tutarları saniyeler içinde hesaplayın.' },
+              faq: { h: 'Tevkifat Nedir?', c: '<p>KDV\'nin bir kısmının alıcı, bir kısmının ise satıcı tarafından devlete ödenmesidir. Bu araç ile 2/10, 5/10 gibi oranlara göre dağılımı görebilirsiniz.</p>' }
+            },
             { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı', inputs: [
-                {id:'start',l:'İşe Giriş Tarihi',type:'date'},
-                {id:'end',l:'İşten Çıkış Tarihi',type:'date'},
-                {id:'salary',l:'Brüt Maaş (TL)',p:'20002.50'}
-            ], btn:'Hesapla', color:'blue', desc:'Çalışma sürenize göre hak ettiğiniz net tazminat.' },
-
-            { id: 'kredi', cat: 'Finans', name: 'Kredi Hesaplama', inputs: [{id:'amt',l:'Kredi Tutarı',p:'100000'}, {id:'term',l:'Vade (Ay)',p:'12'}, {id:'rate',l:'Aylık Faiz %',p:'3.5'}], btn:'Plan Oluştur', color:'blue' },
+                {id:'start',l:'İşe Giriş Tarihi',type:'date'}, {id:'end',l:'İşten Çıkış Tarihi',type:'date'}, {id:'salary',l:'Brüt Maaş (TL)',p:'25000'}
+            ], btn:'Tazminat Hesapla', color:'blue', desc:'Çalışma sürenize göre hak ettiğiniz kıdem tazminatını net olarak hesaplayın.',
+              meta: { t: '2026 Kıdem Tazminatı Hesaplama - Net Tutar', d: 'Çalışma gün sayısına göre kıdem tazminatınızı hesaplayın. Damga vergisi düşülmüş net tutarı öğrenin.' },
+              faq: { h: 'Kıdem Tazminatı Şartları', c: '<p>En az 1 yıl çalışmış olmanız ve işten haklı nedenlerle (veya işveren tarafından) çıkarılmış olmanız gerekir. Her tam yıl için 30 günlük brüt ücret ödenir.</p>' }
+            },
+            { id: 'kredi', cat: 'Finans', name: 'Kredi Hesaplama', inputs: [{id:'amt',l:'Kredi Tutarı',p:'100000'}, {id:'term',l:'Vade (Ay)',p:'24'}, {id:'rate',l:'Aylık Faiz %',p:'3.99'}], btn:'Ödeme Planı Oluştur', color:'blue', desc:'Konut, taşıt veya ihtiyaç kredisi taksitlerini ve toplam geri ödemeyi hesaplayın.',
+               meta: { t: 'Kredi Hesaplama Aracı - Faiz ve Taksit Hesapla', d: 'İhtiyaç, konut ve taşıt kredisi için aylık taksit tutarlarını ve toplam geri ödemeyi hesaplayın.' },
+               faq: { h: 'Kredi Faizi Nasıl Hesaplanır?', c: '<p>Bankaların uyguladığı aylık akdi faiz oranı üzerinden, anapara ve vade süresi dikkate alınarak eşit taksitli ödeme planı oluşturulur.</p>' }
+            },
+            // Other tools with basic config (meta defaults used in function)
             { id: 'net_brut', cat: 'Finans', name: 'Netten Brüte Maaş', inputs: [{id:'net',l:'Net Maaş',p:'17002'}], btn:'Hesapla', color:'blue' },
             { id: 'brut_net', cat: 'Finans', name: 'Brütten Nete Maaş', inputs: [{id:'brut',l:'Brüt Maaş',p:'20002.50'}], btn:'Hesapla', color:'blue' },
             { id: 'mevduat', cat: 'Finans', name: 'Mevduat Getirisi', inputs: [{id:'amt',l:'Anapara',p:'100000'}, {id:'rate',l:'Yıllık Faiz %',p:'45'}, {id:'days',l:'Gün Sayısı',p:'32'}], btn:'Getiri Hesapla', color:'blue' },
@@ -357,14 +341,7 @@
             { id: 'kk_asgari', cat: 'Finans', name: 'K.K. Asgari Ödeme', inputs: [{id:'lim',l:'Kart Limiti',p:'50000'}, {id:'debt',l:'Dönem Borcu',p:'15000'}], btn:'Hesapla', color:'blue' },
             { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu', inputs: [{id:'price',l:'Satış Bedeli',p:'3000000'}], btn:'Hesapla', color:'blue' },
             { id: 'zam', cat: 'Finans', name: 'Maaş Zam', inputs: [{id:'curr',l:'Mevcut Maaş',p:'17002'}, {id:'rate',l:'Zam %',p:'30'}], btn:'Hesapla', color:'blue' },
-
-            // 3. SAĞLIK
-            { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen', inputs: [
-                {id:'w',l:'Kilo (kg)',p:'80'},
-                {id:'h',l:'Boy (cm)',p:'180'},
-                {id:'goal',l:'Hedef',type:'select',opts:['Kilo Vermek','Kilo Almak','Formu Korumak','Kas Yapmak']}
-            ], btn:'✨ Plan Oluştur', color:'indigo', desc:'Fiziksel özelliklerinize ve hedefinize uygun 1 günlük örnek beslenme planı oluşturun.' },
-
+            { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen', inputs: [{id:'w',l:'Kilo (kg)',p:'80'}, {id:'h',l:'Boy (cm)',p:'180'}, {id:'goal',l:'Hedef',type:'select',opts:['Kilo Vermek','Kilo Almak','Formu Korumak','Kas Yapmak']}], btn:'Plan Oluştur', color:'indigo' },
             { id: 'bmi', cat: 'Sağlık', name: 'Vücut Kitle İndeksi', inputs: [{id:'h',l:'Boy (cm)',p:'175'}, {id:'w',l:'Kilo (kg)',p:'75'}], btn:'Analiz Et', color:'green' },
             { id: 'idealkilo', cat: 'Sağlık', name: 'İdeal Kilo', inputs: [{id:'h',l:'Boy (cm)',p:'170'}, {id:'g',l:'Cinsiyet',type:'select',opts:['Erkek','Kadın']}], btn:'Hesapla', color:'green' },
             { id: 'bmr', cat: 'Sağlık', name: 'Bazal Metabolizma', inputs: [{id:'w',l:'Kilo',p:'70'}, {id:'h',l:'Boy',p:'175'}, {id:'a',l:'Yaş',p:'30'}, {id:'g',l:'Cinsiyet',type:'select',opts:['Erkek','Kadın']}], btn:'Hesapla', color:'green' },
@@ -373,15 +350,11 @@
             { id: 'gebelik', cat: 'Sağlık', name: 'Doğum Tarihi (SAT)', inputs: [{id:'date',l:'Son Adet Tarihi',type:'date'}], btn:'Hesapla', color:'green' },
             { id: 'sigara', cat: 'Sağlık', name: 'Sigara Maliyeti', inputs: [{id:'price',l:'Paket Fiyatı',p:'60'}, {id:'daily',l:'Günlük Adet',p:'20'}], btn:'Zararı Gör', color:'green' },
             { id: 'nabiz', cat: 'Sağlık', name: 'Spor Nabız Aralığı', inputs: [{id:'age',l:'Yaş',p:'30'}], btn:'Hesapla', color:'green' },
-
-            // 4. EĞİTİM & MATEMATİK
             { id: 'yuzde', cat: 'Eğitim', name: 'Yüzde Hesaplama', inputs: [{id:'a',l:'Sayı',p:'500'}, {id:'b',l:'Yüzde Oranı',p:'20'}], btn:'Hesapla', color:'purple' },
             { id: 'sinav', cat: 'Eğitim', name: 'Üniversite Not Ort.', inputs: [{id:'v',l:'Vize Notu',p:'60'}, {id:'f',l:'Final Notu',p:'80'}], btn:'Hesapla', color:'purple' },
             { id: 'takdir', cat: 'Eğitim', name: 'Takdir / Teşekkür', inputs: [{id:'avg',l:'Dönem Ortalaması',p:'86.50'}], btn:'Sorgula', color:'purple' },
             { id: 'dikdortgen', cat: 'Eğitim', name: 'Alan Hesaplama', inputs: [{id:'w',l:'En (m)',p:'5'}, {id:'h',l:'Boy (m)',p:'10'}], btn:'Hesapla', color:'purple' },
             { id: 'kelime', cat: 'Eğitim', name: 'Kelime Sayacı', inputs: [{id:'txt',l:'Metni Yapıştırın',type:'textarea'}], btn:'Analiz Et', color:'purple' },
-
-            // 5. PRATİK & ARAÇLAR
             { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi', inputs: [{id:'size',l:'Dosya (GB)',p:'10'}, {id:'spd',l:'Hız (Mbps)',p:'35'}], btn:'Hesapla', color:'orange' },
             { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi', inputs: [{id:'km',l:'Yol (km)',p:'100'}, {id:'lit',l:'Ort. Tüketim (Lt)',p:'7'}, {id:'pr',l:'Litre Fiyatı',p:'42'}], btn:'Maliyet Hesapla', color:'orange' },
             { id: 'yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', inputs: [{id:'date',l:'Doğum Tarihi',type:'date'}], btn:'Hesapla', color:'orange' },
@@ -390,13 +363,24 @@
             { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman', inputs: [{id:'km',l:'Mesafe (km)',p:'400'}, {id:'hr',l:'Süre (Saat)',p:'4'}], btn:'Hız Bul', color:'orange' }
         ];
 
-        // --- INIT ---
         window.onload = function() {
             renderSidebar();
             renderTools();
-            checkCookies(); // Check cookie consent
-            switchTab('kdv');
+            checkCookies();
+            handleRoute(); // Initial route check
         };
+
+        window.onhashchange = handleRoute; // Handle hash changes
+
+        // --- ROUTING & SEO ---
+        function handleRoute() {
+            const hash = window.location.hash.substring(1);
+            if(hash && tools.find(t=>t.id===hash)) {
+                switchTab(hash);
+            } else {
+                switchTab('kdv'); // Default
+            }
+        }
 
         // --- RENDER ENGINE ---
         function renderSidebar() {
@@ -405,28 +389,18 @@
             const cats = [...new Set(tools.map(t => t.cat))];
 
             cats.forEach(cat => {
-                // Desktop Header
                 const header = document.createElement('div');
-                header.className = 'cat-header';
-                header.innerText = cat;
-                sidebar.appendChild(header);
-
-                // Mobile Filter Button
+                header.className = 'cat-header'; header.innerText = cat; sidebar.appendChild(header);
                 const mb = document.createElement('button');
-                mb.className = "px-4 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-semibold whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition";
-                mb.innerText = cat;
-                mb.onclick = () => filterByCat(cat);
-                mobCats.appendChild(mb);
-
-                // Desktop Items
+                mb.className = "px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 transition shadow-sm mr-2";
+                mb.innerText = cat; mb.onclick = () => filterByCat(cat); mobCats.appendChild(mb);
                 tools.filter(t => t.cat === cat).forEach(t => {
                     const btn = document.createElement('button');
                     btn.id = `btn-${t.id}`;
-                    btn.className = 'w-full text-left px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center sidebar-inactive gap-3 mb-1';
-                    // Special icon for AI
+                    btn.className = 'w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition flex items-center nav-item gap-3 mb-1 text-slate-500 hover:bg-slate-50 hover:text-blue-600';
                     const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>' : '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>';
                     btn.innerHTML = `${icon} ${t.name}`;
-                    btn.onclick = () => switchTab(t.id);
+                    btn.onclick = () => window.location.hash = t.id; // Change hash triggers routing
                     sidebar.appendChild(btn);
                 });
             });
@@ -434,83 +408,101 @@
 
         function renderTools() {
             const container = document.getElementById('tool-container');
-
             tools.forEach(t => {
                 const div = document.createElement('div');
                 div.id = `content-${t.id}`;
-                div.className = 'hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-fade-in relative';
-
+                div.className = 'hidden bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-fade-in relative';
                 const themeColor = { blue: 'blue', green: 'emerald', purple: 'violet', orange: 'amber', indigo: 'indigo' }[t.color] || 'blue';
 
-                // Description if available (SEO text)
-                const descHtml = t.desc ? `<p class="text-sm text-slate-500 mb-6 border-b border-slate-100 pb-4">${t.desc}</p>` : '';
-
                 let html = `
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="p-2 bg-${themeColor}-100 rounded-lg text-${themeColor}-600"><i class="fa-solid ${t.cat==='Yapay Zeka'?'fa-wand-magic-sparkles':'fa-calculator'}"></i></div>
-                        <h2 class="text-2xl font-bold text-slate-800">${t.name}</h2>
+                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                        <div class="p-3 bg-${themeColor}-100 rounded-2xl text-${themeColor}-600 shadow-sm"><i class="fa-solid ${t.cat==='Yapay Zeka'?'fa-wand-magic-sparkles':'fa-calculator'} text-xl"></i></div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">${t.name}</h1>
+                            ${t.desc ? `<p class="text-xs text-slate-500 mt-1">${t.desc}</p>` : ''}
+                        </div>
                     </div>
-                    ${descHtml}
-                    <div class="grid grid-cols-1 md:grid-cols-${t.inputs.length > 2 ? '2' : '1'} gap-5">`;
+                    <div class="grid grid-cols-1 md:grid-cols-${t.inputs.length > 2 ? '2' : '1'} gap-6">`;
 
                 t.inputs.forEach(inp => {
-                    html += `<div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">${inp.l}</label>`;
+                    html += `<div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">${inp.l}</label>`;
                     if(inp.type === 'select') {
-                        html += `<div class="relative"><select id="${t.id}-${inp.id}" class="w-full p-3.5 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer">`;
-                        inp.opts.forEach((o, i) => html += `<option value="${i}">${o}</option>`); // Value is index
-                        html += `</select><i class="fa-solid fa-chevron-down absolute right-4 top-4 text-slate-400 text-xs pointer-events-none"></i></div></div>`;
+                        html += `<div class="relative"><select id="${t.id}-${inp.id}" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">`;
+                        inp.opts.forEach((o, i) => html += `<option value="${i}">${o}</option>`);
+                        html += `</select><i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i></div></div>`;
                     } else if (inp.type === 'textarea') {
-                        html += `<textarea id="${t.id}-${inp.id}" class="w-full p-3.5 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white transition" rows="4" placeholder="${inp.p || ''}"></textarea></div>`;
+                        html += `<textarea id="${t.id}-${inp.id}" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white transition input-premium" rows="4" placeholder="${inp.p || ''}"></textarea></div>`;
                     } else {
-                        html += `<input type="${inp.type || 'number'}" id="${t.id}-${inp.id}" class="w-full p-3.5 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition" placeholder="${inp.p || ''}" ${inp.type==='date'?'':'step="any"'}></div>`;
+                        html += `<input type="${inp.type || 'number'}" id="${t.id}-${inp.id}" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="${inp.p || ''}" ${inp.type==='date'?'':'step="any"'}></div>`;
                     }
                 });
 
                 html += `</div>
-                <button onclick="calc_${t.id}()" class="btn-calc bg-${themeColor}-600 hover:bg-${themeColor}-700 shadow-${themeColor}-200 flex justify-center items-center gap-2">
+                <button onclick="calc_${t.id}()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
                     ${t.cat==='Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles"></i>' : '<i class="fa-solid fa-bolt"></i>'} ${t.btn}
                 </button>
 
-                <div id="res-${t.id}" class="result-box hidden bg-${themeColor}-50 border border-${themeColor}-100 relative group">
-                    <button id="btn-copy-${t.id}" onclick="copyResult('${t.id}')" class="absolute top-2 right-2 text-xs bg-white border border-slate-200 px-2 py-1 rounded hover:bg-slate-50 transition text-slate-500 flex items-center gap-1">
+                <div id="res-${t.id}" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
+                    <button id="btn-copy-${t.id}" onclick="copyResult('${t.id}')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
                         <i class="fa-regular fa-copy"></i> Kopyala
                     </button>
-                    <p class="text-xs font-bold text-${themeColor}-600 uppercase tracking-widest mb-1">Sonuç</p>
-                    <div id="val-${t.id}" class="${t.cat==='Yapay Zeka' ? 'text-lg font-medium text-slate-800 text-left ai-output' : 'text-3xl font-black text-slate-800'}"></div>
-                    <div id="detail-${t.id}" class="text-sm text-slate-600 mt-2 empty:hidden"></div>
+                    <p class="text-[10px] font-bold text-${themeColor}-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
+                    <div id="val-${t.id}" class="${t.cat==='Yapay Zeka' ? 'text-base font-medium text-slate-700 text-left ai-output leading-relaxed' : 'text-3xl md:text-4xl font-black text-slate-900 tracking-tight'}"></div>
+                    <div id="detail-${t.id}" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
                 </div>`;
-
                 div.innerHTML = html;
                 container.appendChild(div);
             });
         }
 
-        // --- NAVIGATION LOGIC ---
+        // --- LOGIC: SWITCH TAB & SEO UPDATE ---
         function switchTab(id) {
+            // 1. View Transition
             document.querySelectorAll('[id^="content-"]').forEach(d => d.classList.add('hidden'));
             const target = document.getElementById(`content-${id}`);
             if(target) target.classList.remove('hidden');
 
+            // 2. Sidebar Active State
             document.querySelectorAll('[id^="btn-"]').forEach(b => {
-                b.classList.remove('sidebar-active', 'bg-blue-50', 'text-blue-600');
-                b.classList.add('sidebar-inactive');
-                // Standard dot
+                b.classList.remove('nav-active');
                 const dot = b.querySelector('span');
-                if(dot && !dot.classList.contains('fa-wand-magic-sparkles')) {
-                    dot.classList.remove('bg-blue-500');
-                    dot.classList.add('bg-slate-300');
-                }
+                if(dot && !dot.classList.contains('fa-wand-magic-sparkles')) dot.classList.add('bg-slate-300');
             });
             const btn = document.getElementById(`btn-${id}`);
             if(btn) {
-                btn.classList.add('sidebar-active', 'bg-blue-50', 'text-blue-600');
-                btn.classList.remove('sidebar-inactive');
+                btn.classList.add('nav-active');
                 const dot = btn.querySelector('span');
-                if(dot && !dot.classList.contains('fa-wand-magic-sparkles')) {
-                    dot.classList.add('bg-blue-500');
-                    dot.classList.remove('bg-slate-300');
-                }
+                if(dot && !dot.classList.contains('fa-wand-magic-sparkles')) { dot.classList.remove('bg-slate-300'); dot.classList.add('bg-blue-600'); }
                 btn.scrollIntoView({block:'nearest'});
+            }
+
+            // 3. Dynamic SEO & Info Panel
+            const t = tools.find(x => x.id === id);
+            if(t) {
+                // Title & Meta
+                document.title = t.meta?.t || `${t.name} - HesaplaHadi`;
+                document.querySelector('meta[name="description"]').setAttribute("content", t.meta?.d || `${t.name} aracı ile hızlı ve doğru hesaplama yapın.`);
+
+                // Schema Injection
+                const schemaScript = document.getElementById('tool-schema');
+                if(t.schema) {
+                    schemaScript.textContent = JSON.stringify(t.schema);
+                } else {
+                    schemaScript.textContent = JSON.stringify({ "@type": "SoftwareApplication", "name": t.name, "applicationCategory": "Utilities" });
+                }
+
+                // Info Panel Content
+                const infoPanel = document.getElementById('info-panel');
+                if(t.faq) {
+                    infoPanel.innerHTML = `
+                        <h2 class="text-lg font-bold text-slate-800 mb-4 border-l-4 border-blue-500 pl-3">${t.name} Hakkında Bilgiler</h2>
+                        ${t.faq.h ? `<h3 class="font-bold text-slate-900 mb-2">${t.faq.h}</h3>` : ''}
+                        <div class="prose prose-sm text-slate-600">${t.faq.c}</div>
+                    `;
+                    infoPanel.classList.remove('hidden');
+                } else {
+                    infoPanel.classList.add('hidden');
+                }
             }
         }
 
@@ -521,7 +513,6 @@
                 const matches = t.name.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q);
                 btn.style.display = matches ? 'flex' : 'none';
             });
-            // Hide empty headers
             document.querySelectorAll('.cat-header').forEach(h => {
                 let next = h.nextElementSibling;
                 let vis = false;
@@ -532,13 +523,13 @@
                 h.style.display = vis ? 'block' : 'none';
             });
         }
-
-        function filterByCat(cat) {
-            document.getElementById('global-search').value = cat;
-            filterTools();
+        function filterToolsMobile() {
+             const q = document.getElementById('mobile-search').value.toLowerCase();
+             // Same logic reusing the desktop sidebar buttons which are hidden but controlled
+             filterTools(); // Simplified for this demo
         }
+        function filterByCat(cat) { document.getElementById('global-search').value = cat; filterTools(); }
 
-        // --- CORE CALCULATORS ---
         function showRes(id, mainTxt, detailTxt = '') {
             const r = document.getElementById(`res-${id}`);
             document.getElementById(`val-${id}`).innerHTML = mainTxt;
@@ -546,92 +537,20 @@
             r.classList.remove('hidden');
             r.scrollIntoView({behavior:'smooth', block:'nearest'});
         }
-        function getVal(tid, iid) { return document.getElementById(`${tid}-${iid}`).value; }
-        function getNum(tid, iid) { return parseFloat(getVal(tid,iid)) || 0; }
 
-        // --- AI FUNCTIONS ---
+        // --- CALC FUNCTIONS ---
+        function calc_kdv() { const a=getNum('kdv','amt'), r=tools.find(t=>t.id==='kdv').inputs[1].opts[getVal('kdv','rate')].match(/\d+/)[0]/100, t=getVal('kdv','type'); let n,x,tot; if(t==0){n=a/(1+r);x=a-n;tot=a;}else{n=a;x=a*r;tot=a+x;} showRes('kdv', tot.toLocaleString('tr-TR',{minimumFractionDigits:2})+' TL', `Net: <strong>${n.toLocaleString('tr-TR',{minimumFractionDigits:2})}</strong> | KDV: <strong>${x.toLocaleString('tr-TR',{minimumFractionDigits:2})}</strong>`); }
+        function calc_tevkifat() { const a=getNum('tevkifat','amt'), r=[0.01,0.1,0.2][getVal('tevkifat','rate')], tn=[2,3,4,5,7,9][getVal('tevkifat','tev')], t=getVal('tevkifat','type'); let m,ft; if(t==1){m=a/(1+r);ft=a-m;}else{m=a;ft=a*r;} const w=ft*tn/10, d=ft-w, p=m+d; showRes('tevkifat', p.toLocaleString('tr-TR',{minimumFractionDigits:2})+' TL', `KDV: ${ft.toFixed(2)} | Tevkifat (${tn}/10): -${w.toFixed(2)} | Beyan: ${d.toFixed(2)}`); }
+        function calc_kredi() { const p=getNum('kredi','amt'), t=getNum('kredi','term'), r=getNum('kredi','rate')/100, x=Math.pow(1+r,t), pay=p*(r*x)/(x-1); showRes('kredi', pay.toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL/Ay', `Toplam Geri Ödeme: ${(pay*t).toLocaleString('tr-TR')} TL`); }
 
-        async function calc_ai_asistan() {
-            const q = getVal('ai_asistan', 'q');
-            if(!q) return;
-            showRes('ai_asistan', '<i class="fa-solid fa-spinner fa-spin"></i> Düşünüyorum...', '');
-
-            try {
-                const answer = await callGemini(q, "Sen yardımsever ve zeki bir hesaplama asistanısın. Kullanıcının matematiksel, finansal, mantıksal veya genel kültür sorularını Türkçe olarak yanıtla. Cevabın kısa, net ve anlaşılır olsun. Eğer bir hesaplama yapıyorsan işlemi adım adım kısaca açıkla.");
-                // Formatting markdown basic
-                const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-                showRes('ai_asistan', formatted);
-            } catch (e) {
-                showRes('ai_asistan', 'Bağlantı Hatası: ' + (e.message || 'Bilinmeyen hata'), 'API Anahtarınızı kontrol edip tekrar deneyin.');
-            }
-        }
-
-        async function calc_ai_diyet() {
-            const w = getVal('ai_diyet', 'w');
-            const h = getVal('ai_diyet', 'h');
-            const gIdx = getVal('ai_diyet', 'goal');
-            const goals = ['Kilo Vermek', 'Kilo Almak', 'Formu Korumak', 'Kas Yapmak'];
-            const goal = goals[gIdx];
-
-            if(!w || !h) return;
-            showRes('ai_diyet', '<i class="fa-solid fa-spinner fa-spin"></i> Plan hazırlanıyor...', '');
-
-            const prompt = `Kilo: ${w}kg, Boy: ${h}cm, Hedef: ${goal}. Bana 1 günlük örnek bir beslenme planı oluştur.`;
-            const sys = "Sen uzman bir diyetisyensin. Verilen bilgilere göre kişiye özel, sağlıklı ve uygulanabilir 1 günlük örnek beslenme programı (Kahvaltı, Öğle, Akşam, Ara Öğün) oluştur. Cevabın Türkçe ve liste formatında olsun. Kalori miktarını da tahmini olarak belirt.";
-
-            try {
-                const answer = await callGemini(prompt, sys);
-                const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-                showRes('ai_diyet', formatted);
-            } catch (e) {
-                showRes('ai_diyet', 'Plan oluşturulamadı: ' + (e.message || 'Hata'), 'Lütfen API anahtarınızı kontrol edin.');
-            }
-        }
-
-        // --- STANDARD FUNCTIONS (Existing logic maintained) ---
-
-        // 1. KDV
-        function calc_kdv() {
-            const amt = getNum('kdv','amt');
-            const rIdx = getVal('kdv','rate');
-            const typeIdx = getVal('kdv','type');
-            const rates = [1, 10, 20];
-            const rate = rates[rIdx];
-            let net, tax, total;
-            if (typeIdx == 0) { net = amt / (1 + rate/100); tax = amt - net; total = amt; }
-            else { net = amt; tax = amt * (rate/100); total = amt + tax; }
-            showRes('kdv', `${total.toLocaleString('tr-TR', {minimumFractionDigits: 2})} TL`,
-                `Net: <strong>${net.toLocaleString('tr-TR', {minimumFractionDigits: 2})} TL</strong> | KDV: <strong>${tax.toLocaleString('tr-TR', {minimumFractionDigits: 2})} TL</strong>`);
-        }
-
-        // 2. Tevkifat
-        function calc_tevkifat() {
-            const amt = getNum('tevkifat','amt');
-            const rIdx = getVal('tevkifat','rate');
-            const tevIdx = getVal('tevkifat','tev');
-            const typeIdx = getVal('tevkifat','type');
-            const rates = [1, 10, 20]; const rate = rates[rIdx];
-            const numerators = [2, 3, 4, 5, 7, 9]; const tevNum = numerators[tevIdx];
-            let matrah, fullTax;
-            if (typeIdx == 1) { matrah = amt / (1 + rate/100); fullTax = amt - matrah; }
-            else { matrah = amt; fullTax = amt * (rate/100); }
-            const withheld = (fullTax * tevNum) / 10;
-            const declared = fullTax - withheld;
-            const payable = matrah + declared;
-            showRes('tevkifat', `${payable.toLocaleString('tr-TR', {minimumFractionDigits: 2})} TL`,
-                `KDV (%${rate}): ${fullTax.toFixed(2)} TL<br>Tevkifat (${tevNum}/10): -${withheld.toFixed(2)} TL`);
-        }
-
-        // 3. Kıdem
         function calc_kidem() {
             const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); const sal = getNum('kidem','salary');
-            if (!s || !e || !sal || isNaN(s) || isNaN(e)) return;
+            if (isNaN(s)||isNaN(e)||!sal) return;
 
             const diffTime = Math.abs(e - s);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             const tenureYears = diffDays / 365;
 
-            // Detailed breakdown
             let years = e.getFullYear() - s.getFullYear();
             let months = e.getMonth() - s.getMonth();
             let days = e.getDate() - s.getDate();
@@ -643,69 +562,78 @@
             showRes('kidem', `${net.toLocaleString('tr-TR', {maximumFractionDigits: 2})} TL`, `${years} Yıl ${months} Ay ${days} Gün`);
         }
 
-        // 4. BMI
-        function calc_bmi() {
-            const h = getNum('bmi','h') / 100; const w = getNum('bmi','w');
-            if(!h || !w) return;
-            const bmi = w / (h * h);
-            let s = bmi < 25 ? "Normal" : "Kilolu";
-            showRes('bmi', bmi.toFixed(2), s);
-        }
-
-        // 5. Kredi
-        function calc_kredi() {
-            const p = getNum('kredi','amt'); const t = getNum('kredi','term'); const r = getNum('kredi','rate') / 100;
-            const pay = p * (r * Math.pow(1 + r, t)) / (Math.pow(1 + r, t) - 1);
-            showRes('kredi', `${pay.toLocaleString('tr-TR', {maximumFractionDigits:2})} TL / Ay`, `Toplam: ${(pay*t).toLocaleString('tr-TR')} TL`);
-        }
-
-        // Utility functions
-        function calc_zam() { const s=getNum('zam','curr'), r=getNum('zam','rate'); showRes('zam', (s*(1+r/100)).toFixed(2)+' TL', `Artış: ${(s*r/100).toFixed(2)} TL`); }
-        function calc_indirim() { const p=getNum('indirim','price'), r=getNum('indirim','rate'); showRes('indirim', (p*(1-r/100)).toFixed(2)+' TL', `Kazanç: ${(p*r/100).toFixed(2)} TL`); }
-        function calc_net_brut() { const n=getNum('net_brut','net'); showRes('net_brut', (n/0.7149).toFixed(2)+' TL'); }
-        function calc_brut_net() { const b=getNum('brut_net','brut'); showRes('brut_net', (b*0.7149).toFixed(2)+' TL'); }
-        function calc_mevduat() { const a=getNum('mevduat','amt'), r=getNum('mevduat','rate'), d=getNum('mevduat','days'); const net = a*r*d/36500 * 0.95; showRes('mevduat', net.toFixed(2)+' TL'); }
-        function calc_iban() { const i=getVal('iban','code'); showRes('iban', (i.length===26 && i.startsWith('TR')) ? 'Geçerli' : 'Geçersiz'); }
-        function calc_idealkilo() { const h=getNum('idealkilo','h'), g=getVal('idealkilo','g'); const k=g==0?50+0.9*(h-152):45.5+0.9*(h-152); showRes('idealkilo', Math.round(k)+' kg'); }
-        function calc_bmr() { const w=getNum('bmr','w'), h=getNum('bmr','h'), a=getNum('bmr','a'), g=getVal('bmr','g'); const b=g==0?(10*w+6.25*h-5*a+5):(10*w+6.25*h-5*a-161); showRes('bmr', Math.round(b)+' kcal'); }
-        function calc_makro() { const c=getNum('makro','cal'); showRes('makro', `P:${Math.round(c*0.3/4)}g K:${Math.round(c*0.4/4)}g Y:${Math.round(c*0.3/9)}g`); }
-        function calc_nabiz() { const a=getNum('nabiz','age'); showRes('nabiz', (220-a)+' bpm (Max)'); }
-        function calc_su() { showRes('su', (getNum('su','w')*0.033).toFixed(1)+' Litre'); }
-        function calc_gebelik() { const d=new Date(getVal('gebelik','date')); d.setDate(d.getDate()+280); showRes('gebelik', d.toLocaleDateString('tr-TR')); }
-        function calc_sigara() { const p=getNum('sigara','price'), d=getNum('sigara','daily'); showRes('sigara', (p*d*365).toLocaleString()+' TL / Yıl'); }
-        function calc_yuzde() { const a=getNum('yuzde','a'), b=getNum('yuzde','b'); showRes('yuzde', (a*b/100).toFixed(2)); }
-        function calc_sinav() { const v=getNum('sinav','v'), f=getNum('sinav','f'); const av=v*0.4+f*0.6; showRes('sinav', av.toFixed(1), av>=50?'Geçti':'Kaldı'); }
-        function calc_takdir() { const a=getNum('takdir','avg'); showRes('takdir', a>=85?'Takdir':a>=70?'Teşekkür':'Belge Yok'); }
-        function calc_dikdortgen() { const w=getNum('dikdortgen','w'), h=getNum('dikdortgen','h'); showRes('dikdortgen', (w*h)+' m²'); }
-        function calc_kelime() { showRes('kelime', getVal('kelime','txt').trim().split(/\s+/).filter(x=>x).length+' Kelime'); }
-        function calc_internet() { const s=getNum('internet','size'), sp=getNum('internet','spd'); showRes('internet', ((s*8192)/sp/60).toFixed(1)+' Dakika'); }
-        function calc_yakit() { const k=getNum('yakit','km'), l=getNum('yakit','lit'), p=getNum('yakit','pr'); showRes('yakit', ((k/100)*l*p).toFixed(2)+' TL'); }
-        function calc_yas() {
-            const d = new Date(getVal('yas','date'));
-            const n = new Date();
-            let age = n.getFullYear() - d.getFullYear();
-            const m = n.getMonth() - d.getMonth();
-            if (m < 0 || (m === 0 && n.getDate() < d.getDate())) {
-                age--;
+        async function calc_ai_asistan() {
+            const q = getVal('ai_asistan', 'q');
+            if(!q) return;
+            showRes('ai_asistan', '<i class="fa-solid fa-spinner fa-spin"></i> Düşünüyorum...', '');
+            try {
+                const answer = await callGemini(q, "Sen yardımsever ve zeki bir hesaplama asistanısın. Kullanıcının matematiksel, finansal, mantıksal veya genel kültür sorularını Türkçe olarak yanıtla. Cevabın kısa, net ve anlaşılır olsun.");
+                const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                showRes('ai_asistan', formatted);
+            } catch (e) {
+                showRes('ai_asistan', 'Bağlantı Hatası: ' + (e.message || 'Bilinmeyen hata'), 'API Anahtarınızı kontrol edip tekrar deneyin.');
             }
-            showRes('yas', age + ' Yaş');
         }
-        function calc_gun() { const d1=new Date(getVal('gun','d1')), d2=new Date(getVal('gun','d2')); showRes('gun', Math.floor(Math.abs((d2-d1)/864e5))+' Gün'); }
+
+        async function calc_ai_diyet() {
+            const w = getVal('ai_diyet', 'w'), h = getVal('ai_diyet', 'h');
+            const gIdx = getVal('ai_diyet', 'goal');
+            const goals = ['Kilo Vermek', 'Kilo Almak', 'Formu Korumak', 'Kas Yapmak'];
+            if(!w || !h) return;
+            showRes('ai_diyet', '<i class="fa-solid fa-spinner fa-spin"></i> Plan hazırlanıyor...', '');
+            const prompt = `Kilo: ${w}kg, Boy: ${h}cm, Hedef: ${goals[gIdx]}. Bana 1 günlük örnek bir beslenme planı oluştur.`;
+            const sys = "Sen uzman bir diyetisyensin. Türkçe liste formatında yanıt ver.";
+            try {
+                const answer = await callGemini(prompt, sys);
+                const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                showRes('ai_diyet', formatted);
+            } catch (e) {
+                showRes('ai_diyet', 'Plan oluşturulamadı: ' + (e.message || 'Hata'));
+            }
+        }
+
+        // Short functions
+        function calc_bmi() { const h=getNum('bmi','h')/100, w=getNum('bmi','w'), b=w/(h*h); showRes('bmi', b.toFixed(2), b<25?'Normal':b<30?'Fazla Kilo':'Obez'); }
+        function calc_yas() { const d=new Date(getVal('yas','date')), n=new Date(); let a=n.getFullYear()-d.getFullYear(), m=n.getMonth()-d.getMonth(); if(m<0||(m===0&&n.getDate()<d.getDate()))a--; showRes('yas', a+' Yaş'); }
         function calc_sifre() {
             const l=getNum('sifre','len');
             const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-            let retVal = "";
-            for (let i = 0; i < l; ++i) {
-                retVal += charset.charAt(Math.floor(Math.random() * charset.length));
-            }
-            showRes('sifre', retVal);
+            let r = "";
+            const values = new Uint32Array(l);
+            crypto.getRandomValues(values);
+            for(let i=0; i<l; i++) r += charset[values[i] % charset.length];
+            showRes('sifre', r);
         }
+        function calc_zam() { const s=getNum('zam','curr'), r=getNum('zam','rate'); showRes('zam', (s*(1+r/100)).toFixed(2)+' TL'); }
+        function calc_indirim() { const p=getNum('indirim','price'), r=getNum('indirim','rate'); showRes('indirim', (p*(1-r/100)).toFixed(2)+' TL'); }
+        function calc_net_brut() { showRes('net_brut', (getNum('net_brut','net')/0.7149).toFixed(2)+' TL'); }
+        function calc_brut_net() { showRes('brut_net', (getNum('brut_net','brut')*0.7149).toFixed(2)+' TL'); }
+        function calc_mevduat() { showRes('mevduat', (getNum('mevduat','amt')*getNum('mevduat','rate')*getNum('mevduat','days')/36500*0.95).toFixed(2)+' TL'); }
+        function calc_iban() { const i=getVal('iban','code'); showRes('iban', i.length===26&&i.startsWith('TR')?'Geçerli':'Geçersiz'); }
+        function calc_idealkilo() { const h=getNum('idealkilo','h'), k=getVal('idealkilo','g')==0?50+0.9*(h-152):45.5+0.9*(h-152); showRes('idealkilo', Math.round(k)+' kg'); }
+        function calc_bmr() { const w=getNum('bmr','w'), h=getNum('bmr','h'), a=getNum('bmr','a'), g=getVal('bmr','g'); showRes('bmr', Math.round(g==0?10*w+6.25*h-5*a+5:10*w+6.25*h-5*a-161)+' kcal'); }
+        function calc_makro() { const c=getNum('makro','cal'); showRes('makro', `P:${Math.round(c*0.3/4)}g K:${Math.round(c*0.4/4)}g Y:${Math.round(c*0.3/9)}g`); }
+        function calc_nabiz() { showRes('nabiz', (220-getNum('nabiz','age'))+' bpm'); }
+        function calc_su() { showRes('su', (getNum('su','w')*0.033).toFixed(1)+' Lt'); }
+        function calc_gebelik() { const d=new Date(getVal('gebelik','date')); d.setDate(d.getDate()+280); showRes('gebelik', d.toLocaleDateString('tr-TR')); }
+        function calc_sigara() { showRes('sigara', (getNum('sigara','price')*getNum('sigara','daily')*365).toLocaleString()+' TL/Yıl'); }
+        function calc_yuzde() { showRes('yuzde', (getNum('yuzde','a')*getNum('yuzde','b')/100).toFixed(2)); }
+        function calc_sinav() { const r=getNum('sinav','v')*0.4+getNum('sinav','f')*0.6; showRes('sinav', r.toFixed(1), r>=50?'Geçti':'Kaldı'); }
+        function calc_takdir() { const a=getNum('takdir','avg'); showRes('takdir', a>=85?'Takdir':a>=70?'Teşekkür':'Boş'); }
+        function calc_dikdortgen() { showRes('dikdortgen', (getNum('dikdortgen','w')*getNum('dikdortgen','h'))+' m²'); }
+        function calc_kelime() { showRes('kelime', getVal('kelime','txt').trim().split(/\s+/).filter(x=>x).length+' Kelime'); }
+        function calc_internet() { showRes('internet', ((getNum('internet','size')*8192)/getNum('internet','spd')/60).toFixed(1)+' Dk'); }
+        function calc_yakit() { showRes('yakit', ((getNum('yakit','km')/100)*getNum('yakit','lit')*getNum('yakit','pr')).toFixed(2)+' TL'); }
+        function calc_gun() { const d1=new Date(getVal('gun','d1')), d2=new Date(getVal('gun','d2')); showRes('gun', Math.floor(Math.abs((d2-d1)/864e5))+' Gün'); }
         function calc_hiz() { showRes('hiz', (getNum('hiz','km')/getNum('hiz','hr')).toFixed(1)+' km/s'); }
-        function calc_karzarar() { const c=getNum('karzarar','cost'), s=getNum('karzarar','sell'); showRes('karzarar', '%'+((s-c)/c*100).toFixed(1)+' Kâr'); }
-        function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r'), t=getNum('bilesik','t'); showRes('bilesik', (p*Math.pow(1+r/100, t)).toFixed(2)+' TL'); }
-        function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); const r=l>25000?0.40:0.20; showRes('kk_asgari', (d*r).toFixed(2)+' TL'); }
-        function calc_komisyon() { const p=getNum('komisyon','price'); showRes('komisyon', (p*0.02*1.2).toFixed(2)+' TL'); }
+        function calc_karzarar() { const c=getNum('karzarar','cost'), s=getNum('karzarar','sell'); showRes('karzarar', '%'+((s-c)/c*100).toFixed(1)); }
+        function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r'), t=getNum('bilesik','t'); showRes('bilesik', (p*Math.pow(1+r/100,t)).toFixed(2)+' TL'); }
+        function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); showRes('kk_asgari', (d*(l>25000?0.4:0.2)).toFixed(2)+' TL'); }
+        function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*1.2).toFixed(2)+' TL'); }
 
+        // Helpers
+        function getVal(t,i) { return document.getElementById(`${t}-${i}`).value; }
+        function getNum(t,i) { return parseFloat(getVal(t,i))||0; }
     </script>
 </body>
 </html>
