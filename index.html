@@ -685,7 +685,16 @@
         function calc_kelime() { showRes('kelime', getVal('kelime','txt').trim().split(/\s+/).filter(x=>x).length+' Kelime'); }
         function calc_internet() { const s=getNum('internet','size'), sp=getNum('internet','spd'); showRes('internet', ((s*8192)/sp/60).toFixed(1)+' Dakika'); }
         function calc_yakit() { const k=getNum('yakit','km'), l=getNum('yakit','lit'), p=getNum('yakit','pr'); showRes('yakit', ((k/100)*l*p).toFixed(2)+' TL'); }
-        function calc_yas() { const d=new Date(getVal('yas','date')); const n=new Date(); showRes('yas', (n.getFullYear()-d.getFullYear())+' Yaş'); }
+        function calc_yas() {
+            const d = new Date(getVal('yas','date'));
+            const n = new Date();
+            let age = n.getFullYear() - d.getFullYear();
+            const m = n.getMonth() - d.getMonth();
+            if (m < 0 || (m === 0 && n.getDate() < d.getDate())) {
+                age--;
+            }
+            showRes('yas', age + ' Yaş');
+        }
         function calc_gun() { const d1=new Date(getVal('gun','d1')), d2=new Date(getVal('gun','d2')); showRes('gun', Math.floor(Math.abs((d2-d1)/864e5))+' Gün'); }
         function calc_sifre() {
             const l=getNum('sifre','len');
