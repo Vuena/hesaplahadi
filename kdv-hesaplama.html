@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="2026 Güncel KDV Hesaplama Aracı. KDV dahil ve hariç tutarları %1, %10 ve %20 oranlarıyla hesaplayın.">
+    <meta name="keywords" content="kdv hesaplama, kdv dahil hesaplama, kdv hariç hesaplama, katma değer vergisi">
+    <meta name="author" content="HesaplaHadi">
+    <meta name="robots" content="index, follow">
+    <title>KDV Hesaplama 2026 - KDV Dahil ve Hariç Hesapla | HesaplaHadi</title>
+    <link rel="canonical" href="https://hesaplahadi.com/kdv-hesaplama.html">
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Calculator",
+      "name": "KDV Hesaplama Aracı",
+      "url": "https://hesaplahadi.com/kdv-hesaplama.html",
+      "description": "KDV dahil ve hariç hesaplamalarınızı saniyeler içinde yapın.",
+      "operatingSystem": "All",
+      "applicationCategory": "FinanceApplication",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="flex flex-col min-h-screen text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                    <i class="fa-solid fa-calculator text-lg"></i>
+                </div>
+                <div class="leading-tight">
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Asistan</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+
+        <!-- Sidebar -->
+        <nav class="hidden lg:block lg:col-span-3 space-y-4">
+            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+                <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+                    <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
+                </div>
+                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
+                    <!-- JS Populated via calculator.js -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-span-1 lg:col-span-6 space-y-6">
+
+            <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
+
+                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                    <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm">
+                        <i class="fa-solid fa-calculator text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">KDV Hesaplama</h1>
+                        <p class="text-xs text-slate-500 mt-1">KDV Dahil ve Hariç tutarları güncel oranlarla (%1, %10, %20) hesaplayın.</p>
+                    </div>
+                </div>
+
+                <!-- Static Form for KDV -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tutar (TL)</label>
+                        <input type="number" id="kdv-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1000" step="any">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">KDV Oranı</label>
+                        <div class="relative">
+                            <select id="kdv-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+                                <option value="0">%1 (Gıda vb.)</option>
+                                <option value="1">%10 (Tekstil vb.)</option>
+                                <option value="2" selected>%20 (Genel)</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">İşlem Türü</label>
+                        <div class="relative">
+                            <select id="kdv-type" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+                                <option value="0">KDV Dahil</option>
+                                <option value="1">KDV Hariç</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="calc_kdv()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> Hesapla
+                </button>
+
+                <div id="res-kdv" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
+                    <button id="btn-copy-kdv" onclick="copyResult('kdv')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+                        <i class="fa-regular fa-copy"></i> Kopyala
+                    </button>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
+                    <div id="val-kdv" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+                    <div id="detail-kdv" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+                </div>
+
+            </div>
+
+            <!-- SEO Content -->
+            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+                <h2 class="text-lg font-bold text-slate-800 mb-4 border-l-4 border-blue-500 pl-3">KDV Hesaplama Hakkında</h2>
+                <div class="prose prose-sm text-slate-600">
+                    <p>Katma Değer Vergisi (KDV), mal ve hizmet teslimlerinde alıcıdan alınan bir tüketim vergisidir. Türkiye'de genel olarak %1, %10 ve %20 oranlarında uygulanır.</p>
+                    <h3 class="font-bold text-slate-800 mt-4 mb-2">KDV Dahil Nasıl Hesaplanır?</h3>
+                    <p>Bir tutarın KDV dahil halini bulmak için: <code>Tutar x (1 + KDV Oranı)</code> formülü kullanılır.<br>Örnek: 1000 TL + %20 KDV = 1000 x 1.20 = 1200 TL.</p>
+                    <h3 class="font-bold text-slate-800 mt-4 mb-2">KDV Hariç Nasıl Hesaplanır?</h3>
+                    <p>KDV dahil bir tutardan KDV'siz (matrah) tutarı bulmak için: <code>Tutar / (1 + KDV Oranı)</code> formülü kullanılır.<br>Örnek: 1200 TL (KDV Dahil) / 1.20 = 1000 TL.</p>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="col-span-1 lg:col-span-3 space-y-6">
+             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-500"></i> Diğer Araçlar
+                </h4>
+                <ul class="text-sm space-y-2 text-slate-600 font-medium">
+                    <li class="cursor-pointer hover:text-indigo-600 hover:bg-indigo-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='ai-asistan.html'">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i> AI Asistan</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
+                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center">
+            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
+                <a href="index.html" class="hover:text-white transition">Ana Sayfa</a>
+                <a href="blog/index.html" class="hover:text-white transition">Blog</a>
+            </div>
+            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
+            <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
+        </div>
+    </div>
+
+    <script src="assets/js/calculator.js"></script>
+</body>
+</html>

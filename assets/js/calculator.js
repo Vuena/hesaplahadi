@@ -1,0 +1,258 @@
+// API Key Obfuscation
+const _k = "QUl6YVN5Qzh6SGxSTkZvck1peW5tM01qUnFNc3RvWjRNczBwQVdR";
+const apiKey = atob(_k);
+
+// --- TOOL CONFIGURATION (Central Source of Truth) ---
+const tools = [
+    // 1. YAPAY ZEKA
+    { id: 'ai_asistan', cat: 'Yapay Zeka', name: 'AI Hesaplama Asistanı', link: 'ai-asistan.html', color:'indigo' },
+
+    // 2. FİNANS & VERGİ
+    { id: 'kdv', cat: 'Finans', name: 'KDV Hesaplama', link: 'kdv-hesaplama.html', color:'blue', inputs: [{}, {opts:['%1','%10','%20']}] },
+    { id: 'tevkifat', cat: 'Finans', name: 'KDV Tevkifat Hesaplama', link: 'tevkifat-hesaplama.html', color:'blue' },
+    { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı', link: 'kidem-tazminati.html', color:'blue' },
+    { id: 'kredi', cat: 'Finans', name: 'Kredi Hesaplama', link: 'kredi-hesaplama.html', color:'blue' },
+    { id: 'net_brut', cat: 'Finans', name: 'Netten Brüte Maaş', link: 'index.html#net_brut', color:'blue' },
+    { id: 'brut_net', cat: 'Finans', name: 'Brütten Nete Maaş', link: 'index.html#brut_net', color:'blue' },
+    { id: 'mevduat', cat: 'Finans', name: 'Mevduat Getirisi', link: 'index.html#mevduat', color:'blue' },
+    { id: 'iban', cat: 'Finans', name: 'IBAN Doğrulama', link: 'index.html#iban', color:'blue' },
+    { id: 'indirim', cat: 'Finans', name: 'İndirim Hesaplama', link: 'index.html#indirim', color:'blue' },
+    { id: 'karzarar', cat: 'Finans', name: 'Kâr Marjı', link: 'index.html#karzarar', color:'blue' },
+    { id: 'bilesik', cat: 'Finans', name: 'Bileşik Faiz', link: 'index.html#bilesik', color:'blue' },
+    { id: 'kk_asgari', cat: 'Finans', name: 'K.K. Asgari Ödeme', link: 'index.html#kk_asgari', color:'blue' },
+    { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu', link: 'index.html#komisyon', color:'blue' },
+    { id: 'zam', cat: 'Finans', name: 'Maaş Zam', link: 'index.html#zam', color:'blue' },
+
+    // 3. SAĞLIK
+    { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen', link: 'ai-diyet.html', color:'indigo' },
+    { id: 'bmi', cat: 'Sağlık', name: 'Vücut Kitle İndeksi', link: 'index.html#bmi', color:'green' },
+    { id: 'idealkilo', cat: 'Sağlık', name: 'İdeal Kilo', link: 'index.html#idealkilo', color:'green' },
+    { id: 'bmr', cat: 'Sağlık', name: 'Bazal Metabolizma', link: 'index.html#bmr', color:'green' },
+    { id: 'makro', cat: 'Sağlık', name: 'Günlük Makro İhtiyacı', link: 'index.html#makro', color:'green' },
+    { id: 'su', cat: 'Sağlık', name: 'Su Tüketimi', link: 'index.html#su', color:'green' },
+    { id: 'gebelik', cat: 'Sağlık', name: 'Doğum Tarihi (SAT)', link: 'index.html#gebelik', color:'green' },
+    { id: 'sigara', cat: 'Sağlık', name: 'Sigara Maliyeti', link: 'index.html#sigara', color:'green' },
+    { id: 'nabiz', cat: 'Sağlık', name: 'Spor Nabız Aralığı', link: 'index.html#nabiz', color:'green' },
+
+    // 4. EĞİTİM & MATEMATİK
+    { id: 'yuzde', cat: 'Eğitim', name: 'Yüzde Hesaplama', link: 'index.html#yuzde', color:'purple' },
+    { id: 'sinav', cat: 'Eğitim', name: 'Üniversite Not Ort.', link: 'index.html#sinav', color:'purple' },
+    { id: 'takdir', cat: 'Eğitim', name: 'Takdir / Teşekkür', link: 'index.html#takdir', color:'purple' },
+    { id: 'dikdortgen', cat: 'Eğitim', name: 'Alan Hesaplama', link: 'index.html#dikdortgen', color:'purple' },
+    { id: 'kelime', cat: 'Eğitim', name: 'Kelime Sayacı', link: 'index.html#kelime', color:'purple' },
+
+    // 5. PRATİK & ARAÇLAR
+    { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi', link: 'index.html#internet', color:'orange' },
+    { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi', link: 'index.html#yakit', color:'orange' },
+    { id: 'yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', link: 'index.html#yas', color:'orange' },
+    { id: 'gun', cat: 'Pratik', name: 'İki Tarih Arası', link: 'index.html#gun', color:'orange' },
+    { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Üret', link: 'index.html#sifre', color:'orange' },
+    { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman', link: 'index.html#hiz', color:'orange' }
+];
+
+// --- RENDER SIDEBAR ---
+function renderSidebar() {
+    const sidebar = document.getElementById('sidebar-list');
+    if(!sidebar) return; // Might not be present on all pages?
+
+    // Clear existing (if any)
+    sidebar.innerHTML = '';
+
+    const cats = [...new Set(tools.map(t => t.cat))];
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+    cats.forEach(cat => {
+        const header = document.createElement('div');
+        header.className = 'cat-header'; header.innerText = cat; sidebar.appendChild(header);
+
+        tools.filter(t => t.cat === cat).forEach(t => {
+            const a = document.createElement('a');
+            a.href = t.link;
+            a.className = 'w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition flex items-center nav-item gap-3 mb-1 text-slate-500 hover:bg-slate-50 hover:text-blue-600 block';
+
+            // Active State Check
+            if(currentPath === t.link) {
+                a.classList.add('nav-active');
+            }
+
+            const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>' : '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>';
+            a.innerHTML = `${icon} ${t.name}`;
+
+            sidebar.appendChild(a);
+        });
+    });
+}
+
+// --- GEMINI API HELPER ---
+async function callGemini(userPrompt, systemPrompt) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+    const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] }
+    };
+
+    for (let i = 0; i < 3; i++) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error?.message || response.statusText);
+            return data.candidates[0].content.parts[0].text;
+        } catch (error) {
+            if (i === 2) throw error;
+            await new Promise(r => setTimeout(r, 1000));
+        }
+    }
+}
+
+// --- COOKIE & UTILS ---
+function checkCookies() { if(!localStorage.getItem('cookiesAccepted')) setTimeout(()=>document.getElementById('cookie-banner').classList.remove('translate-y-full'), 1000); }
+function acceptCookies() { localStorage.setItem('cookiesAccepted','true'); document.getElementById('cookie-banner').classList.add('translate-y-full'); }
+
+function copyResult(id) {
+    const val = document.getElementById(`val-${id}`).innerText;
+    const btn = document.getElementById(`btn-copy-${id}`);
+    navigator.clipboard.writeText(val).then(() => {
+        const h = btn.innerHTML; btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        setTimeout(()=>btn.innerHTML=h, 1500);
+    }).catch(e => console.error(e));
+}
+
+// --- HELPERS ---
+function getVal(t,i) { return document.getElementById(`${t}-${i}`).value; }
+function getNum(t,i) { return parseFloat(getVal(t,i))||0; }
+function showRes(id, mainTxt, detailTxt = '') {
+    const r = document.getElementById(`res-${id}`);
+    document.getElementById(`val-${id}`).innerHTML = mainTxt;
+    document.getElementById(`detail-${id}`).innerHTML = detailTxt;
+    r.classList.remove('hidden');
+    r.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// --- CALC LOGIC ---
+function calc_kdv() {
+    const a=getNum('kdv','amt');
+    // Look up rate manually to avoid dependency issues if tools array changes
+    const rIdx = getVal('kdv','rate');
+    const rates = [0.01, 0.10, 0.20]; // 1, 10, 20
+    const r = rates[rIdx];
+    const t=getVal('kdv','type');
+    let n,x,tot;
+    if(t==0){n=a/(1+r);x=a-n;tot=a;}else{n=a;x=a*r;tot=a+x;}
+    showRes('kdv', tot.toLocaleString('tr-TR',{minimumFractionDigits:2})+' TL', `Net: <strong>${n.toLocaleString('tr-TR',{minimumFractionDigits:2})}</strong> | KDV: <strong>${x.toLocaleString('tr-TR',{minimumFractionDigits:2})}</strong>`);
+}
+
+function calc_tevkifat() {
+    const a=getNum('tevkifat','amt');
+    const r=[0.01,0.1,0.2][getVal('tevkifat','rate')];
+    const tn=[2,3,4,5,7,9][getVal('tevkifat','tev')];
+    const t=getVal('tevkifat','type');
+    let m,ft;
+    if(t==1){m=a/(1+r);ft=a-m;}else{m=a;ft=a*r;}
+    const w=ft*tn/10, d=ft-w, p=m+d;
+    showRes('tevkifat', p.toLocaleString('tr-TR',{minimumFractionDigits:2})+' TL', `KDV: ${ft.toFixed(2)} | Tevkifat (${tn}/10): -${w.toFixed(2)} | Beyan: ${d.toFixed(2)}`);
+}
+
+function calc_kredi() {
+    const p=getNum('kredi','amt'), t=getNum('kredi','term'), r=getNum('kredi','rate')/100;
+    const x=Math.pow(1+r,t), pay=p*(r*x)/(x-1);
+    showRes('kredi', pay.toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL/Ay', `Toplam Geri Ödeme: ${(pay*t).toLocaleString('tr-TR')} TL`);
+}
+
+function calc_kidem() {
+    const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); const sal = getNum('kidem','salary');
+    if (isNaN(s)||isNaN(e)||!sal) return;
+
+    const diffTime = Math.abs(e - s);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const tenureYears = diffDays / 365;
+
+    let years = e.getFullYear() - s.getFullYear();
+    let months = e.getMonth() - s.getMonth();
+    let days = e.getDate() - s.getDate();
+    if (days < 0) { months--; days += new Date(e.getFullYear(), e.getMonth(), 0).getDate(); }
+    if (months < 0) { years--; months += 12; }
+
+    const gross = sal * tenureYears;
+    const net = gross * 0.99241;
+    showRes('kidem', `${net.toLocaleString('tr-TR', {maximumFractionDigits: 2})} TL`, `${years} Yıl ${months} Ay ${days} Gün`);
+}
+
+async function calc_ai_asistan() {
+    const q = getVal('ai_asistan', 'q');
+    if(!q) return;
+    showRes('ai_asistan', '<i class="fa-solid fa-spinner fa-spin"></i> Düşünüyorum...', '');
+    try {
+        const answer = await callGemini(q, "Sen yardımsever ve zeki bir hesaplama asistanısın. Kullanıcının matematiksel, finansal, mantıksal veya genel kültür sorularını Türkçe olarak yanıtla. Cevabın kısa, net ve anlaşılır olsun.");
+        const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+        showRes('ai_asistan', formatted);
+    } catch (e) {
+        showRes('ai_asistan', 'Bağlantı Hatası: ' + (e.message || 'Bilinmeyen hata'), 'API Anahtarınızı kontrol edip tekrar deneyin.');
+    }
+}
+
+async function calc_ai_diyet() {
+    const w = getVal('ai_diyet', 'w'), h = getVal('ai_diyet', 'h');
+    const gIdx = getVal('ai_diyet', 'goal');
+    const goals = ['Kilo Vermek', 'Kilo Almak', 'Formu Korumak', 'Kas Yapmak'];
+    if(!w || !h) return;
+    showRes('ai_diyet', '<i class="fa-solid fa-spinner fa-spin"></i> Plan hazırlanıyor...', '');
+    const prompt = `Kilo: ${w}kg, Boy: ${h}cm, Hedef: ${goals[gIdx]}. Bana 1 günlük örnek bir beslenme planı oluştur.`;
+    const sys = "Sen uzman bir diyetisyensin. Türkçe liste formatında yanıt ver.";
+    try {
+        const answer = await callGemini(prompt, sys);
+        const formatted = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+        showRes('ai_diyet', formatted);
+    } catch (e) {
+        showRes('ai_diyet', 'Plan oluşturulamadı: ' + (e.message || 'Hata'));
+    }
+}
+
+// Others
+function calc_bmi() { const h=getNum('bmi','h')/100, w=getNum('bmi','w'), b=w/(h*h); showRes('bmi', b.toFixed(2), b<25?'Normal':b<30?'Fazla Kilo':'Obez'); }
+function calc_yas() { const d=new Date(getVal('yas','date')), n=new Date(); let a=n.getFullYear()-d.getFullYear(), m=n.getMonth()-d.getMonth(); if(m<0||(m===0&&n.getDate()<d.getDate()))a--; showRes('yas', a+' Yaş'); }
+function calc_sifre() {
+    const l=getNum('sifre','len');
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    let r = "";
+    const values = new Uint32Array(l);
+    crypto.getRandomValues(values);
+    for(let i=0; i<l; i++) r += charset[values[i] % charset.length];
+    showRes('sifre', r);
+}
+// Placeholder for others to ensure no errors if called
+function calc_zam() { const s=getNum('zam','curr'), r=getNum('zam','rate'); showRes('zam', (s*(1+r/100)).toFixed(2)+' TL'); }
+function calc_indirim() { const p=getNum('indirim','price'), r=getNum('indirim','rate'); showRes('indirim', (p*(1-r/100)).toFixed(2)+' TL'); }
+function calc_net_brut() { showRes('net_brut', (getNum('net_brut','net')/0.7149).toFixed(2)+' TL'); }
+function calc_brut_net() { showRes('brut_net', (getNum('brut_net','brut')*0.7149).toFixed(2)+' TL'); }
+function calc_mevduat() { showRes('mevduat', (getNum('mevduat','amt')*getNum('mevduat','rate')*getNum('mevduat','days')/36500*0.95).toFixed(2)+' TL'); }
+function calc_iban() { const i=getVal('iban','code'); showRes('iban', i.length===26&&i.startsWith('TR')?'Geçerli':'Geçersiz'); }
+function calc_idealkilo() { const h=getNum('idealkilo','h'), k=getVal('idealkilo','g')==0?50+0.9*(h-152):45.5+0.9*(h-152); showRes('idealkilo', Math.round(k)+' kg'); }
+function calc_bmr() { const w=getNum('bmr','w'), h=getNum('bmr','h'), a=getNum('bmr','a'), g=getVal('bmr','g'); showRes('bmr', Math.round(g==0?10*w+6.25*h-5*a+5:10*w+6.25*h-5*a-161)+' kcal'); }
+function calc_makro() { const c=getNum('makro','cal'); showRes('makro', `P:${Math.round(c*0.3/4)}g K:${Math.round(c*0.4/4)}g Y:${Math.round(c*0.3/9)}g`); }
+function calc_nabiz() { showRes('nabiz', (220-getNum('nabiz','age'))+' bpm'); }
+function calc_su() { showRes('su', (getNum('su','w')*0.033).toFixed(1)+' Lt'); }
+function calc_gebelik() { const d=new Date(getVal('gebelik','date')); d.setDate(d.getDate()+280); showRes('gebelik', d.toLocaleDateString('tr-TR')); }
+function calc_sigara() { showRes('sigara', (getNum('sigara','price')*getNum('sigara','daily')*365).toLocaleString()+' TL/Yıl'); }
+function calc_yuzde() { showRes('yuzde', (getNum('yuzde','a')*getNum('yuzde','b')/100).toFixed(2)); }
+function calc_sinav() { const r=getNum('sinav','v')*0.4+getNum('sinav','f')*0.6; showRes('sinav', r.toFixed(1), r>=50?'Geçti':'Kaldı'); }
+function calc_takdir() { const a=getNum('takdir','avg'); showRes('takdir', a>=85?'Takdir':a>=70?'Teşekkür':'Boş'); }
+function calc_dikdortgen() { showRes('dikdortgen', (getNum('dikdortgen','w')*getNum('dikdortgen','h'))+' m²'); }
+function calc_kelime() { showRes('kelime', getVal('kelime','txt').trim().split(/\s+/).filter(x=>x).length+' Kelime'); }
+function calc_internet() { showRes('internet', ((getNum('internet','size')*8192)/getNum('internet','spd')/60).toFixed(1)+' Dk'); }
+function calc_yakit() { showRes('yakit', ((getNum('yakit','km')/100)*getNum('yakit','lit')*getNum('yakit','pr')).toFixed(2)+' TL'); }
+function calc_gun() { const d1=new Date(getVal('gun','d1')), d2=new Date(getVal('gun','d2')); showRes('gun', Math.floor(Math.abs((d2-d1)/864e5))+' Gün'); }
+function calc_hiz() { showRes('hiz', (getNum('hiz','km')/getNum('hiz','hr')).toFixed(1)+' km/s'); }
+function calc_karzarar() { const c=getNum('karzarar','cost'), s=getNum('karzarar','sell'); showRes('karzarar', '%'+((s-c)/c*100).toFixed(1)); }
+function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r'), t=getNum('bilesik','t'); showRes('bilesik', (p*Math.pow(1+r/100,t)).toFixed(2)+' TL'); }
+function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); showRes('kk_asgari', (d*(l>25000?0.4:0.2)).toFixed(2)+' TL'); }
+function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*1.2).toFixed(2)+' TL'); }
+
+// Run Init
+window.addEventListener('load', () => {
+    checkCookies();
+    renderSidebar();
+});
