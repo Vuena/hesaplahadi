@@ -41,6 +41,7 @@
                 </div>
             </a>
 
+            <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                 <a href="blog/index.html" class="hover:text-blue-600 px-2 py-2 transition">Blog</a>
                 <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
@@ -48,6 +49,11 @@
                     <span>AI Asistan</span>
                 </a>
             </div>
+
+            <!-- Mobile Nav Button -->
+            <a href="blog/index.html" class="md:hidden p-2 text-blue-600 font-bold text-xs flex items-center gap-2 border border-blue-100 rounded-lg hover:bg-blue-50 transition">
+                <span>Blog</span> <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </header>
 
@@ -159,31 +165,45 @@
 
         function renderDashboard() {
             const container = document.getElementById('tool-container');
-            container.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"; // Grid Layout
             container.innerHTML = ""; // Clear existing
+            container.className = "space-y-8"; // Stack categories vertically
 
-            // Group tools by category for ordered display or just mix them?
-            // Dashboard usually mixes them or sorts by popularity.
-            // Let's render all tools as clickable cards.
+            // Group tools by category
+            const cats = [...new Set(tools.map(t => t.cat))];
 
-            tools.forEach(t => {
-                // Skip if hidden or special? No, show all.
-                const themeColor = { blue: 'blue', green: 'emerald', purple: 'violet', orange: 'amber', indigo: 'indigo', red: 'red', cyan: 'cyan' }[t.color] || 'blue';
-                const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles"></i>' : '<i class="fa-solid fa-calculator"></i>';
+            cats.forEach(cat => {
+                const section = document.createElement('div');
 
-                const card = document.createElement('a');
-                card.href = t.link;
-                card.className = `bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-1 transition flex flex-col items-center text-center group h-full`;
+                // Category Header
+                const header = document.createElement('h3');
+                header.className = "text-sm font-bold text-slate-500 uppercase tracking-wide mb-4 pl-1 flex items-center gap-2";
+                header.innerHTML = `<span class="w-1.5 h-4 bg-slate-300 rounded-full"></span> ${cat}`;
+                section.appendChild(header);
 
-                card.innerHTML = `
-                    <div class="w-12 h-12 bg-${themeColor}-50 text-${themeColor}-600 rounded-full flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition">
-                        ${icon}
-                    </div>
-                    <h3 class="font-bold text-slate-800 text-sm leading-tight">${t.name}</h3>
-                    <span class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-wide">${t.cat}</span>
-                `;
+                // Grid for this category
+                const grid = document.createElement('div');
+                grid.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4";
 
-                container.appendChild(card);
+                tools.filter(t => t.cat === cat).forEach(t => {
+                    const themeColor = { blue: 'blue', green: 'emerald', purple: 'violet', orange: 'amber', indigo: 'indigo', red: 'red', cyan: 'cyan' }[t.color] || 'blue';
+                    const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles"></i>' : '<i class="fa-solid fa-calculator"></i>';
+
+                    const card = document.createElement('a');
+                    card.href = t.link;
+                    // Smaller padding on mobile (p-4)
+                    card.className = `bg-white p-4 md:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-${themeColor}-200 transition flex flex-col items-center text-center group h-full`;
+
+                    card.innerHTML = `
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-${themeColor}-50 text-${themeColor}-600 rounded-full flex items-center justify-center text-lg md:text-xl mb-3 group-hover:scale-110 transition">
+                            ${icon}
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-xs md:text-sm leading-tight group-hover:text-${themeColor}-600 transition">${t.name}</h4>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                container.appendChild(section);
             });
         }
 

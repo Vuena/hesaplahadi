@@ -287,6 +287,12 @@ html_template = """<!DOCTYPE html>
                     <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
                 </div>
             </a>
+
+            <!-- Mobile Nav Button -->
+            <a href="blog/index.html" class="md:hidden p-2 text-blue-600 font-bold text-xs flex items-center gap-2 border border-blue-100 rounded-lg hover:bg-blue-50 transition">
+                <span>Blog</span> <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
             <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                 <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
                 <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
