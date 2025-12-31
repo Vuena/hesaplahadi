@@ -3,7 +3,12 @@ import os
 import re
 
 # Define the new header block for tool pages
-# Must match the NEW index.html structure
+# - Replaced "Menü" with "Tüm Hesaplama Araçları"
+# - Gradient for mobile button
+# - "Hesaplama Araçları" link in blog header logic (handled separately or shared if template allows)
+# - Desktop search bar
+# - Ensuring desktop view works (md:block hidden logic)
+
 new_header = """    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
@@ -43,7 +48,8 @@ new_header = """    <!-- Header -->
                         <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
                     </a>
 
-                    <!-- Mobile Stylized Blog Button -->
+                    <!-- Mobile Stylized Blog Button (Changes to Home Link in Blog pages) -->
+                    <!-- This generic template is for tool pages, so it links to Blog -->
                     <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
                         <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
                     </a>
@@ -57,18 +63,17 @@ new_header = """    <!-- Header -->
                  <div id="mobile-search-suggestions" class="absolute top-full left-0 w-full bg-white border border-slate-200 shadow-lg rounded-xl mt-1 z-50 hidden"></div>
             </div>
 
-            <!-- Mobile Drawer Toggle (Below Search) -->
+            <!-- Mobile Drawer Toggle (Below Search) - UPDATED -->
             <div class="md:hidden mt-3">
-                <button onclick="toggleDrawer()" class="w-full bg-slate-800 text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-slate-700 transition shadow-sm">
+                <button onclick="toggleDrawer()" class="w-full bg-gradient-to-r from-slate-700 to-slate-600 text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:opacity-90 transition shadow-sm">
                     <i class="fa-solid fa-bars"></i>
-                    <span class="font-bold text-sm">Menü</span>
+                    <span class="font-bold text-sm">Tüm Hesaplama Araçları</span>
                 </button>
             </div>
         </div>
     </header>"""
 
 # Regex to find the header block
-# It looks for <!-- Header --> ... </header>
 header_regex = re.compile(r'<!-- Header -->.*?<header.*?>.*?</header>', re.DOTALL)
 
 def update_file(filepath):
@@ -83,6 +88,13 @@ def update_file(filepath):
     # Replace header
     new_content = header_regex.sub(new_header, content)
 
+    # Site Icon Injection
+    if '<link rel="icon"' not in new_content:
+        # Try to find an icon
+        icon_path = 'assets/img/favicon.png'
+        # Insert before </head>
+        new_content = new_content.replace('</head>', f'    <link rel="icon" type="image/png" href="{icon_path}">\n</head>')
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(new_content)
     print(f"Updated {filepath}")
@@ -92,3 +104,6 @@ files = [f for f in os.listdir('.') if f.endswith('.html') and f != 'index.html'
 
 for f in files:
     update_file(f)
+
+# Also update index.html specifically
+update_file('index.html')

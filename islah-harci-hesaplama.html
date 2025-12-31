@@ -28,6 +28,7 @@
         .mask-visible { opacity: 1; pointer-events: auto; }
         .mask-hidden { opacity: 0; pointer-events: none; }
     </style>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
@@ -41,7 +42,7 @@
         <div id="drawer-list" class="p-3 space-y-1"></div>
     </aside>
 
-        <!-- Header -->
+            <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
@@ -80,7 +81,8 @@
                         <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
                     </a>
 
-                    <!-- Mobile Stylized Blog Button -->
+                    <!-- Mobile Stylized Blog Button (Changes to Home Link in Blog pages) -->
+                    <!-- This generic template is for tool pages, so it links to Blog -->
                     <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
                         <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
                     </a>
@@ -94,11 +96,11 @@
                  <div id="mobile-search-suggestions" class="absolute top-full left-0 w-full bg-white border border-slate-200 shadow-lg rounded-xl mt-1 z-50 hidden"></div>
             </div>
 
-            <!-- Mobile Drawer Toggle (Below Search) -->
+            <!-- Mobile Drawer Toggle (Below Search) - UPDATED -->
             <div class="md:hidden mt-3">
-                <button onclick="toggleDrawer()" class="w-full bg-slate-800 text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-slate-700 transition shadow-sm">
+                <button onclick="toggleDrawer()" class="w-full bg-gradient-to-r from-slate-700 to-slate-600 text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:opacity-90 transition shadow-sm">
                     <i class="fa-solid fa-bars"></i>
-                    <span class="font-bold text-sm">Menü</span>
+                    <span class="font-bold text-sm">Tüm Hesaplama Araçları</span>
                 </button>
             </div>
         </div>
@@ -126,9 +128,17 @@
 
                 <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
                 <div id="content-islah">
-                    <div id="tool-placeholder">
-                        <p class="text-slate-500 text-sm italic">Bu araç şu anda geliştirilme aşamasındadır. Lütfen daha sonra tekrar deneyiniz veya AI Asistan'ı kullanınız.</p>
-                    </div>
+
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Islah Edilen Tutar (TL)</label>
+            <input type="number" id="islah-val" class="w-full rounded-xl border-slate-200" placeholder="Örn: 100000">
+        </div>
+        <button onclick="calc_islah()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-blue-200">Hesapla</button>
+        <div id="res-islah" class="hidden mt-6 bg-blue-50 rounded-2xl p-6 border border-blue-100 text-center animate-fade-in">
+            <div id="val-islah" class="text-3xl font-extrabold text-blue-700 mb-2"></div>
+            <div id="detail-islah" class="text-sm text-blue-600"></div>
+        </div>
+
                 </div>
             </div>
 
