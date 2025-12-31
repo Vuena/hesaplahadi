@@ -361,9 +361,9 @@ template = """<!DOCTYPE html>
                 </div>
             </a>
 
-            <!-- Mobile: Back to Tools (Araçlar) - USER REQUEST FIX -->
-            <a href="../index.html" class="md:hidden p-2 text-slate-600 font-bold text-xs flex items-center gap-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
-                <i class="fa-solid fa-chevron-left"></i> <span>Araçlar</span>
+            <!-- Mobile: Calculation Tools Button (Hesaplama Araçları) - USER REQUEST -->
+            <a href="../index.html" class="md:hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-700 flex items-center gap-1 hover:bg-blue-700 transition shadow-sm">
+                <i class="fa-solid fa-calculator"></i> Hesaplama Araçları
             </a>
 
             <!-- Desktop Nav -->
