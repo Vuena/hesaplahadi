@@ -45,21 +45,23 @@
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+                <!-- Left: Logo (No Hamburger) -->
                 <div class="flex items-center gap-3">
-                    <!-- Mobile Menu Button -->
-                    <button class="md:hidden text-slate-600 hover:text-blue-600 transition p-2" onclick="toggleDrawer()">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-
                     <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2 rounded-lg group-hover:shadow-lg transition">
+                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2 rounded-lg group-hover:shadow-lg transition">
                             <i class="fa-solid fa-calculator text-base"></i>
                         </div>
                         <div class="leading-tight">
                             <h1 class="text-lg md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
                         </div>
                     </a>
+                </div>
+
+                <!-- Desktop Search -->
+                <div class="hidden md:block relative w-96 mx-4">
+                    <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
+                    <input type="text" id="desktop-tool-search" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
+                    <div id="desktop-search-suggestions" class="absolute top-full left-0 w-full bg-white border border-slate-200 shadow-lg rounded-xl mt-1 z-50 hidden"></div>
                 </div>
 
                 <!-- Right: Actions -->
@@ -89,6 +91,15 @@
             <div class="md:hidden mt-3 relative">
                  <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
                  <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
+                 <div id="mobile-search-suggestions" class="absolute top-full left-0 w-full bg-white border border-slate-200 shadow-lg rounded-xl mt-1 z-50 hidden"></div>
+            </div>
+
+            <!-- Mobile Drawer Toggle (Below Search) -->
+            <div class="md:hidden mt-3">
+                <button onclick="toggleDrawer()" class="w-full bg-slate-800 text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-slate-700 transition shadow-sm">
+                    <i class="fa-solid fa-bars"></i>
+                    <span class="font-bold text-sm">Menü</span>
+                </button>
             </div>
         </div>
     </header>

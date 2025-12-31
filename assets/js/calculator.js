@@ -47,8 +47,48 @@ const tools = [
     { id: 'yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', link: 'tam-yas-hesaplama.html', color:'orange' },
     { id: 'gun', cat: 'Pratik', name: 'İki Tarih Arası', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
     { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Üret', link: 'guclu-sifre-olusturucu.html', color:'orange' },
-    { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'orange' }
+    { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'orange' },
+
+    // 6. YENİ ARAÇLAR
+    { id: 'ags', cat: 'Eğitim', name: 'AGS Puan Hesapla', link: 'ags-puan-hesapla.html', color:'purple' },
+    { id: 'deger_artisi', cat: 'Finans', name: 'Değer Artış Kazancı', link: 'deger-artisi-hesaplama.html', color:'blue' },
+    { id: 'ek_ders', cat: 'Finans', name: 'Ek Ders Ücreti', link: 'ek-ders-hesaplama.html', color:'blue' },
+    { id: 'promil', cat: 'Pratik', name: 'Promil Hesaplama', link: 'promil-hesaplama.html', color:'orange' },
+    { id: 'tus', cat: 'Eğitim', name: 'TUS Puan Hesapla', link: 'tus-puan-hesaplama.html', color:'purple' },
+    { id: 'lgs', cat: 'Eğitim', name: 'LGS Puan Hesapla', link: 'lgs-puan-hesaplama.html', color:'purple' },
+    { id: 'islah', cat: 'Finans', name: 'Islah Harcı', link: 'islah-harci-hesaplama.html', color:'blue' },
+    { id: 'taksimetre', cat: 'Pratik', name: 'Taksimetre Hesapla', link: 'taksimetre-hesaplama.html', color:'orange' },
+    { id: 'safak', cat: 'Pratik', name: 'Şafak Sayacı', link: 'safak-hesaplama.html', color:'orange' },
+    { id: 'yks', cat: 'Eğitim', name: 'YKS Net Hesaplama', link: 'yks-net-hesaplama.html', color:'purple' },
+    { id: 'kira', cat: 'Finans', name: 'Kira Artış Oranı', link: 'kira-artis-hesaplama.html', color:'blue' },
+    { id: 'vekalet', cat: 'Finans', name: 'Vekalet Ücreti', link: 'vekalet-ucreti-hesaplama.html', color:'blue' },
+    { id: 'gano', cat: 'Eğitim', name: 'GANO Hesaplama', link: 'gano-hesaplama.html', color:'purple' }
 ];
+
+// --- SEARCH SUGGESTIONS ---
+function showPopularSearchSuggestions(inputId, containerId) {
+    const input = document.getElementById(inputId);
+    const container = document.getElementById(containerId);
+    if (!input || !container) return;
+
+    input.addEventListener('focus', () => {
+        container.innerHTML = '';
+        container.classList.remove('hidden');
+        const popular = tools.filter(t => ['kdv', 'kredi', 'yuzde'].includes(t.id));
+        popular.forEach(t => {
+            const a = document.createElement('a');
+            a.href = t.link;
+            a.className = 'block px-4 py-2 hover:bg-slate-50 text-slate-600 text-sm border-b last:border-0 border-slate-100 flex items-center gap-2';
+            a.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-xs text-slate-400"></i> ${t.name}`;
+            container.appendChild(a);
+        });
+    });
+
+    // Hide on blur (delayed)
+    input.addEventListener('blur', () => {
+        setTimeout(() => container.classList.add('hidden'), 200);
+    });
+}
 
 // --- RENDER SIDEBAR ---
 function renderSidebar() {
@@ -62,15 +102,6 @@ function renderSidebar() {
         const container = document.getElementById(id);
         if(!container) return;
         container.innerHTML = ''; // Clear
-
-        // Add "All Tools" link for Mobile Drawer only
-        if(id === 'drawer-list') {
-             const allLink = document.createElement('a');
-             allLink.href = 'index.html';
-             allLink.className = 'w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 bg-slate-50 mb-2 block border border-slate-200 hover:bg-slate-100 transition flex items-center';
-             allLink.innerHTML = '<i class="fa-solid fa-layer-group mr-2 text-blue-500"></i> Tüm Hesaplamalar';
-             container.appendChild(allLink);
-        }
 
         cats.forEach(cat => {
             const header = document.createElement('div');
@@ -316,3 +347,18 @@ window.addEventListener('load', () => {
         }
     }
 });
+// Placeholders for new tools
+function calc_ags() { showRes('ags', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_deger_artisi() { showRes('deger_artisi', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_ek_ders() { showRes('ek_ders', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_promil() { showRes('promil', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_tus() { showRes('tus', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_lgs() { showRes('lgs', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_islah() { showRes('islah', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_taksimetre() { showRes('taksimetre', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_safak() { showRes('safak', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_yks() { showRes('yks', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_kira() { showRes('kira', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_vekalet() { showRes('vekalet', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+function calc_gano() { showRes('gano', 'Hesaplama Yakında', 'Bu araç geliştirme aşamasındadır.'); }
+showPopularSearchSuggestions('mobile-tool-search', 'mobile-search-suggestions'); showPopularSearchSuggestions('desktop-tool-search', 'desktop-search-suggestions');
