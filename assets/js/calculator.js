@@ -52,33 +52,43 @@ const tools = [
 
 // --- RENDER SIDEBAR ---
 function renderSidebar() {
-    const sidebar = document.getElementById('sidebar-list');
-    if(!sidebar) return; // Might not be present on all pages?
-
-    // Clear existing (if any)
-    sidebar.innerHTML = '';
-
     const cats = [...new Set(tools.map(t => t.cat))];
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-    cats.forEach(cat => {
-        const header = document.createElement('div');
-        header.className = 'cat-header'; header.innerText = cat; sidebar.appendChild(header);
+    // Target both desktop sidebar and mobile drawer
+    const containers = ['sidebar-list', 'drawer-list'];
 
-        tools.filter(t => t.cat === cat).forEach(t => {
-            const a = document.createElement('a');
-            a.href = t.link;
-            a.className = 'w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition flex items-center nav-item gap-3 mb-1 text-slate-500 hover:bg-slate-50 hover:text-blue-600 block';
+    containers.forEach(id => {
+        const container = document.getElementById(id);
+        if(!container) return;
+        container.innerHTML = ''; // Clear
 
-            // Active State Check
-            if(currentPath === t.link) {
-                a.classList.add('nav-active');
-            }
+        // Add "All Tools" link for Mobile Drawer only
+        if(id === 'drawer-list') {
+             const allLink = document.createElement('a');
+             allLink.href = 'index.html';
+             allLink.className = 'w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 bg-slate-50 mb-2 block border border-slate-200 hover:bg-slate-100 transition flex items-center';
+             allLink.innerHTML = '<i class="fa-solid fa-layer-group mr-2 text-blue-500"></i> Tüm Hesaplamalar';
+             container.appendChild(allLink);
+        }
 
-            const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>' : '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>';
-            a.innerHTML = `${icon} ${t.name}`;
+        cats.forEach(cat => {
+            const header = document.createElement('div');
+            header.className = 'cat-header'; header.innerText = cat;
+            container.appendChild(header);
 
-            sidebar.appendChild(a);
+            tools.filter(t => t.cat === cat).forEach(t => {
+                const a = document.createElement('a');
+                a.href = t.link;
+                a.className = 'w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition flex items-center nav-item gap-3 mb-1 text-slate-500 hover:bg-slate-50 hover:text-blue-600 block';
+                if(currentPath === t.link) {
+                    a.classList.add('nav-active', 'bg-blue-50', 'text-blue-600');
+                }
+
+                const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>' : '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>';
+                a.innerHTML = `${icon} ${t.name}`;
+                container.appendChild(a);
+            });
         });
     });
 }
@@ -135,9 +145,8 @@ function showRes(id, mainTxt, detailTxt = '') {
 // --- CALC LOGIC ---
 function calc_kdv() {
     const a=getNum('kdv','amt');
-    // Look up rate manually to avoid dependency issues if tools array changes
     const rIdx = getVal('kdv','rate');
-    const rates = [0.01, 0.10, 0.20]; // 1, 10, 20
+    const rates = [0.01, 0.10, 0.20];
     const r = rates[rIdx];
     const t=getVal('kdv','type');
     let n,x,tot;
@@ -211,6 +220,43 @@ async function calc_ai_diyet() {
     }
 }
 
+// Updated Yuzde Calculation with 5 Modes
+function calc_yuzde() {
+    const m = parseInt(getVal('yuzde', 'mode'));
+    const a = getNum('yuzde', 'a');
+    const b = getNum('yuzde', 'b');
+    let res = 0;
+    let desc = "";
+
+    // 0: A'nın %B'si
+    // 1: A, B'nin % kaçı
+    // 2: A->B Değişim
+    // 3: A'yı %B Artır
+    // 4: A'yı %B Azalt
+
+    if (m === 0) {
+        res = (a * b) / 100;
+        desc = `${a} sayısının %${b}'si`;
+    } else if (m === 1) {
+        if(b === 0) { showRes('yuzde', 'Tanımsız'); return; }
+        res = (a / b) * 100;
+        desc = `${a}, ${b} sayısının %${res.toFixed(2)}'sidir`;
+    } else if (m === 2) {
+        if(a === 0) { showRes('yuzde', 'Tanımsız'); return; }
+        res = ((b - a) / a) * 100;
+        const direction = res > 0 ? 'Artış' : 'Azalış';
+        desc = `${a} -> ${b} değişim: %${Math.abs(res).toFixed(2)} ${direction}`;
+    } else if (m === 3) {
+        res = a * (1 + b / 100);
+        desc = `${a} + %${b}`;
+    } else if (m === 4) {
+        res = a * (1 - b / 100);
+        desc = `${a} - %${b}`;
+    }
+
+    showRes('yuzde', res.toLocaleString('tr-TR', {maximumFractionDigits: 2}), desc);
+}
+
 // Others
 function calc_bmi() { const h=getNum('bmi','h')/100, w=getNum('bmi','w'), b=w/(h*h); showRes('bmi', b.toFixed(2), b<25?'Normal':b<30?'Fazla Kilo':'Obez'); }
 function calc_yas() { const d=new Date(getVal('yas','date')), n=new Date(); let a=n.getFullYear()-d.getFullYear(), m=n.getMonth()-d.getMonth(); if(m<0||(m===0&&n.getDate()<d.getDate()))a--; showRes('yas', a+' Yaş'); }
@@ -226,8 +272,8 @@ function calc_sifre() {
 // Placeholder for others to ensure no errors if called
 function calc_zam() { const s=getNum('zam','curr'), r=getNum('zam','rate'); showRes('zam', (s*(1+r/100)).toFixed(2)+' TL'); }
 function calc_indirim() { const p=getNum('indirim','price'), r=getNum('indirim','rate'); showRes('indirim', (p*(1-r/100)).toFixed(2)+' TL'); }
-function calc_net_brut() { showRes('net_brut', (getNum('net_brut','net')/0.7149).toFixed(2)+' TL'); }
-function calc_brut_net() { showRes('brut_net', (getNum('brut_net','brut')*0.7149).toFixed(2)+' TL'); }
+function calc_net_brut() { showRes('net_brut', (getNum('net_brut','net')/0.7149).toFixed(2)+' TL', 'Tahmini Hesap (2026 Ocak)'); }
+function calc_brut_net() { showRes('brut_net', (getNum('brut_net','brut')*0.7149).toFixed(2)+' TL', 'Tahmini Hesap (2026 Ocak)'); }
 function calc_mevduat() { showRes('mevduat', (getNum('mevduat','amt')*getNum('mevduat','rate')*getNum('mevduat','days')/36500*0.95).toFixed(2)+' TL'); }
 function calc_iban() { const i=getVal('iban','code'); showRes('iban', i.length===26&&i.startsWith('TR')?'Geçerli':'Geçersiz'); }
 function calc_idealkilo() { const h=getNum('idealkilo','h'), k=getVal('idealkilo','g')==0?50+0.9*(h-152):45.5+0.9*(h-152); showRes('idealkilo', Math.round(k)+' kg'); }
@@ -237,7 +283,6 @@ function calc_nabiz() { showRes('nabiz', (220-getNum('nabiz','age'))+' bpm'); }
 function calc_su() { showRes('su', (getNum('su','w')*0.033).toFixed(1)+' Lt'); }
 function calc_gebelik() { const d=new Date(getVal('gebelik','date')); d.setDate(d.getDate()+280); showRes('gebelik', d.toLocaleDateString('tr-TR')); }
 function calc_sigara() { showRes('sigara', (getNum('sigara','price')*getNum('sigara','daily')*365).toLocaleString()+' TL/Yıl'); }
-function calc_yuzde() { showRes('yuzde', (getNum('yuzde','a')*getNum('yuzde','b')/100).toFixed(2)); }
 function calc_sinav() { const r=getNum('sinav','v')*0.4+getNum('sinav','f')*0.6; showRes('sinav', r.toFixed(1), r>=50?'Geçti':'Kaldı'); }
 function calc_takdir() { const a=getNum('takdir','avg'); showRes('takdir', a>=85?'Takdir':a>=70?'Teşekkür':'Boş'); }
 function calc_dikdortgen() { showRes('dikdortgen', (getNum('dikdortgen','w')*getNum('dikdortgen','h'))+' m²'); }

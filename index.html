@@ -215,27 +215,7 @@
         // Init
         window.addEventListener('load', () => {
             renderRecentBlog();
-            // Populate Drawer using same logic as Desktop Sidebar?
-            // calculator.js usually populates 'sidebar-list'.
-            // We can duplicate the content to 'drawer-list'.
-            setTimeout(() => {
-                const sidebar = document.getElementById('sidebar-list');
-                const drawer = document.getElementById('drawer-list');
-                if(sidebar && drawer) {
-                    drawer.innerHTML = sidebar.innerHTML;
-                    // Adjust styles for mobile drawer if needed
-                    // Replace 'sidebar-inactive' classes maybe?
-                    // Actually, let's just keep the classes, they are Tailwind.
-                    // But we might want to ensure clicks close the drawer?
-                    const links = drawer.querySelectorAll('a, button');
-                    links.forEach(l => {
-                        l.addEventListener('click', () => {
-                             // If it's a link to another page, drawer closing doesn't matter much but nice UX.
-                             // toggleDrawer();
-                        });
-                    });
-                }
-            }, 500); // wait for calculator.js to populate sidebar
+            // Drawer is now populated by calculator.js -> renderSidebar()
         });
 
         function renderRecentBlog() {

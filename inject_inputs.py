@@ -28,7 +28,11 @@ tool_inputs = {
     "nabiz": [{"id":"age","l":"Yaş","p":"30"}],
 
     # Education
-    "yuzde": [{"id":"a","l":"Sayı","p":"500"}, {"id":"b","l":"Yüzde (%)","p":"20"}],
+    "yuzde": [
+        {"id":"mode","l":"Hesaplama Türü","type":"select","opts":["A sayısının %B'si kaçtır?","A sayısı, B sayısının % kaçıdır?","A'dan B'ye değişim oranı %?","A sayısı %B artırılırsa?","A sayısı %B azaltılırsa?"]},
+        {"id":"a","l":"A Değeri (Sayı)","p":"500"},
+        {"id":"b","l":"B Değeri (Oran/Sayı)","p":"20"}
+    ],
     "sinav": [{"id":"v","l":"Vize Notu","p":"60"}, {"id":"f","l":"Final Notu","p":"80"}],
     "takdir": [{"id":"avg","l":"Dönem Ortalaması","p":"86.50"}],
     "dikdortgen": [{"id":"w","l":"En (m)","p":"5"}, {"id":"h","l":"Boy (m)","p":"10"}],

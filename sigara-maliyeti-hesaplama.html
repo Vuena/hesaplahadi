@@ -194,16 +194,7 @@
 
         // Specific init for this tool
         window.addEventListener('load', () => {
-
-             // Populate Drawer using same logic as Desktop Sidebar
-             setTimeout(() => {
-                const sidebar = document.getElementById('sidebar-list');
-                const drawer = document.getElementById('drawer-list');
-                if(sidebar && drawer) {
-                    drawer.innerHTML = sidebar.innerHTML;
-                }
-            }, 500);
-
+             // The drawer is now populated by calculator.js -> renderSidebar()
              if(typeof renderSingleTool === 'function') {
                  renderSingleTool('sigara', 'tool-placeholder');
              }

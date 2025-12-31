@@ -113,7 +113,12 @@
 
                 <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
                 <div id="content-yuzde">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Sayı</label><input type="number" id="yuzde-a" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="500" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Yüzde (%)</label><input type="number" id="yuzde-b" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="20" step="any"></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hesaplama Türü</label><div class="relative">
+            <select id="yuzde-mode" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+                <option value="0">A sayısının %B'si kaçtır?</option><option value="1">A sayısı, B sayısının % kaçıdır?</option><option value="2">A'dan B'ye değişim oranı %?</option><option value="3">A sayısı %B artırılırsa?</option><option value="4">A sayısı %B azaltılırsa?</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
+        </div></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">A Değeri (Sayı)</label><input type="number" id="yuzde-a" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="500" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">B Değeri (Oran/Sayı)</label><input type="number" id="yuzde-b" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="20" step="any"></div></div>
                 <button onclick="calc_yuzde()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
                     <i class="fa-solid fa-bolt"></i> Hesapla
                 </button>
@@ -194,16 +199,7 @@
 
         // Specific init for this tool
         window.addEventListener('load', () => {
-
-             // Populate Drawer using same logic as Desktop Sidebar
-             setTimeout(() => {
-                const sidebar = document.getElementById('sidebar-list');
-                const drawer = document.getElementById('drawer-list');
-                if(sidebar && drawer) {
-                    drawer.innerHTML = sidebar.innerHTML;
-                }
-            }, 500);
-
+             // The drawer is now populated by calculator.js -> renderSidebar()
              if(typeof renderSingleTool === 'function') {
                  renderSingleTool('yuzde', 'tool-placeholder');
              }
