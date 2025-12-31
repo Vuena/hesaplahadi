@@ -41,17 +41,12 @@
         <div id="drawer-list" class="p-3 space-y-1"></div>
     </aside>
 
-                <!-- Header -->
+                    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+                <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
-                    <!-- Mobile Hamburger (Simple) -->
-                    <button class="md:hidden text-slate-500 hover:text-blue-600 transition p-2" onclick="toggleDrawer()">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-
                      <a href="index.html" class="flex items-center space-x-2 group">
                         <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
                             <i class="fa-solid fa-calculator text-lg"></i>
@@ -64,6 +59,12 @@
 
                 <!-- Right: Actions -->
                 <div class="flex items-center gap-3">
+                    <!-- Desktop Search Bar -->
+                    <div class="hidden md:block relative">
+                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                         <input type="text" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+                    </div>
+
                     <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                         <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
@@ -97,7 +98,8 @@
             </div>
 
             <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
-            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:bg-blue-600 transition shadow-sm" onclick="toggleDrawer()">
+            <!-- Updated Color to match AI block (Indigo/Purple Gradient) -->
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm" onclick="toggleDrawer()">
                 <i class="fa-solid fa-bars"></i>
                 <span>Tüm Hesaplama Araçları</span>
             </button>
@@ -144,21 +146,44 @@
             </div>
 
             <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+    <h2 class="text-xl font-bold text-slate-800 mb-4">HesaplaHadi Nedir?</h2>
+    <p class="mb-4">HesaplaHadi, günlük hayatta, eğitimde veya iş süreçlerinde sıkça ihtiyaç duyulan matematiksel veya mantıksal bir işlemin hızlıca yapılmasını sağlayan dijital bir araçtır. Manuel olarak hesaplaması zaman alan veya karmaşık formüller gerektiren bu işlem, aracımız sayesinde saniyeler içinde hatasız olarak gerçekleştirilir.</p>
 
-            <h2>Yakıt Tasarrufu İpuçları</h2>
-            <p>Ani hızlanmalardan kaçınmak, lastik basınçlarını kontrol etmek ve gereksiz yükleri boşaltmak yakıt tüketimini %10-20 oranında azaltabilir.</p>
+    <h3 class="text-lg font-bold text-slate-800 mb-3">Neden Bu Aracı Kullanmalısınız?</h3>
+    <ul class="list-disc pl-5 space-y-2 mb-4">
+        <li><strong>Hız ve Pratiklik:</strong> Karmaşık işlemleri anında sonuçlandırır.</li>
+        <li><strong>Doğruluk:</strong> İnsan hatası riskini ortadan kaldırır.</li>
+        <li><strong>Erişilebilirlik:</strong> İnternet olan her yerden 7/24 ücretsiz kullanabilirsiniz.</li>
+    </ul>
 
-            </article>
+    <h3 class="text-lg font-bold text-slate-800 mb-3">Nasıl Kullanılır?</h3>
+    <p class="mb-4">İlgili alanlara gerekli verileri (sayı, tutar, tarih vb.) girdikten sonra "Hesapla" butonuna basmanız yeterlidir. Sonuçlar anında ekranınızda belirecektir. Bazı araçlarımızda detaylı döküm ve grafikler de sunulmaktadır.</p>
+
+    <p>HesaplaHadi.com olarak, kullanıcılarımızın ihtiyaç duyduğu tüm hesaplama araçlarını en güncel verilerle ve en sade arayüzle sunmayı hedefliyoruz.</p>
+</article>
         </main>
 
         <aside class="col-span-1 lg:col-span-3 space-y-6">
              <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler
+                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
                 </h4>
                 <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-indigo-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='kdv-hesaplama.html'">KDV Hesaplama</li>
-                    <li class="cursor-pointer hover:text-indigo-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='kredi-hesaplama.html'">Kredi Hesaplama</li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
+                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
+                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
+                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
+                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
+                        <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
                 </ul>
             </div>
         </aside>

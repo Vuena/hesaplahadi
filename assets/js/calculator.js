@@ -95,6 +95,20 @@ function renderSidebar() {
 
 // --- GEMINI API HELPER ---
 async function callGemini(userPrompt, systemPrompt) {
+    // Rate Limiting (50 requests per day)
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem('ai_last_date');
+    let count = parseInt(localStorage.getItem('ai_daily_count') || '0');
+
+    if (lastDate !== today) {
+        count = 0;
+        localStorage.setItem('ai_last_date', today);
+    }
+
+    if (count >= 50) {
+        throw new Error('Günlük soru limitine (50) ulaştınız. Yarın tekrar deneyin.');
+    }
+
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
     const payload = {
         contents: [{ parts: [{ text: userPrompt }] }],
@@ -110,6 +124,9 @@ async function callGemini(userPrompt, systemPrompt) {
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error?.message || response.statusText);
+
+            // Increment count on success
+            localStorage.setItem('ai_daily_count', (count + 1).toString());
             return data.candidates[0].content.parts[0].text;
         } catch (error) {
             if (i === 2) throw error;
