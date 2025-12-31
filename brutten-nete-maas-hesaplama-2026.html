@@ -48,7 +48,7 @@
                 <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
                      <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
                             <i class="fa-solid fa-calculator text-lg"></i>
                         </div>
                         <div class="leading-tight">
@@ -99,7 +99,7 @@
 
             <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
             <!-- Updated Color to match AI block (Indigo/Purple Gradient) -->
-            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-40 cursor-pointer" onclick="toggleDrawer()">
                 <i class="fa-solid fa-bars"></i>
                 <span>Tüm Hesaplama Araçları</span>
             </button>
@@ -198,7 +198,7 @@
             <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
-    <script src="assets/js/calculator.js"></script>
+    <script src="assets/js/calculator.js?v=2"></script>
     <script>
         // Drawer Logic
         function toggleDrawer() {
