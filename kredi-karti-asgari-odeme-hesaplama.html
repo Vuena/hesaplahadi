@@ -6,6 +6,19 @@
     <meta name="description" content="Kredi kartı dönem borcunuza göre ödemeniz gereken minimum tutar.">
     <title>Kredi Kartı Asgari Ödeme Hesaplama | HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/kredi-karti-asgari-odeme-hesaplama.html" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Kredi Kartı Asgari Ödeme Hesaplama",
+      "url": "https://hesaplahadi.com/kredi-karti-asgari-odeme-hesaplama.html",
+      "description": "Kredi kartı dönem borcunuza göre ödemeniz gereken minimum tutar.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -54,7 +67,7 @@
 
                 <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
                 <div id="content-kk_asgari">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Kart Limiti</label><input type="number" id="kk_asgari-lim" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="50000" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Dönem Borcu</label><input type="number" id="kk_asgari-debt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="15000" step="any"></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Kart Limiti</label><input type="number" id="kk_asgari-lim" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="50000" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Dönem Borcu</label><input type="number" id="kk_asgari-debt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="15000" step="any"></div></div>
                 <button onclick="calc_kk_asgari()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
                     <i class="fa-solid fa-bolt"></i> Hesapla
                 </button>

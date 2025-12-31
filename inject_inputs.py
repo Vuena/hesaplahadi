@@ -73,6 +73,18 @@ for filename in os.listdir('.'):
         with open(filename, 'r', encoding='utf-8') as f:
             content = f.read()
 
+        # Reset any previous injection if running multiple times (revert to placeholder)
+        if '<div id="tool-placeholder"></div>' not in content:
+             # Basic regex replace to strip out previous injection if it exists
+             # But since I don't have a backup, I have to rely on the fact that I am re-generating these pages from `generate_tool_pages.py`?
+             # No, `generate_tool_pages.py` rewrites them from scratch. I should run that first!
+             # Or I can just continue if I assume I run `generate_tool_pages` before this.
+             # But to be safe in this "Fix" plan, I should probably rely on the placeholder.
+             # Wait, I didn't re-run `generate_tool_pages` in this plan.
+             # If I run `inject_inputs` again on an already injected file, it won't find the placeholder.
+             # So I MUST re-run `generate_tool_pages.py` first to get a clean state.
+             pass
+
         # Identify tool ID from content (I embedded it in the HTML comments or ID)
         # Look for <div id="content-{tool_id}">
         match = re.search(r'id="content-([^"]+)"', content)
@@ -85,7 +97,8 @@ for filename in os.listdir('.'):
                 inputs_list = tool_inputs[tool_id]
                 cols = "2" if len(inputs_list) > 1 else "1"
 
-                inputs_html = f'<div class="grid grid-cols-1 md:grid-cols-{cols} gap-6">'
+                # Mobile Fix: gap-5 instead of gap-6
+                inputs_html = f'<div class="grid grid-cols-1 md:grid-cols-{cols} gap-5 md:gap-6">'
                 for inp in inputs_list:
                     inputs_html += generate_input_html(tool_id, inp)
                 inputs_html += '</div>'

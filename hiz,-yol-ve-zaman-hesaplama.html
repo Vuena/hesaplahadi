@@ -6,6 +6,19 @@
     <meta name="description" content="Gidilen mesafe ve süreye göre ortalama hızı bulun.">
     <title>Hız, Yol ve Zaman Hesaplama | HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/hiz,-yol-ve-zaman-hesaplama.html" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Hız, Yol ve Zaman Hesaplama",
+      "url": "https://hesaplahadi.com/hiz,-yol-ve-zaman-hesaplama.html",
+      "description": "Gidilen mesafe ve süreye göre ortalama hızı bulun.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -54,7 +67,7 @@
 
                 <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
                 <div id="content-hiz">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Mesafe (km)</label><input type="number" id="hiz-km" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="400" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Süre (Saat)</label><input type="number" id="hiz-hr" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="4" step="any"></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Mesafe (km)</label><input type="number" id="hiz-km" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="400" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Süre (Saat)</label><input type="number" id="hiz-hr" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="4" step="any"></div></div>
                 <button onclick="calc_hiz()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
                     <i class="fa-solid fa-bolt"></i> Hesapla
                 </button>

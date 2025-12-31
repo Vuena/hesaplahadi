@@ -6,6 +6,19 @@
     <meta name="description" content="Yapay zeka destekli ücretsiz diyet listesi oluşturucu.">
     <title>AI Diyetisyen - Kişiye Özel Beslenme Programı | HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/ai-diyetisyen.html" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AI Diyetisyen - Kişiye Özel Beslenme Programı",
+      "url": "https://hesaplahadi.com/ai-diyetisyen.html",
+      "description": "Yapay zeka destekli ücretsiz diyet listesi oluşturucu.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -54,7 +67,7 @@
 
                 <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
                 <div id="content-ai_diyet">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Kilo (kg)</label><input type="number" id="ai_diyet-w" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="80" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Boy (cm)</label><input type="number" id="ai_diyet-h" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="180" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hedef</label><div class="relative">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Kilo (kg)</label><input type="number" id="ai_diyet-w" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="80" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Boy (cm)</label><input type="number" id="ai_diyet-h" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="180" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hedef</label><div class="relative">
             <select id="ai_diyet-goal" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
                 <option value="0">Kilo Vermek</option><option value="1">Kilo Almak</option><option value="2">Formu Korumak</option><option value="3">Kas Yapmak</option>
             </select>

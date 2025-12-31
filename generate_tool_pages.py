@@ -258,6 +258,19 @@ html_template = """<!DOCTYPE html>
     <meta name="description" content="{desc}">
     <title>{title} | HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/{slug}" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "{title}",
+      "url": "https://hesaplahadi.com/{slug}",
+      "description": "{desc}",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "offers": {{ "@type": "Offer", "price": "0", "priceCurrency": "TRY" }}
+    }}
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
