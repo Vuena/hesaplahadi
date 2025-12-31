@@ -77,3 +77,38 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; 
 .ai-output ul { list-style-type: disc; padding-left: 1.5rem; text-align: left; margin-top: 0.5rem; }
 .ai-output li { margin-bottom: 0.25rem; }
 .ai-output strong { color: #1e293b; }
+/* Mobile UX Improvements */
+.mobile-big-btn {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.mobile-big-btn:active {
+    transform: scale(0.98);
+}
+
+.mobile-blog-btn {
+    background-color: #f1f5f9;
+    color: #334155;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+.mobile-blog-btn:hover {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
