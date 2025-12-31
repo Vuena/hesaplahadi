@@ -154,10 +154,10 @@ function showRes(id, mainTxt, detailTxt = '') {
     if(existingHelp) existingHelp.remove();
 
     const tool = tools.find(t => t.id === id);
-    if(tool && tool.cat !== 'Yapay Zeka') {
+    if(tool && tool.cat !== 'Yapay Zeka' && !tool.id.startsWith('ai_')) {
         const div = document.createElement('div');
-        div.className = 'mt-4 text-center ai-help-link';
-        div.innerHTML = '<a href="ai-asistan.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
+        div.className = 'mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-center shadow-sm ai-help-link';
+        div.innerHTML = '<a href="ai-asistan.html" class="block text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles mb-1 text-lg block"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
         r.appendChild(div);
     }
 
