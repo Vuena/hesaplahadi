@@ -30,20 +30,14 @@
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
 
-            <!-- Header -->
+                    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+                <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
-                     <!-- Mobile "Tüm Hesaplamalar" Button (Replaces Hamburger) -->
-                     <button class="md:hidden flex items-center gap-2 bg-slate-100 text-slate-700 px-3 py-2 rounded-lg font-bold text-[10px] hover:bg-slate-200 transition border border-slate-200" onclick="toggleDrawer()">
-                         <i class="fa-solid fa-bars"></i>
-                         <span>Tüm Hesaplamalar</span>
-                     </button>
-
                      <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                        <div class="block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
                             <i class="fa-solid fa-calculator text-lg"></i>
                         </div>
                         <div class="leading-tight">
@@ -54,6 +48,12 @@
 
                 <!-- Right: Actions -->
                 <div class="flex items-center gap-3">
+                    <!-- Desktop Search Bar -->
+                    <div class="hidden md:block relative">
+                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                         <input type="text" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+                    </div>
+
                     <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                         <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
@@ -67,10 +67,31 @@
             </div>
 
             <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative">
-                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
+            <div class="md:hidden mt-3 relative group">
+                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+
+                 <!-- Search Suggestions -->
+                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+                    <div class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+                    <a href="kdv-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-percent text-blue-400"></i> KDV Hesaplama
+                    </a>
+                    <a href="kredi-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-blue-400"></i> Kredi Hesaplama
+                    </a>
+                    <a href="tevkifat-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-blue-400"></i> Tevkifat Hesapla
+                    </a>
+                 </div>
             </div>
+
+            <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
+            <!-- Updated Color to match AI block (Indigo/Purple Gradient) -->
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i>
+                <span>Tüm Hesaplama Araçları</span>
+            </button>
         </div>
     </header>
 
@@ -149,15 +170,27 @@
 
             <!-- SEO Content -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-                <h2 class="text-lg font-bold text-slate-800 mb-4 border-l-4 border-blue-500 pl-3">KDV Hesaplama Hakkında</h2>
-                <div class="prose prose-sm text-slate-600">
-                    <p>Katma Değer Vergisi (KDV), mal ve hizmet teslimlerinde alıcıdan alınan bir tüketim vergisidir. Türkiye'de genel olarak %1, %10 ve %20 oranlarında uygulanır.</p>
-                    <h3 class="font-bold text-slate-800 mt-4 mb-2">KDV Dahil Nasıl Hesaplanır?</h3>
-                    <p>Bir tutarın KDV dahil halini bulmak için: <code>Tutar x (1 + KDV Oranı)</code> formülü kullanılır.<br>Örnek: 1000 TL + %20 KDV = 1000 x 1.20 = 1200 TL.</p>
-                    <h3 class="font-bold text-slate-800 mt-4 mb-2">KDV Hariç Nasıl Hesaplanır?</h3>
-                    <p>KDV dahil bir tutardan KDV'siz (matrah) tutarı bulmak için: <code>Tutar / (1 + KDV Oranı)</code> formülü kullanılır.<br>Örnek: 1200 TL (KDV Dahil) / 1.20 = 1000 TL.</p>
-                </div>
-            </article>
+        <h2 class="text-xl font-bold text-slate-800 mb-4">KDV Hesaplama Hakkında Detaylı Rehber</h2>
+        <p class="mb-4">Katma Değer Vergisi (KDV), yapılan mal ve hizmet teslimlerinde, malın veya hizmetin teslimi anında doğan ve alıcıdan tahsil edilen bir tüketim vergisidir. Türkiye'de uygulanan KDV oranları %1, %10 ve %20 olarak üç ana kategoride toplanır.</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">KDV Dahil Hesaplama Nasıl Yapılır?</h3>
+        <p class="mb-4">KDV dahil hesaplama işlemi, net tutarın üzerine KDV oranının eklenmesiyle bulunur. Formül şöyledir:<br>
+        <code>KDV Dahil Tutar = Net Tutar x (1 + KDV Oranı)</code><br>
+        Örneğin 1000 TL'lik bir ürünün %20 KDV dahil fiyatı: 1000 x 1.20 = 1200 TL'dir.</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">KDV Hariç Hesaplama Nasıl Yapılır?</h3>
+        <p class="mb-4">KDV hariç (matrah) hesaplama, toplam tutardan verginin arındırılması işlemidir. Formül şöyledir:<br>
+        <code>Net Tutar = Toplam Tutar / (1 + KDV Oranı)</code><br>
+        Örneğin 1200 TL (KDV Dahil) olan bir ürünün vergisiz fiyatı: 1200 / 1.20 = 1000 TL'dir.</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">Güncel KDV Oranları (2026)</h3>
+        <ul class="list-disc pl-5 space-y-2 mb-4">
+            <li><strong>%1 KDV:</strong> Temel gıda maddeleri (ekmek, un vb.), gazete ve dergiler.</li>
+            <li><strong>%10 KDV:</strong> Tekstil ürünleri, giyim, turizm konaklama hizmetleri, yeme-içme hizmetleri.</li>
+            <li><strong>%20 KDV:</strong> Mobilya, beyaz eşya, elektronik cihazlar, kozmetik ve diğer genel kategoriler.</li>
+        </ul>
+        <p>Hesaplama aracımızı kullanarak işlem türünü ve oranını seçerek saniyeler içinde hatasız sonuç alabilirsiniz.</p>
+    </article>
 
         </main>
 
@@ -165,14 +198,23 @@
         <aside class="col-span-1 lg:col-span-3 space-y-6">
              <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-500"></i> Diğer Araçlar
+                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
                 </h4>
                 <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-indigo-600 hover:bg-indigo-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='ai-asistan.html'">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i> AI Asistan</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
+                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
                         <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
+                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
+                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
+                        <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                 </ul>
             </div>

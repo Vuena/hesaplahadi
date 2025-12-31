@@ -63,14 +63,7 @@ function renderSidebar() {
         if(!container) return;
         container.innerHTML = ''; // Clear
 
-        // Add "All Tools" link for Mobile Drawer only
-        if(id === 'drawer-list') {
-             const allLink = document.createElement('a');
-             allLink.href = 'index.html';
-             allLink.className = 'w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 bg-slate-50 mb-2 block border border-slate-200 hover:bg-slate-100 transition flex items-center';
-             allLink.innerHTML = '<i class="fa-solid fa-layer-group mr-2 text-blue-500"></i> Tüm Hesaplamalar';
-             container.appendChild(allLink);
-        }
+        // Note: "All Tools" link explicitly removed for Mobile Drawer per request
 
         cats.forEach(cat => {
             const header = document.createElement('div');
@@ -95,6 +88,20 @@ function renderSidebar() {
 
 // --- GEMINI API HELPER ---
 async function callGemini(userPrompt, systemPrompt) {
+    // Rate Limiting (50 requests per day)
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem('ai_last_date');
+    let count = parseInt(localStorage.getItem('ai_daily_count') || '0');
+
+    if (lastDate !== today) {
+        count = 0;
+        localStorage.setItem('ai_last_date', today);
+    }
+
+    if (count >= 50) {
+        throw new Error('Günlük soru limitine (50) ulaştınız. Yarın tekrar deneyin.');
+    }
+
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
     const payload = {
         contents: [{ parts: [{ text: userPrompt }] }],
@@ -110,6 +117,9 @@ async function callGemini(userPrompt, systemPrompt) {
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error?.message || response.statusText);
+
+            // Increment count on success
+            localStorage.setItem('ai_daily_count', (count + 1).toString());
             return data.candidates[0].content.parts[0].text;
         } catch (error) {
             if (i === 2) throw error;
@@ -138,8 +148,70 @@ function showRes(id, mainTxt, detailTxt = '') {
     const r = document.getElementById(`res-${id}`);
     document.getElementById(`val-${id}`).innerHTML = mainTxt;
     document.getElementById(`detail-${id}`).innerHTML = detailTxt;
+
+    // AI Help Link Injection
+    const existingHelp = r.querySelector('.ai-help-link');
+    if(existingHelp) existingHelp.remove();
+
+    const tool = tools.find(t => t.id === id);
+    if(tool && tool.cat !== 'Yapay Zeka') {
+        const div = document.createElement('div');
+        div.className = 'mt-4 text-center ai-help-link';
+        div.innerHTML = '<a href="ai-asistan.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
+        r.appendChild(div);
+    }
+
     r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// --- DRAWER FUNCTIONS (Global) ---
+function toggleDrawer() {
+    const d = document.getElementById('drawer');
+    const m = document.getElementById('drawer-mask');
+    if(!d || !m) return;
+
+    if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+    } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+    }
+}
+
+function filterDrawerTools() {
+    const qInput = document.getElementById('mobile-tool-search');
+    if(!qInput) return;
+    const q = qInput.value.toLowerCase();
+    const drawerList = document.getElementById('drawer-list');
+    if(!drawerList) return;
+    const items = drawerList.querySelectorAll('a');
+
+    items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+}
+
+function initDrawer() {
+    if(!document.getElementById('drawer')) {
+        const drawerHTML = `
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+        </div>
+        <div id="drawer-list" class="p-3 space-y-1"></div>
+    </aside>`;
+        document.body.insertAdjacentHTML('afterbegin', drawerHTML);
+    }
 }
 
 // --- CALC LOGIC ---
@@ -299,7 +371,17 @@ function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*
 // Run Init
 window.addEventListener('load', () => {
     checkCookies();
+    initDrawer();
     renderSidebar();
+
+    // Mobile Search Suggestions Logic
+    const ms = document.getElementById('mobile-tool-search');
+    const sg = document.getElementById('search-suggestions');
+    if(ms && sg) {
+        ms.addEventListener('focus', () => { if(ms.value === '') sg.classList.remove('hidden'); });
+        ms.addEventListener('input', () => { if(ms.value !== '') sg.classList.add('hidden'); else sg.classList.remove('hidden'); });
+        ms.addEventListener('blur', () => { setTimeout(() => sg.classList.add('hidden'), 200); });
+    }
 
     // Check for AI Asistan query param
     const urlParams = new URLSearchParams(window.location.search);

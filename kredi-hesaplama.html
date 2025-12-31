@@ -24,24 +24,68 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
+        <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 group">
-                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
-                    <i class="fa-solid fa-calculator text-lg"></i>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Left: Logo -->
+                <div class="flex items-center gap-3">
+                     <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                            <i class="fa-solid fa-calculator text-lg"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                        </div>
+                    </a>
                 </div>
-                <div class="leading-tight">
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Search Bar -->
+                    <div class="hidden md:block relative">
+                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                         <input type="text" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+                    </div>
+
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                        <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
+                        <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
+                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>AI Asistan</span>
+                        </a>
+                    </div>
                 </div>
-            </a>
-            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
-                <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
-                <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>AI Asistan</span>
-                </a>
             </div>
+
+            <!-- Mobile Search Bar (Below Header) -->
+            <div class="md:hidden mt-3 relative group">
+                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+
+                 <!-- Search Suggestions -->
+                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+                    <div class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+                    <a href="kdv-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-percent text-blue-400"></i> KDV Hesaplama
+                    </a>
+                    <a href="kredi-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-blue-400"></i> Kredi Hesaplama
+                    </a>
+                    <a href="tevkifat-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-blue-400"></i> Tevkifat Hesapla
+                    </a>
+                 </div>
+            </div>
+
+            <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
+            <!-- Updated Color to match AI block (Indigo/Purple Gradient) -->
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i>
+                <span>Tüm Hesaplama Araçları</span>
+            </button>
         </div>
     </header>
 
@@ -90,19 +134,43 @@
             </div>
 
             <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-                <h2 class="text-lg font-bold text-slate-800 mb-4 border-l-4 border-blue-500 pl-3">Kredi Hesaplama Mantığı</h2>
-                <div class="prose prose-sm text-slate-600">
-                    <p>Bankaların uyguladığı aylık akdi faiz oranı üzerinden, anapara ve vade süresi dikkate alınarak (KKDF ve BSMV dahil edilebilir) eşit taksitli ödeme planı oluşturulur.</p>
-                </div>
-            </article>
+        <h2 class="text-xl font-bold text-slate-800 mb-4">Kredi Hesaplama ve Ödeme Planı Oluşturma</h2>
+        <p class="mb-4">Kredi hesaplama aracı, bankalardan almayı planladığınız İhtiyaç, Konut veya Taşıt kredileri için aylık taksit tutarını ve toplam geri ödemeyi hesaplamanıza yardımcı olur. Banka faiz oranları ve vade sayısı, ödeme planınızı doğrudan etkileyen en önemli faktörlerdir.</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">Kredi Faiz Hesaplama Mantığı</h3>
+        <p class="mb-4">Bankalar genellikle "Eşit Taksitli" ödeme yöntemi kullanır. Bu yöntemde her ay ödediğiniz taksit tutarı sabittir, ancak taksit içindeki anapara ve faiz dengesi zamanla değişir. İlk taksitlerde faiz ödemesi yüksekken, son taksitlere doğru anapara ödemesi artar.</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">Kredi Hesaplama Formülü</h3>
+        <p class="mb-4">Aylık taksit tutarı şu formülle hesaplanır:<br>
+        <code>Taksit = Anapara x [Faiz x (1+Faiz)^Vade] / [(1+Faiz)^Vade - 1]</code><br>
+        Burada faiz oranı aylık olarak (örneğin %3.50 ise 0.035) formüle dahil edilir.</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">KKDF ve BSMV Vergileri</h3>
+        <p class="mb-4">İhtiyaç kredilerinde faiz tutarı üzerinden %15 KKDF ve %15 BSMV vergisi alınır. Konut kredileri vergiden muaftır. Hesaplama aracımız, girdiğiniz faiz oranını "akdi faiz" kabul ederek (vergiler dahil edilmiş son oran) hesaplama yapar.</p>
+    </article>
         </main>
 
         <aside class="col-span-1 lg:col-span-3 space-y-6">
              <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-orange-500"></i> Popüler</h4>
+                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
+                </h4>
                 <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='kdv-hesaplama.html'">KDV Hesaplama</li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='tevkifat-hesaplama.html'">Tevkifat Hesapla</li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
+                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
+                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
+                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
+                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
+                        <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
                 </ul>
             </div>
         </aside>
