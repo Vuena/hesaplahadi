@@ -137,8 +137,22 @@ function showRes(id, mainTxt, detailTxt = '') {
         if(!aiPrompt) {
             aiPrompt = document.createElement('div');
             aiPrompt.id = `ai-prompt-${id}`;
-            aiPrompt.className = 'mt-4 text-center text-xs text-slate-500 pt-3 border-t border-slate-200/50';
-            aiPrompt.innerHTML = `Bir hata olduğunu mu düşünüyorsunuz? <a href="ai-asistan.html" class="text-blue-600 underline hover:text-blue-700">Ai Asistanımıza sormayı deneyin!</a>`;
+            aiPrompt.className = 'mt-6 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 flex items-center justify-between gap-4 group cursor-pointer hover:shadow-md transition-all';
+            aiPrompt.onclick = () => window.location.href='ai-asistan.html';
+            aiPrompt.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 shadow-sm shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                         <p class="text-xs font-bold text-indigo-900 uppercase tracking-wide">Sonuç Hatalı mı?</p>
+                         <p class="text-[11px] text-indigo-700">AI Asistanımıza sormayı deneyin!</p>
+                    </div>
+                </div>
+                <div class="bg-white text-indigo-600 w-8 h-8 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </div>
+            `;
             r.appendChild(aiPrompt);
         }
     }
