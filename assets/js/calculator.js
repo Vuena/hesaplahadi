@@ -316,3 +316,36 @@ window.addEventListener('load', () => {
         }
     }
 });
+// --- DRAWER LOGIC (Migrated from inline) ---
+function toggleDrawer() {
+    const d = document.getElementById('drawer');
+    const m = document.getElementById('drawer-mask');
+    if(!d || !m) return;
+
+    if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+    } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+    }
+}
+
+function filterDrawerTools() {
+    const input = document.getElementById('mobile-tool-search');
+    if(!input) return;
+    const q = input.value.toLowerCase();
+    const drawerList = document.getElementById('drawer-list');
+    if(!drawerList) return;
+    const items = drawerList.querySelectorAll('a');
+
+    items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+}
