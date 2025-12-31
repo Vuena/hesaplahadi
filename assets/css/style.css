@@ -77,3 +77,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; 
 .ai-output ul { list-style-type: disc; padding-left: 1.5rem; text-align: left; margin-top: 0.5rem; }
 .ai-output li { margin-bottom: 0.25rem; }
 .ai-output strong { color: #1e293b; }
+/* Mobile Drawer */
+.drawer-open { transform: translateX(0); }
+.drawer-closed { transform: translateX(-100%); }
+.mask-visible { opacity: 1; pointer-events: auto; }
+.mask-hidden { opacity: 0; pointer-events: none; }

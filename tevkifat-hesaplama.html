@@ -25,6 +25,18 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
+    <!-- Mobile Sidebar Drawer -->
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+        </div>
+        <div id="drawer-list" class="p-3 space-y-1">
+            <!-- Populated by JS -->
+        </div>
+    </aside>
+
             <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
@@ -38,7 +50,7 @@
                      </button>
 
                      <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                        <div class="block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
                             <i class="fa-solid fa-calculator text-lg"></i>
                         </div>
                         <div class="leading-tight">

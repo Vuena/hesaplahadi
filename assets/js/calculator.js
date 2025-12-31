@@ -50,6 +50,39 @@ const tools = [
     { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'orange' }
 ];
 
+// --- DRAWER (MOBILE MENU) LOGIC ---
+function toggleDrawer() {
+    const d = document.getElementById('drawer');
+    const m = document.getElementById('drawer-mask');
+    if (!d || !m) return;
+    if (d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+    } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+    }
+}
+
+function filterDrawerTools() {
+    const searchInput = document.getElementById('mobile-tool-search');
+    const drawerList = document.getElementById('drawer-list');
+    if (!searchInput || !drawerList) return;
+
+    const q = searchInput.value.toLowerCase();
+    const items = drawerList.querySelectorAll('a');
+
+    items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+}
+
 // --- RENDER SIDEBAR ---
 function renderSidebar() {
     const cats = [...new Set(tools.map(t => t.cat))];
@@ -62,15 +95,6 @@ function renderSidebar() {
         const container = document.getElementById(id);
         if(!container) return;
         container.innerHTML = ''; // Clear
-
-        // Add "All Tools" link for Mobile Drawer only
-        if(id === 'drawer-list') {
-             const allLink = document.createElement('a');
-             allLink.href = 'index.html';
-             allLink.className = 'w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 bg-slate-50 mb-2 block border border-slate-200 hover:bg-slate-100 transition flex items-center';
-             allLink.innerHTML = '<i class="fa-solid fa-layer-group mr-2 text-blue-500"></i> Tüm Hesaplamalar';
-             container.appendChild(allLink);
-        }
 
         cats.forEach(cat => {
             const header = document.createElement('div');
@@ -138,6 +162,29 @@ function showRes(id, mainTxt, detailTxt = '') {
     const r = document.getElementById(`res-${id}`);
     document.getElementById(`val-${id}`).innerHTML = mainTxt;
     document.getElementById(`detail-${id}`).innerHTML = detailTxt;
+
+    // AI Support Link Injection
+    if (!id.startsWith('ai_')) {
+        // Remove existing if any to avoid duplicates
+        const existingLink = r.querySelector('.ai-support-link');
+        if (existingLink) existingLink.remove();
+
+        const supportDiv = document.createElement('div');
+        supportDiv.className = 'ai-support-link mt-4 pt-3 border-t border-slate-200/50 text-center';
+
+        // Clean text for URL
+        const cleanMain = mainTxt.replace(/<[^>]*>/g, '').trim();
+        const cleanDetail = detailTxt.replace(/<[^>]*>/g, '').trim();
+        const query = encodeURIComponent(`Hata kontrolü: Sonuç=${cleanMain}, Detay=${cleanDetail}. Bu hesaplamada bir hata var mı?`);
+
+        supportDiv.innerHTML = `
+            <a href="ai-asistan.html?q=${query}" class="text-xs font-medium text-indigo-500 hover:text-indigo-700 transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!
+            </a>
+        `;
+        r.appendChild(supportDiv);
+    }
+
     r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
