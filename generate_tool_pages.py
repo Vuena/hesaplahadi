@@ -299,7 +299,7 @@ html_template = """<!DOCTYPE html>
             <div class="flex justify-between items-center">
                 <!-- Left: Hamburger + Logo -->
                 <div class="flex items-center gap-3">
-                    <button class="md:hidden text-slate-600 p-1" onclick="toggleDrawer()">
+                    <button class="lg:hidden text-slate-600 p-1" onclick="toggleDrawer()">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                     <a href="index.html" class="flex items-center space-x-2 group">
@@ -336,7 +336,7 @@ html_template = """<!DOCTYPE html>
             </div>
 
             <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative">
+            <div class="lg:hidden mt-3 relative">
                  <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
                  <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
             </div>
