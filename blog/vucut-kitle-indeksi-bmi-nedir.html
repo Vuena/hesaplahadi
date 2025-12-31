@@ -19,26 +19,39 @@
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
     <!-- Header -->
+    <!-- Header -->
+    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center space-x-2 group">
-                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
-                    <i class="fa-solid fa-calculator text-lg"></i>
-                </div>
-                <div class="leading-tight">
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                </div>
-            </a>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
 
-            <!-- Mobile: Calculation Tools Button (Hesaplama Araçları) - USER REQUEST -->
-            <a href="../index.html" class="md:hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-700 flex items-center gap-1 hover:bg-blue-700 transition shadow-sm">
-                <i class="fa-solid fa-calculator"></i> Hesaplama Araçları
-            </a>
+                <div class="flex items-center gap-3">
+                    <a href="../index.html" class="flex items-center space-x-2 group">
+                        <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                            <i class="fa-solid fa-calculator text-lg"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                        </div>
+                    </a>
+                </div>
 
-            <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-4 text-sm font-bold text-slate-600">
-                <a href="../index.html" class="hover:text-blue-600 transition">Araçlar</a>
-                <a href="index.html" class="text-blue-600">Blog</a>
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                         <!-- USER REQUEST: Hesaplama Araçları Button -->
+                        <a href="../index.html" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition flex items-center gap-2 shadow-sm shadow-blue-200">
+                            <i class="fa-solid fa-calculator"></i> Hesaplama Araçları
+                        </a>
+                        <a href="index.html" class="hover:text-blue-600 transition px-2">Blog</a>
+                    </div>
+
+                    <!-- Mobile: Calculation Tools Button (Hesaplama Araçları) -->
+                    <a href="../index.html" class="md:hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-700 flex items-center gap-1 hover:bg-blue-700 transition shadow-sm">
+                        <i class="fa-solid fa-calculator"></i> Araçlar
+                    </a>
+                </div>
             </div>
         </div>
     </header>
@@ -59,6 +72,7 @@
 
                 <article>
                     <!-- Header -->
+                    <!-- Header -->
                     <header class="mb-8">
                         <div class="flex items-center gap-3 mb-4">
                             <span id="post-cat" class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide">Kategori</span>
@@ -73,7 +87,67 @@
                     </div>
 
                     <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body"><p>BMI, vücut ağırlığının boy uzunluğunun karesine bölünmesiyle hesaplanır.</p></div>
+                    <div class="prose max-w-none" id="content-body"><h2>Vücut Kitle İndeksi (BMI) Nedir? Sağlığınızın İlk Ölçütü ve Değerlendirmesi</h2>
+
+<p>Sağlıklı bir yaşam sürmenin temel taşlarından biri, ideal kilomuzu korumaktır. Peki, bir kişinin sağlıklı bir kiloda olup olmadığını bilimsel olarak nasıl anlarız? İşte bu sorunun cevabı, dünya çapında kabul görmüş basit ama etkili bir ölçüt olan Vücut Kitle İndeksi’nde (BMI) gizlidir. Sıklıkla duyduğumuz bu kısaltma, aslında vücudumuzdaki ağırlık ile boyumuz arasındaki oranı gösteren temel bir tarama aracıdır. Ancak BMI değerleri tek başına ne kadar yeterlidir ve çıkan sonuçlar bize sağlığımız hakkında tam olarak ne söyler?</p>
+
+<p>Bu yazımızda, BMI’ın ne olduğunu, nasıl hesaplandığını ve en önemlisi, çıkan değerlerin hangi sağlık risklerine işaret edebileceğini detaylıca inceleyeceğiz. Eğer kilo kontrolünüzü sağlamak veya genel sağlık durumunuz hakkında fikir edinmek istiyorsanız, doğru yerdesiniz.</p>
+
+<h3>Vücut Kitle İndeksi (BMI) Tanımı ve Kısa Tarihçesi</h3>
+
+<p>Vücut Kitle İndeksi (Body Mass Index - BMI), bir bireyin kilosunun, boyunun karesine bölünmesiyle elde edilen sayısal bir değerdir. Bu oran, kişinin zayıf, normal kilolu, fazla kilolu veya obez kategorisinde olup olmadığını belirlemek için kullanılır.</p>
+
+<p>BMI kavramı, 19. yüzyılda Belçikalı istatistikçi Adolphe Quetelet tarafından geliştirilmiştir ve bu nedenle bazen Quetelet İndeksi olarak da anılır. Amacı, nüfus düzeyinde ortalama ağırlık ve boy oranlarını tespit etmek ve obezite riskini standart bir yöntemle değerlendirmektir. Bugün, Dünya Sağlık Örgütü (DSÖ) tarafından global bir halk sağlığı aracı olarak yaygınca kullanılmaktadır.</p>
+
+<h3>BMI Nasıl Hesaplanır?</h3>
+
+<p>BMI hesaplaması oldukça basittir ve evde, hatta akıllı telefon uygulamaları üzerinden bile kolayca yapılabilir. Temelde iki veriye ihtiyacınız vardır: kilogram cinsinden ağırlığınız ve metre cinsinden boyunuz.</p>
+
+<p>BMI formülü şu şekildedir:</p>
+<p><strong>BMI = Ağırlık (kg) / [Boy (m) x Boy (m)]</strong></p>
+<p>Örneğin, 75 kilogram ağırlığında ve 1.75 metre boyunda biri için hesaplama şöyle yapılır: 75 / (1.75 * 1.75) = 75 / 3.0625 ≈ 24.5. Bu değer, kişinin hangi kategoriye girdiğini gösterir.</p>
+
+<h3>BMI Değerleri Ne Anlama Gelir? Sağlık Kategorileri</h3>
+
+<p>Hesaplamayı yaptıktan sonra elde ettiğiniz değer, genel sağlık riskinizi tahmin etmek için aşağıdaki kategorilere ayrılır. Unutmayın, bu kategoriler standart yetişkin değerleridir (18 yaş üstü) ve uluslararası kabul görmüş sınıflandırmalardır:</p>
+
+<ul>
+    <li><strong>18.5’in Altında: Zayıf (Underweight)</strong>
+        <p>Bu aralık, vücudun sağlıklı işlevlerini sürdürmesi için yeterli ağırlığa sahip olunmadığı anlamına gelebilir. Bu durum, beslenme eksiklikleri veya farklı sağlık sorunlarının göstergesi olabilir ve mutlaka bir uzmana danışılmalıdır.</p>
+    </li>
+    <li><strong>18.5 – 24.9 Arası: Normal Kilolu (Healthy Weight)</strong>
+        <p>Tebrikler! Bu aralık, en sağlıklı kilo aralığını temsil eder. Bu BMI değerine sahip kişilerde, obeziteyle ilişkili kronik hastalıkların (diyabet, kalp hastalıkları vb.) riski en düşüktür.</p>
+    </li>
+    <li><strong>25.0 – 29.9 Arası: Fazla Kilolu (Overweight)</strong>
+        <p>Bu aralık, ideal kilonun üzerinde olduğunuzu gösterir. Fazla kilolu olmak, özellikle bel çevresindeki yağlanma ile birleştiğinde, ileride sağlık sorunları riskini artırabilir. Genellikle hafif diyet ve egzersiz değişiklikleri ile kontrol altına alınması önerilir.</p>
+    </li>
+    <li><strong>30.0 ve Üzeri: Obez (Obese)</strong>
+        <p>30 ve üzeri BMI değeri, ciddi bir sağlık riskine işaret eder ve genellikle tıbbi müdahale gerektirir. Obezite, Tip 2 diyabet, yüksek tansiyon, kalp krizi ve bazı kanser türlerinin riskini önemli ölçüde artırır.</p>
+        <ul>
+            <li>Sınıf I Obezite: 30.0 – 34.9</li>
+            <li>Sınıf II Obezite: 35.0 – 39.9</li>
+            <li>Sınıf III Obezite (Morbid Obezite): 40.0 ve Üzeri</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>BMI Kullanımının Sınırlılıkları: Neden Tek Başına Yeterli Değil?</h3>
+
+<p>BMI, hızlı ve kolay bir tarama aracı olsa da, vücut kompozisyonunu dikkate almadığı için bazı durumlarda yanıltıcı olabilir. Bu, SEO uyumlu içerik üreten bir yazar olarak vurgulamamız gereken kritik bir noktadır.</p>
+
+<p>BMI sadece toplam ağırlığı hesaplar, ancak vücuttaki yağ oranını ve kas kütlesini ayırt edemez. Bu durum özellikle aşağıdaki gruplarda yanlış sonuçlara yol açabilir:</p>
+
+<p><strong>Kaslı Bireyler (Sporcular):</strong> Vücut geliştirme yapan veya yüksek kas kütlesine sahip kişilerde, kas, yağdan daha yoğun olduğu için ağırlık fazla çıkar. Bu durumda, kişi aslında sağlıklı ve düşük yağ oranına sahip olsa bile, BMI değeri onu "fazla kilolu" veya hatta "obez" kategorisine sokabilir.</p>
+
+<p><strong>Yaşlılar:</strong> Yaşlandıkça kas kütlesi doğal olarak azalır ve vücut yağı artar. Yaşlı bir birey normal BMI aralığında olabilir, ancak yüksek yağ oranı nedeniyle yine de sağlık riski taşıyabilir.</p>
+
+<p><strong>Hamile Kadınlar:</strong> Gebelik sırasında değişen ağırlık ve sıvı tutulumu nedeniyle standart BMI değerlendirmeleri geçerliliğini yitirir.</p>
+
+<h3>Sonuç: BMI Bir Başlangıç Noktasıdır</h3>
+
+<p>Vücut Kitle İndeksi (BMI), sağlığınızla ilgili hızlı bir ön değerlendirme yapmanızı sağlayan harika bir başlangıç noktasıdır. Hangi kategoride olursanız olun, sağlıklı bir yaşam için düzenli fiziksel aktivite ve dengeli beslenme her zaman önceliğiniz olmalıdır.</p>
+
+<p>Eğer BMI değeriniz normal aralığın dışında çıkarsa veya yüksek kas kütleniz nedeniyle sonuçlarınızdan emin değilseniz, en doğru değerlendirme için bir sağlık profesyoneli, diyetisyen veya spor hekimi ile görüşmeniz önemlidir. Bu uzmanlar, bel çevresi ölçümü, vücut yağ yüzdesi ve diğer kapsamlı testlerle birlikte BMI sonuçlarınızı yorumlayarak size özel, kişiselleştirilmiş bir sağlık planı oluşturmanıza yardımcı olacaktır.</p></div>
                 </article>
             </main>
 

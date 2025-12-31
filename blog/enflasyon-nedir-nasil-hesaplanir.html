@@ -19,26 +19,39 @@
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
     <!-- Header -->
+    <!-- Header -->
+    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center space-x-2 group">
-                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
-                    <i class="fa-solid fa-calculator text-lg"></i>
-                </div>
-                <div class="leading-tight">
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                </div>
-            </a>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
 
-            <!-- Mobile: Calculation Tools Button (Hesaplama Araçları) - USER REQUEST -->
-            <a href="../index.html" class="md:hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-700 flex items-center gap-1 hover:bg-blue-700 transition shadow-sm">
-                <i class="fa-solid fa-calculator"></i> Hesaplama Araçları
-            </a>
+                <div class="flex items-center gap-3">
+                    <a href="../index.html" class="flex items-center space-x-2 group">
+                        <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                            <i class="fa-solid fa-calculator text-lg"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                        </div>
+                    </a>
+                </div>
 
-            <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-4 text-sm font-bold text-slate-600">
-                <a href="../index.html" class="hover:text-blue-600 transition">Araçlar</a>
-                <a href="index.html" class="text-blue-600">Blog</a>
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                         <!-- USER REQUEST: Hesaplama Araçları Button -->
+                        <a href="../index.html" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition flex items-center gap-2 shadow-sm shadow-blue-200">
+                            <i class="fa-solid fa-calculator"></i> Hesaplama Araçları
+                        </a>
+                        <a href="index.html" class="hover:text-blue-600 transition px-2">Blog</a>
+                    </div>
+
+                    <!-- Mobile: Calculation Tools Button (Hesaplama Araçları) -->
+                    <a href="../index.html" class="md:hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-700 flex items-center gap-1 hover:bg-blue-700 transition shadow-sm">
+                        <i class="fa-solid fa-calculator"></i> Araçlar
+                    </a>
+                </div>
             </div>
         </div>
     </header>
@@ -59,6 +72,7 @@
 
                 <article>
                     <!-- Header -->
+                    <!-- Header -->
                     <header class="mb-8">
                         <div class="flex items-center gap-3 mb-4">
                             <span id="post-cat" class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide">Kategori</span>
@@ -73,7 +87,62 @@
                     </div>
 
                     <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body"><p>Enflasyon, fiyatlar genel düzeyindeki artıştır.</p></div>
+                    <div class="prose max-w-none" id="content-body"><h2>Enflasyon Nedir? Bütçenizi Nasıl Etkiler?</h2>
+
+<p>Ekonomi haberlerini açtığınızda veya markette fiyat etiketlerine baktığınızda sürekli karşınıza çıkan bir kavram var: Enflasyon. Herkes ondan bahsediyor, ancak "Enflasyon tam olarak nedir ve benim günlük bütçemi nasıl bu kadar derinden etkileyebilir?" diye merak ediyor olabilirsiniz. Finansal okuryazarlığın temel taşlarından biri olan enflasyonu anlamak, paranızın değerini korumanın ilk adımıdır.</p>
+
+<h3>Enflasyonun Temel Tanımı: Paran Nedir?</h3>
+
+<p>Basitçe ifade etmek gerekirse, <strong>enflasyon</strong>, mal ve hizmetlerin genel fiyat seviyesinin zaman içinde sürekli olarak artmasıdır. Bu, cebinizdeki paranın alım gücünün azalması anlamına gelir. Bir yıl önce 100 TL ile aldığınız bir sepet ürünü, bugün aynı miktarda para ile alamıyorsanız, enflasyon yaşıyorsunuz demektir.</p>
+
+<p>Ekonomistler bu durumu genellikle "çok fazla paranın çok az malı kovalaması" olarak tanımlar. Talep, arzı aştığında veya üretim maliyetleri yükseldiğinde, satıcılar doğal olarak fiyatları artırma eğilimine girer.</p>
+
+<h3>Enflasyon Nasıl Ölçülür ve Türleri Nelerdir?</h3>
+
+<p>Enflasyonu ölçmek için dünyada en yaygın kullanılan araç, Türkiye'de <a href="#">TÜİK</a> tarafından hesaplanan <strong>Tüketici Fiyat Endeksi (TÜFE)</strong>'dir. TÜFE, tüketicilerin hane halkı olarak sıkça satın aldığı mal ve hizmetlerden oluşan bir "tüketim sepeti"ndeki fiyat değişimlerini izler. Bu sepette gıdadan kiraya, ulaşımdan eğitime kadar her şey bulunur.</p>
+
+<p>Enflasyonun şiddetine göre üç temel türü bulunur:</p>
+<ul>
+    <li><strong>Sürünen (Ilımlı) Enflasyon:</strong> Yüzde ılımlı artışlar (%1-4 arası). Genellikle ekonominin sağlıklı bir işareti olarak kabul edilir.</li>
+    <li><strong>Yüksek Enflasyon:</strong> Fiyat artışlarının çift hanelere ulaştığı durumdur. Tasarrufları hızla eritir ve ekonomik öngörülebilirliği azaltır.</li>
+    <li><strong>Hiperenflasyon:</strong> Çok yüksek ve kontrolsüz fiyat artışlarıdır (aylık %50'den fazla). Bu durum, ulusal para birimine olan güveni tamamen yok eder.</li>
+</ul>
+
+<h3>Enflasyonun Kaynakları: Fiyatlar Neden Uçuşa Geçer?</h3>
+
+<p>Enflasyona yol açan temel olarak iki ana mekanizma bulunur:</p>
+
+<p><strong>1. Talep Enflasyonu (Demand-Pull Inflation):</strong> Tüketicilerin mal ve hizmetlere olan genel talebi, ekonominin üretebileceği arz miktarını aştığında ortaya çıkar. Örneğin, devlet teşvikleri veya düşük faiz oranları nedeniyle insanların harcayacak çok parası olduğunda, fiyatlar yükselir.</p>
+
+<p><strong>2. Maliyet Enflasyonu (Cost-Push Inflation):</strong> Üretim maliyetlerinin (enerji, hammadde, işçilik) artması sonucu ortaya çıkar. Üreticiler bu artan maliyetleri tüketiciye yansıtmak zorunda kalır. Örneğin, petrol fiyatlarındaki büyük bir artış, nakliye maliyetlerini yükselterek zincirleme bir reaksiyona neden olur.</p>
+
+<h3>Enflasyon Bütçenizi Nasıl Etkiler? Alım Gücü Erozyonu</h3>
+
+<p>Enflasyonun bütçeniz üzerindeki etkisi dolaylı veya soyut değildir; doğrudan cebinize dokunur. Özellikle sabit gelire sahip bireyler ve tasarruf sahipleri için en büyük tehdittir.</p>
+
+<h4>1. Alım Gücünün Azalması</h4>
+<p>Bu, en bariz etkidir. Maaşınız sabit kalırken, temel ihtiyaçlarınızın (gıda, kira, yakıt) fiyatı yükselir. 10.000 TL'lik maaşınız bir yıl sonra yine 10.000 TL ise, ancak fiyatlar %50 artmışsa, aslında hayat standardınız ve alım gücünüz %50 düşmüş demektir. Bu, harcama planlarınızı yeniden yapmanızı gerektirir ve lüks harcamalardan kısıntı yapmaya zorlar.</p>
+
+<h4>2. Tasarrufların Değer Kaybı</h4>
+<p>Eğer birikiminizi düşük faizli banka hesaplarında veya yastık altında tutuyorsanız, enflasyon bu parayı sessizce yiyip bitirir. Eğer enflasyon %20 iken, banka hesabınız sadece %10 faiz veriyorsa, paranız reel olarak değer kaybetmektedir. Bu durum, insanları "parayı çalıştırmaya" ve riskli yatırımlara yöneltebilir.</p>
+
+<h4>3. Öngörülemezlik ve Planlama Zorluğu</h4>
+<p>Yüksek enflasyon, geleceğe yönelik bütçe yapmayı neredeyse imkansız hale getirir. Bir yıl sonra çocuğunuzun okul masraflarının ne kadar olacağını, hatta bir ay sonra market alışverişinizin toplam maliyetinin ne olacağını bile tahmin etmek zorlaşır. Bu belirsizlik, yatırım yapma veya büyük alımlar (ev, araba) yapma kararlarını erteler.</p>
+
+<h3>Enflasyon Karşısında Bütçenizi Koruma Yolları</h3>
+
+<p>Enflasyonu tek başınıza durduramazsınız, ancak etkilerini minimize etmek için proaktif adımlar atabilirsiniz. Akıllı bütçe yönetimi, enflasyonist ortamda hayati önem taşır.</p>
+
+<h4>1. Akıllı Yatırım Stratejileri Geliştirin</h4>
+<p>Paranızı enflasyon oranının üzerinde getiri sağlama potansiyeli olan varlıklara yönlendirin. Bu varlıklar genellikle hisse senetleri, gayrimenkul veya enflasyona endeksli tahviller olabilir. Unutmayın, enflasyona karşı en büyük savaş, paranızı hareketsiz bırakmamaktır.</p>
+
+<h4>2. Borçları Yönetin ve Değerlendirin</h4>
+<p>Enflasyonist ortamda, sabit faizli uzun vadeli borçlar (konut kredisi gibi) genellikle borçlu lehine çalışır, çünkü borcun geri ödemesi için kullanılan gelecekteki para, bugünkü paraya göre daha az değerlidir. Ancak değişken faizli veya kısa vadeli yüksek faizli borçlardan mutlaka kaçınılmalıdır.</p>
+
+<h4>3. Bütçenizi Esnek Tutun ve Takip Edin</h4>
+<p>Fiyatların sürekli değiştiği bir ortamda aylık bütçenizi katı kurallarla belirlemek yerine esnek tutun. Zorunlu harcamalarınızdaki (gıda, enerji) artışları yakından takip edin ve bu artışları karşılamak için lüks veya isteğe bağlı harcamalardan derhal kesintiye gidin. Mal ve hizmetleri toplu alım veya indirimli dönemlerde stoklama stratejilerini değerlendirin.</p>
+
+<p>Sonuç olarak, enflasyon bir ekonominin kaçınılmaz bir parçasıdır. Onu anlamak ve etkilerini önceden tahmin edebilmek, finansal refahınızı korumanın en güçlü yoludur. Bütçenizi enflasyona karşı bir kalkan olarak kullanmayı öğrenin.</p></div>
                 </article>
             </main>
 

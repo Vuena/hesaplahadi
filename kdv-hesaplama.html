@@ -34,15 +34,9 @@
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+                <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
-                     <!-- Mobile "Tüm Hesaplamalar" Button (Replaces Hamburger) -->
-                     <button class="md:hidden flex items-center gap-2 bg-slate-100 text-slate-700 px-3 py-2 rounded-lg font-bold text-[10px] hover:bg-slate-200 transition border border-slate-200" onclick="toggleDrawer()">
-                         <i class="fa-solid fa-bars"></i>
-                         <span>Tüm Hesaplamalar</span>
-                     </button>
-
-                     <a href="index.html" class="flex items-center space-x-2 group">
+                    <a href="index.html" class="flex items-center space-x-2 group">
                         <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
                             <i class="fa-solid fa-calculator text-lg"></i>
                         </div>
@@ -63,13 +57,32 @@
                             <span>AI Asistan</span>
                         </a>
                     </div>
+
+                    <!-- Mobile AI Button -->
+                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </a>
+
+                    <!-- Mobile Stylized Blog Button -->
+                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative">
-                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
+            <!-- Mobile Layout: Search First, Then Button -->
+            <div class="md:hidden mt-3 space-y-3">
+                <!-- 1. Search Bar -->
+                <div class="relative">
+                     <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
+                     <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none shadow-sm">
+                </div>
+
+                <!-- 2. All Calculations Button (Full Width, Light) -->
+                <button class="w-full flex items-center justify-center gap-2 bg-white text-slate-700 px-4 py-2.5 rounded-lg font-bold text-sm border border-slate-200 shadow-sm hover:bg-slate-50 transition" onclick="toggleDrawer()">
+                    <i class="fa-solid fa-bars text-blue-500"></i>
+                    <span>Tüm Hesaplamalar</span>
+                </button>
             </div>
         </div>
     </header>
@@ -77,12 +90,14 @@
     <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
 
         <!-- Sidebar -->
+        <!-- Sidebar -->
+        <!-- Sidebar -->
         <nav class="hidden lg:block lg:col-span-3 space-y-4">
-            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24 max-h-[calc(100vh-120px)]">
                 <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
                 </div>
-                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
+                <div id="sidebar-list" class="overflow-y-auto custom-scroll p-2 space-y-1">
                     <!-- JS Populated via calculator.js -->
                 </div>
             </div>
