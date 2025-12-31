@@ -63,15 +63,6 @@ function renderSidebar() {
         if(!container) return;
         container.innerHTML = ''; // Clear
 
-        // Add "All Tools" link for Mobile Drawer only
-        if(id === 'drawer-list') {
-             const allLink = document.createElement('a');
-             allLink.href = 'index.html';
-             allLink.className = 'w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 bg-slate-50 mb-2 block border border-slate-200 hover:bg-slate-100 transition flex items-center';
-             allLink.innerHTML = '<i class="fa-solid fa-layer-group mr-2 text-blue-500"></i> Tüm Hesaplamalar';
-             container.appendChild(allLink);
-        }
-
         cats.forEach(cat => {
             const header = document.createElement('div');
             header.className = 'cat-header'; header.innerText = cat;
