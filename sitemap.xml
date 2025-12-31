@@ -1,42 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://hesaplahadi.com/</loc>
-        <lastmod>2026-05-24</lastmod>
-        <priority>1.0</priority>
-    </url>
-    <url>
         <loc>https://hesaplahadi.com/index.html</loc>
         <lastmod>2026-05-24</lastmod>
-        <priority>1.0</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hesaplahadi.com/kdv-hesaplama.html</loc>
         <lastmod>2026-05-24</lastmod>
-        <priority>0.9</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hesaplahadi.com/tevkifat-hesaplama.html</loc>
         <lastmod>2026-05-24</lastmod>
-        <priority>0.9</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hesaplahadi.com/kidem-tazminati.html</loc>
         <lastmod>2026-05-24</lastmod>
-        <priority>0.9</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hesaplahadi.com/kredi-hesaplama.html</loc>
         <lastmod>2026-05-24</lastmod>
-        <priority>0.9</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hesaplahadi.com/ai-asistan.html</loc>
         <lastmod>2026-05-24</lastmod>
-        <priority>0.9</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hesaplahadi.com/blog/index.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/bilesik-faiz-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/takdir-tesekkur-hesaplama-e-okul.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/i̇ndirim-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/emlakci-komisyonu-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/maas-zam-orani-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/bazal-metabolizma-hizi-bmr-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/brutten-nete-maas-hesaplama-2026.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/mevduat-faizi-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/kelime-ve-karakter-sayaci.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/gunluk-makro-protein,-karbonhidrat,-yag-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/i̇ki-tarih-arasi-gun-sayaci.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/universite-not-ortalamasi-vize-final-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/yakit-tuketimi-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/kâr-marji-ve-zarar-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/iban-dogrulama-ve-cozumleme-araci.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/kredi-karti-asgari-odeme-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/hiz,-yol-ve-zaman-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/spor-nabiz-araligi-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/yuzde-hesaplama-araci.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/dikdortgen-alan-ve-cevre-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/gunluk-su-i̇htiyaci-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/netten-brute-maas-hesaplama-2026.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/i̇deal-kilo-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/sigara-maliyeti-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/ai-diyetisyen.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/vucut-kitle-i̇ndeksi-bmi-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/guclu-sifre-olusturucu.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/tam-yas-hesaplama.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/gebelik-hesaplama-ve-dogum-tarihi.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/yuzde-hesaplama-formulu-ve-ornekleri.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/enflasyon-nedir-nasil-hesaplanir.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/konut-kredisi-cekerken-dikkat-edilmesi-gerekenler.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/kdv-tevkifati-nedir-kimler-yapar.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/brutten-nete-maas-hesaplama-rehberi.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/vucut-kitle-indeksi-bmi-nedir.html</loc>
         <lastmod>2026-05-24</lastmod>
         <priority>0.8</priority>
     </url>
@@ -46,7 +221,12 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hesaplahadi.com/blog/kdv-tevkifati-nedir-kimler-yapar.html</loc>
+        <loc>https://hesaplahadi.com/blog/gunluk-su-tuketimi-ne-kadar-olmali.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hesaplahadi.com/blog/ideal-kilo-nasil-hesaplanir-formulu-nedir.html</loc>
         <lastmod>2026-05-24</lastmod>
         <priority>0.8</priority>
     </url>
