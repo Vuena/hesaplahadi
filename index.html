@@ -127,7 +127,7 @@
 
                     <!-- AI Input -->
                     <form action="ai-asistan.html" method="get" class="relative max-w-md mx-auto group">
-                        <input type="text" name="q" placeholder="Örn: 50.000 TL kredi faizi ne kadar?" class="w-full pl-5 pr-12 py-3.5 rounded-xl text-slate-800 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-300/30 shadow-lg transition placeholder:text-slate-400">
+                        <input type="text" name="q" placeholder="Örn. 50.000 TL krediyi %3.5 faizle 12 ayda ödersem aylık taksit ne olur? veya İstanbul ile New York saat farkı nedir?" class="w-full pl-5 pr-12 py-3.5 rounded-xl text-slate-800 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-300/30 shadow-lg transition placeholder:text-slate-400">
                         <button type="submit" class="absolute right-2 top-2 p-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition shadow-md w-9 h-9 flex items-center justify-center">
                             <i class="fa-solid fa-paper-plane text-xs"></i>
                         </button>
@@ -185,36 +185,6 @@
     <script src="assets/js/calculator.js"></script>
     <script src="assets/js/blog-data.js"></script>
     <script>
-        // Drawer Logic
-        function toggleDrawer() {
-            const d = document.getElementById('drawer');
-            const m = document.getElementById('drawer-mask');
-            if(d.classList.contains('drawer-closed')) {
-                d.classList.remove('drawer-closed');
-                d.classList.add('drawer-open');
-                m.classList.remove('mask-hidden');
-                m.classList.add('mask-visible');
-            } else {
-                d.classList.remove('drawer-open');
-                d.classList.add('drawer-closed');
-                m.classList.remove('mask-visible');
-                m.classList.add('mask-hidden');
-            }
-        }
-
-        // Search in Drawer
-        function filterDrawerTools() {
-            const q = document.getElementById('mobile-tool-search').value.toLowerCase();
-            const drawerList = document.getElementById('drawer-list');
-            const items = drawerList.querySelectorAll('a'); // Assuming links
-
-            items.forEach(item => {
-                if(item.classList.contains('cat-header')) return; // skip headers
-                const txt = item.innerText.toLowerCase();
-                item.style.display = txt.includes(q) ? 'flex' : 'none';
-            });
-        }
-
         // Init
         window.addEventListener('load', () => {
             renderRecentBlog();

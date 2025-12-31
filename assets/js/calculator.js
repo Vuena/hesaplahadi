@@ -10,44 +10,44 @@ const tools = [
     // 2. FİNANS & VERGİ
     { id: 'kdv', cat: 'Finans', name: 'KDV Hesaplama', link: 'kdv-hesaplama.html', color:'blue', inputs: [{}, {opts:['%1','%10','%20']}] },
     { id: 'tevkifat', cat: 'Finans', name: 'KDV Tevkifat Hesaplama', link: 'tevkifat-hesaplama.html', color:'blue' },
-    { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı', link: 'kidem-tazminati.html', color:'blue' },
+    { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı Hesaplama', link: 'kidem-tazminati.html', color:'blue' },
     { id: 'kredi', cat: 'Finans', name: 'Kredi Hesaplama', link: 'kredi-hesaplama.html', color:'blue' },
-    { id: 'net_brut', cat: 'Finans', name: 'Netten Brüte Maaş', link: 'netten-brute-maas-hesaplama-2026.html', color:'blue' },
-    { id: 'brut_net', cat: 'Finans', name: 'Brütten Nete Maaş', link: 'brutten-nete-maas-hesaplama-2026.html', color:'blue' },
-    { id: 'mevduat', cat: 'Finans', name: 'Mevduat Getirisi', link: 'mevduat-faizi-hesaplama.html', color:'blue' },
-    { id: 'iban', cat: 'Finans', name: 'IBAN Doğrulama', link: 'iban-dogrulama-ve-cozumleme-araci.html', color:'blue' },
+    { id: 'net_brut', cat: 'Finans', name: 'Netten Brüte Maaş Hesaplama', link: 'netten-brute-maas-hesaplama-2026.html', color:'blue' },
+    { id: 'brut_net', cat: 'Finans', name: 'Brütten Nete Maaş Hesaplama', link: 'brutten-nete-maas-hesaplama-2026.html', color:'blue' },
+    { id: 'mevduat', cat: 'Finans', name: 'Mevduat Getirisi Hesaplama', link: 'mevduat-faizi-hesaplama.html', color:'blue' },
+    { id: 'iban', cat: 'Finans', name: 'IBAN Doğrulama Hesaplama', link: 'iban-dogrulama-ve-cozumleme-araci.html', color:'blue' },
     { id: 'indirim', cat: 'Finans', name: 'İndirim Hesaplama', link: 'i̇ndirim-hesaplama.html', color:'blue' },
-    { id: 'karzarar', cat: 'Finans', name: 'Kâr Marjı', link: 'kâr-marji-ve-zarar-hesaplama.html', color:'blue' },
-    { id: 'bilesik', cat: 'Finans', name: 'Bileşik Faiz', link: 'bilesik-faiz-hesaplama.html', color:'blue' },
-    { id: 'kk_asgari', cat: 'Finans', name: 'K.K. Asgari Ödeme', link: 'kredi-karti-asgari-odeme-hesaplama.html', color:'blue' },
-    { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu', link: 'emlakci-komisyonu-hesaplama.html', color:'blue' },
-    { id: 'zam', cat: 'Finans', name: 'Maaş Zam', link: 'maas-zam-orani-hesaplama.html', color:'blue' },
+    { id: 'karzarar', cat: 'Finans', name: 'Kâr Marjı Hesaplama', link: 'kâr-marji-ve-zarar-hesaplama.html', color:'blue' },
+    { id: 'bilesik', cat: 'Finans', name: 'Bileşik Faiz Hesaplama', link: 'bilesik-faiz-hesaplama.html', color:'blue' },
+    { id: 'kk_asgari', cat: 'Finans', name: 'Kredi Kartı Asgari Ödeme Hesaplama', link: 'kredi-karti-asgari-odeme-hesaplama.html', color:'blue' },
+    { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu Hesaplama', link: 'emlakci-komisyonu-hesaplama.html', color:'blue' },
+    { id: 'zam', cat: 'Finans', name: 'Maaş Zam Hesaplama', link: 'maas-zam-orani-hesaplama.html', color:'blue' },
 
     // 3. SAĞLIK
-    { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen', link: 'ai-diyetisyen.html', color:'indigo' },
-    { id: 'bmi', cat: 'Sağlık', name: 'Vücut Kitle İndeksi', link: 'vucut-kitle-i̇ndeksi-bmi-hesaplama.html', color:'green' },
-    { id: 'idealkilo', cat: 'Sağlık', name: 'İdeal Kilo', link: 'i̇deal-kilo-hesaplama.html', color:'green' },
-    { id: 'bmr', cat: 'Sağlık', name: 'Bazal Metabolizma', link: 'bazal-metabolizma-hizi-bmr-hesaplama.html', color:'green' },
-    { id: 'makro', cat: 'Sağlık', name: 'Günlük Makro İhtiyacı', link: 'gunluk-makro-protein,-karbonhidrat,-yag-hesaplama.html', color:'green' },
-    { id: 'su', cat: 'Sağlık', name: 'Su Tüketimi', link: 'gunluk-su-i̇htiyaci-hesaplama.html', color:'green' },
-    { id: 'gebelik', cat: 'Sağlık', name: 'Doğum Tarihi (SAT)', link: 'gebelik-hesaplama-ve-dogum-tarihi.html', color:'green' },
-    { id: 'sigara', cat: 'Sağlık', name: 'Sigara Maliyeti', link: 'sigara-maliyeti-hesaplama.html', color:'green' },
-    { id: 'nabiz', cat: 'Sağlık', name: 'Spor Nabız Aralığı', link: 'spor-nabiz-araligi-hesaplama.html', color:'green' },
+    { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen Hesaplama', link: 'ai-diyetisyen.html', color:'indigo' },
+    { id: 'bmi', cat: 'Sağlık', name: 'Vücut Kitle İndeksi Hesaplama', link: 'vucut-kitle-i̇ndeksi-bmi-hesaplama.html', color:'green' },
+    { id: 'idealkilo', cat: 'Sağlık', name: 'İdeal Kilo Hesaplama', link: 'i̇deal-kilo-hesaplama.html', color:'green' },
+    { id: 'bmr', cat: 'Sağlık', name: 'Bazal Metabolizma Hesaplama', link: 'bazal-metabolizma-hizi-bmr-hesaplama.html', color:'green' },
+    { id: 'makro', cat: 'Sağlık', name: 'Günlük Makro İhtiyacı Hesaplama', link: 'gunluk-makro-protein,-karbonhidrat,-yag-hesaplama.html', color:'green' },
+    { id: 'su', cat: 'Sağlık', name: 'Su Tüketimi Hesaplama', link: 'gunluk-su-i̇htiyaci-hesaplama.html', color:'green' },
+    { id: 'gebelik', cat: 'Sağlık', name: 'Doğum Tarihi Hesaplama', link: 'gebelik-hesaplama-ve-dogum-tarihi.html', color:'green' },
+    { id: 'sigara', cat: 'Sağlık', name: 'Sigara Maliyeti Hesaplama', link: 'sigara-maliyeti-hesaplama.html', color:'green' },
+    { id: 'nabiz', cat: 'Sağlık', name: 'Spor Nabız Aralığı Hesaplama', link: 'spor-nabiz-araligi-hesaplama.html', color:'green' },
 
     // 4. EĞİTİM & MATEMATİK
     { id: 'yuzde', cat: 'Eğitim', name: 'Yüzde Hesaplama', link: 'yuzde-hesaplama-araci.html', color:'purple' },
-    { id: 'sinav', cat: 'Eğitim', name: 'Üniversite Not Ort.', link: 'universite-not-ortalamasi-vize-final-hesaplama.html', color:'purple' },
-    { id: 'takdir', cat: 'Eğitim', name: 'Takdir / Teşekkür', link: 'takdir-tesekkur-hesaplama-e-okul.html', color:'purple' },
+    { id: 'sinav', cat: 'Eğitim', name: 'Üniversite Not Ortalaması Hesaplama', link: 'universite-not-ortalamasi-vize-final-hesaplama.html', color:'purple' },
+    { id: 'takdir', cat: 'Eğitim', name: 'Takdir Teşekkür Hesaplama', link: 'takdir-tesekkur-hesaplama-e-okul.html', color:'purple' },
     { id: 'dikdortgen', cat: 'Eğitim', name: 'Alan Hesaplama', link: 'dikdortgen-alan-ve-cevre-hesaplama.html', color:'purple' },
-    { id: 'kelime', cat: 'Eğitim', name: 'Kelime Sayacı', link: 'kelime-ve-karakter-sayaci.html', color:'purple' },
+    { id: 'kelime', cat: 'Eğitim', name: 'Kelime Sayacı Hesaplama', link: 'kelime-ve-karakter-sayaci.html', color:'purple' },
 
     // 5. PRATİK & ARAÇLAR
-    { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'orange' },
-    { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi', link: 'yakit-tuketimi-hesaplama.html', color:'orange' },
+    { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi Hesaplama', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'orange' },
+    { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi Hesaplama', link: 'yakit-tuketimi-hesaplama.html', color:'orange' },
     { id: 'yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', link: 'tam-yas-hesaplama.html', color:'orange' },
-    { id: 'gun', cat: 'Pratik', name: 'İki Tarih Arası', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
-    { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Üret', link: 'guclu-sifre-olusturucu.html', color:'orange' },
-    { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'orange' }
+    { id: 'gun', cat: 'Pratik', name: 'İki Tarih Arası Gün Hesaplama', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
+    { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Hesaplama', link: 'guclu-sifre-olusturucu.html', color:'orange' },
+    { id: 'hiz', cat: 'Pratik', name: 'Hız Zaman Hesaplama', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'orange' }
 ];
 
 // --- RENDER SIDEBAR ---
@@ -134,10 +134,27 @@ function copyResult(id) {
 // --- HELPERS ---
 function getVal(t,i) { return document.getElementById(`${t}-${i}`).value; }
 function getNum(t,i) { return parseFloat(getVal(t,i))||0; }
+
 function showRes(id, mainTxt, detailTxt = '') {
     const r = document.getElementById(`res-${id}`);
     document.getElementById(`val-${id}`).innerHTML = mainTxt;
     document.getElementById(`detail-${id}`).innerHTML = detailTxt;
+
+    // Remove existing promo if any
+    const existingPromo = r.querySelector('.ai-promo');
+    if(existingPromo) existingPromo.remove();
+
+    // Add Promo
+    const promo = document.createElement('div');
+    promo.className = 'ai-promo mt-4 pt-4 border-t border-slate-100 text-center';
+    promo.innerHTML = `
+        <p class="text-xs text-slate-500 mb-2">Bir hata olduğunu mu düşünüyorsunuz? O halde Ai Asistanımıza sorun.</p>
+        <a href="ai-asistan.html" class="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-lg hover:bg-indigo-100 transition">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Asistana Sor
+        </a>
+    `;
+    r.appendChild(promo);
+
     r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
@@ -295,6 +312,39 @@ function calc_karzarar() { const c=getNum('karzarar','cost'), s=getNum('karzarar
 function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r'), t=getNum('bilesik','t'); showRes('bilesik', (p*Math.pow(1+r/100,t)).toFixed(2)+' TL'); }
 function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); showRes('kk_asgari', (d*(l>25000?0.4:0.2)).toFixed(2)+' TL'); }
 function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*1.2).toFixed(2)+' TL'); }
+
+// Drawer Logic (Global)
+function toggleDrawer() {
+    const d = document.getElementById('drawer');
+    const m = document.getElementById('drawer-mask');
+    if(!d || !m) return;
+    if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+    } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+    }
+}
+
+function filterDrawerTools() {
+    const input = document.getElementById('mobile-tool-search');
+    if(!input) return;
+    const q = input.value.toLowerCase();
+    const drawerList = document.getElementById('drawer-list');
+    if(!drawerList) return;
+    const items = drawerList.querySelectorAll('a');
+
+    items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+}
 
 // Run Init
 window.addEventListener('load', () => {
