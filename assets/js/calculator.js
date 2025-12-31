@@ -301,6 +301,15 @@ window.addEventListener('load', () => {
     checkCookies();
     renderSidebar();
 
+    // Mobile Search Suggestions Logic
+    const ms = document.getElementById('mobile-tool-search');
+    const sg = document.getElementById('search-suggestions');
+    if(ms && sg) {
+        ms.addEventListener('focus', () => { if(ms.value === '') sg.classList.remove('hidden'); });
+        ms.addEventListener('input', () => { if(ms.value !== '') sg.classList.add('hidden'); else sg.classList.remove('hidden'); });
+        ms.addEventListener('blur', () => { setTimeout(() => sg.classList.add('hidden'), 200); });
+    }
+
     // Check for AI Asistan query param
     const urlParams = new URLSearchParams(window.location.search);
     const q = urlParams.get('q');
