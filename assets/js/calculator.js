@@ -83,6 +83,15 @@ function renderSidebar() {
                 container.appendChild(a);
             });
         });
+
+        // Strict Cleanup: Remove any "Tüm Hesaplamalar" link if present
+        const links = container.querySelectorAll('a');
+        links.forEach(link => {
+            const txt = link.innerText.toLowerCase();
+            if(txt.includes('tüm hesaplama') || txt.includes('tum hesaplama')) {
+                link.remove();
+            }
+        });
     });
 }
 
@@ -156,7 +165,8 @@ function showRes(id, mainTxt, detailTxt = '') {
     const tool = tools.find(t => t.id === id);
     if(tool && tool.cat !== 'Yapay Zeka' && !tool.id.startsWith('ai_')) {
         const div = document.createElement('div');
-        div.className = 'mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-center shadow-sm ai-help-link';
+        div.className = 'mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-center shadow-sm ai-help-link block'; // Ensure display:block
+        div.style.display = 'block';
         div.innerHTML = '<a href="ai-asistan.html" class="block text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles mb-1 text-lg block"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
         r.appendChild(div);
     }
@@ -202,8 +212,8 @@ function filterDrawerTools() {
 function initDrawer() {
     if(!document.getElementById('drawer')) {
         const drawerHTML = `
-    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
-    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[90] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[100] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
         <div class="p-4 border-b border-slate-100 flex justify-between items-center">
              <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
              <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
