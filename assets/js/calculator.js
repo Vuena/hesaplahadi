@@ -63,15 +63,6 @@ function renderSidebar() {
         if(!container) return;
         container.innerHTML = ''; // Clear
 
-        // Add "All Tools" link for Mobile Drawer only
-        if(id === 'drawer-list') {
-             const allLink = document.createElement('a');
-             allLink.href = 'index.html';
-             allLink.className = 'w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 bg-slate-50 mb-2 block border border-slate-200 hover:bg-slate-100 transition flex items-center';
-             allLink.innerHTML = '<i class="fa-solid fa-layer-group mr-2 text-blue-500"></i> Tüm Hesaplamalar';
-             container.appendChild(allLink);
-        }
-
         cats.forEach(cat => {
             const header = document.createElement('div');
             header.className = 'cat-header'; header.innerText = cat;
@@ -138,6 +129,20 @@ function showRes(id, mainTxt, detailTxt = '') {
     const r = document.getElementById(`res-${id}`);
     document.getElementById(`val-${id}`).innerHTML = mainTxt;
     document.getElementById(`detail-${id}`).innerHTML = detailTxt;
+
+    // Add AI Prompt for non-AI tools
+    const tool = tools.find(t => t.id === id);
+    if(tool && tool.cat !== 'Yapay Zeka') {
+        let aiPrompt = document.getElementById(`ai-prompt-${id}`);
+        if(!aiPrompt) {
+            aiPrompt = document.createElement('div');
+            aiPrompt.id = `ai-prompt-${id}`;
+            aiPrompt.className = 'mt-4 text-center text-xs text-slate-500 pt-3 border-t border-slate-200/50';
+            aiPrompt.innerHTML = `Bir hata olduğunu mu düşünüyorsunuz? <a href="ai-asistan.html" class="text-blue-600 underline hover:text-blue-700">Ai Asistanımıza sormayı deneyin!</a>`;
+            r.appendChild(aiPrompt);
+        }
+    }
+
     r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
@@ -295,6 +300,38 @@ function calc_karzarar() { const c=getNum('karzarar','cost'), s=getNum('karzarar
 function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r'), t=getNum('bilesik','t'); showRes('bilesik', (p*Math.pow(1+r/100,t)).toFixed(2)+' TL'); }
 function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); showRes('kk_asgari', (d*(l>25000?0.4:0.2)).toFixed(2)+' TL'); }
 function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*1.2).toFixed(2)+' TL'); }
+
+// --- DRAWER LOGIC ---
+function toggleDrawer() {
+    const d = document.getElementById('drawer');
+    const m = document.getElementById('drawer-mask');
+    if(!d || !m) return; // Guard
+
+    if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+    } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+    }
+}
+
+function filterDrawerTools() {
+    const q = document.getElementById('mobile-tool-search').value.toLowerCase();
+    const drawerList = document.getElementById('drawer-list');
+    if(!drawerList) return;
+    const items = drawerList.querySelectorAll('a');
+
+    items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+}
 
 // Run Init
 window.addEventListener('load', () => {
