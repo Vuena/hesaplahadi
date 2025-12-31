@@ -328,7 +328,7 @@ with open('assets/js/blog-data.js', 'w', encoding='utf-8') as f:
     f.write(js_content)
 print("Updated assets/js/blog-data.js")
 
-# 2. Define Template (Updated Header for Mobile 'Araçlar')
+# 2. Define Template (Updated Header for Mobile 'Araçlar' AND Favicon)
 template = """<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -337,6 +337,7 @@ template = """<!DOCTYPE html>
     <meta name="description" content="HesaplaHadi Blog yazısı.">
     <title>Blog Detay - HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/blog/template.html" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
@@ -361,9 +362,9 @@ template = """<!DOCTYPE html>
                 </div>
             </a>
 
-            <!-- Mobile: Back to Tools (Araçlar) - USER REQUEST FIX -->
-            <a href="../index.html" class="md:hidden p-2 text-slate-600 font-bold text-xs flex items-center gap-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
-                <i class="fa-solid fa-chevron-left"></i> <span>Araçlar</span>
+            <!-- Mobile: Calculation Tools Button (Hesaplama Araçları) - USER REQUEST -->
+            <a href="../index.html" class="md:hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-700 flex items-center gap-1 hover:bg-blue-700 transition shadow-sm">
+                <i class="fa-solid fa-calculator"></i> Hesaplama Araçları
             </a>
 
             <!-- Desktop Nav -->

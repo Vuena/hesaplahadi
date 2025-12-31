@@ -28,6 +28,7 @@
         .mask-visible { opacity: 1; pointer-events: auto; }
         .mask-hidden { opacity: 0; pointer-events: none; }
     </style>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
@@ -41,21 +42,18 @@
         <div id="drawer-list" class="p-3 space-y-1"></div>
     </aside>
 
-    <!-- Header -->
+                    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+                <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
-                    <button class="md:hidden text-slate-600 p-1" onclick="toggleDrawer()">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                    <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2 rounded-lg group-hover:shadow-lg transition">
-                            <i class="fa-solid fa-calculator text-base"></i>
+                     <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                            <i class="fa-solid fa-calculator text-lg"></i>
                         </div>
                         <div class="leading-tight">
-                            <h1 class="text-lg md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-indigo-600">Hadi</span></h1>
+                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
                         </div>
                     </a>
                 </div>
@@ -64,26 +62,29 @@
                 <div class="flex items-center gap-3">
                     <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="blog/index.html" class="hover:text-indigo-600 px-2 py-2 transition">Blog</a>
+                        <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
+                        <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
                         <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
                             <span>AI Asistan</span>
                         </a>
                     </div>
-
                     <!-- Mobile AI Button -->
                     <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
                         <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
                     </a>
-
-                    <!-- Mobile Stylized Blog Button -->
-                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
                 </div>
             </div>
 
-            <!-- Mobile Search Bar (Below Header) -->
+            <!-- Mobile: "Tüm Hesaplamalar" Button (Middle Row) -->
+            <div class="md:hidden mt-3">
+                <button class="w-full flex items-center justify-center gap-2 bg-slate-100 text-slate-700 px-4 py-2.5 rounded-lg font-bold text-xs hover:bg-slate-200 transition border border-slate-200" onclick="toggleDrawer()">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>Tüm Hesaplamalar</span>
+                </button>
+            </div>
+
+            <!-- Mobile Search Bar (Bottom Row) -->
             <div class="md:hidden mt-3 relative">
                  <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
                  <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
