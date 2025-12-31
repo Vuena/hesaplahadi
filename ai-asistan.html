@@ -42,16 +42,11 @@
             <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+            <!-- Top Row: Logo & Desktop Nav -->
+            <div class="flex justify-between items-center mb-3 md:mb-0">
+                <!-- Logo -->
                 <div class="flex items-center gap-3">
-                     <!-- Mobile "Tüm Hesaplamalar" Button (Replaces Hamburger) -->
-                     <button class="md:hidden flex items-center gap-2 bg-slate-100 text-slate-700 px-3 py-2 rounded-lg font-bold text-[10px] hover:bg-slate-200 transition border border-slate-200" onclick="toggleDrawer()">
-                         <i class="fa-solid fa-bars"></i>
-                         <span>Tüm Hesaplamalar</span>
-                     </button>
-
-                     <a href="index.html" class="flex items-center space-x-2 group">
+                    <a href="index.html" class="flex items-center space-x-2 group">
                         <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
                             <i class="fa-solid fa-calculator text-lg"></i>
                         </div>
@@ -61,9 +56,8 @@
                     </a>
                 </div>
 
-                <!-- Right: Actions -->
+                <!-- Desktop Actions -->
                 <div class="flex items-center gap-3">
-                    <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                         <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
                         <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
@@ -75,11 +69,17 @@
                 </div>
             </div>
 
-            <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative">
+            <!-- Mobile Search Bar -->
+            <div class="md:hidden relative z-50">
                  <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
                  <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
             </div>
+
+            <!-- Mobile Menu Button (Full Width, Blue/Indigo Gradient) -->
+            <button class="md:hidden w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-bold shadow-md hover:shadow-lg transition mt-3 flex justify-center items-center gap-2" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i>
+                <span>Tüm Hesaplama Araçları</span>
+            </button>
         </div>
     </header>
 
