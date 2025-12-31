@@ -3,66 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HesaplaHadi ile KDV, Tevkifat, Kredi, Kıdem Tazminatı ve Yapay Zeka destekli hesaplama araçlarını ücretsiz kullanın. Finans, sağlık ve eğitim hesaplamaları tek adreste.">
-    <meta name="keywords" content="kdv hesaplama, yapay zeka hesaplama, diyet listesi hazırla, kredi hesaplama, maaş hesaplama, kıdem tazminatı, tevkifat hesaplama">
-    <meta name="author" content="HesaplaHadi">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="HesaplaHadi ile KDV, Tevkifat, Kredi, Kıdem Tazminatı ve Yapay Zeka destekli hesaplama araçlarını ücretsiz kullanın.">
     <title>HesaplaHadi - Finans, Vergi ve AI Destekli Hesaplama Araçları</title>
     <link rel="canonical" href="https://hesaplahadi.com/">
-
-    <!-- JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "HesaplaHadi",
       "url": "https://hesaplahadi.com",
-      "description": "Profesyonel ve günlük kullanım için ücretsiz, yapay zeka destekli hesaplama araçları koleksiyonu.",
+      "description": "Profesyonel hesaplama araçları koleksiyonu.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "All"
     }
     </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .drawer-open { transform: translateX(0); }
+        .drawer-closed { transform: translateX(-100%); }
+        .mask-visible { opacity: 1; pointer-events: auto; }
+        .mask-hidden { opacity: 0; pointer-events: none; }
+    </style>
 </head>
-<body class="flex flex-col min-h-screen text-slate-800">
+<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
+
+    <!-- Mobile Sidebar Drawer -->
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+        </div>
+        <div id="drawer-list" class="p-3 space-y-1">
+            <!-- Populated by JS -->
+        </div>
+    </aside>
 
     <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 group">
-                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
-                    <i class="fa-solid fa-calculator text-lg"></i>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Left: Hamburger + Logo -->
+                <div class="flex items-center gap-3">
+                    <button class="md:hidden text-slate-600 p-1" onclick="toggleDrawer()">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2 rounded-lg group-hover:shadow-lg transition">
+                            <i class="fa-solid fa-calculator text-base"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-lg md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                        </div>
+                    </a>
                 </div>
-                <div class="leading-tight">
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                </div>
-            </a>
 
-            <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                <a href="blog/index.html" class="hover:text-blue-600 px-2 py-2 transition">Blog</a>
-                <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>AI Asistan</span>
-                </a>
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                        <a href="blog/index.html" class="hover:text-blue-600 px-2 py-2 transition">Blog</a>
+                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>AI Asistan</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile AI Button -->
+                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </a>
+
+                    <!-- Mobile Stylized Blog Button -->
+                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+                    </a>
+                </div>
             </div>
 
-            <!-- Mobile Nav Button -->
-            <a href="blog/index.html" class="md:hidden p-2 text-blue-600 font-bold text-xs flex items-center gap-2 border border-blue-100 rounded-lg hover:bg-blue-50 transition">
-                <span>Blog</span> <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            <!-- Mobile Search Bar (Below Header) -->
+            <div class="md:hidden mt-3 relative">
+                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
+            </div>
         </div>
     </header>
 
     <!-- Main Container -->
-    <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+    <div class="container mx-auto px-4 py-6 md:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
 
-        <!-- Left Sidebar (Navigation) -->
+        <!-- Left Sidebar (Desktop Navigation) -->
         <nav class="hidden lg:block lg:col-span-3 space-y-4">
-            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24 max-h-[calc(100vh-120px)]">
                 <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
                 </div>
@@ -75,24 +109,32 @@
         <!-- Main Content -->
         <main class="col-span-1 lg:col-span-6 space-y-6">
 
-            <!-- Hero / Welcome -->
-            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
+            <!-- AI Welcome Hero (Replaces Welcome Box) -->
+            <div class="bg-white rounded-3xl shadow-xl border border-indigo-50 overflow-hidden relative">
+                <!-- Decorative BG -->
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700 opacity-95"></div>
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                <div class="relative z-10">
-                    <h2 class="text-3xl font-bold mb-2">HesaplaHadi'ye Hoş Geldiniz</h2>
-                    <p class="text-blue-100 mb-6 max-w-md">KDV, Tevkifat, Kredi ve 20+ aracı tek platformda kullanın. Yapay zeka asistanımızla karmaşık sorularınıza anında cevap bulun.</p>
-                    <div class="flex gap-3">
-                        <a href="kdv-hesaplama.html" class="bg-white text-blue-600 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-blue-50 transition shadow-sm">KDV Hesapla</a>
-                        <a href="ai-asistan.html" class="bg-indigo-500/30 text-white border border-indigo-400/30 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-500/50 transition backdrop-blur-sm"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i> AI Asistan</a>
+
+                <div class="relative z-10 p-6 md:p-8 text-center text-white">
+                    <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20 shadow-lg animate-pulse-slow">
+                        <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
                     </div>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2">Sana Nasıl Yardımcı Olabilirim?</h2>
+                    <p class="text-indigo-100 text-sm md:text-base mb-6 max-w-lg mx-auto">Matematiksel işlemler, finansal sorular veya günlük problemler... Yapay zeka asistanına sor, anında cevaplasın.</p>
+
+                    <!-- AI Input -->
+                    <form action="ai-asistan.html" method="get" class="relative max-w-md mx-auto group">
+                        <input type="text" name="q" placeholder="Örn: 50.000 TL kredi faizi ne kadar?" class="w-full pl-5 pr-12 py-3.5 rounded-xl text-slate-800 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-300/30 shadow-lg transition placeholder:text-slate-400">
+                        <button type="submit" class="absolute right-2 top-2 p-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition shadow-md w-9 h-9 flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            <!-- Tool Container (For Minor Tools) -->
-            <div id="tool-container"></div>
-
-            <!-- SEO Content -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel mt-8">
+            <!-- Removed Central Grid (#tool-container) as per request -->
+            <!-- Only SEO Content remains here -->
+            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel mt-4">
                 <h2 class="text-xl font-bold text-slate-800 mb-4">Türkiye'nin En Akıllı Hesaplama Platformu</h2>
                 <p>HesaplaHadi, finansal planlamadan sağlık verilerine, eğitimden günlük yaşama kadar ihtiyaç duyduğunuz tüm matematiksel işlemleri saniyeler içinde gerçekleştirmenizi sağlar.</p>
             </article>
@@ -106,25 +148,20 @@
                 </h4>
                 <ul class="text-sm space-y-2 text-slate-600 font-medium">
                     <li class="cursor-pointer hover:text-indigo-600 hover:bg-indigo-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='ai-asistan.html'">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-indigo-500 group-hover:scale-110 transition"></i> AI Asistan</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i> AI Asistan</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
-                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
+                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
-                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kidem-tazminati.html'">
-                        <span>Kıdem Tazminatı</span> <i class="fa-solid fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition"></i>
+                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                 </ul>
             </div>
 
             <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
                 <h4 class="font-bold text-blue-800 mb-4 pb-2 border-b border-blue-200">Blog'da Yeni</h4>
-                <div id="recent-blog-list">
-                    <!-- JS Populated -->
-                </div>
+                <div id="recent-blog-list"></div>
                 <a href="blog/index.html" class="inline-block mt-4 text-xs font-bold text-blue-600 hover:text-blue-800">Tüm Yazılar <i class="fa-solid fa-arrow-right ml-1"></i></a>
             </div>
         </aside>
@@ -132,96 +169,79 @@
 
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <div class="mb-8">
-                <span class="text-3xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            </div>
-            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mb-10 text-slate-300">
+            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
                 <a href="index.html" class="hover:text-white transition">Ana Sayfa</a>
                 <a href="blog/index.html" class="hover:text-white transition">Blog</a>
                 <a href="ai-asistan.html" class="hover:text-white transition">AI Asistan</a>
             </div>
-            <div class="text-xs text-slate-600 border-t border-slate-800 pt-8">
-                &copy; 2026 HesaplaHadi.
-            </div>
+            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
-
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
-            <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
-        </div>
-    </div>
 
     <script src="assets/js/calculator.js"></script>
     <script src="assets/js/blog-data.js"></script>
     <script>
-        // --- DASHBOARD RENDERER ---
-        // Renders all tools as cards for mobile/desktop dashboard view
-        window.addEventListener('load', () => {
-            renderDashboard();
-            renderRecentBlog();
-        });
+        // Drawer Logic
+        function toggleDrawer() {
+            const d = document.getElementById('drawer');
+            const m = document.getElementById('drawer-mask');
+            if(d.classList.contains('drawer-closed')) {
+                d.classList.remove('drawer-closed');
+                d.classList.add('drawer-open');
+                m.classList.remove('mask-hidden');
+                m.classList.add('mask-visible');
+            } else {
+                d.classList.remove('drawer-open');
+                d.classList.add('drawer-closed');
+                m.classList.remove('mask-visible');
+                m.classList.add('mask-hidden');
+            }
+        }
 
-        function renderDashboard() {
-            const container = document.getElementById('tool-container');
-            container.innerHTML = ""; // Clear existing
-            container.className = "space-y-8"; // Stack categories vertically
+        // Search in Drawer
+        function filterDrawerTools() {
+            const q = document.getElementById('mobile-tool-search').value.toLowerCase();
+            const drawerList = document.getElementById('drawer-list');
+            const items = drawerList.querySelectorAll('a'); // Assuming links
 
-            // Group tools by category
-            const cats = [...new Set(tools.map(t => t.cat))];
-
-            cats.forEach(cat => {
-                const section = document.createElement('div');
-
-                // Category Header
-                const header = document.createElement('h3');
-                header.className = "text-sm font-bold text-slate-500 uppercase tracking-wide mb-4 pl-1 flex items-center gap-2";
-                header.innerHTML = `<span class="w-1.5 h-4 bg-slate-300 rounded-full"></span> ${cat}`;
-                section.appendChild(header);
-
-                // Grid for this category
-                const grid = document.createElement('div');
-                grid.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4";
-
-                tools.filter(t => t.cat === cat).forEach(t => {
-                    const themeColor = { blue: 'blue', green: 'emerald', purple: 'violet', orange: 'amber', indigo: 'indigo', red: 'red', cyan: 'cyan' }[t.color] || 'blue';
-                    const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles"></i>' : '<i class="fa-solid fa-calculator"></i>';
-
-                    const card = document.createElement('a');
-                    card.href = t.link;
-                    // Smaller padding on mobile (p-4)
-                    card.className = `bg-white p-4 md:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-${themeColor}-200 transition flex flex-col items-center text-center group h-full`;
-
-                    card.innerHTML = `
-                        <div class="w-10 h-10 md:w-12 md:h-12 bg-${themeColor}-50 text-${themeColor}-600 rounded-full flex items-center justify-center text-lg md:text-xl mb-3 group-hover:scale-110 transition">
-                            ${icon}
-                        </div>
-                        <h4 class="font-bold text-slate-800 text-xs md:text-sm leading-tight group-hover:text-${themeColor}-600 transition">${t.name}</h4>
-                    `;
-                    grid.appendChild(card);
-                });
-
-                section.appendChild(grid);
-                container.appendChild(section);
+            items.forEach(item => {
+                if(item.classList.contains('cat-header')) return; // skip headers
+                const txt = item.innerText.toLowerCase();
+                item.style.display = txt.includes(q) ? 'flex' : 'none';
             });
         }
+
+        // Init
+        window.addEventListener('load', () => {
+            renderRecentBlog();
+            // Populate Drawer using same logic as Desktop Sidebar?
+            // calculator.js usually populates 'sidebar-list'.
+            // We can duplicate the content to 'drawer-list'.
+            setTimeout(() => {
+                const sidebar = document.getElementById('sidebar-list');
+                const drawer = document.getElementById('drawer-list');
+                if(sidebar && drawer) {
+                    drawer.innerHTML = sidebar.innerHTML;
+                    // Adjust styles for mobile drawer if needed
+                    // Replace 'sidebar-inactive' classes maybe?
+                    // Actually, let's just keep the classes, they are Tailwind.
+                    // But we might want to ensure clicks close the drawer?
+                    const links = drawer.querySelectorAll('a, button');
+                    links.forEach(l => {
+                        l.addEventListener('click', () => {
+                             // If it's a link to another page, drawer closing doesn't matter much but nice UX.
+                             // toggleDrawer();
+                        });
+                    });
+                }
+            }, 500); // wait for calculator.js to populate sidebar
+        });
 
         function renderRecentBlog() {
             const container = document.getElementById('recent-blog-list');
             if(!container) return;
-
-            // Get last 3 posts (assuming array is chronological, take last 3 or reverse?)
-            // blogPosts in blog-data.js seems to be manually ordered. Let's take the *first* 3 as "newest" if we assume top is new,
-            // or we just take the first 3.
-            // Actually, usually new posts are added to the top or bottom.
-            // In my previous step `blog-data.js` had old posts first?
-            // "kredi-notu" was top. "New posts" were appended.
-            // So last elements are newest.
-            // Let's reverse and take 3.
-
             const recent = [...blogPosts].reverse().slice(0, 3);
-
             container.innerHTML = "";
             recent.forEach(post => {
                 const a = document.createElement('a');

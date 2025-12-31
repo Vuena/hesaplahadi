@@ -3,26 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KDV tevkifatı hesaplama, oranlar ve tevkifatlı fatura kesimi hakkında detaylı rehber.">
+    <meta name="description" content="İşletmeler için tevkifatlı fatura kesim süreçleri, 2/10, 5/10 oranlarının anlamı ve dikkat edilmesi gereken noktalar.">
     <title>KDV Tevkifatı Nedir? Kimler Tevkifat Yapar? - HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/blog/kdv-tevkifati-nedir-kimler-yapar.html" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     <style>
-        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; letter-spacing: -0.025em; }
-        .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .prose p { margin-bottom: 1.25rem; line-height: 1.75; color: #475569; }
-        .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; }
-        .prose ul { list-style-type: disc; }
+        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.7; color: #334155; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
         .prose li { margin-bottom: 0.5rem; }
-        .prose strong { color: #0f172a; font-weight: 700; }
-        .toc-link.active { color: #2563eb; font-weight: 600; border-left: 2px solid #2563eb; padding-left: 0.5rem; margin-left: -0.5rem; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
+    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="../index.html" class="flex items-center space-x-2 group">
@@ -33,8 +29,15 @@
                     <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
                 </div>
             </a>
-            <div class="flex items-center space-x-4 text-sm font-bold text-slate-600">
-                <a href="../index.html" class="hover:text-blue-600 transition hidden md:block">Araçlar</a>
+
+            <!-- Mobile: Back to Tools (Araçlar) - USER REQUEST FIX -->
+            <a href="../index.html" class="md:hidden p-2 text-slate-600 font-bold text-xs flex items-center gap-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
+                <i class="fa-solid fa-chevron-left"></i> <span>Araçlar</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-4 text-sm font-bold text-slate-600">
+                <a href="../index.html" class="hover:text-blue-600 transition">Araçlar</a>
                 <a href="index.html" class="text-blue-600">Blog</a>
             </div>
         </div>
@@ -43,7 +46,9 @@
     <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
+            <!-- Main Content -->
             <main class="lg:col-span-8">
+                <!-- Breadcrumb -->
                 <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
                     <a href="../index.html" class="hover:text-blue-600">Anasayfa</a>
                     <span class="mx-2">/</span>
@@ -53,54 +58,26 @@
                 </nav>
 
                 <article>
+                    <!-- Header -->
                     <header class="mb-8">
                         <div class="flex items-center gap-3 mb-4">
-                            <span id="post-cat" class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide">...</span>
+                            <span id="post-cat" class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide">Kategori</span>
                         </div>
-                        <h1 id="post-title" class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-6">...</h1>
-                        <p id="post-summary" class="text-lg md:text-xl text-slate-600 leading-relaxed border-l-4 border-blue-500 pl-4">...</p>
+                        <h1 id="post-title" class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-6">KDV Tevkifatı Nedir? Kimler Tevkifat Yapar?</h1>
+                        <p id="post-summary" class="text-lg md:text-xl text-slate-600 leading-relaxed border-l-4 border-blue-500 pl-4">İşletmeler için tevkifatlı fatura kesim süreçleri, 2/10, 5/10 oranlarının anlamı ve dikkat edilmesi gereken noktalar.</p>
                     </header>
 
+                    <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300">
                          <i id="post-icon" class="fa-solid fa-image text-8xl opacity-50"></i>
                     </div>
 
-                    <div class="prose max-w-none" id="content-body">
-                       <p>KDV Tevkifatı, vergi güvenliğini sağlamak amacıyla alıcı ve satıcı arasında verginin bölüşülerek devlete ödenmesi sistemidir. Özellikle hizmet sektöründe ve kamu ile yapılan işlerde sıkça karşımıza çıkar.</p>
-
-                       <h2>Tevkifat Nedir?</h2>
-                       <p>Kelime anlamı olarak "kesinti" anlamına gelir. Normalde satıcı, mal veya hizmet bedeli üzerinden hesaplanan KDV'nin tamamını tahsil edip devlete öder. Tevkifat uygulamasında ise alıcı, hesaplanan KDV'nin bir kısmını satıcıya değil, doğrudan vergi dairesine öder.</p>
-
-                       <h2>Tam Tevkifat vs Kısmı Tevkifat</h2>
-                       <p>Tevkifat ikiye ayrılır:</p>
-                       <ul>
-                           <li><strong>Tam Tevkifat:</strong> İşlem bedeli üzerinden hesaplanan KDV'nin tamamının alıcı tarafından beyan edilip ödenmesidir.</li>
-                           <li><strong>Kısmi Tevkifat:</strong> Maliye Bakanlığı'nca belirlenen oranlara göre KDV'nin bir kısmının alıcı, bir kısmının satıcı tarafından ödenmesidir.</li>
-                       </ul>
-
-                       <h2>Sık Kullanılan Tevkifat Oranları</h2>
-                       <p>İşlem türüne göre oranlar değişmektedir:</p>
-                       <ul>
-                           <li><strong>5/10 (veya 1/2):</strong> Genellikle işgücü temin hizmetleri, yapı denetim hizmetlerinde kullanılır.</li>
-                           <li><strong>2/10:</strong> Servis taşımacılığı hizmetlerinde yaygındır.</li>
-                           <li><strong>9/10:</strong> Temizlik, çevre ve bahçe bakım hizmetlerinde uygulanır.</li>
-                       </ul>
-
-                       <h2>Kimler Tevkifat Yapmak Zorunda?</h2>
-                       <p>Genel bütçeli idareler, belediyeler, halka açık şirketler ve bankalar gibi kurumlar ("Belirlenmiş Alıcılar") belirli hizmet alımlarında tevkifat yapmak zorundadır. Ayrıca KDV mükellefi olan herkes, belirli işlemlerde (örn. işgücü temini) tevkifat yapmakla yükümlü olabilir.</p>
-
-                       <h3>Hesaplama Örneği</h3>
-                       <p>1.000 TL'lik bir temizlik hizmeti (%20 KDV, 9/10 Tevkifat) için:</p>
-                       <ul>
-                           <li>KDV Tutarı: 200 TL</li>
-                           <li>Tevkifat Tutarı (Devlete): 180 TL</li>
-                           <li>Satıcıya Ödenen KDV: 20 TL</li>
-                           <li>Toplam Tahsilat: 1.020 TL</li>
-                       </ul>
-                    </div>
+                    <!-- Content Body -->
+                    <div class="prose max-w-none" id="content-body"><p>Tevkifat, verginin bir kısmının alıcı tarafından ödenmesidir.</p></div>
                 </article>
             </main>
 
+            <!-- Sidebar -->
             <aside class="lg:col-span-4 space-y-8">
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sticky top-24">
                     <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
@@ -138,46 +115,62 @@
             const post = getCurrentPost();
             if(!post) return;
 
-            // Dynamic Metadata Updates (Enhancement)
             document.title = `${post.title} - HesaplaHadi Blog`;
             document.querySelector('meta[name="description"]').setAttribute("content", post.summary);
             let canonical = document.querySelector('link[rel="canonical"]');
-            if(!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
             canonical.href = `https://hesaplahadi.com/blog/${post.slug}`;
 
             document.getElementById('crumb-title').innerText = post.title;
             document.getElementById('post-cat').innerText = post.category;
-            document.getElementById('post-date').innerHTML = `<i class="fa-regular fa-calendar mr-1"></i> ${post.date}`;
             document.getElementById('post-title').innerText = post.title;
             document.getElementById('post-summary').innerText = post.summary;
-            document.getElementById('post-icon').className = `fa-solid ${post.image} text-8xl text-${post.color}-300`;
+
+            const iconEl = document.getElementById('post-icon');
+            iconEl.className = `fa-solid ${post.image} text-8xl text-${post.color}-300`;
 
             if(post.relatedTool) {
                 const cta = document.getElementById('cta-widget');
                 const btn = document.getElementById('cta-link');
                 let link = `../index.html#btn-${post.relatedTool}`;
-                const standaloneMap = { 'kdv': '../kdv-hesaplama.html', 'tevkifat': '../tevkifat-hesaplama.html', 'kidem': '../kidem-tazminati.html', 'kredi': '../kredi-hesaplama.html', 'ai_asistan': '../ai-asistan.html' };
+                const standaloneMap = {
+                    'kdv': '../kdv-hesaplama.html',
+                    'tevkifat': '../tevkifat-hesaplama.html',
+                    'kidem': '../kidem-tazminati.html',
+                    'kredi': '../kredi-hesaplama.html',
+                    'ai_asistan': '../ai-asistan.html'
+                };
                 if(standaloneMap[post.relatedTool]) link = standaloneMap[post.relatedTool];
                 btn.href = link;
                 cta.classList.remove('hidden');
             }
         }
+
         function generateTOC() {
             const content = document.getElementById('content-body');
             const tocNav = document.getElementById('toc');
             const headers = content.querySelectorAll('h2, h3');
-            if(headers.length === 0) { tocNav.parentElement.classList.add('hidden'); return; }
+            if(headers.length === 0) {
+                tocNav.parentElement.classList.add('hidden');
+                return;
+            }
             headers.forEach((header, index) => {
                 if(!header.id) header.id = `section-${index}`;
                 const link = document.createElement('a');
                 link.href = `#${header.id}`;
                 link.innerText = header.innerText;
                 link.className = `block toc-link hover:text-blue-600 transition truncate ${header.tagName === 'H3' ? 'pl-4 text-xs' : ''}`;
-                link.onclick = (e) => { e.preventDefault(); document.getElementById(header.id).scrollIntoView({behavior: 'smooth'}); document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active')); link.classList.add('active'); };
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    document.getElementById(header.id).scrollIntoView({behavior: 'smooth'});
+                };
                 tocNav.appendChild(link);
             });
         }
-        window.onload = function() { loadPostData(); setTimeout(generateTOC, 100); };
+
+        window.onload = function() {
+            loadPostData();
+            setTimeout(generateTOC, 100);
+        };
     </script>
 </body>
 </html>

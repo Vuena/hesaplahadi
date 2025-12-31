@@ -255,4 +255,19 @@ function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*
 window.addEventListener('load', () => {
     checkCookies();
     renderSidebar();
+
+    // Check for AI Asistan query param
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get('q');
+    if (q) {
+        // If we are on the ai-asistan page and have a query, auto-calc
+        const input = document.getElementById('ai_asistan-q');
+        if (input) {
+            input.value = q;
+            // Add a small delay for UI rendering before triggering
+            setTimeout(() => {
+               calc_ai_asistan();
+            }, 500);
+        }
+    }
 });

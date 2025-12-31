@@ -22,31 +22,71 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .drawer-open { transform: translateX(0); }
+        .drawer-closed { transform: translateX(-100%); }
+        .mask-visible { opacity: 1; pointer-events: auto; }
+        .mask-hidden { opacity: 0; pointer-events: none; }
+    </style>
 </head>
-<body class="flex flex-col min-h-screen text-slate-800">
+<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
+
+    <!-- Mobile Sidebar Drawer -->
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+        </div>
+        <div id="drawer-list" class="p-3 space-y-1"></div>
+    </aside>
+
     <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 group">
-                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
-                    <i class="fa-solid fa-calculator text-lg"></i>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Left: Hamburger + Logo -->
+                <div class="flex items-center gap-3">
+                    <button class="md:hidden text-slate-600 p-1" onclick="toggleDrawer()">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2 rounded-lg group-hover:shadow-lg transition">
+                            <i class="fa-solid fa-calculator text-base"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-lg md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-indigo-600">Hadi</span></h1>
+                        </div>
+                    </a>
                 </div>
-                <div class="leading-tight">
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-indigo-600">Hadi</span></h1>
+
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                        <a href="blog/index.html" class="hover:text-indigo-600 px-2 py-2 transition">Blog</a>
+                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>AI Asistan</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile AI Button -->
+                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </a>
+
+                    <!-- Mobile Stylized Blog Button -->
+                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+                    </a>
                 </div>
-            </a>
+            </div>
 
-            <!-- Mobile Nav Button -->
-            <a href="blog/index.html" class="md:hidden p-2 text-indigo-600 font-bold text-xs flex items-center gap-2 border border-blue-100 rounded-lg hover:bg-blue-50 transition">
-                <span>Blog</span> <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                <a href="index.html" class="hover:text-indigo-600 transition">Araçlar</a>
-                <a href="blog/index.html" class="hover:text-indigo-600 transition">Blog</a>
-                <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span>AI Asistan</span>
-                </a>
+            <!-- Mobile Search Bar (Below Header) -->
+            <div class="md:hidden mt-3 relative">
+                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
             </div>
         </div>
     </header>
@@ -125,11 +165,47 @@
     </footer>
     <script src="assets/js/calculator.js"></script>
     <script>
+        // Drawer Logic
+        function toggleDrawer() {
+            const d = document.getElementById('drawer');
+            const m = document.getElementById('drawer-mask');
+            if(d.classList.contains('drawer-closed')) {
+                d.classList.remove('drawer-closed');
+                d.classList.add('drawer-open');
+                m.classList.remove('mask-hidden');
+                m.classList.add('mask-visible');
+            } else {
+                d.classList.remove('drawer-open');
+                d.classList.add('drawer-closed');
+                m.classList.remove('mask-visible');
+                m.classList.add('mask-hidden');
+            }
+        }
+
+        function filterDrawerTools() {
+            const q = document.getElementById('mobile-tool-search').value.toLowerCase();
+            const drawerList = document.getElementById('drawer-list');
+            const items = drawerList.querySelectorAll('a');
+
+            items.forEach(item => {
+                if(item.classList.contains('cat-header')) return;
+                const txt = item.innerText.toLowerCase();
+                item.style.display = txt.includes(q) ? 'flex' : 'none';
+            });
+        }
+
         // Specific init for this tool
         window.addEventListener('load', () => {
-             // We need a function in calculator.js to render a specific tool into a specific container
-             // or we modify renderTools to be more flexible.
-             // For now, let's assume I will add 'renderSingleTool(toolId, containerId)' to calculator.js
+
+             // Populate Drawer using same logic as Desktop Sidebar
+             setTimeout(() => {
+                const sidebar = document.getElementById('sidebar-list');
+                const drawer = document.getElementById('drawer-list');
+                if(sidebar && drawer) {
+                    drawer.innerHTML = sidebar.innerHTML;
+                }
+            }, 500);
+
              if(typeof renderSingleTool === 'function') {
                  renderSingleTool('net_brut', 'tool-placeholder');
              }

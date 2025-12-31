@@ -7,7 +7,8 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-chart-line",
         "color": "blue",
-        "relatedTool": "kredi"
+        "relatedTool": "kredi",
+        "content": "<p>Kredi notu, finansal geçmişinizin bir özetidir.</p><h2>Ödemeleri Düzenli Yapın</h2><p>Gecikmiş borçlar notunuzu en çok düşüren faktördür.</p>"
     },
     {
         "id": "tevkifat-nedir",
@@ -17,7 +18,8 @@ const blogPosts = [
         "category": "Vergi",
         "image": "fa-receipt",
         "color": "emerald",
-        "relatedTool": "tevkifat"
+        "relatedTool": "tevkifat",
+        "content": "<p>Tevkifat, verginin bir kısmının alıcı tarafından ödenmesidir.</p>"
     },
     {
         "id": "enflasyon-nedir",
@@ -27,7 +29,8 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-arrow-trend-up",
         "color": "red",
-        "relatedTool": "mevduat"
+        "relatedTool": "mevduat",
+        "content": "<p>Enflasyon, fiyatlar genel düzeyindeki artıştır.</p>"
     },
     {
         "id": "konut-kredisi",
@@ -37,7 +40,8 @@ const blogPosts = [
         "category": "Emlak",
         "image": "fa-house",
         "color": "orange",
-        "relatedTool": "kredi"
+        "relatedTool": "kredi",
+        "content": "<p>Konut kredisi uzun vadeli bir borçlanmadır.</p>"
     },
     {
         "id": "ideal-kilo",
@@ -47,7 +51,8 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-weight-scale",
         "color": "green",
-        "relatedTool": "idealkilo"
+        "relatedTool": "idealkilo",
+        "content": "<p>İdeal kilo, sağlıklı yaşamın anahtarıdır.</p>"
     },
     {
         "id": "brut-net",
@@ -57,7 +62,8 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-money-bill-wave",
         "color": "blue",
-        "relatedTool": "brut_net"
+        "relatedTool": "brut_net",
+        "content": "<p>Brüt maaş, işverenin kasasından çıkan toplam tutardır (işveren maliyeti hariç).</p>"
     },
     {
         "id": "bmi-nedir",
@@ -67,7 +73,8 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-person",
         "color": "green",
-        "relatedTool": "bmi"
+        "relatedTool": "bmi",
+        "content": "<p>BMI, vücut ağırlığının boy uzunluğunun karesine bölünmesiyle hesaplanır.</p>"
     },
     {
         "id": "yuzde-hesaplama",
@@ -77,7 +84,8 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-percent",
         "color": "purple",
-        "relatedTool": "yuzde"
+        "relatedTool": "yuzde",
+        "content": "<p>Yüzde hesaplama hayatın her alanında karşımıza çıkar.</p>"
     },
     {
         "id": "su-tuketimi",
@@ -87,7 +95,8 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-droplet",
         "color": "cyan",
-        "relatedTool": "su"
+        "relatedTool": "su",
+        "content": "<p>Su hayattır.</p>"
     },
     {
         "slug": "doviz-yatirimi-mantikli-mi.html",
@@ -97,7 +106,7 @@ const blogPosts = [
         "image": "fa-coins",
         "color": "green",
         "relatedTool": "mevduat",
-        "content": "\n            <p>Döviz yatırımı, Türkiye'de en popüler tasarruf yöntemlerinden biridir. Ancak her yatırım aracı gibi riskleri de barındırır.</p>\n            <h2>Döviz Kurları Neden Değişir?</h2>\n            <p>Faiz kararları, enflasyon oranları ve küresel ekonomik gelişmeler kurları doğrudan etkiler.</p>\n            <h2>Sepet Yapmak</h2>\n            <p>Tüm birikiminizi tek bir para biriminde tutmak yerine Dolar, Euro ve Altın gibi farklı araçlara bölmek riski azaltır.</p>\n        "
+        "content": "<p>Döviz yatırımı...</p>"
     },
     {
         "slug": "kredi-karti-puanlari-nasil-kullanilir.html",
@@ -107,7 +116,7 @@ const blogPosts = [
         "image": "fa-credit-card",
         "color": "blue",
         "relatedTool": "kk_asgari",
-        "content": "\n            <p>Kredi kartı puanları, harcama yaparken kazandığınız sadakat ödülleridir. Bu puanların son kullanma tarihi olduğunu unutmayın.</p>\n            <h2>Akaryakıt ve Market Alışverişleri</h2>\n            <p>Puanları kullanmanın en pratik yolu, anlaşmalı market ve benzin istasyonlarında harcamaktır. Bazı sitelerde uçak bileti alımında katlı puan avantajı sağlanabilir.</p>\n        "
+        "content": "<p>Puanları harcamak...</p>"
     },
     {
         "slug": "bireysel-emeklilik-sistemi-bes-nedir.html",
@@ -117,7 +126,7 @@ const blogPosts = [
         "image": "fa-piggy-bank",
         "color": "purple",
         "relatedTool": "mevduat",
-        "content": "\n            <p>BES, sosyal güvenlik sistemine ek olarak ikinci bir emeklilik geliri sağlamayı amaçlar.</p>\n            <h2>Devlet Katkısı Avantajı</h2>\n            <p>Yatırdığınız her 100 TL için devlet 30 TL katkı payı ekler. Bu %30'luk anında getiri, başka hiçbir risksiz yatırım aracında yoktur.</p>\n        "
+        "content": "<p>BES birikim...</p>"
     },
     {
         "slug": "altin-yatirimi-fiziki-mi-banka-mi.html",
@@ -127,7 +136,7 @@ const blogPosts = [
         "image": "fa-gem",
         "color": "amber",
         "relatedTool": "mevduat",
-        "content": "\n            <p>Geleneksel yatırım aracımız altın, güvenli liman olma özelliğini koruyor.</p>\n            <h2>Fiziki Altın</h2>\n            <p>Saklama riski vardır (hırsızlık vb.) ancak alım-satım makası genellikle kuyumcularda daha düşüktür.</p>\n            <h2>Banka Altın Hesabı</h2>\n            <p>Çalınma riski yoktur ve 7/24 işlem yapılabilir. Ancak bankaların alış-satış kurları arasındaki fark (makas) mesai saatleri dışında açılabilir.</p>\n        "
+        "content": "<p>Altın yatırımı...</p>"
     },
     {
         "slug": "intermittent-fasting-aralikli-oruc-nedir.html",
@@ -137,7 +146,7 @@ const blogPosts = [
         "image": "fa-clock",
         "color": "indigo",
         "relatedTool": "ai_diyet",
-        "content": "\n            <p>Aralıklı oruç, ne yediğinizden çok ne zaman yediğinize odaklanan bir beslenme modelidir.</p>\n            <h2>16/8 Metodu</h2>\n            <p>Günün 16 saati aç kalıp (uyku dahil), yemek yemenin sadece 8 saatlik bir dilimde serbest olduğu yöntemdir. Genellikle 12:00-20:00 arası yemek yenir.</p>\n        "
+        "content": "<p>Aralıklı oruç...</p>"
     },
     {
         "slug": "metabolizma-hizlandirma-yollari.html",
@@ -147,7 +156,7 @@ const blogPosts = [
         "image": "fa-fire",
         "color": "red",
         "relatedTool": "bmr",
-        "content": "\n            <p>Metabolizma hızı, vücudun yaktığı kalori miktarını belirler.</p>\n            <h2>Protein Tüketimi</h2>\n            <p>Proteinlerin sindirimi için vücut daha fazla enerji harcar (Termik Etki). Bu da metabolizmayı %15-30 oranında hızlandırabilir.</p>\n            <h2>Soğuk Su İçmek</h2>\n            <p>Vücut suyu ısıtmak için enerji harcar. Günde 2 litre soğuk su içmek ekstra kalori yakımı sağlar.</p>\n        "
+        "content": "<p>Metabolizma...</p>"
     },
     {
         "slug": "ders-calisma-teknikleri-pomodoro.html",
@@ -157,7 +166,7 @@ const blogPosts = [
         "image": "fa-stopwatch",
         "color": "red",
         "relatedTool": "sinav",
-        "content": "\n            <p>Pomodoro tekniği, zamanı bloklara bölerek beynin odaklanma süresini maksimumda tutmayı hedefler.</p>\n            <h2>Nasıl Uygulanır?</h2>\n            <ol>\n                <li>Hedefinizi belirleyin.</li>\n                <li>Zamanlayıcıyı 25 dakikaya kurun ve sadece çalışın.</li>\n                <li>Zil çalınca 5 dakika mola verin.</li>\n                <li>Her 4 döngüde bir 15-30 dakika uzun mola verin.</li>\n            </ol>\n        "
+        "content": "<p>Pomodoro...</p>"
     },
     {
         "slug": "hizli-okuma-teknikleri.html",
@@ -167,7 +176,7 @@ const blogPosts = [
         "image": "fa-book-open",
         "color": "blue",
         "relatedTool": "kelime",
-        "content": "\n            <p>Hızlı okuma, sadece hızlı gitmek değil, bütünü görmektir.</p>\n            <h2>İç Seslendirmeyi Durdurun</h2>\n            <p>Okurken kelimeleri içinizden seslendirmek (subvokalizasyon) hızınızı konuşma hızıyla sınırlar (150-200 kelime/dk). Gözlerinizle tarayarak okumayı öğrenmelisiniz.</p>\n        "
+        "content": "<p>Hızlı okuma...</p>"
     },
     {
         "slug": "evde-spor-yaparak-zayiflama.html",
@@ -177,17 +186,127 @@ const blogPosts = [
         "image": "fa-dumbbell",
         "color": "orange",
         "relatedTool": "bmi",
-        "content": "\n            <p>Kilo vermek için pahalı spor salonlarına ihtiyacınız yok.</p>\n            <h2>HIIT Kardiyo</h2>\n            <p>Yüksek yoğunluklu aralıklı antrenman (HIIT), kısa sürede maksimum kalori yakımı sağlar. 20 dakikalık bir HIIT, 1 saatlik yürüyüşten daha etkili olabilir.</p>\n        "
+        "content": "<p>Evde spor...</p>"
     },
     {
-        "slug": "kripto-para-vergilendirme.html",
-        "title": "Türkiye'de Kripto Para Vergilendirmesi Var Mı?",
-        "summary": "Bitcoin ve altcoin kazançları vergiye tabi mi? Yasal düzenlemelerde son durum.",
+        "slug": "tasarruf-yapmanin-yollari.html",
+        "title": "Para Biriktirmenin ve Tasarruf Yapmanın 7 Yolu",
+        "summary": "Gereksiz harcamaları kısıp birikim yapmaya başlamak için pratik ipuçları.",
         "category": "Finans",
-        "image": "fa-bitcoin",
+        "image": "fa-wallet",
+        "color": "green",
+        "relatedTool": "mevduat",
+        "content": "<p>Tasarruf yapmak...</p>"
+    },
+    {
+        "slug": "is-gorusmesinde-maas-pazarligi.html",
+        "title": "İş Görüşmesinde Maaş Pazarlığı Nasıl Yapılır?",
+        "summary": "Yeni bir işe girerken veya zam isterken maaş beklentinizi nasıl dile getirmelisiniz?",
+        "category": "Kariyer",
+        "image": "fa-briefcase",
+        "color": "blue",
+        "relatedTool": "net_brut",
+        "content": "<p>Maaş pazarlığı...</p>"
+    },
+    {
+        "slug": "kalori-acigi-ile-zayiflama.html",
+        "title": "Kalori Açığı Oluşturarak Nasıl Zayıflanır?",
+        "summary": "Kilo vermenin temel mantığı: Kalori açığı. Günlük ne kadar açık oluşturmalısınız?",
+        "category": "Sağlık",
+        "image": "fa-apple-whole",
+        "color": "red",
+        "relatedTool": "bmr",
+        "content": "<p>Kalori açığı...</p>"
+    },
+    {
+        "slug": "python-ile-yazilima-baslamak.html",
+        "title": "Python ile Yazılıma Başlamak: Neden İlk Tercih Olmalı?",
+        "summary": "Kodlama öğrenmek isteyenler için Python dilinin avantajları ve kullanım alanları.",
+        "category": "Eğitim",
+        "image": "fa-code",
+        "color": "yellow",
+        "relatedTool": "kelime",
+        "content": "<p>Python...</p>"
+    },
+    {
+        "slug": "cocuklar-icin-kodlama-egitimi.html",
+        "title": "Çocuklar İçin Kodlama Eğitimi Neden Önemli?",
+        "summary": "Erken yaşta algoritmik düşünme becerisi kazanmanın faydaları.",
+        "category": "Eğitim",
+        "image": "fa-child",
+        "color": "purple",
+        "relatedTool": "dikdortgen",
+        "content": "<p>Kodlama eğitimi...</p>"
+    },
+    {
+        "slug": "gunluk-yuruyusun-faydalari.html",
+        "title": "Günde 10 Bin Adım Atmanın Faydaları Nelerdir?",
+        "summary": "Düzenli yürüyüşün kalp sağlığından kilo kontrolüne kadar inanılmaz etkileri.",
+        "category": "Sağlık",
+        "image": "fa-person-walking",
+        "color": "cyan",
+        "relatedTool": "yakit",
+        "content": "<p>Günlük yürüyüş...</p>"
+    },
+    {
+        "slug": "yapay-zeka-gelecegi.html",
+        "title": "Yapay Zeka Geleceği Nasıl Şekillendirecek?",
+        "summary": "İş dünyasından sanata, yapay zekanın hayatımıza etkileri ve beklenen büyük değişimler.",
+        "category": "Teknoloji",
+        "image": "fa-robot",
+        "color": "indigo",
+        "relatedTool": "ai_asistan",
+        "content": "<p>Yapay zeka (AI), sadece bir teknoloji trendi değil, insanlık tarihinin en büyük devrimlerinden biridir.</p>"
+    },
+    {
+        "slug": "ev-almak-mi-kiralamak-mi.html",
+        "title": "Ev Almak mı Yoksa Kiralamak mı Daha Mantıklı?",
+        "summary": "Mevcut faiz oranları ve kira çarpanlarına göre finansal analiz. Hangi durumda ne yapılmalı?",
+        "category": "Emlak",
+        "image": "fa-house-chimney",
         "color": "orange",
-        "relatedTool": "karzarar",
-        "content": "\n            <p>Kripto varlıklar, son yılların en çok konuşulan yatırım araçlarıdır.</p>\n            <h2>Mevcut Durum</h2>\n            <p>Şu an için bireysel yatırımcıların alım-satım kazançlarına yönelik doğrudan bir gelir vergisi düzenlemesi netleşmemiştir. Ancak meclis gündemindeki yasa tasarısı ile işlem vergisi (binde oranlarda) getirilmesi planlanmaktadır.</p>\n        "
+        "relatedTool": "kredi",
+        "content": "<p>Ev sahipliği, güvence hissi verse de finansal açıdan her zaman en iyi seçenek olmayabilir.</p>"
+    },
+    {
+        "slug": "dengeli-beslenme-tabagi.html",
+        "title": "Dengeli Beslenme Tabağı Nasıl Hazırlanır?",
+        "summary": "Her öğünde bulunması gereken besin grupları. Karbonhidrat, protein ve yağ dengesi.",
+        "category": "Sağlık",
+        "image": "fa-carrot",
+        "color": "green",
+        "relatedTool": "makro",
+        "content": "<p>Sağlıklı bir tabak, renkli ve çeşitlidir.</p>"
+    },
+    {
+        "slug": "lgs-hazirlik-rehberi.html",
+        "title": "LGS Hazırlık Sürecinde Başarı İçin 7 Altın Kural",
+        "summary": "Sınav stresini yönetme, planlı çalışma ve deneme çözme stratejileri.",
+        "category": "Eğitim",
+        "image": "fa-pencil",
+        "color": "blue",
+        "relatedTool": "sinav",
+        "content": "<p>LGS, disiplinli bir çalışma gerektirir.</p>"
+    },
+    {
+        "slug": "kisisel-finans-yonetimi.html",
+        "title": "Kişisel Finans Yönetimi: Gelir-Gider Dengesi",
+        "summary": "Para nereye gidiyor? Harcamalarınızı kontrol altına alarak finansal özgürlüğe ulaşın.",
+        "category": "Finans",
+        "image": "fa-chart-pie",
+        "color": "emerald",
+        "relatedTool": "mevduat",
+        "content": "<p>Bütçe yapmak, zenginleşmenin ilk kuralıdır.</p>"
+    },
+    {
+        "slug": "su-icmenin-cilde-faydalari.html",
+        "title": "Su İçmenin Cilt Sağlığına 5 İnanılmaz Faydası",
+        "summary": "Daha parlak ve genç bir cilt için suyun önemi. Nem dengesi ve toksin atımı.",
+        "category": "Güzellik",
+        "image": "fa-droplet",
+        "color": "cyan",
+        "relatedTool": "su",
+        "content": "<p>Cildiniz susuz kaldığında kurur ve yaşlanır.</p>"
     }
 ];
 

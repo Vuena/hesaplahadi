@@ -1,33 +1,19 @@
-<!-- Template for Blog Detail Pages -->
-<!-- Copy this structure for new posts and update content inside <article> -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Dynamic Meta Tags -->
-    <title>Aralıklı Oruç (Intermittent Fasting) Nedir? Nasıl Yapılır? - HesaplaHadi</title>
     <meta name="description" content="16/8 kuralı ile kilo verme yöntemi. Açlık penceresinde neler tüketilebilir?">
+    <title>Aralıklı Oruç (Intermittent Fasting) Nedir? Nasıl Yapılır? - HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/blog/intermittent-fasting-aralikli-oruc-nedir.html" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     <style>
-        /* Typography for Blog Content */
-        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; letter-spacing: -0.025em; }
-        .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .prose p { margin-bottom: 1.25rem; line-height: 1.75; color: #475569; }
-        .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; }
-        .prose ul { list-style-type: disc; }
-        .prose ol { list-style-type: decimal; }
+        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.7; color: #334155; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
         .prose li { margin-bottom: 0.5rem; }
-        .prose strong { color: #0f172a; font-weight: 700; }
-        .prose blockquote { border-left: 4px solid #cbd5e1; padding-left: 1rem; font-style: italic; color: #64748b; margin: 1.5rem 0; }
-        .prose img { border-radius: 0.75rem; margin: 1.5rem 0; width: 100%; height: auto; }
-
-        /* TOC Styling */
-        .toc-link.active { color: #2563eb; font-weight: 600; border-left: 2px solid #2563eb; padding-left: 0.5rem; margin-left: -0.5rem; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
@@ -43,8 +29,15 @@
                     <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
                 </div>
             </a>
-            <div class="flex items-center space-x-4 text-sm font-bold text-slate-600">
-                <a href="../index.html" class="hover:text-blue-600 transition hidden md:block">Araçlar</a>
+
+            <!-- Mobile: Back to Tools (Araçlar) - USER REQUEST FIX -->
+            <a href="../index.html" class="md:hidden p-2 text-slate-600 font-bold text-xs flex items-center gap-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
+                <i class="fa-solid fa-chevron-left"></i> <span>Araçlar</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-4 text-sm font-bold text-slate-600">
+                <a href="../index.html" class="hover:text-blue-600 transition">Araçlar</a>
                 <a href="index.html" class="text-blue-600">Blog</a>
             </div>
         </div>
@@ -76,33 +69,23 @@
 
                     <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300">
-                         <!-- In a real app, this would be an <img> -->
                          <i id="post-icon" class="fa-solid fa-image text-8xl opacity-50"></i>
                     </div>
 
                     <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body">
-            <p>Aralıklı oruç, ne yediğinizden çok ne zaman yediğinize odaklanan bir beslenme modelidir.</p>
-            <h2>16/8 Metodu</h2>
-            <p>Günün 16 saati aç kalıp (uyku dahil), yemek yemenin sadece 8 saatlik bir dilimde serbest olduğu yöntemdir. Genellikle 12:00-20:00 arası yemek yenir.</p>
-        </div>
+                    <div class="prose max-w-none" id="content-body"><p>Aralıklı oruç...</p></div>
                 </article>
             </main>
 
             <!-- Sidebar -->
             <aside class="lg:col-span-4 space-y-8">
-
-                <!-- Table of Contents -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sticky top-24">
                     <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
                         <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
                     </h4>
-                    <nav id="toc" class="text-sm space-y-2 text-slate-600">
-                        <!-- JS Generated -->
-                    </nav>
+                    <nav id="toc" class="text-sm space-y-2 text-slate-600"></nav>
                 </div>
 
-                <!-- Dynamic CTA Widget -->
                 <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-10">
                         <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
@@ -115,7 +98,6 @@
                         </a>
                     </div>
                 </div>
-
             </aside>
         </div>
     </div>
@@ -127,43 +109,29 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="../assets/js/blog-data.js"></script>
     <script>
-        // --- 1. Load Metadata ---
         function loadPostData() {
             const post = getCurrentPost();
-            if(!post) return; // Or redirect to 404
+            if(!post) return;
 
-            // Update Meta
             document.title = `${post.title} - HesaplaHadi Blog`;
             document.querySelector('meta[name="description"]').setAttribute("content", post.summary);
-
-            // Canonical Update
             let canonical = document.querySelector('link[rel="canonical"]');
-            if(!canonical) {
-                canonical = document.createElement('link');
-                canonical.rel = 'canonical';
-                document.head.appendChild(canonical);
-            }
             canonical.href = `https://hesaplahadi.com/blog/${post.slug}`;
 
-            // Update Header Elements
             document.getElementById('crumb-title').innerText = post.title;
             document.getElementById('post-cat').innerText = post.category;
             document.getElementById('post-title').innerText = post.title;
             document.getElementById('post-summary').innerText = post.summary;
 
-            // Icon/Image
             const iconEl = document.getElementById('post-icon');
             iconEl.className = `fa-solid ${post.image} text-8xl text-${post.color}-300`;
 
-            // CTA Setup
             if(post.relatedTool) {
                 const cta = document.getElementById('cta-widget');
                 const btn = document.getElementById('cta-link');
                 let link = `../index.html#btn-${post.relatedTool}`;
-
                 const standaloneMap = {
                     'kdv': '../kdv-hesaplama.html',
                     'tevkifat': '../tevkifat-hesaplama.html',
@@ -171,55 +139,36 @@
                     'kredi': '../kredi-hesaplama.html',
                     'ai_asistan': '../ai-asistan.html'
                 };
-
-                if(standaloneMap[post.relatedTool]) {
-                    link = standaloneMap[post.relatedTool];
-                }
-
+                if(standaloneMap[post.relatedTool]) link = standaloneMap[post.relatedTool];
                 btn.href = link;
                 cta.classList.remove('hidden');
             }
         }
 
-        // --- 2. Generate TOC ---
         function generateTOC() {
             const content = document.getElementById('content-body');
             const tocNav = document.getElementById('toc');
             const headers = content.querySelectorAll('h2, h3');
-
             if(headers.length === 0) {
-                tocNav.parentElement.classList.add('hidden'); // Hide if no headers
+                tocNav.parentElement.classList.add('hidden');
                 return;
             }
-
             headers.forEach((header, index) => {
-                // Create ID if missing
-                if(!header.id) {
-                    header.id = `section-${index}`;
-                }
-
+                if(!header.id) header.id = `section-${index}`;
                 const link = document.createElement('a');
                 link.href = `#${header.id}`;
                 link.innerText = header.innerText;
                 link.className = `block toc-link hover:text-blue-600 transition truncate ${header.tagName === 'H3' ? 'pl-4 text-xs' : ''}`;
-
-                // Smooth scroll
                 link.onclick = (e) => {
                     e.preventDefault();
                     document.getElementById(header.id).scrollIntoView({behavior: 'smooth'});
-                    // Update active state manually
-                    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
                 };
-
                 tocNav.appendChild(link);
             });
         }
 
-        // --- Init ---
         window.onload = function() {
             loadPostData();
-            // Wait a tick for content to populate if it was dynamic (here it's static in HTML file)
             setTimeout(generateTOC, 100);
         };
     </script>
