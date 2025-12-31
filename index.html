@@ -115,10 +115,11 @@
             </div>
 
             <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
-                <h4 class="font-bold text-blue-800 mb-2">Blog'da Yeni</h4>
-                <a href="blog/kredi-notu-nasil-yukseltilir.html" class="block group">
-                    <p class="text-sm text-blue-600 font-bold group-hover:underline">Kredi Notu Nasıl Yükseltilir? 5 Etkili Yöntem</p>
-                </a>
+                <h4 class="font-bold text-blue-800 mb-4 pb-2 border-b border-blue-200">Blog'da Yeni</h4>
+                <div id="recent-blog-list">
+                    <!-- JS Populated -->
+                </div>
+                <a href="blog/index.html" class="inline-block mt-4 text-xs font-bold text-blue-600 hover:text-blue-800">Tüm Yazılar <i class="fa-solid fa-arrow-right ml-1"></i></a>
             </div>
         </aside>
     </div>
@@ -147,81 +148,76 @@
     </div>
 
     <script src="assets/js/calculator.js"></script>
+    <script src="assets/js/blog-data.js"></script>
     <script>
-        // Special render logic for index (Hub)
+        // --- DASHBOARD RENDERER ---
+        // Renders all tools as cards for mobile/desktop dashboard view
         window.addEventListener('load', () => {
-            renderHubTools();
+            renderDashboard();
+            renderRecentBlog();
         });
 
-        function renderHubTools() {
+        function renderDashboard() {
             const container = document.getElementById('tool-container');
-            const currentHash = window.location.hash.substring(1);
+            container.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"; // Grid Layout
+            container.innerHTML = ""; // Clear existing
+
+            // Group tools by category for ordered display or just mix them?
+            // Dashboard usually mixes them or sorts by popularity.
+            // Let's render all tools as clickable cards.
 
             tools.forEach(t => {
-                // If it's a major tool (link is external), skip rendering inputs on index.
-                // Unless we want cards? Let's just render logic for Internal tools (link starts with index.html)
-                // For external tools, we rely on the Sidebar or Hero.
+                // Skip if hidden or special? No, show all.
+                const themeColor = { blue: 'blue', green: 'emerald', purple: 'violet', orange: 'amber', indigo: 'indigo', red: 'red', cyan: 'cyan' }[t.color] || 'blue';
+                const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles"></i>' : '<i class="fa-solid fa-calculator"></i>';
 
-                if(t.link.includes('.html') && !t.link.startsWith('index.html')) return;
+                const card = document.createElement('a');
+                card.href = t.link;
+                card.className = `bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-1 transition flex flex-col items-center text-center group h-full`;
 
-                const div = document.createElement('div');
-                div.id = `content-${t.id}`;
-                // Hidden by default, unless hash matches
-                div.className = (currentHash === t.id) ?
-                    'bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-fade-in relative mb-8' :
-                    'hidden bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-fade-in relative mb-8';
-
-                const themeColor = { blue: 'blue', green: 'emerald', purple: 'violet', orange: 'amber', indigo: 'indigo' }[t.color] || 'blue';
-
-                let html = `
-                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                        <div class="p-3 bg-${themeColor}-100 rounded-2xl text-${themeColor}-600 shadow-sm"><i class="fa-solid ${t.cat==='Yapay Zeka'?'fa-wand-magic-sparkles':'fa-calculator'} text-xl"></i></div>
-                        <div>
-                            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">${t.name}</h1>
-                        </div>
+                card.innerHTML = `
+                    <div class="w-12 h-12 bg-${themeColor}-50 text-${themeColor}-600 rounded-full flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition">
+                        ${icon}
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-${(t.inputs && t.inputs.length > 2) ? '2' : '1'} gap-6">`;
+                    <h3 class="font-bold text-slate-800 text-sm leading-tight">${t.name}</h3>
+                    <span class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-wide">${t.cat}</span>
+                `;
 
-                if(t.inputs) {
-                    t.inputs.forEach(inp => {
-                        html += `<div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">${inp.l}</label>`;
-                        if(inp.type === 'select') {
-                            html += `<div class="relative"><select id="${t.id}-${inp.id}" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">`;
-                            inp.opts.forEach((o, i) => html += `<option value="${i}">${o}</option>`);
-                            html += `</select><i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i></div></div>`;
-                        } else if (inp.type === 'textarea') {
-                            html += `<textarea id="${t.id}-${inp.id}" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white transition input-premium" rows="4" placeholder="${inp.p || ''}"></textarea></div>`;
-                        } else {
-                            html += `<input type="${inp.type || 'number'}" id="${t.id}-${inp.id}" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="${inp.p || ''}" ${inp.type==='date'?'':'step="any"'}></div>`;
-                        }
-                    });
-                }
-
-                html += `</div>
-                <button onclick="calc_${t.id}()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i> Hesapla
-                </button>
-
-                <div id="res-${t.id}" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-                    <button id="btn-copy-${t.id}" onclick="copyResult('${t.id}')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Kopyala
-                    </button>
-                    <p class="text-[10px] font-bold text-${themeColor}-600 uppercase tracking-widest mb-2">SONUÇ</p>
-                    <div id="val-${t.id}" class="text-3xl font-black text-slate-900 tracking-tight"></div>
-                    <div id="detail-${t.id}" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
-                </div>`;
-                div.innerHTML = html;
-                container.appendChild(div);
+                container.appendChild(card);
             });
         }
 
-        // Handle Hash Change for Index
-        window.onhashchange = () => {
-             const hash = window.location.hash.substring(1);
-             document.querySelectorAll('[id^="content-"]').forEach(d => d.classList.add('hidden'));
-             const target = document.getElementById(`content-${hash}`);
-             if(target) target.classList.remove('hidden');
-        };
+        function renderRecentBlog() {
+            const container = document.getElementById('recent-blog-list');
+            if(!container) return;
+
+            // Get last 3 posts (assuming array is chronological, take last 3 or reverse?)
+            // blogPosts in blog-data.js seems to be manually ordered. Let's take the *first* 3 as "newest" if we assume top is new,
+            // or we just take the first 3.
+            // Actually, usually new posts are added to the top or bottom.
+            // In my previous step `blog-data.js` had old posts first?
+            // "kredi-notu" was top. "New posts" were appended.
+            // So last elements are newest.
+            // Let's reverse and take 3.
+
+            const recent = [...blogPosts].reverse().slice(0, 3);
+
+            container.innerHTML = "";
+            recent.forEach(post => {
+                const a = document.createElement('a');
+                a.href = `blog/${post.slug}`;
+                a.className = "block group mb-3 last:mb-0";
+                a.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="shrink-0 mt-1"><i class="fa-solid ${post.image || 'fa-file-lines'} text-blue-300 group-hover:text-blue-500 transition"></i></div>
+                        <div>
+                            <p class="text-sm text-slate-700 font-bold group-hover:text-blue-600 transition leading-snug">${post.title}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(a);
+            });
+        }
     </script>
 </body>
 </html>
