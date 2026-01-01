@@ -254,8 +254,11 @@ function calc_kredi() {
 }
 
 function calc_kidem() {
-    const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); const sal = getNum('kidem','salary');
+    const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); let sal = getNum('kidem','salary');
     if (isNaN(s)||isNaN(e)||!sal) return;
+
+    // 2026 Cap Estimate
+    if (sal > 55000) sal = 55000;
 
     const diffTime = Math.abs(e - s);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
