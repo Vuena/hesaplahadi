@@ -3,19 +3,17 @@ import os
 import re
 
 # Define the new header block for tool pages
-# INCLUDES SEARCH BAR
+# Changes:
+# 1. Removed top-left burger button.
+# 2. Changed "Tüm Hesaplama Araçları" button color to gradient (Indigo/Purple).
+# 3. Added Desktop Search Bar.
+
 new_header = """    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Hamburger + Logo -->
+                <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
-                     <!-- Mobile "Tüm Hesaplamalar" Button (Replaces Hamburger) -->
-                     <button class="md:hidden flex items-center gap-2 bg-slate-100 text-slate-700 px-3 py-2 rounded-lg font-bold text-[10px] hover:bg-slate-200 transition border border-slate-200" onclick="toggleDrawer()">
-                         <i class="fa-solid fa-bars"></i>
-                         <span>Tüm Hesaplamalar</span>
-                     </button>
-
                      <a href="index.html" class="flex items-center space-x-2 group">
                         <div class="hidden md:block bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
                             <i class="fa-solid fa-calculator text-lg"></i>
@@ -28,6 +26,12 @@ new_header = """    <!-- Header -->
 
                 <!-- Right: Actions -->
                 <div class="flex items-center gap-3">
+                    <!-- Desktop Search Bar -->
+                    <div class="hidden md:block relative">
+                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                         <input type="text" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+                    </div>
+
                     <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                         <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
@@ -41,34 +45,58 @@ new_header = """    <!-- Header -->
             </div>
 
             <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative">
-                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none">
+            <div class="md:hidden mt-3 relative group">
+                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+
+                 <!-- Search Suggestions -->
+                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+                    <div class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+                    <a href="kdv-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-percent text-blue-400"></i> KDV Hesaplama
+                    </a>
+                    <a href="kredi-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-blue-400"></i> Kredi Hesaplama
+                    </a>
+                    <a href="tevkifat-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-blue-400"></i> Tevkifat Hesapla
+                    </a>
+                 </div>
             </div>
+
+            <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
+            <!-- Updated Color to match AI block (Indigo/Purple Gradient) -->
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i>
+                <span>Tüm Hesaplama Araçları</span>
+            </button>
         </div>
     </header>"""
 
 # Regex to find the header block
-# It looks for <!-- Header --> ... </header>
 header_regex = re.compile(r'<!-- Header -->.*?<header.*?>.*?</header>', re.DOTALL)
 
 def update_file(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-    # Check if file has header
-    if not header_regex.search(content):
-        print(f"Skipping {filepath}: Header not found.")
-        return
+        # Check if file has header
+        if not header_regex.search(content):
+            print(f"Skipping {filepath}: Header not found.")
+            return
 
-    # Replace header
-    new_content = header_regex.sub(new_header, content)
+        # Replace header
+        new_content = header_regex.sub(new_header, content)
 
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(new_content)
-    print(f"Updated {filepath}")
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"Updated {filepath}")
+    except Exception as e:
+        print(f"Error updating {filepath}: {e}")
 
-# List of files to process (exclude blog folder, include root html files)
+# List of files to process
+# Exclude index.html as it will be updated manually
 files = [f for f in os.listdir('.') if f.endswith('.html') and f != 'index.html']
 
 for f in files:

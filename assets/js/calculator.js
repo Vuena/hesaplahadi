@@ -63,6 +63,8 @@ function renderSidebar() {
         if(!container) return;
         container.innerHTML = ''; // Clear
 
+        // Note: "All Tools" link explicitly removed for Mobile Drawer per request
+
         cats.forEach(cat => {
             const header = document.createElement('div');
             header.className = 'cat-header'; header.innerText = cat;
@@ -81,11 +83,34 @@ function renderSidebar() {
                 container.appendChild(a);
             });
         });
+
+        // Strict Cleanup: Remove any "Tüm Hesaplamalar" link if present
+        const links = container.querySelectorAll('a');
+        links.forEach(link => {
+            const txt = link.innerText.toLowerCase();
+            if(txt.includes('tüm hesaplama') || txt.includes('tum hesaplama')) {
+                link.remove();
+            }
+        });
     });
 }
 
 // --- GEMINI API HELPER ---
 async function callGemini(userPrompt, systemPrompt) {
+    // Rate Limiting (50 requests per day)
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem('ai_last_date');
+    let count = parseInt(localStorage.getItem('ai_daily_count') || '0');
+
+    if (lastDate !== today) {
+        count = 0;
+        localStorage.setItem('ai_last_date', today);
+    }
+
+    if (count >= 50) {
+        throw new Error('Günlük soru limitine (50) ulaştınız. Yarın tekrar deneyin.');
+    }
+
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
     const payload = {
         contents: [{ parts: [{ text: userPrompt }] }],
@@ -101,6 +126,9 @@ async function callGemini(userPrompt, systemPrompt) {
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error?.message || response.statusText);
+
+            // Increment count on success
+            localStorage.setItem('ai_daily_count', (count + 1).toString());
             return data.candidates[0].content.parts[0].text;
         } catch (error) {
             if (i === 2) throw error;
@@ -130,35 +158,70 @@ function showRes(id, mainTxt, detailTxt = '') {
     document.getElementById(`val-${id}`).innerHTML = mainTxt;
     document.getElementById(`detail-${id}`).innerHTML = detailTxt;
 
-    // Add AI Prompt for non-AI tools
+    // AI Help Link Injection
+    const existingHelp = r.querySelector('.ai-help-link');
+    if(existingHelp) existingHelp.remove();
+
     const tool = tools.find(t => t.id === id);
-    if(tool && tool.cat !== 'Yapay Zeka') {
-        let aiPrompt = document.getElementById(`ai-prompt-${id}`);
-        if(!aiPrompt) {
-            aiPrompt = document.createElement('div');
-            aiPrompt.id = `ai-prompt-${id}`;
-            aiPrompt.className = 'mt-6 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 flex items-center justify-between gap-4 group cursor-pointer hover:shadow-md transition-all';
-            aiPrompt.onclick = () => window.location.href='ai-asistan.html';
-            aiPrompt.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 shadow-sm shrink-0">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <div>
-                         <p class="text-xs font-bold text-indigo-900 uppercase tracking-wide">Sonuç Hatalı mı?</p>
-                         <p class="text-[11px] text-indigo-700">AI Asistanımıza sormayı deneyin!</p>
-                    </div>
-                </div>
-                <div class="bg-white text-indigo-600 w-8 h-8 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-chevron-right text-xs"></i>
-                </div>
-            `;
-            r.appendChild(aiPrompt);
-        }
+    if(tool && tool.cat !== 'Yapay Zeka' && !tool.id.startsWith('ai_')) {
+        const div = document.createElement('div');
+        div.className = 'mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-center shadow-sm ai-help-link block'; // Ensure display:block
+        div.style.display = 'block';
+        div.innerHTML = '<a href="ai-asistan.html" class="block text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles mb-1 text-lg block"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
+        r.appendChild(div);
     }
 
     r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// --- DRAWER FUNCTIONS (Global) ---
+function toggleDrawer() {
+    const d = document.getElementById('drawer');
+    const m = document.getElementById('drawer-mask');
+    if(!d || !m) return;
+
+    if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+    } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+    }
+}
+
+function filterDrawerTools() {
+    const qInput = document.getElementById('mobile-tool-search');
+    if(!qInput) return;
+    const q = qInput.value.toLowerCase();
+    const drawerList = document.getElementById('drawer-list');
+    if(!drawerList) return;
+    const items = drawerList.querySelectorAll('a');
+
+    items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+}
+
+function initDrawer() {
+    if(!document.getElementById('drawer')) {
+        const drawerHTML = `
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[90] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[100] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+        </div>
+        <div id="drawer-list" class="p-3 space-y-1"></div>
+    </aside>`;
+        document.body.insertAdjacentHTML('afterbegin', drawerHTML);
+    }
 }
 
 // --- CALC LOGIC ---
@@ -191,8 +254,11 @@ function calc_kredi() {
 }
 
 function calc_kidem() {
-    const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); const sal = getNum('kidem','salary');
+    const s = new Date(getVal('kidem','start')); const e = new Date(getVal('kidem','end')); let sal = getNum('kidem','salary');
     if (isNaN(s)||isNaN(e)||!sal) return;
+
+    // 2026 Cap Estimate
+    if (sal > 55000) sal = 55000;
 
     const diffTime = Math.abs(e - s);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -350,7 +416,17 @@ function filterDrawerTools() {
 // Run Init
 window.addEventListener('load', () => {
     checkCookies();
+    initDrawer();
     renderSidebar();
+
+    // Mobile Search Suggestions Logic
+    const ms = document.getElementById('mobile-tool-search');
+    const sg = document.getElementById('search-suggestions');
+    if(ms && sg) {
+        ms.addEventListener('focus', () => { if(ms.value === '') sg.classList.remove('hidden'); });
+        ms.addEventListener('input', () => { if(ms.value !== '') sg.classList.add('hidden'); else sg.classList.remove('hidden'); });
+        ms.addEventListener('blur', () => { setTimeout(() => sg.classList.add('hidden'), 200); });
+    }
 
     // Check for AI Asistan query param
     const urlParams = new URLSearchParams(window.location.search);
