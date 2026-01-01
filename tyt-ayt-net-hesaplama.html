@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TYT AYT Net Hesaplama aracı ile güncel 2026 verileriyle hesaplama yapın.">
+    <meta name="keywords" content="yks net hesaplama, doğru yanlış">
+    <meta name="author" content="HesaplaHadi">
+    <meta name="robots" content="index, follow">
+    <title>TYT AYT Net Hesaplama | HesaplaHadi</title>
+    <link rel="canonical" href="https://hesaplahadi.com/tyt-ayt-net-hesaplama.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Calculator",
+      "name": "TYT AYT Net Hesaplama",
+      "url": "https://hesaplahadi.com/tyt-ayt-net-hesaplama.html",
+      "description": "TYT AYT Net Hesaplama aracı ile güncel 2026 verileriyle hesaplama yapın.",
+      "applicationCategory": "education",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="flex flex-col min-h-screen text-slate-800">
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                     <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
+                            <i class="fa-solid fa-calculator text-lg"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="hidden md:block relative">
+                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                         <input type="text" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+                    </div>
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                        <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
+                        <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
+                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>AI Asistan</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden mt-3 relative group z-40">
+                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+                    <div class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+                    <a href="kdv-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-percent text-blue-400"></i> KDV Hesaplama
+                    </a>
+                    <a href="kredi-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-blue-400"></i> Kredi Hesaplama
+                    </a>
+                    <a href="tevkifat-hesaplama.html" class="block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-blue-400"></i> Tevkifat Hesapla
+                    </a>
+                 </div>
+            </div>
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-40 cursor-pointer" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i>
+                <span>Tüm Hesaplama Araçları</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+        <!-- Sidebar -->
+        <nav class="hidden lg:block lg:col-span-3 space-y-4">
+            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+                <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+                    <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
+                </div>
+                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-span-1 lg:col-span-6 space-y-6">
+            <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
+                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                    <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm">
+                        <i class="fa-solid fa-calculator text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">TYT AYT Net Hesaplama</h1>
+                        <p class="text-xs text-slate-500 mt-1">TYT AYT Net Hesaplama aracı ile güncel 2026 verileriyle hesaplama yapın.</p>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC FORM CONTENT -->
+
+             <div class="mb-4"><h3 class="font-bold">TYT</h3>
+             <div class="grid grid-cols-2 gap-2">
+                <input type="number" id="tyt-d" class="p-2 border rounded" placeholder="D">
+                <input type="number" id="tyt-y" class="p-2 border rounded" placeholder="Y">
+             </div></div>
+             <div class="mb-4"><h3 class="font-bold">AYT</h3>
+             <div class="grid grid-cols-2 gap-2">
+                <input type="number" id="ayt-d" class="p-2 border rounded" placeholder="D">
+                <input type="number" id="ayt-y" class="p-2 border rounded" placeholder="Y">
+             </div></div>
+             <button onclick="calc_tyt_ayt_net()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
+                <i class="fa-solid fa-list-check"></i> Hesapla
+            </button>
+
+
+                <div id="res-tyt_ayt" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
+                    <button id="btn-copy-tyt_ayt" onclick="copyResult('tyt_ayt')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+                        <i class="fa-regular fa-copy"></i> Kopyala
+                    </button>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
+                    <div id="val-tyt_ayt" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+                    <div id="detail-tyt_ayt" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+                </div>
+
+            </div>
+
+            <!-- SEO Content -->
+
+        <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+            <h2 class="text-xl font-bold text-slate-800 mb-4">TYT AYT Net Hesaplama ile Başarınızı Planlayın</h2>
+            <p class="mb-4">Eğitim hayatında notlar, puanlar ve sıralamalar, hedeflerinize ulaşmanızdaki en önemli göstergelerdir. <strong>TYT AYT Net Hesaplama</strong> aracımız, MEB ve ÖSYM'nin güncel müfredatına, katsayılarına ve sınav sistemlerine (2025-2026 Eğitim Öğretim Yılı) tam uyumlu olarak çalışır.</p>
+
+            <h3 class="text-lg font-bold text-slate-800 mb-3">Puan ve Sıralama Hesaplama Mantığı</h3>
+            <p class="mb-4">Sınav sistemlerinde (YKS, KPSS, LGS vb.) standart sapma, okul puanı eklemesi ve ders katsayıları her yıl değişiklik gösterebilir. Aracımız, geçmiş yılların yığılmalı verilerini ve bu yılın zorluk derecesi tahminlerini kullanarak size en yakın sonucu (tahmini) vermeyi amaçlar. <strong>yks net hesaplama, doğru yanlış</strong> hesaplamalarınızı yaparken bu detayları göz önünde bulunduruyoruz.</p>
+
+            <h3 class="text-lg font-bold text-slate-800 mb-3">Not Hesaplama ve Akademik Hedefler</h3>
+            <p class="mb-4">Üniversite veya lise not ortalamalarınızı hesaplarken, kredili sistem veya ağırlıklı ortalama gibi faktörleri manuel hesaplamak zordur. Aracımızla vize, final ve proje notlarınızı girerek dönem sonu harf notunuzu veya genel ortalamanızı saniyeler içinde görebilirsiniz. Başarıya giden yolda stratejik planlama yapmak için bu verileri kullanın.</p>
+
+            <p>Sonuçlarınızı analiz etmek ve çalışma programı önerileri almak için AI asistanımıza danışabilirsiniz.</p>
+        </article>
+
+
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="col-span-1 lg:col-span-3 space-y-6">
+             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
+                </h4>
+                <ul class="text-sm space-y-2 text-slate-600 font-medium">
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
+                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
+                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
+                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='mtv-hesaplama-2026.html'">
+                        <span>MTV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center">
+            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
+                <a href="index.html" class="hover:text-white transition">Ana Sayfa</a>
+                <a href="blog/index.html" class="hover:text-white transition">Blog</a>
+            </div>
+            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+        </div>
+    </footer>
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
+            <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
+        </div>
+    </div>
+    <script src="assets/js/calculator.js?v=3"></script>
+    <script src="assets/js/tools-2026.js?v=1"></script>
+</body>
+</html>
