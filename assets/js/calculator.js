@@ -481,10 +481,59 @@ window.addEventListener('load', () => {
     // Mobile Search Suggestions Logic
     const ms = document.getElementById('mobile-tool-search');
     const sg = document.getElementById('search-suggestions');
-    if(ms && sg) {
-        ms.addEventListener('focus', () => { if(ms.value === '') sg.classList.remove('hidden'); });
-        ms.addEventListener('input', () => { if(ms.value !== '') sg.classList.add('hidden'); else sg.classList.remove('hidden'); });
-        ms.addEventListener('blur', () => { setTimeout(() => sg.classList.add('hidden'), 200); });
+    const msl = document.getElementById('mobile-search-results-list');
+    const msh = document.getElementById('mobile-search-header');
+
+    if(ms && sg && msl) {
+        const renderMobileResults = (query) => {
+            msl.innerHTML = '';
+            let filtered = [];
+
+            if (!query) {
+                if(msh) msh.innerText = "POPÜLER ARAÇLAR";
+                filtered = tools.filter(t => ['kdv', 'kredi', 'tevkifat', 'net_brut', 'bmi'].includes(t.id));
+            } else {
+                if(msh) msh.innerText = "ARAMA SONUÇLARI";
+                filtered = tools.filter(t =>
+                    t.name.toLowerCase().includes(query) ||
+                    t.cat.toLowerCase().includes(query)
+                );
+            }
+
+            if(filtered.length === 0) {
+                msl.innerHTML = '<div class="p-3 text-xs text-slate-500 text-center">Sonuç bulunamadı.</div>';
+                return;
+            }
+
+            filtered.forEach(t => {
+                const a = document.createElement('a');
+                a.href = t.link;
+                a.className = 'block px-3 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded flex items-center gap-2 mb-1';
+
+                let iconClass = 'fa-calculator';
+                if(t.cat === 'Finans') iconClass = 'fa-coins';
+                if(t.cat === 'Sağlık') iconClass = 'fa-heart-pulse';
+                if(t.cat === 'Eğitim') iconClass = 'fa-graduation-cap';
+                if(t.cat === 'Yapay Zeka') iconClass = 'fa-wand-magic-sparkles';
+
+                a.innerHTML = `<i class="fa-solid ${iconClass} text-blue-400 w-4 text-center"></i> ${t.name}`;
+                msl.appendChild(a);
+            });
+        };
+
+        ms.addEventListener('focus', () => {
+            sg.classList.remove('hidden');
+            if(ms.value === '') renderMobileResults('');
+        });
+
+        ms.addEventListener('input', () => {
+            sg.classList.remove('hidden');
+            renderMobileResults(ms.value.toLowerCase());
+        });
+
+        ms.addEventListener('blur', () => {
+            setTimeout(() => sg.classList.add('hidden'), 200);
+        });
     }
 
     // Desktop Search Suggestions Logic
