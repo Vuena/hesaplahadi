@@ -381,38 +381,6 @@ function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r')
 function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); showRes('kk_asgari', (d*(l>25000?0.4:0.2)).toFixed(2)+' TL'); }
 function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*1.2).toFixed(2)+' TL'); }
 
-// --- DRAWER LOGIC ---
-function toggleDrawer() {
-    const d = document.getElementById('drawer');
-    const m = document.getElementById('drawer-mask');
-    if(!d || !m) return; // Guard
-
-    if(d.classList.contains('drawer-closed')) {
-        d.classList.remove('drawer-closed');
-        d.classList.add('drawer-open');
-        m.classList.remove('mask-hidden');
-        m.classList.add('mask-visible');
-    } else {
-        d.classList.remove('drawer-open');
-        d.classList.add('drawer-closed');
-        m.classList.remove('mask-visible');
-        m.classList.add('mask-hidden');
-    }
-}
-
-function filterDrawerTools() {
-    const q = document.getElementById('mobile-tool-search').value.toLowerCase();
-    const drawerList = document.getElementById('drawer-list');
-    if(!drawerList) return;
-    const items = drawerList.querySelectorAll('a');
-
-    items.forEach(item => {
-        if(item.classList.contains('cat-header')) return;
-        const txt = item.innerText.toLowerCase();
-        item.style.display = txt.includes(q) ? 'flex' : 'none';
-    });
-}
-
 // Run Init
 window.addEventListener('load', () => {
     checkCookies();
