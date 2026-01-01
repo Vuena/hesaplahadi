@@ -40,8 +40,14 @@ const tools = [
     { id: 'takdir', cat: 'Eğitim', name: 'Takdir / Teşekkür', link: 'takdir-tesekkur-hesaplama-e-okul.html', color:'purple' },
     { id: 'dikdortgen', cat: 'Eğitim', name: 'Alan Hesaplama', link: 'dikdortgen-alan-ve-cevre-hesaplama.html', color:'purple' },
     { id: 'kelime', cat: 'Eğitim', name: 'Kelime Sayacı', link: 'kelime-ve-karakter-sayaci.html', color:'purple' },
+    { id: 'vf', cat: 'Eğitim', name: 'Vize Final Hesaplama', link: 'vize-final-hesaplama.html', color:'purple' },
+    { id: 'gpa', cat: 'Eğitim', name: 'Not Ortalaması (GNO)', link: 'universite-not-ortalamasi-hesaplama.html', color:'purple' },
 
     // 5. PRATİK & ARAÇLAR
+    { id: 'day', cat: 'Pratik', name: 'Hangi Gün?', link: 'hangi-gun-hesaplama.html', color:'orange' },
+    { id: 'date_add', cat: 'Pratik', name: 'Tarihe Gün Ekle', link: 'tarihe-gun-ekleme-hesaplama.html', color:'orange' },
+    { id: 'asgari', cat: 'Finans', name: '2026 Asgari Ücret', link: 'asgari-ucret-hesaplama.html', color:'blue' },
+    { id: 'memur', cat: 'Finans', name: '2026 Memur Zammı', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
     { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'orange' },
     { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi', link: 'yakit-tuketimi-hesaplama.html', color:'orange' },
     { id: 'yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', link: 'tam-yas-hesaplama.html', color:'orange' },
@@ -258,7 +264,7 @@ function calc_kidem() {
     if (isNaN(s)||isNaN(e)||!sal) return;
 
     // 2026 Cap Estimate
-    if (sal > 55000) sal = 55000;
+    if (sal > 55000) sal = 55000; // Updated logic: If salary > cap, use cap. 55000 is approx estimate.
 
     const diffTime = Math.abs(e - s);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -380,6 +386,91 @@ function calc_karzarar() { const c=getNum('karzarar','cost'), s=getNum('karzarar
 function calc_bilesik() { const p=getNum('bilesik','p'), r=getNum('bilesik','r'), t=getNum('bilesik','t'); showRes('bilesik', (p*Math.pow(1+r/100,t)).toFixed(2)+' TL'); }
 function calc_kk_asgari() { const l=getNum('kk_asgari','lim'), d=getNum('kk_asgari','debt'); showRes('kk_asgari', (d*(l>25000?0.4:0.2)).toFixed(2)+' TL'); }
 function calc_komisyon() { showRes('komisyon', (getNum('komisyon','price')*0.02*1.2).toFixed(2)+' TL'); }
+
+// New Tools Logic
+function calc_day() {
+    const d = new Date(getVal('day', 'date'));
+    if(isNaN(d)) return;
+    showRes('day', d.toLocaleDateString('tr-TR', { weekday: 'long' }), d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }));
+}
+
+function calc_date_add() {
+    const d = new Date(getVal('add', 'date'));
+    const days = getNum('add', 'days');
+    if(isNaN(d)) return;
+    d.setDate(d.getDate() + days);
+    showRes('date-add', d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' }), (days>0?'+':'') + days + ' gün sonrası');
+}
+
+function calc_vf() {
+    const v = getNum('vf', 'vize');
+    const f = getNum('vf', 'final');
+    const r = parseFloat(getVal('vf', 'ratio'));
+    const avg = (v * r) + (f * (1 - r));
+    const status = avg >= 50 ? 'GEÇTİ' : 'KALDI'; // Simple assumption
+    const color = avg >= 50 ? 'text-green-600' : 'text-red-600';
+    showRes('vf', `<span class="${color}">${avg.toFixed(1)}</span>`, `Durum: <strong>${status}</strong> (Vize: %${r*100}, Final: %${(1-r)*100})`);
+}
+
+function addGpaRow() {
+    const container = document.getElementById('gpa-rows');
+    const div = document.createElement('div');
+    div.className = 'grid grid-cols-12 gap-2 items-center gpa-row';
+    div.innerHTML = `
+        <div class="col-span-6 md:col-span-5"><input type="text" placeholder="Ders" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 text-sm"></div>
+        <div class="col-span-3 md:col-span-3"><input type="number" placeholder="Kr" value="3" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 text-sm gpa-credit"></div>
+        <div class="col-span-3 md:col-span-3">
+            <select class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 text-sm gpa-grade">
+                <option value="4.0">AA (4.0)</option><option value="3.5">BA (3.5)</option><option value="3.0">BB (3.0)</option>
+                <option value="2.5">CB (2.5)</option><option value="2.0">CC (2.0)</option><option value="1.5">DC (1.5)</option>
+                <option value="1.0">DD (1.0)</option><option value="0.5">FD (0.5)</option><option value="0.0">FF (0.0)</option>
+            </select>
+        </div>
+        <div class="col-span-1 text-center"><button onclick="this.closest('.gpa-row').remove()" class="text-red-400 hover:text-red-600"><i class="fa-solid fa-trash"></i></button></div>
+    `;
+    container.appendChild(div);
+}
+
+function calc_gpa() {
+    const credits = document.querySelectorAll('.gpa-credit');
+    const grades = document.querySelectorAll('.gpa-grade');
+    let totalC = 0, totalP = 0;
+    credits.forEach((c, i) => {
+        const cr = parseFloat(c.value) || 0;
+        const gr = parseFloat(grades[i].value) || 0;
+        totalC += cr;
+        totalP += cr * gr;
+    });
+    if(totalC === 0) return;
+    const gpa = totalP / totalC;
+    showRes('gpa', gpa.toFixed(2), `Toplam Kredi: ${totalC} | Başarı Notu: ${gpa.toFixed(2)}/4.00`);
+}
+
+function calc_asgari() {
+    const p = getVal('asgari', 'period');
+    const t = getVal('asgari', 'type');
+
+    // 2026 Estimates (Hypothetical)
+    // 2025 July Estimate: ~20000 Net
+    // 2026 Jan Estimate: ~25000 Net (Assumed 25% increase)
+    let net = 25000;
+    let gross = 30000; // Approx
+
+    if(p === '2025-2') { net = 20002; gross = 23532; } // Approx values for late 2025
+
+    if(t === 'bn') {
+        showRes('asgari', `${net.toLocaleString()} TL (Net)`, `Tahmini Brüt: ${gross.toLocaleString()} TL`);
+    } else {
+        showRes('asgari', `${gross.toLocaleString()} TL (Brüt)`, `Tahmini Net: ${net.toLocaleString()} TL`);
+    }
+}
+
+function calc_memur() {
+    const curr = getNum('memur', 'curr');
+    const rate = getNum('memur', 'rate');
+    const newVal = curr * (1 + rate / 100);
+    showRes('memur', `${newVal.toLocaleString('tr-TR', {maximumFractionDigits: 0})} TL`, `Artış Oranı: %${rate} | Fark: ${(newVal-curr).toLocaleString('tr-TR', {maximumFractionDigits:0})} TL`);
+}
 
 // Run Init
 window.addEventListener('load', () => {
