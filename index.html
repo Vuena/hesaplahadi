@@ -65,18 +65,9 @@
                          <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
                          <!-- Desktop Search Suggestions (Hidden by default) -->
                          <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
-                            <div class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+                            <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
                             <div id="desktop-search-results-list">
-                                <!-- Populated dynamically or defaults -->
-                                <a href="kdv-hesaplama.html" class="block px-4 py-3 text-xs font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
-                                    <i class="fa-solid fa-percent text-blue-400"></i> KDV Hesaplama
-                                </a>
-                                <a href="kredi-hesaplama.html" class="block px-4 py-3 text-xs font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
-                                    <i class="fa-solid fa-coins text-blue-400"></i> Kredi Hesaplama
-                                </a>
-                                <a href="tevkifat-hesaplama.html" class="block px-4 py-3 text-xs font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
-                                    <i class="fa-solid fa-file-invoice-dollar text-blue-400"></i> Tevkifat Hesapla
-                                </a>
+                                <!-- Populated dynamically by JS -->
                             </div>
                          </div>
                     </div>

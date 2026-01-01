@@ -15,7 +15,7 @@ const tools = [
     { id: 'net_brut', cat: 'Finans', name: 'Netten Brüte Maaş Hesaplama', link: 'netten-brute-maas-hesaplama-2026.html', color:'blue' },
     { id: 'brut_net', cat: 'Finans', name: 'Brütten Nete Maaş Hesaplama', link: 'brutten-nete-maas-hesaplama-2026.html', color:'blue' },
     { id: 'mevduat', cat: 'Finans', name: 'Mevduat Getirisi Hesaplama', link: 'mevduat-faizi-hesaplama.html', color:'blue' },
-    { id: 'iban', cat: 'Finans', name: 'IBAN Doğrulama Hesaplama', link: 'iban-dogrulama-ve-cozumleme-araci.html', color:'blue' },
+    { id: 'iban', cat: 'Finans', name: 'IBAN Doğrulama Aracı', link: 'iban-dogrulama-ve-cozumleme-araci.html', color:'blue' },
     { id: 'indirim', cat: 'Finans', name: 'İndirim Hesaplama', link: 'i̇ndirim-hesaplama.html', color:'blue' },
     { id: 'karzarar', cat: 'Finans', name: 'Kâr Marjı Hesaplama', link: 'kâr-marji-ve-zarar-hesaplama.html', color:'blue' },
     { id: 'bilesik', cat: 'Finans', name: 'Bileşik Faiz Hesaplama', link: 'bilesik-faiz-hesaplama.html', color:'blue' },
@@ -24,7 +24,7 @@ const tools = [
     { id: 'zam', cat: 'Finans', name: 'Maaş Zam Hesaplama', link: 'maas-zam-orani-hesaplama.html', color:'blue' },
 
     // 3. SAĞLIK
-    { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen Hesaplama', link: 'ai-diyetisyen.html', color:'indigo' },
+    { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen', link: 'ai-diyetisyen.html', color:'indigo' },
     { id: 'bmi', cat: 'Sağlık', name: 'Vücut Kitle İndeksi Hesaplama', link: 'vucut-kitle-i̇ndeksi-bmi-hesaplama.html', color:'green' },
     { id: 'idealkilo', cat: 'Sağlık', name: 'İdeal Kilo Hesaplama', link: 'i̇deal-kilo-hesaplama.html', color:'green' },
     { id: 'bmr', cat: 'Sağlık', name: 'Bazal Metabolizma Hesaplama', link: 'bazal-metabolizma-hizi-bmr-hesaplama.html', color:'green' },
@@ -39,20 +39,20 @@ const tools = [
     { id: 'sinav', cat: 'Eğitim', name: 'Üniversite Not Ort. Hesaplama', link: 'universite-not-ortalamasi-vize-final-hesaplama.html', color:'purple' },
     { id: 'takdir', cat: 'Eğitim', name: 'Takdir / Teşekkür Hesaplama', link: 'takdir-tesekkur-hesaplama-e-okul.html', color:'purple' },
     { id: 'dikdortgen', cat: 'Eğitim', name: 'Alan Hesaplama', link: 'dikdortgen-alan-ve-cevre-hesaplama.html', color:'purple' },
-    { id: 'kelime', cat: 'Eğitim', name: 'Kelime Sayacı Hesaplama', link: 'kelime-ve-karakter-sayaci.html', color:'purple' },
+    { id: 'kelime', cat: 'Eğitim', name: 'Kelime ve Karakter Sayacı', link: 'kelime-ve-karakter-sayaci.html', color:'purple' },
     { id: 'vf', cat: 'Eğitim', name: 'Vize Final Hesaplama', link: 'vize-final-hesaplama.html', color:'purple' },
     { id: 'gpa', cat: 'Eğitim', name: 'Not Ortalaması (GNO) Hesaplama', link: 'universite-not-ortalamasi-hesaplama.html', color:'purple' },
 
     // 5. PRATİK & ARAÇLAR
-    { id: 'day', cat: 'Pratik', name: 'Hangi Gün Hesaplama', link: 'hangi-gun-hesaplama.html', color:'orange' },
-    { id: 'date_add', cat: 'Pratik', name: 'Tarihe Gün Ekle Hesaplama', link: 'tarihe-gun-ekleme-hesaplama.html', color:'orange' },
+    { id: 'day', cat: 'Pratik', name: 'Hangi Gün?', link: 'hangi-gun-hesaplama.html', color:'orange' },
+    { id: 'date_add', cat: 'Pratik', name: 'Tarihe Gün Ekleme', link: 'tarihe-gun-ekleme-hesaplama.html', color:'orange' },
     { id: 'asgari', cat: 'Finans', name: '2026 Asgari Ücret Hesaplama', link: 'asgari-ucret-hesaplama.html', color:'blue' },
     { id: 'memur', cat: 'Finans', name: '2026 Memur Zammı Hesaplama', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
     { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi Hesaplama', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'orange' },
     { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi Hesaplama', link: 'yakit-tuketimi-hesaplama.html', color:'orange' },
     { id: 'yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', link: 'tam-yas-hesaplama.html', color:'orange' },
-    { id: 'gun', cat: 'Pratik', name: 'İki Tarih Arası Hesaplama', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
-    { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Üret Hesaplama', link: 'guclu-sifre-olusturucu.html', color:'orange' },
+    { id: 'gun', cat: 'Pratik', name: 'İki Tarih Arası Gün Sayacı', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
+    { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Oluşturucu', link: 'guclu-sifre-olusturucu.html', color:'orange' },
     { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman Hesaplama', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'orange' }
 ];
 
@@ -490,10 +490,60 @@ window.addEventListener('load', () => {
     // Desktop Search Suggestions Logic
     const ds = document.getElementById('desktop-tool-search');
     const dsg = document.getElementById('desktop-search-suggestions');
-    if(ds && dsg) {
-        ds.addEventListener('focus', () => { if(ds.value === '') dsg.classList.remove('hidden'); });
-        ds.addEventListener('input', () => { if(ds.value !== '') dsg.classList.add('hidden'); else dsg.classList.remove('hidden'); });
-        ds.addEventListener('blur', () => { setTimeout(() => dsg.classList.add('hidden'), 200); });
+    const dsl = document.getElementById('desktop-search-results-list');
+    const dsh = document.getElementById('desktop-search-header');
+
+    if(ds && dsg && dsl) {
+        const renderDesktopResults = (query) => {
+            dsl.innerHTML = '';
+            let filtered = [];
+
+            if (!query) {
+                // Show Popular Tools if empty
+                if(dsh) dsh.innerText = "POPÜLER ARAÇLAR";
+                filtered = tools.filter(t => ['kdv', 'kredi', 'tevkifat', 'net_brut', 'bmi'].includes(t.id));
+            } else {
+                if(dsh) dsh.innerText = "ARAMA SONUÇLARI";
+                filtered = tools.filter(t =>
+                    t.name.toLowerCase().includes(query) ||
+                    t.cat.toLowerCase().includes(query)
+                );
+            }
+
+            if(filtered.length === 0) {
+                dsl.innerHTML = '<div class="p-4 text-xs text-slate-500 text-center">Sonuç bulunamadı.</div>';
+                return;
+            }
+
+            filtered.forEach(t => {
+                const a = document.createElement('a');
+                a.href = t.link;
+                a.className = 'block px-4 py-3 text-xs font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3 border-b border-slate-50 last:border-0';
+
+                let iconClass = 'fa-calculator';
+                if(t.cat === 'Finans') iconClass = 'fa-coins';
+                if(t.cat === 'Sağlık') iconClass = 'fa-heart-pulse';
+                if(t.cat === 'Eğitim') iconClass = 'fa-graduation-cap';
+                if(t.cat === 'Yapay Zeka') iconClass = 'fa-wand-magic-sparkles';
+
+                a.innerHTML = `<i class="fa-solid ${iconClass} text-blue-400 w-4 text-center"></i> ${t.name}`;
+                dsl.appendChild(a);
+            });
+        };
+
+        ds.addEventListener('focus', () => {
+            dsg.classList.remove('hidden');
+            if(ds.value === '') renderDesktopResults('');
+        });
+
+        ds.addEventListener('input', () => {
+            dsg.classList.remove('hidden');
+            renderDesktopResults(ds.value.toLowerCase());
+        });
+
+        ds.addEventListener('blur', () => {
+            setTimeout(() => dsg.classList.add('hidden'), 200);
+        });
     }
 
     // Check for AI Asistan query param
