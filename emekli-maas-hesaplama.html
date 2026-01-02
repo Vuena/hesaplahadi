@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.">
-  <meta name="keywords" content="fazla mesai, overtime">
+  <meta name="description" content="Emekli Maaş Hesaplama aracı ile güncel verileriyle hesaplama yapın.">
+  <meta name="keywords" content="emekli zammı, ssk bağkur">
   <meta name="author" content="HesaplaHadi">
   <meta name="robots" content="index, follow">
-  <title>Mesai Ücreti Hesaplama | HesaplaHadi</title>
-  <link rel="canonical" href="https://hesaplahadi.com/mesai-hesaplama.html">
+  <title>Emekli Maaş Hesaplama | HesaplaHadi</title>
+  <link rel="canonical" href="https://hesaplahadi.com/emekli-maas-hesaplama.html">
   <script type="application/ld+json">
   {
    "@context": "https://schema.org",
    "@type": "Calculator",
-   "name": "Mesai Ücreti Hesaplama",
-   "url": "https://hesaplahadi.com/mesai-hesaplama.html",
-   "description": "Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.",
+   "name": "Emekli Maaş Hesaplama",
+   "url": "https://hesaplahadi.com/emekli-maas-hesaplama.html",
+   "description": "Emekli Maaş Hesaplama aracı ile güncel verileriyle hesaplama yapın.",
    "applicationCategory": "finance",
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
   }
@@ -122,21 +122,21 @@
             <i class="fa-solid fa-calculator text-xl"></i>
           </div>
           <div>
-            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mesai Ücreti Hesaplama</h1>
-            <p class="text-xs text-slate-500 mt-1">Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.</p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Emekli Maaş Hesaplama</h1>
+            <p class="text-xs text-slate-500 mt-1">Emekli Maaş Hesaplama aracı ile güncel verileriyle hesaplama yapın.</p>
           </div>
         </div>
 
         <!-- DYNAMIC FORM CONTENT -->
-        <input type="number" id="mesai-sal" class="w-full p-3 border rounded mb-2" placeholder="Net Maaş"><input type="number" id="mesai-hours" class="w-full p-3 border rounded" placeholder="Fazla Mesai Saati"><button onclick="calc_mesai()" class="btn-calc w-full mt-4 py-3 rounded-xl bg-blue-600 text-white">Hesapla</button>
+        <input type="number" id="emekli-days" class="w-full p-4 border rounded-xl" placeholder="Prim Gün Sayısı"><button onclick="calc_emekli()" class="btn-calc w-full mt-4 py-3 rounded-xl bg-blue-600 text-white">Hesapla</button>
 
-        <div id="res-mesai" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-          <button id="btn-copy-mesai" onclick="copyResult('mesai')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+        <div id="res-emekli" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
+          <button id="btn-copy-emekli" onclick="copyResult('emekli')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
             <i class="fa-regular fa-copy"></i> Kopyala
           </button>
           <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
-          <div id="val-mesai" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
-          <div id="detail-mesai" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+          <div id="val-emekli" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+          <div id="detail-emekli" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
         </div>
 
       </div>
@@ -144,11 +144,11 @@
       <!-- SEO Content -->
 
     <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-      <h2 class="text-xl font-bold text-slate-800 mb-4">Mesai Ücreti Hesaplama ve Finansal Planlama</h2>
-      <p class="mb-4">Finansal kararlar alırken doğru verilerle hareket etmek hayati önem taşır. <strong>Mesai Ücreti Hesaplama</strong> aracımız, yılı güncel ekonomik parametreleri, vergi dilimleri ve enflasyon tahminleri dikkate alınarak tasarlanmıştır. İster yatırım yapın, ister borçlanın, ister maaş hesabınızı kontrol edin; doğru hesaplama size para kazandırır.</p>
+      <h2 class="text-xl font-bold text-slate-800 mb-4">Emekli Maaş Hesaplama ve Finansal Planlama</h2>
+      <p class="mb-4">Finansal kararlar alırken doğru verilerle hareket etmek hayati önem taşır. <strong>Emekli Maaş Hesaplama</strong> aracımız, yılı güncel ekonomik parametreleri, vergi dilimleri ve enflasyon tahminleri dikkate alınarak tasarlanmıştır. İster yatırım yapın, ister borçlanın, ister maaş hesabınızı kontrol edin; doğru hesaplama size para kazandırır.</p>
 
       <h3 class="text-lg font-bold text-slate-800 mb-3">Yılında Dikkat Edilmesi Gerekenler</h3>
-      <p class="mb-4">Ocak itibarıyla değişen asgari ücret, vergi oranları ve harç tutarları, tüm finansal dengeleri etkilemektedir. Aracımız, bu yeni dönemdeki katsayıları ve yasal düzenlemeleri (Resmi Gazete verileri ışığında) baz alarak size en gerçekçi sonucu (tahmini) sunar. Özellikle <strong>fazla mesai, overtime</strong> konularında yapacağınız hatalı bir hesaplama, bütçenizde ciddi sapmalara yol açabilir.</p>
+      <p class="mb-4">Ocak itibarıyla değişen asgari ücret, vergi oranları ve harç tutarları, tüm finansal dengeleri etkilemektedir. Aracımız, bu yeni dönemdeki katsayıları ve yasal düzenlemeleri (Resmi Gazete verileri ışığında) baz alarak size en gerçekçi sonucu (tahmini) sunar. Özellikle <strong>emekli zammı, ssk bağkur</strong> konularında yapacağınız hatalı bir hesaplama, bütçenizde ciddi sapmalara yol açabilir.</p>
 
       <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama Mantığı</h3>
       <p class="mb-4">Finansal hesaplamalarımızda net bugünkü değer, bileşik faiz formülleri ve yasal kesinti oranları (Damga Vergisi, Gelir Vergisi vb.) otomatik olarak uygulanır. Kullanıcı dostu arayüzümüz sayesinde, karmaşık formüllerle uğraşmadan sadece temel verileri girerek net sonuca ulaşabilirsiniz.</p>
