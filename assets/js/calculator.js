@@ -236,22 +236,30 @@ function calc_kdv() {
     let rVal = getVal('kdv', 'rate');
     let rate = 0;
 
+    // Handle Rate Selection
     if (rVal === 'custom') {
-        rate = getNum('kdv', 'custom-rate') / 100;
+        const customInput = getNum('kdv', 'custom-rate');
+        rate = customInput / 100;
     } else {
         rate = parseFloat(rVal) / 100;
     }
+
+    // Validation
+    if (rate < 0 || isNaN(rate)) rate = 0;
 
     const type = getVal('kdv', 'type');
     let net = 0, tax = 0, total = 0;
 
     if (type === 'include') {
-        // KDV Dahil (Inclusive)
+        // KDV Dahil (Inclusive): Amount entered is TOTAL
+        // Net = Total / (1 + Rate)
         total = amt;
         net = total / (1 + rate);
         tax = total - net;
     } else {
-        // KDV Hariç (Exclusive)
+        // KDV Hariç (Exclusive): Amount entered is NET (Matrah)
+        // Tax = Net * Rate
+        // Total = Net + Tax
         net = amt;
         tax = net * rate;
         total = net + tax;
@@ -271,7 +279,7 @@ function calc_kdv() {
         resNet.innerText = f(net);
         resTax.innerText = f(tax);
         resTotal.innerText = f(total);
-        valDiv.innerText = f(total); // Hidden value for copy function
+        if(valDiv) valDiv.innerText = f(total);
 
         resDiv.classList.remove('hidden');
         resDiv.scrollIntoView({behavior:'smooth', block:'nearest'});
@@ -281,6 +289,7 @@ function calc_kdv() {
         if(!existingHelp) {
              const div = document.createElement('div');
             div.className = 'mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-center shadow-sm ai-help-link block';
+            div.style.display = 'block';
             div.innerHTML = '<a href="ai-asistan.html" class="block text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles mb-1 text-lg block"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
             resDiv.appendChild(div);
         }
