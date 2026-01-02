@@ -232,14 +232,59 @@ function initDrawer() {
 
 // --- CALC LOGIC ---
 function calc_kdv() {
-    const a=getNum('kdv','amt');
-    const rIdx = getVal('kdv','rate');
-    const rates = [0.01, 0.10, 0.20];
-    const r = rates[rIdx];
-    const t=getVal('kdv','type');
-    let n,x,tot;
-    if(t==0){n=a/(1+r);x=a-n;tot=a;}else{n=a;x=a*r;tot=a+x;}
-    showRes('kdv', tot.toLocaleString('tr-TR',{minimumFractionDigits:2})+' TL', `Net: <strong>${n.toLocaleString('tr-TR',{minimumFractionDigits:2})}</strong> | KDV: <strong>${x.toLocaleString('tr-TR',{minimumFractionDigits:2})}</strong>`);
+    const amt = getNum('kdv', 'amt');
+    let rVal = getVal('kdv', 'rate');
+    let rate = 0;
+
+    if (rVal === 'custom') {
+        rate = getNum('kdv', 'custom-rate') / 100;
+    } else {
+        rate = parseFloat(rVal) / 100;
+    }
+
+    const type = getVal('kdv', 'type');
+    let net = 0, tax = 0, total = 0;
+
+    if (type === 'include') {
+        // KDV Dahil (Inclusive)
+        total = amt;
+        net = total / (1 + rate);
+        tax = total - net;
+    } else {
+        // KDV Hariç (Exclusive)
+        net = amt;
+        tax = net * rate;
+        total = net + tax;
+    }
+
+    // Format output
+    const f = (n) => n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' TL';
+
+    // Update New UI Elements
+    const resNet = document.getElementById('kdv-res-net');
+    const resTax = document.getElementById('kdv-res-tax');
+    const resTotal = document.getElementById('kdv-res-total');
+    const resDiv = document.getElementById('res-kdv');
+    const valDiv = document.getElementById('val-kdv'); // For copy helper
+
+    if (resNet && resTax && resTotal) {
+        resNet.innerText = f(net);
+        resTax.innerText = f(tax);
+        resTotal.innerText = f(total);
+        valDiv.innerText = f(total); // Hidden value for copy function
+
+        resDiv.classList.remove('hidden');
+        resDiv.scrollIntoView({behavior:'smooth', block:'nearest'});
+
+        // Inject AI help link if missing
+        const existingHelp = resDiv.querySelector('.ai-help-link');
+        if(!existingHelp) {
+             const div = document.createElement('div');
+            div.className = 'mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-center shadow-sm ai-help-link block';
+            div.innerHTML = '<a href="ai-asistan.html" class="block text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"><i class="fa-solid fa-wand-magic-sparkles mb-1 text-lg block"></i> Bir hata olduğunu mu düşünüyorsunuz? Ai Asistanımıza sormayı deneyin!</a>';
+            resDiv.appendChild(div);
+        }
+    }
 }
 
 function calc_tevkifat() {

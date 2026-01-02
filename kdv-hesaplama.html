@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="2026 Güncel KDV Hesaplama Aracı. KDV dahil ve hariç tutarları %1, %10 ve %20 oranlarıyla hesaplayın.">
+    <meta name="description" content="2026 Güncel KDV Hesaplama Aracı. KDV dahil ve hariç tutarları %1, %10, %20 ve özel oranlarla hesaplayın.">
     <meta name="keywords" content="kdv hesaplama, kdv dahil hesaplama, kdv hariç hesaplama, katma değer vergisi">
     <meta name="author" content="HesaplaHadi">
     <meta name="robots" content="index, follow">
     <title>KDV Hesaplama 2026 - KDV Dahil ve Hariç Hesapla | HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/kdv-hesaplama.html">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 
     <!-- Schema -->
     <script type="application/ld+json">
@@ -130,11 +131,11 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold text-slate-900 tracking-tight">KDV Hesaplama</h1>
-                        <p class="text-xs text-slate-500 mt-1">KDV Dahil ve Hariç tutarları güncel oranlarla (%1, %10, %20) hesaplayın.</p>
+                        <p class="text-xs text-slate-500 mt-1">KDV Dahil ve Hariç tutarları güncel oranlarla hesaplayın.</p>
                     </div>
                 </div>
 
-                <!-- Static Form for KDV -->
+                <!-- NEW KDV FORM -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tutar (TL)</label>
@@ -143,20 +144,28 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">KDV Oranı</label>
                         <div class="relative">
-                            <select id="kdv-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                                <option value="0">%1 (Gıda vb.)</option>
-                                <option value="1">%10 (Tekstil vb.)</option>
-                                <option value="2" selected>%20 (Genel)</option>
+                            <select id="kdv-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium" onchange="toggleCustomRate()">
+                                <option value="20" selected>%20 (Genel - Mobilya, Beyaz Eşya vb.)</option>
+                                <option value="10">%10 (Tekstil, Giyim vb.)</option>
+                                <option value="1">%1 (Temel Gıda vb.)</option>
+                                <option value="custom">Özel Oran Giriniz</option>
                             </select>
                             <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
                         </div>
                     </div>
+
+                    <!-- Custom Rate Input (Hidden by default) -->
+                    <div id="kdv-custom-container" class="hidden">
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Özel Oran (%)</label>
+                        <input type="number" id="kdv-custom-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="18">
+                    </div>
+
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">İşlem Türü</label>
                         <div class="relative">
                             <select id="kdv-type" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                                <option value="0">KDV Dahil</option>
-                                <option value="1">KDV Hariç</option>
+                                <option value="include">KDV Dahil (İçinden Çıkar)</option>
+                                <option value="exclude">KDV Hariç (Üstüne Ekle)</option>
                             </select>
                             <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
                         </div>
@@ -167,13 +176,33 @@
                     <i class="fa-solid fa-bolt"></i> Hesapla
                 </button>
 
-                <div id="res-kdv" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-                    <button id="btn-copy-kdv" onclick="copyResult('kdv')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Kopyala
-                    </button>
-                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
-                    <div id="val-kdv" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
-                    <div id="detail-kdv" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+                <!-- NEW RESULT TABLE -->
+                <div id="res-kdv" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-white border border-slate-100 shadow-sm">
+                    <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-2">
+                         <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">HESAPLAMA DETAYI</span>
+                         <button onclick="copyResult('kdv')" class="text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition text-slate-500 flex items-center gap-1">
+                            <i class="fa-regular fa-copy"></i> <span id="btn-copy-kdv-text">Kopyala</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-500 font-medium">Net Tutar (KDV'siz)</span>
+                            <span id="kdv-res-net" class="text-base font-bold text-slate-700"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-500 font-medium">KDV Tutarı</span>
+                            <span id="kdv-res-tax" class="text-base font-bold text-red-500"></span>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                            <span class="text-sm text-slate-800 font-bold">TOPLAM TUTAR</span>
+                            <span id="kdv-res-total" class="text-2xl font-black text-blue-600 tracking-tight"></span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden val for copy function compatibility -->
+                    <div id="val-kdv" class="hidden"></div>
+                    <div id="detail-kdv" class="hidden"></div>
                 </div>
 
             </div>
@@ -252,6 +281,18 @@
         </div>
     </div>
 
-    <script src="assets/js/calculator.js?v=2"></script>
+    <script src="assets/js/calculator.js?v=3"></script>
+    <!-- Custom script to handle dynamic UI for this specific tool -->
+    <script>
+        function toggleCustomRate() {
+            const r = document.getElementById('kdv-rate').value;
+            const c = document.getElementById('kdv-custom-container');
+            if(r === 'custom') {
+                c.classList.remove('hidden');
+            } else {
+                c.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
