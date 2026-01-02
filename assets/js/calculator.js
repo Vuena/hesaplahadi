@@ -109,7 +109,14 @@ const tools = [
     { id: 'burc', cat: 'Astroloji', name: 'Burç Hesaplama', link: 'burc-hesaplama.html', color:'purple' },
     { id: 'ay_burcu', cat: 'Astroloji', name: 'Ay Burcu Hesaplama', link: 'ay-burcu-hesaplama.html', color:'purple' },
     { id: 'numeroloji', cat: 'Astroloji', name: 'Numeroloji Hesaplama', link: 'numeroloji-hesaplama.html', color:'purple' },
-    { id: 'cin', cat: 'Astroloji', name: 'Çin Takvimi Cinsiyet Hesaplama', link: 'cin-takvimi-cinsiyet-hesaplama.html', color:'purple' }
+    { id: 'cin', cat: 'Astroloji', name: 'Çin Takvimi Cinsiyet Hesaplama', link: 'cin-takvimi-cinsiyet-hesaplama.html', color:'purple' },
+
+    // 8. E-TİCARET
+    { id: 'trendyol', cat: 'E-Ticaret', name: 'Trendyol Komisyon Hesaplama', link: 'trendyol-komisyon-hesaplama.html', color:'orange' },
+    { id: 'n11', cat: 'E-Ticaret', name: 'N11 Komisyon Hesaplama', link: 'n11-komisyon-hesaplama.html', color:'red' },
+    { id: 'hepsiburada', cat: 'E-Ticaret', name: 'Hepsiburada Komisyon Hesaplama', link: 'hepsiburada-komisyon-hesaplama.html', color:'orange' },
+    { id: 'amazon', cat: 'E-Ticaret', name: 'Amazon Komisyon Hesaplama', link: 'amazon-komisyon-hesaplama.html', color:'gray' },
+    { id: 'ciceksepeti', cat: 'E-Ticaret', name: 'Çiçeksepeti Komisyon Hesaplama', link: 'ciceksepeti-komisyon-hesaplama.html', color:'blue' }
 ];
 
 // --- RENDER SIDEBAR ---
@@ -137,7 +144,10 @@ function renderSidebar() {
                     a.classList.add('nav-active', 'bg-blue-50', 'text-blue-600');
                 }
 
-                const icon = t.cat === 'Yapay Zeka' ? '<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>' : '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>';
+                let icon = '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>';
+                if(t.cat === 'Yapay Zeka') icon = '<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>';
+                if(t.cat === 'E-Ticaret') icon = '<i class="fa-solid fa-shop text-orange-500"></i>';
+
                 a.innerHTML = `${icon} ${t.name}`;
                 container.appendChild(a);
             });
@@ -356,6 +366,71 @@ function calc_gpa() { const credits = document.querySelectorAll('.gpa-credit'); 
 function calc_asgari() { const p = getVal('asgari', 'period'); const t = getVal('asgari', 'type'); let net = 28500; let gross = 33530; if(p === '2025-2') { net = 20002; gross = 23532; } if(t === 'bn') { showRes('asgari', `${net.toLocaleString()} TL (Net)`, `Tahmini Brüt: ${gross.toLocaleString()} TL`); } else { showRes('asgari', `${gross.toLocaleString()} TL (Brüt)`, `Tahmini Net: ${net.toLocaleString()} TL`); } }
 function calc_memur() { const curr = getNum('memur', 'curr'); const rate = getNum('memur', 'rate'); const newVal = curr * (1 + rate / 100); showRes('memur', `${newVal.toLocaleString('tr-TR', {maximumFractionDigits: 0})} TL`, `Artış Oranı: %${rate} | Fark: ${(newVal-curr).toLocaleString('tr-TR', {maximumFractionDigits:0})} TL`); }
 
+function calc_commission() {
+    const sell = getNum('comm', 'sell');
+    const buy = getNum('comm', 'buy');
+    const rate = getNum('comm', 'rate');
+    const kdv = getNum('comm', 'kdv');
+    const cargo = getNum('comm', 'cargo');
+    const service = document.getElementById('comm-service') ? getNum('comm', 'service') : 0;
+    const trans = document.getElementById('comm-trans') ? getNum('comm', 'trans') : 0;
+    const listing = document.getElementById('comm-listing') ? getNum('comm', 'listing') : 0;
+    const ad = document.getElementById('comm-ad') ? getNum('comm', 'ad') : 0;
+
+    const serviceVatRate = 0.20;
+    const productVatRate = kdv / 100;
+
+    const netSell = sell / (1 + productVatRate);
+    const outputVat = sell - netSell;
+
+    const grossCommission = sell * (rate / 100);
+    const netCommission = grossCommission / (1 + serviceVatRate);
+    const vatCommission = grossCommission - netCommission;
+
+    const netBuy = buy / (1 + productVatRate);
+    const inputVatProduct = buy - netBuy;
+
+    const netCargo = cargo / (1 + serviceVatRate);
+    const vatCargo = cargo - netCargo;
+
+    const netService = service / (1 + serviceVatRate);
+    const vatService = service - netService;
+
+    const netTrans = trans / (1 + serviceVatRate);
+    const vatTrans = trans - netTrans;
+
+    const netListing = listing / (1 + serviceVatRate);
+    const vatListing = listing - netListing;
+
+    const netAd = ad / (1 + serviceVatRate);
+    const vatAd = ad - netAd;
+
+    const totalGrossExpenses = buy + grossCommission + cargo + service + trans + listing + ad;
+    const totalInputVat = inputVatProduct + vatCommission + vatCargo + vatService + vatTrans + vatListing + vatAd;
+    const payableVat = Math.max(0, outputVat - totalInputVat);
+    const netProfit = sell - totalGrossExpenses - payableVat;
+    const margin = sell > 0 ? (netProfit / sell) * 100 : 0;
+
+    const f = (n) => n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    if(document.getElementById('res-comm-profit')) document.getElementById('res-comm-profit').innerText = f(netProfit) + ' TL';
+    if(document.getElementById('res-comm-margin')) document.getElementById('res-comm-margin').innerText = '%' + f(margin);
+    if(document.getElementById('res-comm-vat')) document.getElementById('res-comm-vat').innerText = f(payableVat) + ' TL';
+    if(document.getElementById('res-comm-comm')) document.getElementById('res-comm-comm').innerText = f(grossCommission) + ' TL';
+
+    // Total Expenses (Excluding Buying Price as per label "Alış Hariç")
+    // Total Gross Expenses includes 'buy'. We subtract it.
+    // We also add Payable VAT as an expense.
+    const totalOpExpenses = (totalGrossExpenses - buy) + payableVat;
+    if(document.getElementById('res-comm-total')) document.getElementById('res-comm-total').innerText = f(totalOpExpenses) + ' TL';
+
+    const resDiv = document.getElementById('res-commission');
+    if(resDiv) {
+        resDiv.classList.remove('hidden');
+        resDiv.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+}
+
 // Run Init
 window.addEventListener('load', () => {
     checkCookies();
@@ -403,6 +478,7 @@ window.addEventListener('load', () => {
                 if(t.cat === 'Sağlık') iconClass = 'fa-heart-pulse';
                 if(t.cat === 'Eğitim') iconClass = 'fa-graduation-cap';
                 if(t.cat === 'Yapay Zeka') iconClass = 'fa-wand-magic-sparkles';
+                if(t.cat === 'E-Ticaret') iconClass = 'fa-shop';
 
                 a.innerHTML = `<i class="fa-solid ${iconClass} text-blue-400 w-4 text-center"></i> ${t.name}`;
                 msl.appendChild(a);
@@ -451,6 +527,7 @@ window.addEventListener('load', () => {
                 if(t.cat === 'Sağlık') iconClass = 'fa-heart-pulse';
                 if(t.cat === 'Eğitim') iconClass = 'fa-graduation-cap';
                 if(t.cat === 'Yapay Zeka') iconClass = 'fa-wand-magic-sparkles';
+                if(t.cat === 'E-Ticaret') iconClass = 'fa-shop';
 
                 a.innerHTML = `<i class="fa-solid ${iconClass} text-blue-400 w-4 text-center"></i> ${t.name}`;
                 dsl.appendChild(a);
