@@ -1,238 +1,238 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="2026 KDV Tevkifat Hesaplama Aracı. 2/10, 5/10, 7/10 ve 9/10 oranlarıyla tevkifat, KDV ve ödenecek tutarı hesaplayın.">
-    <meta name="keywords" content="tevkifat hesaplama, kdv tevkifatı, tevkifat oranları, 5/10 tevkifat, 2/10 tevkifat">
-    <meta name="author" content="HesaplaHadi">
-    <meta name="robots" content="index, follow">
-    <title>KDV Tevkifat Hesaplama 2026 - Oran Hesapla | HesaplaHadi</title>
-    <link rel="canonical" href="https://hesaplahadi.com/tevkifat-hesaplama.html">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Calculator",
-      "name": "KDV Tevkifat Hesaplama",
-      "url": "https://hesaplahadi.com/tevkifat-hesaplama.html",
-      "description": "Tevkifatlı fatura hesaplama aracı.",
-      "applicationCategory": "FinanceApplication",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
-    }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content=" KDV Tevkifat Hesaplama Aracı. 2/10, 5/10, 7/10 ve 9/10 oranlarıyla tevkifat, KDV ve ödenecek tutarı hesaplayın.">
+  <meta name="keywords" content="tevkifat hesaplama, kdv tevkifatı, tevkifat oranları, 5/10 tevkifat, 2/10 tevkifat">
+  <meta name="author" content="HesaplaHadi">
+  <meta name="robots" content="index, follow">
+  <title>KDV Tevkifat Hesaplama - Oran Hesapla | HesaplaHadi</title>
+  <link rel="canonical" href="https://hesaplahadi.com/tevkifat-hesaplama.html">
+  <script type="application/ld+json">
+  {
+   "@context": "https://schema.org",
+   "@type": "Calculator",
+   "name": "KDV Tevkifat Hesaplama",
+   "url": "https://hesaplahadi.com/tevkifat-hesaplama.html",
+   "description": "Tevkifatlı fatura hesaplama aracı.",
+   "applicationCategory": "FinanceApplication",
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
-                    <!-- Header -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Left: Logo -->
-                <div class="flex items-center gap-3">
-                     <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Right: Actions -->
-                <div class="flex items-center gap-3">
-                    <!-- Desktop Search Bar -->
-                    <div class="hidden md:block relative">
-                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                         <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
-                         <!-- Desktop Search Suggestions (Hidden by default) -->
-                         <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
-                            <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                            <div id="desktop-search-results-list">
-                                <!-- Populated dynamically by JS -->
-                            </div>
-                         </div>
-                    </div>
-
-                    <!-- Desktop Nav -->
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
-                        <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
-                    </div>
-
-                    <!-- Mobile AI Button -->
-                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-
-                    <!-- Mobile Stylized Blog Button -->
-                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
+          <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex justify-between items-center">
+        <!-- Left: Logo -->
+        <div class="flex items-center gap-3">
+           <a href="index.html" class="flex items-center space-x-2 group">
+            <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
+              <i class="fa-solid fa-calculator text-lg"></i>
             </div>
-
-            <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative group z-50">
-                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
-
-                 <!-- Search Suggestions -->
-                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
-                    <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                    <div id="mobile-search-results-list">
-                        <!-- Populated dynamically by JS -->
-                    </div>
-                 </div>
+            <div class="leading-tight">
+              <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
             </div>
-
-            <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
-            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
-                <i class="fa-solid fa-bars"></i>
-                <span>Tüm Hesaplama Araçları</span>
-            </button>
+          </a>
         </div>
-    </header>
 
-    <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-        <!-- Sidebar -->
-        <nav class="hidden lg:block lg:col-span-3 space-y-4">
-            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
-                <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
-                    <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
-                </div>
-                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Desktop Search Bar -->
+          <div class="hidden md:block relative">
+             <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+             <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+             <!-- Desktop Search Suggestions (Hidden by default) -->
+             <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
+              <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+              <div id="desktop-search-results-list">
+                <!-- Populated dynamically by JS -->
+              </div>
+             </div>
+          </div>
+
+          <!-- Desktop Nav -->
+          <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+            <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
+            <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
+            <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>AI Asistan</span>
+            </a>
+          </div>
+
+          <!-- Mobile AI Button -->
+          <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+            <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+          </a>
+
+          <!-- Mobile Stylized Blog Button -->
+          <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+            <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Search Bar (Below Header) -->
+      <div class="md:hidden mt-3 relative group z-50">
+         <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
+         <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+
+         <!-- Search Suggestions -->
+         <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+          <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+          <div id="mobile-search-results-list">
+            <!-- Populated dynamically by JS -->
+          </div>
+         </div>
+      </div>
+
+      <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
+      <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
+        <i class="fa-solid fa-bars"></i>
+        <span>Tüm Hesaplama Araçları</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+    <!-- Sidebar -->
+    <nav class="hidden lg:block lg:col-span-3 space-y-4">
+      <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+        <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+          <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
+        </div>
+        <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="col-span-1 lg:col-span-6 space-y-6">
+      <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
+        <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+          <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm"><i class="fa-solid fa-calculator text-xl"></i></div>
+          <div><h1 class="text-2xl font-bold text-slate-900 tracking-tight">Tevkifat Hesaplama</h1><p class="text-xs text-slate-500 mt-1">KDV Tevkifatı ve beyan tutarlarını hesaplayın.</p></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tutar (TL)</label>
+            <input type="number" id="tevkifat-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1000">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">KDV Oranı</label>
+            <div class="relative">
+              <select id="tevkifat-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+                <option value="0">%1</option>
+                <option value="1">%10</option>
+                <option value="2" selected>%20</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="col-span-1 lg:col-span-6 space-y-6">
-            <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
-                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm"><i class="fa-solid fa-calculator text-xl"></i></div>
-                    <div><h1 class="text-2xl font-bold text-slate-900 tracking-tight">Tevkifat Hesaplama</h1><p class="text-xs text-slate-500 mt-1">KDV Tevkifatı ve beyan tutarlarını hesaplayın.</p></div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tutar (TL)</label>
-                        <input type="number" id="tevkifat-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1000">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">KDV Oranı</label>
-                        <div class="relative">
-                            <select id="tevkifat-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                                <option value="0">%1</option>
-                                <option value="1">%10</option>
-                                <option value="2" selected>%20</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tevkifat Oranı</label>
-                        <div class="relative">
-                            <select id="tevkifat-tev" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                                <option value="0">2/10</option>
-                                <option value="1">3/10</option>
-                                <option value="2">4/10</option>
-                                <option value="3" selected>5/10</option>
-                                <option value="4">7/10</option>
-                                <option value="5">9/10</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">İşlem Türü</label>
-                        <div class="relative">
-                            <select id="tevkifat-type" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                                <option value="0">KDV Hariç</option>
-                                <option value="1">KDV Dahil</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <button onclick="calc_tevkifat()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i> Hesapla
-                </button>
-
-                <div id="res-tevkifat" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-                    <button id="btn-copy-tevkifat" onclick="copyResult('tevkifat')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Kopyala
-                    </button>
-                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">ÖDENECEK TUTAR</p>
-                    <div id="val-tevkifat" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
-                    <div id="detail-tevkifat" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
-                </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tevkifat Oranı</label>
+            <div class="relative">
+              <select id="tevkifat-tev" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+                <option value="0">2/10</option>
+                <option value="1">3/10</option>
+                <option value="2">4/10</option>
+                <option value="3" selected>5/10</option>
+                <option value="4">7/10</option>
+                <option value="5">9/10</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
             </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">İşlem Türü</label>
+            <div class="relative">
+              <select id="tevkifat-type" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+                <option value="0">KDV Hariç</option>
+                <option value="1">KDV Dahil</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
+            </div>
+          </div>
+        </div>
 
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-        <h2 class="text-xl font-bold text-slate-800 mb-4">KDV Tevkifatı Nedir ve Nasıl Hesaplanır?</h2>
-        <p class="mb-4">Tevkifat, kelime anlamı olarak "kesinti" demektir. KDV tevkifatı, satıcının ödemesi gereken KDV'nin bir kısmının veya tamamının, alıcı tarafından kesilerek doğrudan vergi dairesine ödenmesidir. Bu sistem, vergi güvenliğini sağlamak amacıyla uygulanır.</p>
+        <button onclick="calc_tevkifat()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
+          <i class="fa-solid fa-bolt"></i> Hesapla
+        </button>
 
-        <h3 class="text-lg font-bold text-slate-800 mb-3">Tevkifat Oranları</h3>
-        <p class="mb-4">Tevkifat oranları yapılan hizmetin veya satılan malın türüne göre değişir. Yaygın oranlar şunlardır:</p>
-        <ul class="list-disc pl-5 space-y-2 mb-4">
-            <li><strong>5/10, 7/10, 9/10:</strong> Temizlik, güvenlik, yemek servis hizmetleri gibi işgücü temin hizmetlerinde sıkça kullanılır.</li>
-            <li><strong>2/10:</strong> Belirli yapım işlerinde uygulanır.</li>
+        <div id="res-tevkifat" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
+          <button id="btn-copy-tevkifat" onclick="copyResult('tevkifat')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+            <i class="fa-regular fa-copy"></i> Kopyala
+          </button>
+          <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">ÖDENECEK TUTAR</p>
+          <div id="val-tevkifat" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+          <div id="detail-tevkifat" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+        </div>
+      </div>
+
+      <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+    <h2 class="text-xl font-bold text-slate-800 mb-4">KDV Tevkifatı Nedir ve Nasıl Hesaplanır?</h2>
+    <p class="mb-4">Tevkifat, kelime anlamı olarak "kesinti" demektir. KDV tevkifatı, satıcının ödemesi gereken KDV'nin bir kısmının veya tamamının, alıcı tarafından kesilerek doğrudan vergi dairesine ödenmesidir. Bu sistem, vergi güvenliğini sağlamak amacıyla uygulanır.</p>
+
+    <h3 class="text-lg font-bold text-slate-800 mb-3">Tevkifat Oranları</h3>
+    <p class="mb-4">Tevkifat oranları yapılan hizmetin veya satılan malın türüne göre değişir. Yaygın oranlar şunlardır:</p>
+    <ul class="list-disc pl-5 space-y-2 mb-4">
+      <li><strong>5/10, 7/10, 9/10:</strong> Temizlik, güvenlik, yemek servis hizmetleri gibi işgücü temin hizmetlerinde sıkça kullanılır.</li>
+      <li><strong>2/10:</strong> Belirli yapım işlerinde uygulanır.</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama Örneği</h3>
+    <p class="mb-4">Örneğin 1000 TL tutarında bir hizmet ve %20 KDV oranı olsun. Toplam KDV 200 TL'dir. Eğer 5/10 tevkifat uygulanırsa:<br>
+    - <strong>Satıcıya Ödenen KDV:</strong> 100 TL (200 TL'nin yarısı)<br>
+    - <strong>Vergi Dairesine Ödenen (Tevkifat):</strong> 100 TL (Diğer yarısı)<br>
+    Toplam Fatura Tutarı: 1000 + 100 = 1100 TL olarak satıcıya ödenir.</p>
+  </article>
+    </main>
+
+    <aside class="col-span-1 lg:col-span-3 space-y-6">
+       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
+          <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
+        </h4>
+        <ul class="text-sm space-y-2 text-slate-600 font-medium">
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
+            <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
+            <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
+            <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama.html'">
+            <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
+            <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
         </ul>
+      </div>
+    </aside>
+  </div>
 
-        <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama Örneği</h3>
-        <p class="mb-4">Örneğin 1000 TL tutarında bir hizmet ve %20 KDV oranı olsun. Toplam KDV 200 TL'dir. Eğer 5/10 tevkifat uygulanırsa:<br>
-        - <strong>Satıcıya Ödenen KDV:</strong> 100 TL (200 TL'nin yarısı)<br>
-        - <strong>Vergi Dairesine Ödenen (Tevkifat):</strong> 100 TL (Diğer yarısı)<br>
-        Toplam Fatura Tutarı: 1000 + 100 = 1100 TL olarak satıcıya ödenir.</p>
-    </article>
-        </main>
-
-        <aside class="col-span-1 lg:col-span-3 space-y-6">
-             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
-                </h4>
-                <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
-                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
-                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
-                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
-                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
-                        <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+  <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+    <div class="container mx-auto px-4 text-center">
+      <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+      <div class="text-xs text-slate-600 mt-6">&copy; HesaplaHadi.</div>
     </div>
-
-    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
-        <div class="container mx-auto px-4 text-center">
-            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
-        </div>
-    </footer>
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
-            <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
-        </div>
+  </footer>
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
+      <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
     </div>
-    <script src="assets/js/calculator.js?v=3"></script>
+  </div>
+  <script src="assets/js/calculator.js?v=3"></script>
 </body>
 </html>

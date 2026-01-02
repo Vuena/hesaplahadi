@@ -1,258 +1,258 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Basit yüzde, artış ve azalış oranlarını hesaplayın.">
-    <title>Yüzde Hesaplama Aracı | HesaplaHadi</title>
-    <link rel="canonical" href="https://hesaplahadi.com/yuzde-hesaplama-araci.html" />
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Yüzde Hesaplama Aracı",
-      "url": "https://hesaplahadi.com/yuzde-hesaplama-araci.html",
-      "description": "Basit yüzde, artış ve azalış oranlarını hesaplayın.",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
-    }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <style>
-        .drawer-open { transform: translateX(0); }
-        .drawer-closed { transform: translateX(-100%); }
-        .mask-visible { opacity: 1; pointer-events: auto; }
-        .mask-hidden { opacity: 0; pointer-events: none; }
-    </style>
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Basit yüzde, artış ve azalış oranlarını hesaplayın.">
+  <title>Yüzde Hesaplama Aracı | HesaplaHadi</title>
+  <link rel="canonical" href="https://hesaplahadi.com/yuzde-hesaplama-araci.html" />
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+   "@context": "https://schema.org",
+   "@type": "SoftwareApplication",
+   "name": "Yüzde Hesaplama Aracı",
+   "url": "https://hesaplahadi.com/yuzde-hesaplama-araci.html",
+   "description": "Basit yüzde, artış ve azalış oranlarını hesaplayın.",
+   "applicationCategory": "FinanceApplication",
+   "operatingSystem": "All",
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    .drawer-open { transform: translateX(0); }
+    .drawer-closed { transform: translateX(-100%); }
+    .mask-visible { opacity: 1; pointer-events: auto; }
+    .mask-hidden { opacity: 0; pointer-events: none; }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
-    <!-- Mobile Sidebar Drawer -->
-    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
-    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
-        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
-             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
-             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
-        </div>
-        <div id="drawer-list" class="p-3 space-y-1"></div>
-    </aside>
-
-                    <!-- Header -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Left: Logo -->
-                <div class="flex items-center gap-3">
-                     <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Right: Actions -->
-                <div class="flex items-center gap-3">
-                    <!-- Desktop Search Bar -->
-                    <div class="hidden md:block relative">
-                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                         <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
-                         <!-- Desktop Search Suggestions (Hidden by default) -->
-                         <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
-                            <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                            <div id="desktop-search-results-list">
-                                <!-- Populated dynamically by JS -->
-                            </div>
-                         </div>
-                    </div>
-
-                    <!-- Desktop Nav -->
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
-                        <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
-                    </div>
-
-                    <!-- Mobile AI Button -->
-                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-
-                    <!-- Mobile Stylized Blog Button -->
-                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative group z-50">
-                 <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
-
-                 <!-- Search Suggestions -->
-                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
-                    <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                    <div id="mobile-search-results-list">
-                        <!-- Populated dynamically by JS -->
-                    </div>
-                 </div>
-            </div>
-
-            <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
-            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
-                <i class="fa-solid fa-bars"></i>
-                <span>Tüm Hesaplama Araçları</span>
-            </button>
-        </div>
-    </header>
-
-    <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-        <nav class="hidden lg:block lg:col-span-3 space-y-4">
-            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
-                <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
-                    <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
-                </div>
-                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
-            </div>
-        </nav>
-
-        <main class="col-span-1 lg:col-span-6 space-y-6">
-            <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
-                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div class="p-3 bg-indigo-100 rounded-2xl text-indigo-600 shadow-sm"><i class="fa-solid fa-calculator text-xl"></i></div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Yüzde Hesaplama Aracı</h1>
-                        <p class="text-xs text-slate-500 mt-1">Basit yüzde, artış ve azalış oranlarını hesaplayın.</p>
-                    </div>
-                </div>
-
-                <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
-                <div id="content-yuzde">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hesaplama Türü</label><div class="relative">
-            <select id="yuzde-mode" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                <option value="0">A sayısının %B'si kaçtır?</option><option value="1">A sayısı, B sayısının % kaçıdır?</option><option value="2">A'dan B'ye değişim oranı %?</option><option value="3">A sayısı %B artırılırsa?</option><option value="4">A sayısı %B azaltılırsa?</option>
-            </select>
-            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
-        </div></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">A Değeri (Sayı)</label><input type="number" id="yuzde-a" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="500" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">B Değeri (Oran/Sayı)</label><input type="number" id="yuzde-b" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="20" step="any"></div></div>
-                <button onclick="calc_yuzde()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
-                    <i class="fa-solid fa-bolt"></i> Hesapla
-                </button>
-
-                <div id="res-yuzde" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-indigo-50 border border-indigo-100">
-                    <button id="btn-copy-yuzde" onclick="copyResult('yuzde')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Kopyala
-                    </button>
-                    <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">SONUÇ</p>
-                    <div id="val-yuzde" class="text-3xl font-black text-slate-900 tracking-tight"></div>
-                    <div id="detail-yuzde" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
-                </div>
-
-                </div>
-            </div>
-
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-    <h2 class="text-xl font-bold text-slate-800 mb-4">HesaplaHadi Nedir?</h2>
-    <p class="mb-4">HesaplaHadi, günlük hayatta, eğitimde veya iş süreçlerinde sıkça ihtiyaç duyulan matematiksel veya mantıksal bir işlemin hızlıca yapılmasını sağlayan dijital bir araçtır. Manuel olarak hesaplaması zaman alan veya karmaşık formüller gerektiren bu işlem, aracımız sayesinde saniyeler içinde hatasız olarak gerçekleştirilir.</p>
-
-    <h3 class="text-lg font-bold text-slate-800 mb-3">Neden Bu Aracı Kullanmalısınız?</h3>
-    <ul class="list-disc pl-5 space-y-2 mb-4">
-        <li><strong>Hız ve Pratiklik:</strong> Karmaşık işlemleri anında sonuçlandırır.</li>
-        <li><strong>Doğruluk:</strong> İnsan hatası riskini ortadan kaldırır.</li>
-        <li><strong>Erişilebilirlik:</strong> İnternet olan her yerden 7/24 ücretsiz kullanabilirsiniz.</li>
-    </ul>
-
-    <h3 class="text-lg font-bold text-slate-800 mb-3">Nasıl Kullanılır?</h3>
-    <p class="mb-4">İlgili alanlara gerekli verileri (sayı, tutar, tarih vb.) girdikten sonra "Hesapla" butonuna basmanız yeterlidir. Sonuçlar anında ekranınızda belirecektir. Bazı araçlarımızda detaylı döküm ve grafikler de sunulmaktadır.</p>
-
-    <p>HesaplaHadi.com olarak, kullanıcılarımızın ihtiyaç duyduğu tüm hesaplama araçlarını en güncel verilerle ve en sade arayüzle sunmayı hedefliyoruz.</p>
-</article>
-        </main>
-
-        <aside class="col-span-1 lg:col-span-3 space-y-6">
-             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
-                </h4>
-                <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
-                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
-                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
-                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
-                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
-                        <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+  <!-- Mobile Sidebar Drawer -->
+  <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+  <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+    <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+       <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+       <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
     </div>
+    <div id="drawer-list" class="p-3 space-y-1"></div>
+  </aside>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
-        <div class="container mx-auto px-4 text-center">
-            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
-                <a href="index.html" class="hover:text-white transition">Ana Sayfa</a>
-                <a href="blog/index.html" class="hover:text-white transition">Blog</a>
+          <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex justify-between items-center">
+        <!-- Left: Logo -->
+        <div class="flex items-center gap-3">
+           <a href="index.html" class="flex items-center space-x-2 group">
+            <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
+              <i class="fa-solid fa-calculator text-lg"></i>
             </div>
-            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+            <div class="leading-tight">
+              <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+            </div>
+          </a>
         </div>
-    </footer>
-    <script src="assets/js/calculator.js?v=3"></script>
-    <script>
-        // Drawer Logic
-        function toggleDrawer() {
-            const d = document.getElementById('drawer');
-            const m = document.getElementById('drawer-mask');
-            if(d.classList.contains('drawer-closed')) {
-                d.classList.remove('drawer-closed');
-                d.classList.add('drawer-open');
-                m.classList.remove('mask-hidden');
-                m.classList.add('mask-visible');
-            } else {
-                d.classList.remove('drawer-open');
-                d.classList.add('drawer-closed');
-                m.classList.remove('mask-visible');
-                m.classList.add('mask-hidden');
-            }
-        }
 
-        function filterDrawerTools() {
-            const q = document.getElementById('mobile-tool-search').value.toLowerCase();
-            const drawerList = document.getElementById('drawer-list');
-            const items = drawerList.querySelectorAll('a');
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Desktop Search Bar -->
+          <div class="hidden md:block relative">
+             <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+             <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+             <!-- Desktop Search Suggestions (Hidden by default) -->
+             <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
+              <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+              <div id="desktop-search-results-list">
+                <!-- Populated dynamically by JS -->
+              </div>
+             </div>
+          </div>
 
-            items.forEach(item => {
-                if(item.classList.contains('cat-header')) return;
-                const txt = item.innerText.toLowerCase();
-                item.style.display = txt.includes(q) ? 'flex' : 'none';
-            });
-        }
+          <!-- Desktop Nav -->
+          <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+            <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
+            <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
+            <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>AI Asistan</span>
+            </a>
+          </div>
 
-        // Specific init for this tool
-        window.addEventListener('load', () => {
-             // The drawer is now populated by calculator.js -> renderSidebar()
-             if(typeof renderSingleTool === 'function') {
-                 renderSingleTool('yuzde', 'tool-placeholder');
-             }
-        });
-    </script>
+          <!-- Mobile AI Button -->
+          <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+            <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+          </a>
+
+          <!-- Mobile Stylized Blog Button -->
+          <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+            <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Search Bar (Below Header) -->
+      <div class="md:hidden mt-3 relative group z-50">
+         <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
+         <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+
+         <!-- Search Suggestions -->
+         <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+          <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
+          <div id="mobile-search-results-list">
+            <!-- Populated dynamically by JS -->
+          </div>
+         </div>
+      </div>
+
+      <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
+      <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
+        <i class="fa-solid fa-bars"></i>
+        <span>Tüm Hesaplama Araçları</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+    <nav class="hidden lg:block lg:col-span-3 space-y-4">
+      <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+        <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+          <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
+        </div>
+        <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
+      </div>
+    </nav>
+
+    <main class="col-span-1 lg:col-span-6 space-y-6">
+      <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
+        <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+          <div class="p-3 bg-indigo-100 rounded-2xl text-indigo-600 shadow-sm"><i class="fa-solid fa-calculator text-xl"></i></div>
+          <div>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Yüzde Hesaplama Aracı</h1>
+            <p class="text-xs text-slate-500 mt-1">Basit yüzde, artış ve azalış oranlarını hesaplayın.</p>
+          </div>
+        </div>
+
+        <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
+        <div id="content-yuzde">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hesaplama Türü</label><div class="relative">
+      <select id="yuzde-mode" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
+        <option value="0">A sayısının %B'si kaçtır?</option><option value="1">A sayısı, B sayısının % kaçıdır?</option><option value="2">A'dan B'ye değişim oranı %?</option><option value="3">A sayısı %B artırılırsa?</option><option value="4">A sayısı %B azaltılırsa?</option>
+      </select>
+      <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
+    </div></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">A Değeri (Sayı)</label><input type="number" id="yuzde-a" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="500" step="any"></div><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">B Değeri (Oran/Sayı)</label><input type="number" id="yuzde-b" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="20" step="any"></div></div>
+        <button onclick="calc_yuzde()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
+          <i class="fa-solid fa-bolt"></i> Hesapla
+        </button>
+
+        <div id="res-yuzde" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-indigo-50 border border-indigo-100">
+          <button id="btn-copy-yuzde" onclick="copyResult('yuzde')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+            <i class="fa-regular fa-copy"></i> Kopyala
+          </button>
+          <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">SONUÇ</p>
+          <div id="val-yuzde" class="text-3xl font-black text-slate-900 tracking-tight"></div>
+          <div id="detail-yuzde" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+        </div>
+
+        </div>
+      </div>
+
+      <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+  <h2 class="text-xl font-bold text-slate-800 mb-4">HesaplaHadi Nedir?</h2>
+  <p class="mb-4">HesaplaHadi, günlük hayatta, eğitimde veya iş süreçlerinde sıkça ihtiyaç duyulan matematiksel veya mantıksal bir işlemin hızlıca yapılmasını sağlayan dijital bir araçtır. Manuel olarak hesaplaması zaman alan veya karmaşık formüller gerektiren bu işlem, aracımız sayesinde saniyeler içinde hatasız olarak gerçekleştirilir.</p>
+
+  <h3 class="text-lg font-bold text-slate-800 mb-3">Neden Bu Aracı Kullanmalısınız?</h3>
+  <ul class="list-disc pl-5 space-y-2 mb-4">
+    <li><strong>Hız ve Pratiklik:</strong> Karmaşık işlemleri anında sonuçlandırır.</li>
+    <li><strong>Doğruluk:</strong> İnsan hatası riskini ortadan kaldırır.</li>
+    <li><strong>Erişilebilirlik:</strong> İnternet olan her yerden 7/24 ücretsiz kullanabilirsiniz.</li>
+  </ul>
+
+  <h3 class="text-lg font-bold text-slate-800 mb-3">Nasıl Kullanılır?</h3>
+  <p class="mb-4">İlgili alanlara gerekli verileri (sayı, tutar, tarih vb.) girdikten sonra "Hesapla" butonuna basmanız yeterlidir. Sonuçlar anında ekranınızda belirecektir. Bazı araçlarımızda detaylı döküm ve grafikler de sunulmaktadır.</p>
+
+  <p>HesaplaHadi.com olarak, kullanıcılarımızın ihtiyaç duyduğu tüm hesaplama araçlarını en güncel verilerle ve en sade arayüzle sunmayı hedefliyoruz.</p>
+</article>
+    </main>
+
+    <aside class="col-span-1 lg:col-span-3 space-y-6">
+       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
+          <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
+        </h4>
+        <ul class="text-sm space-y-2 text-slate-600 font-medium">
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
+            <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
+            <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
+            <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama.html'">
+            <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
+            <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+    <div class="container mx-auto px-4 text-center">
+      <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+      <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
+        <a href="index.html" class="hover:text-white transition">Ana Sayfa</a>
+        <a href="blog/index.html" class="hover:text-white transition">Blog</a>
+      </div>
+      <div class="text-xs text-slate-600 mt-6">&copy; HesaplaHadi.</div>
+    </div>
+  </footer>
+  <script src="assets/js/calculator.js?v=3"></script>
+  <script>
+    // Drawer Logic
+    function toggleDrawer() {
+      const d = document.getElementById('drawer');
+      const m = document.getElementById('drawer-mask');
+      if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+      } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+      }
+    }
+
+    function filterDrawerTools() {
+      const q = document.getElementById('mobile-tool-search').value.toLowerCase();
+      const drawerList = document.getElementById('drawer-list');
+      const items = drawerList.querySelectorAll('a');
+
+      items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+      });
+    }
+
+    // Specific init for this tool
+    window.addEventListener('load', () => {
+       // The drawer is now populated by calculator.js -> renderSidebar()
+       if(typeof renderSingleTool === 'function') {
+         renderSingleTool('yuzde', 'tool-placeholder');
+       }
+    });
+  </script>
 </body>
 </html>
