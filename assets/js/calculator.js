@@ -10,9 +10,9 @@ const tools = [
     { id: 'token', cat: 'Yapay Zeka', name: 'AI Token Maliyet Hesaplama', link: 'yapay-zeka-token-maliyet-hesaplama.html', color:'indigo' },
 
     // 2. FİNANS & VERGİ
-    { id: 'enflasyon', cat: 'Finans', name: 'Enflasyon ve Alım Gücü', link: 'enflasyon-alim-gucu-hesaplama.html', color:'blue' },
-    { id: 'freelancer', cat: 'Finans', name: 'Freelancer Gelir Vergisi', link: 'freelancer-gelir-vergisi-hesaplama.html', color:'blue' },
-    { id: 'dolar', cat: 'Finans', name: 'Dolar ve Döviz Kar/Zarar', link: 'dolar-hesaplama.html', color:'blue' },
+    { id: 'enflasyon', cat: 'Finans', name: 'Enflasyon ve Alım Gücü Hesaplama', link: 'enflasyon-alim-gucu-hesaplama.html', color:'blue' },
+    { id: 'freelancer', cat: 'Finans', name: 'Freelancer Gelir Vergisi Hesaplama', link: 'freelancer-gelir-vergisi-hesaplama.html', color:'blue' },
+    { id: 'dolar', cat: 'Finans', name: 'Dolar ve Döviz Kar/Zarar Hesaplama', link: 'dolar-hesaplama.html', color:'blue' },
     { id: 'kdv', cat: 'Finans', name: 'KDV Hesaplama', link: 'kdv-hesaplama.html', color:'blue', inputs: [{}, {opts:['%1','%10','%20']}] },
     { id: 'tevkifat', cat: 'Finans', name: 'KDV Tevkifat Hesaplama', link: 'tevkifat-hesaplama.html', color:'blue' },
     { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı Hesaplama', link: 'kidem-tazminati-hesaplama.html', color:'blue' },
@@ -27,19 +27,19 @@ const tools = [
     { id: 'kk_asgari', cat: 'Finans', name: 'K.K. Asgari Ödeme Hesaplama', link: 'kredi-karti-asgari-odeme-hesaplama.html', color:'blue' },
     { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu Hesaplama', link: 'emlakci-komisyonu-hesaplama.html', color:'blue' },
     { id: 'zam', cat: 'Finans', name: 'Maaş Zam Hesaplama', link: 'maas-zam-orani-hesaplama.html', color:'blue' },
-    { id: 'asgari', cat: 'Finans', name: '2026 Asgari Ücret Hesaplama', link: 'asgari-ucret-hesaplama.html', color:'blue' },
-    { id: 'memur', cat: 'Finans', name: '2026 Memur Zammı Hesaplama', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
+    { id: 'asgari', cat: 'Finans', name: 'Asgari Ücret Hesaplama', link: 'asgari-ucret-hesaplama.html', color:'blue' },
+    { id: 'memur', cat: 'Finans', name: 'Memur Zammı Hesaplama', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
     { id: 'kira', cat: 'Finans', name: 'Kira Zammı Hesaplama', link: 'kira-zammi-hesaplama.html', color:'blue' },
-    { id: 'emekli', cat: 'Finans', name: '2026 Emekli Maaş Hesaplama', link: 'emekli-maas-hesaplama-2026.html', color:'blue' },
-    { id: 'mtv', cat: 'Finans', name: 'MTV Hesaplama 2026', link: 'mtv-hesaplama-2026.html', color:'blue' },
-    { id: 'deger', cat: 'Finans', name: 'Değer Artış Kazancı', link: 'deger-artis-kazanci-hesaplama.html', color:'blue' },
-    { id: 'ucretli', cat: 'Finans', name: 'Ücretli Öğretmen Maaşı', link: 'ucretli-ogretmen-maas-hesaplama.html', color:'blue' },
+    { id: 'emekli', cat: 'Finans', name: 'Emekli Maaş Hesaplama', link: 'emekli-maas-hesaplama.html', color:'blue' },
+    { id: 'mtv', cat: 'Finans', name: 'MTV Hesaplama', link: 'mtv-hesaplama.html', color:'blue' },
+    { id: 'deger', cat: 'Finans', name: 'Değer Artış Kazancı Hesaplama', link: 'deger-artis-kazanci-hesaplama.html', color:'blue' },
+    { id: 'ucretli', cat: 'Finans', name: 'Ücretli Öğretmen Maaşı Hesaplama', link: 'ucretli-ogretmen-maas-hesaplama.html', color:'blue' },
     { id: 'altin', cat: 'Finans', name: 'Altın Hesaplama', link: 'altin-hesaplama.html', color:'blue' },
     { id: 'gumus', cat: 'Finans', name: 'Gümüş Hesaplama', link: 'gumus-hesaplama.html', color:'blue' },
     { id: 'euro', cat: 'Finans', name: 'Euro Hesaplama', link: 'euro-hesaplama.html', color:'blue' },
-    { id: 'esnek', cat: 'Finans', name: 'Esnek Hesap Faizi', link: 'esnek-hesap-faiz-hesaplama.html', color:'blue' },
-    { id: 'tasit2', cat: 'Finans', name: '2. El Taşıt Kredisi', link: 'ikinci-el-tasit-kredisi-hesaplama.html', color:'blue' },
-    { id: 'piyango', cat: 'Finans', name: 'Milli Piyango Vergi', link: 'milli-piyango-hesaplama.html', color:'blue' },
+    { id: 'esnek', cat: 'Finans', name: 'Esnek Hesap Faizi Hesaplama', link: 'esnek-hesap-faiz-hesaplama.html', color:'blue' },
+    { id: 'tasit2', cat: 'Finans', name: '2. El Taşıt Kredisi Hesaplama', link: 'ikinci-el-tasit-kredisi-hesaplama.html', color:'blue' },
+    { id: 'piyango', cat: 'Finans', name: 'Milli Piyango Vergi Hesaplama', link: 'milli-piyango-hesaplama.html', color:'blue' },
     { id: 'vekalet', cat: 'Finans', name: 'Vekalet Ücreti Hesaplama', link: 'vekalet-ucreti-hesaplama.html', color:'blue' },
     { id: 'zekat', cat: 'Finans', name: 'Zekat Hesaplama', link: 'zekat-hesaplama.html', color:'blue' },
     { id: 'islah', cat: 'Finans', name: 'Islah Harcı Hesaplama', link: 'islah-harci-hesaplama.html', color:'blue' },
@@ -70,7 +70,7 @@ const tools = [
     { id: 'akademik', cat: 'Eğitim', name: 'Akademik Teşvik Hesaplama', link: 'akademik-tesvik-hesaplama.html', color:'purple' },
     { id: 'deneme', cat: 'Eğitim', name: 'Deneme Puanı Hesaplama', link: 'deneme-puan-hesaplama.html', color:'purple' },
     { id: 'edebiyat', cat: 'Eğitim', name: 'Edebiyat Not Hesaplama', link: 'edebiyat-not-hesaplama.html', color:'purple' },
-    { id: 'kpss', cat: 'Eğitim', name: 'KPSS Önlisans Puan', link: 'kpss-onlisans-puan-hesaplama.html', color:'purple' },
+    { id: 'kpss', cat: 'Eğitim', name: 'KPSS Önlisans Puan Hesaplama', link: 'kpss-onlisans-puan-hesaplama.html', color:'purple' },
     { id: 'tyt', cat: 'Eğitim', name: 'TYT AYT Net Hesaplama', link: 'tyt-ayt-net-hesaplama.html', color:'purple' },
     { id: 'yks', cat: 'Eğitim', name: 'YKS Sıralama Hesaplama', link: 'yks-siralama-hesaplama.html', color:'purple' },
 
@@ -80,9 +80,9 @@ const tools = [
     { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman Hesaplama', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'gray' },
     { id: 'elk', cat: 'Pratik', name: 'Elektrik Faturası Hesaplama', link: 'elektrik-faturasi-hesaplama.html', color:'orange' },
     { id: 'ev', cat: 'Pratik', name: 'Elektrikli Araç Şarj Hesaplama', link: 'elektrikli-arac-sarj-hesaplama.html', color:'orange' },
-    { id: 'solar', cat: 'Pratik', name: 'Güneş Paneli Amortisman', link: 'gunes-paneli-amortisman-hesaplama.html', color:'orange' },
+    { id: 'solar', cat: 'Pratik', name: 'Güneş Paneli Amortisman Hesaplama', link: 'gunes-paneli-amortisman-hesaplama.html', color:'orange' },
     { id: 'co2', cat: 'Pratik', name: 'Karbon Ayak İzi Hesaplama', link: 'karbon-ayak-izi-hesaplama.html', color:'green' },
-    { id: 'yum', cat: 'Pratik', name: 'Yumurta Haşlama Süresi', link: 'yumurta-haslama-suresi-hesaplama.html', color:'orange' },
+    { id: 'yum', cat: 'Pratik', name: 'Yumurta Haşlama Süresi Hesaplama', link: 'yumurta-haslama-suresi-hesaplama.html', color:'orange' },
     { id: 'raffle', cat: 'Pratik', name: 'Çekiliş Aracı', link: 'cekilis-araci.html', color:'orange' },
     { id: 'qr', cat: 'Pratik', name: 'QR Kod Oluşturucu', link: 'qr-kod-olusturucu.html', color:'gray' },
     { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Oluşturucu', link: 'guclu-sifre-olusturucu.html', color:'gray' },
@@ -91,7 +91,7 @@ const tools = [
     { id: 'kus', cat: 'Pratik', name: 'Kuş Yaşı Hesaplama', link: 'kus-yasi-hesaplama.html', color:'orange' },
     { id: 'internet', cat: 'Pratik', name: 'İnternet Hızı Hesaplama', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'gray' },
     { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi Hesaplama', link: 'yakit-tuketimi-hesaplama.html', color:'orange' },
-    { id: 'tarih_sayac', cat: 'Pratik', name: 'İki Tarih Arası Gün', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
+    { id: 'tarih_sayac', cat: 'Pratik', name: 'İki Tarih Arası Gün Hesaplama', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
     { id: 'infaz', cat: 'Pratik', name: 'İnfaz Hesaplama', link: 'infaz-hesaplama.html', color:'orange' },
     { id: 'mesai', cat: 'Pratik', name: 'Mesai Hesaplama', link: 'mesai-hesaplama.html', color:'orange' },
     { id: 'altili', cat: 'Pratik', name: 'Altılı Ne Verir', link: 'altili-ne-verir-hesaplama.html', color:'orange' },
@@ -99,8 +99,8 @@ const tools = [
 
     // 6. DİJİTAL & SOSYAL MEDYA
     { id: 'smedya', cat: 'Dijital', name: 'Sosyal Medya Gelir Hesaplama', link: 'tiktok-youtube-gelir-hesaplama.html', color:'pink' },
-    { id: 'insta', cat: 'Dijital', name: 'Instagram Etkileşim Oranı', link: 'instagram-etkilesim-orani-hesaplama.html', color:'pink' },
-    { id: 'best_time', cat: 'Dijital', name: 'Sosyal Medya En İyi Saat', link: 'sosyal-medya-en-iyi-saat-hesaplama.html', color:'pink' },
+    { id: 'insta', cat: 'Dijital', name: 'Instagram Etkileşim Oranı Hesaplama', link: 'instagram-etkilesim-orani-hesaplama.html', color:'pink' },
+    { id: 'best_time', cat: 'Dijital', name: 'Sosyal Medya En İyi Saat Hesaplama', link: 'sosyal-medya-en-iyi-saat-hesaplama.html', color:'pink' },
 
     // 7. ASTROLOJİ
     { id: 'solar_map', cat: 'Astroloji', name: 'Solar Harita Hesaplama', link: 'solar-harita-hesaplama.html', color:'purple' },
@@ -109,7 +109,7 @@ const tools = [
     { id: 'burc', cat: 'Astroloji', name: 'Burç Hesaplama', link: 'burc-hesaplama.html', color:'purple' },
     { id: 'ay_burcu', cat: 'Astroloji', name: 'Ay Burcu Hesaplama', link: 'ay-burcu-hesaplama.html', color:'purple' },
     { id: 'numeroloji', cat: 'Astroloji', name: 'Numeroloji Hesaplama', link: 'numeroloji-hesaplama.html', color:'purple' },
-    { id: 'cin', cat: 'Astroloji', name: 'Çin Takvimi Cinsiyet', link: 'cin-takvimi-cinsiyet-hesaplama.html', color:'purple' }
+    { id: 'cin', cat: 'Astroloji', name: 'Çin Takvimi Cinsiyet Hesaplama', link: 'cin-takvimi-cinsiyet-hesaplama.html', color:'purple' }
 ];
 
 // --- RENDER SIDEBAR ---
