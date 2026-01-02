@@ -6,6 +6,8 @@ const apiKey = atob(_k);
 const tools = [
     // 1. YAPAY ZEKA
     { id: 'ai_asistan', cat: 'Yapay Zeka', name: 'AI Hesaplama Asistanı', link: 'ai-asistan.html', color:'indigo' },
+    { id: 'ai_diyet', cat: 'Yapay Zeka', name: 'AI Diyetisyen', link: 'ai-diyetisyen.html', color:'indigo' },
+    { id: 'token', cat: 'Yapay Zeka', name: 'AI Token Maliyet Hesaplama', link: 'yapay-zeka-token-maliyet-hesaplama.html', color:'indigo' },
 
     // 2. FİNANS & VERGİ
     { id: 'enflasyon', cat: 'Finans', name: 'Enflasyon ve Alım Gücü', link: 'enflasyon-alim-gucu-hesaplama.html', color:'blue' },
@@ -13,7 +15,7 @@ const tools = [
     { id: 'dolar', cat: 'Finans', name: 'Dolar ve Döviz Kar/Zarar', link: 'dolar-hesaplama.html', color:'blue' },
     { id: 'kdv', cat: 'Finans', name: 'KDV Hesaplama', link: 'kdv-hesaplama.html', color:'blue', inputs: [{}, {opts:['%1','%10','%20']}] },
     { id: 'tevkifat', cat: 'Finans', name: 'KDV Tevkifat Hesaplama', link: 'tevkifat-hesaplama.html', color:'blue' },
-    { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı Hesaplama', link: 'kidem-tazminati.html', color:'blue' },
+    { id: 'kidem', cat: 'Finans', name: 'Kıdem Tazminatı Hesaplama', link: 'kidem-tazminati-hesaplama.html', color:'blue' },
     { id: 'kredi', cat: 'Finans', name: 'Kredi Hesaplama', link: 'kredi-hesaplama.html', color:'blue' },
     { id: 'net_brut', cat: 'Finans', name: 'Netten Brüte Maaş Hesaplama', link: 'netten-brute-maas-hesaplama.html', color:'blue' },
     { id: 'brut_net', cat: 'Finans', name: 'Brütten Nete Maaş Hesaplama', link: 'brutten-nete-maas-hesaplama.html', color:'blue' },
@@ -25,12 +27,28 @@ const tools = [
     { id: 'kk_asgari', cat: 'Finans', name: 'K.K. Asgari Ödeme Hesaplama', link: 'kredi-karti-asgari-odeme-hesaplama.html', color:'blue' },
     { id: 'komisyon', cat: 'Finans', name: 'Emlak Komisyonu Hesaplama', link: 'emlakci-komisyonu-hesaplama.html', color:'blue' },
     { id: 'zam', cat: 'Finans', name: 'Maaş Zam Hesaplama', link: 'maas-zam-orani-hesaplama.html', color:'blue' },
+    { id: 'asgari', cat: 'Finans', name: '2026 Asgari Ücret Hesaplama', link: 'asgari-ucret-hesaplama.html', color:'blue' },
+    { id: 'memur', cat: 'Finans', name: '2026 Memur Zammı Hesaplama', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
+    { id: 'kira', cat: 'Finans', name: 'Kira Zammı Hesaplama', link: 'kira-zammi-hesaplama.html', color:'blue' },
+    { id: 'emekli', cat: 'Finans', name: '2026 Emekli Maaş Hesaplama', link: 'emekli-maas-hesaplama-2026.html', color:'blue' },
+    { id: 'mtv', cat: 'Finans', name: 'MTV Hesaplama 2026', link: 'mtv-hesaplama-2026.html', color:'blue' },
+    { id: 'deger', cat: 'Finans', name: 'Değer Artış Kazancı', link: 'deger-artis-kazanci-hesaplama.html', color:'blue' },
+    { id: 'ucretli', cat: 'Finans', name: 'Ücretli Öğretmen Maaşı', link: 'ucretli-ogretmen-maas-hesaplama.html', color:'blue' },
+    { id: 'altin', cat: 'Finans', name: 'Altın Hesaplama', link: 'altin-hesaplama.html', color:'blue' },
+    { id: 'gumus', cat: 'Finans', name: 'Gümüş Hesaplama', link: 'gumus-hesaplama.html', color:'blue' },
+    { id: 'euro', cat: 'Finans', name: 'Euro Hesaplama', link: 'euro-hesaplama.html', color:'blue' },
+    { id: 'esnek', cat: 'Finans', name: 'Esnek Hesap Faizi', link: 'esnek-hesap-faiz-hesaplama.html', color:'blue' },
+    { id: 'tasit2', cat: 'Finans', name: '2. El Taşıt Kredisi', link: 'ikinci-el-tasit-kredisi-hesaplama.html', color:'blue' },
+    { id: 'piyango', cat: 'Finans', name: 'Milli Piyango Vergi', link: 'milli-piyango-hesaplama.html', color:'blue' },
+    { id: 'vekalet', cat: 'Finans', name: 'Vekalet Ücreti Hesaplama', link: 'vekalet-ucreti-hesaplama.html', color:'blue' },
+    { id: 'zekat', cat: 'Finans', name: 'Zekat Hesaplama', link: 'zekat-hesaplama.html', color:'blue' },
+    { id: 'islah', cat: 'Finans', name: 'Islah Harcı Hesaplama', link: 'islah-harci-hesaplama.html', color:'blue' },
+    { id: 'dolar_enf', cat: 'Finans', name: 'Dolar Enflasyonu Hesaplama', link: 'dolar-enflasyonu-hesaplama.html', color:'blue' },
 
     // 3. SAĞLIK
     { id: 'oruc', cat: 'Sağlık', name: 'Aralıklı Oruç (IF)', link: 'aralikli-oruc-hesaplama.html', color:'green' },
     { id: 'uyku', cat: 'Sağlık', name: 'Uyku Döngüsü Hesaplama', link: 'uyku-dongusu-hesaplama.html', color:'green' },
     { id: 'sigara', cat: 'Sağlık', name: 'Sigara Bırakma Hesaplama', link: 'sigara-maliyeti-hesaplama.html', color:'green' },
-    { id: 'ai_diyet', cat: 'Sağlık', name: 'AI Diyetisyen', link: 'ai-diyetisyen.html', color:'indigo' },
     { id: 'bmi', cat: 'Sağlık', name: 'Vücut Kitle İndeksi Hesaplama', link: 'vucut-kitle-i̇ndeksi-bmi-hesaplama.html', color:'green' },
     { id: 'idealkilo', cat: 'Sağlık', name: 'İdeal Kilo Hesaplama', link: 'i̇deal-kilo-hesaplama.html', color:'green' },
     { id: 'bmr', cat: 'Sağlık', name: 'Bazal Metabolizma Hesaplama', link: 'bazal-metabolizma-hizi-bmr-hesaplama.html', color:'green' },
@@ -38,6 +56,7 @@ const tools = [
     { id: 'su', cat: 'Sağlık', name: 'Su Tüketimi Hesaplama', link: 'gunluk-su-i̇htiyaci-hesaplama.html', color:'green' },
     { id: 'gebelik', cat: 'Sağlık', name: 'Doğum Tarihi (SAT) Hesaplama', link: 'gebelik-hesaplama-ve-dogum-tarihi.html', color:'green' },
     { id: 'nabiz', cat: 'Sağlık', name: 'Spor Nabız Aralığı Hesaplama', link: 'spor-nabiz-araligi-hesaplama.html', color:'green' },
+    { id: 'kaf', cat: 'Sağlık', name: 'Kafein Tolerans Hesaplama', link: 'kahve-tolerans-hesaplama.html', color:'green' },
 
     // 4. EĞİTİM & MATEMATİK
     { id: 'yuzde', cat: 'Eğitim', name: 'Yüzde Hesaplama', link: 'yuzde-hesaplama-araci.html', color:'purple' },
@@ -47,13 +66,50 @@ const tools = [
     { id: 'kelime', cat: 'Eğitim', name: 'Kelime ve Karakter Sayacı', link: 'kelime-ve-karakter-sayaci.html', color:'purple' },
     { id: 'vf', cat: 'Eğitim', name: 'Vize Final Hesaplama', link: 'vize-final-hesaplama.html', color:'purple' },
     { id: 'gpa', cat: 'Eğitim', name: 'Not Ortalaması (GNO) Hesaplama', link: 'universite-not-ortalamasi-hesaplama.html', color:'purple' },
+    { id: 'timer', cat: 'Eğitim', name: 'Sınav Geri Sayım', link: 'sinav-geri-sayim-sayaci.html', color:'purple' },
+    { id: 'akademik', cat: 'Eğitim', name: 'Akademik Teşvik Hesaplama', link: 'akademik-tesvik-hesaplama.html', color:'purple' },
+    { id: 'deneme', cat: 'Eğitim', name: 'Deneme Puanı Hesaplama', link: 'deneme-puan-hesaplama.html', color:'purple' },
+    { id: 'edebiyat', cat: 'Eğitim', name: 'Edebiyat Not Hesaplama', link: 'edebiyat-not-hesaplama.html', color:'purple' },
+    { id: 'kpss', cat: 'Eğitim', name: 'KPSS Önlisans Puan', link: 'kpss-onlisans-puan-hesaplama.html', color:'purple' },
+    { id: 'tyt', cat: 'Eğitim', name: 'TYT AYT Net Hesaplama', link: 'tyt-ayt-net-hesaplama.html', color:'purple' },
+    { id: 'yks', cat: 'Eğitim', name: 'YKS Sıralama Hesaplama', link: 'yks-siralama-hesaplama.html', color:'purple' },
 
     // 5. PRATİK & ARAÇLAR
     { id: 'day', cat: 'Pratik', name: 'Hangi Gün?', link: 'hangi-gun-hesaplama.html', color:'orange' },
     { id: 'date_add', cat: 'Pratik', name: 'Tarihe Gün Ekleme Hesaplama', link: 'tarihe-gun-ekleme-hesaplama.html', color:'orange' },
-    { id: 'asgari', cat: 'Finans', name: '2026 Asgari Ücret Hesaplama', link: 'asgari-ucret-hesaplama.html', color:'blue' },
-    { id: 'memur', cat: 'Finans', name: '2026 Memur Zammı Hesaplama', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
-    { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman Hesaplama', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'gray' }
+    { id: 'hiz', cat: 'Pratik', name: 'Hız / Zaman Hesaplama', link: 'hiz,-yol-ve-zaman-hesaplama.html', color:'gray' },
+    { id: 'elk', cat: 'Pratik', name: 'Elektrik Faturası Hesaplama', link: 'elektrik-faturasi-hesaplama.html', color:'orange' },
+    { id: 'ev', cat: 'Pratik', name: 'Elektrikli Araç Şarj Hesaplama', link: 'elektrikli-arac-sarj-hesaplama.html', color:'orange' },
+    { id: 'solar', cat: 'Pratik', name: 'Güneş Paneli Amortisman', link: 'gunes-paneli-amortisman-hesaplama.html', color:'orange' },
+    { id: 'co2', cat: 'Pratik', name: 'Karbon Ayak İzi Hesaplama', link: 'karbon-ayak-izi-hesaplama.html', color:'green' },
+    { id: 'yum', cat: 'Pratik', name: 'Yumurta Haşlama Süresi', link: 'yumurta-haslama-suresi-hesaplama.html', color:'orange' },
+    { id: 'raffle', cat: 'Pratik', name: 'Çekiliş Aracı', link: 'cekilis-araci.html', color:'orange' },
+    { id: 'qr', cat: 'Pratik', name: 'QR Kod Oluşturucu', link: 'qr-kod-olusturucu.html', color:'gray' },
+    { id: 'sifre', cat: 'Pratik', name: 'Güçlü Şifre Oluşturucu', link: 'guclu-sifre-olusturucu.html', color:'gray' },
+    { id: 'kedi', cat: 'Pratik', name: 'Kedi Yaşı Hesaplama', link: 'kedi-yasi-hesaplama.html', color:'orange' },
+    { id: 'kopek', cat: 'Pratik', name: 'Köpek Yaşı Hesaplama', link: 'kopek-yasi-hesaplama.html', color:'orange' },
+    { id: 'kus', cat: 'Pratik', name: 'Kuş Yaşı Hesaplama', link: 'kus-yasi-hesaplama.html', color:'orange' },
+    { id: 'internet', cat: 'Pratik', name: 'İnternet Hızı Hesaplama', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'gray' },
+    { id: 'yakit', cat: 'Pratik', name: 'Yakıt Tüketimi Hesaplama', link: 'yakit-tuketimi-hesaplama.html', color:'orange' },
+    { id: 'tarih_sayac', cat: 'Pratik', name: 'İki Tarih Arası Gün', link: 'i̇ki-tarih-arasi-gun-sayaci.html', color:'orange' },
+    { id: 'infaz', cat: 'Pratik', name: 'İnfaz Hesaplama', link: 'infaz-hesaplama.html', color:'orange' },
+    { id: 'mesai', cat: 'Pratik', name: 'Mesai Hesaplama', link: 'mesai-hesaplama.html', color:'orange' },
+    { id: 'altili', cat: 'Pratik', name: 'Altılı Ne Verir', link: 'altili-ne-verir-hesaplama.html', color:'orange' },
+    { id: 'tam_yas', cat: 'Pratik', name: 'Tam Yaş Hesaplama', link: 'tam-yas-hesaplama.html', color:'orange' },
+
+    // 6. DİJİTAL & SOSYAL MEDYA
+    { id: 'smedya', cat: 'Dijital', name: 'Sosyal Medya Gelir Hesaplama', link: 'tiktok-youtube-gelir-hesaplama.html', color:'pink' },
+    { id: 'insta', cat: 'Dijital', name: 'Instagram Etkileşim Oranı', link: 'instagram-etkilesim-orani-hesaplama.html', color:'pink' },
+    { id: 'best_time', cat: 'Dijital', name: 'Sosyal Medya En İyi Saat', link: 'sosyal-medya-en-iyi-saat-hesaplama.html', color:'pink' },
+
+    // 7. ASTROLOJİ
+    { id: 'solar_map', cat: 'Astroloji', name: 'Solar Harita Hesaplama', link: 'solar-harita-hesaplama.html', color:'purple' },
+    { id: 'dogum', cat: 'Astroloji', name: 'Doğum Haritası Hesaplama', link: 'dogum-haritasi-hesaplama.html', color:'purple' },
+    { id: 'yukselen', cat: 'Astroloji', name: 'Yükselen Burç Hesaplama', link: 'yukselen-burc-hesaplama.html', color:'purple' },
+    { id: 'burc', cat: 'Astroloji', name: 'Burç Hesaplama', link: 'burc-hesaplama.html', color:'purple' },
+    { id: 'ay_burcu', cat: 'Astroloji', name: 'Ay Burcu Hesaplama', link: 'ay-burcu-hesaplama.html', color:'purple' },
+    { id: 'numeroloji', cat: 'Astroloji', name: 'Numeroloji Hesaplama', link: 'numeroloji-hesaplama.html', color:'purple' },
+    { id: 'cin', cat: 'Astroloji', name: 'Çin Takvimi Cinsiyet', link: 'cin-takvimi-cinsiyet-hesaplama.html', color:'purple' }
 ];
 
 // --- RENDER SIDEBAR ---
@@ -87,14 +143,16 @@ function renderSidebar() {
             });
         });
 
-        const links = container.querySelectorAll('a');
-        links.forEach(link => {
-            const txt = link.innerText.toLowerCase();
-            // Explicitly remove links that look like summary links
-            if(txt.includes('tüm hesaplama') || txt.includes('tum hesaplama')) {
-                link.remove();
-            }
-        });
+        // Strict Cleanup: Remove "Tüm Hesaplamalar" link from drawer if present
+        if(id === 'drawer-list') {
+            const links = container.querySelectorAll('a');
+            links.forEach(link => {
+                const txt = link.innerText.toLowerCase();
+                if(txt.includes('tüm hesaplama') || txt.includes('tum hesaplama')) {
+                    link.remove();
+                }
+            });
+        }
     });
 }
 
@@ -219,6 +277,7 @@ function filterDrawerTools() {
 function initDrawer() {
     if(!document.getElementById('drawer')) {
         // High Z-Index to ensure it overlays everything including sticky headers
+        // Use z-[990] and z-[1000] as per HEAD but logic from fix
         const drawerHTML = `
     <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[990] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
     <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[1000] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
