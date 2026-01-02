@@ -376,6 +376,7 @@ function calc_commission() {
     const trans = document.getElementById('comm-trans') ? getNum('comm', 'trans') : 0;
     const listing = document.getElementById('comm-listing') ? getNum('comm', 'listing') : 0;
     const ad = document.getElementById('comm-ad') ? getNum('comm', 'ad') : 0;
+    const stopajRate = document.getElementById('comm-stopaj') ? getNum('comm', 'stopaj') : 0;
 
     const serviceVatRate = 0.20;
     const productVatRate = kdv / 100;
@@ -405,7 +406,12 @@ function calc_commission() {
     const netAd = ad / (1 + serviceVatRate);
     const vatAd = ad - netAd;
 
-    const totalGrossExpenses = buy + grossCommission + cargo + service + trans + listing + ad;
+    // Stopaj Calculation: Applied to platform fees (Commission, Service, Listing, Transaction, Ad)
+    // Excluding Cargo from Stopaj base as it's often a pass-through or separate logic, but including others.
+    const stopajBase = grossCommission + service + listing + trans + ad;
+    const stopajAmount = stopajBase * (stopajRate / 100);
+
+    const totalGrossExpenses = buy + grossCommission + cargo + service + trans + listing + ad + stopajAmount;
     const totalInputVat = inputVatProduct + vatCommission + vatCargo + vatService + vatTrans + vatListing + vatAd;
     const payableVat = Math.max(0, outputVat - totalInputVat);
     const netProfit = sell - totalGrossExpenses - payableVat;
@@ -417,6 +423,7 @@ function calc_commission() {
     if(document.getElementById('res-comm-margin')) document.getElementById('res-comm-margin').innerText = '%' + f(margin);
     if(document.getElementById('res-comm-vat')) document.getElementById('res-comm-vat').innerText = f(payableVat) + ' TL';
     if(document.getElementById('res-comm-comm')) document.getElementById('res-comm-comm').innerText = f(grossCommission) + ' TL';
+    if(document.getElementById('res-comm-stopaj')) document.getElementById('res-comm-stopaj').innerText = f(stopajAmount) + ' TL';
 
     // Total Expenses (Excluding Buying Price as per label "Alış Hariç")
     // Total Gross Expenses includes 'buy'. We subtract it.
