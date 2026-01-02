@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sigara Maliyeti Hesaplama aracı ile sigarayı bırakarak ne kadar tasarruf edeceğinizi ve sağlığınızın nasıl iyileşeceğini öğrenin.">
-    <title>Sigara Maliyeti ve Sağlık Hesaplama | HesaplaHadi</title>
-    <link rel="canonical" href="https://hesaplahadi.com/sigara-maliyeti-hesaplama.html" />
+    <meta name="description" content="Enflasyon ve Alım Gücü Hesaplama aracı ile geçmişteki paranın bugünkü değerini öğrenin.">
+    <meta name="keywords" content="enflasyon hesaplama, alım gücü, para değeri">
+    <title>Enflasyon ve Alım Gücü Hesaplama | HesaplaHadi</title>
+    <link rel="canonical" href="https://hesaplahadi.com/enflasyon-alim-gucu-hesaplama.html">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Sigara Maliyeti ve Sağlık Hesaplama",
-      "applicationCategory": "HealthApplication",
+      "name": "Enflasyon ve Alım Gücü Hesaplama",
+      "applicationCategory": "FinanceApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
     }
     </script>
@@ -20,17 +21,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 </head>
-<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
-
-    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
-    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
-        <div class="p-4 border-b border-slate-100 flex justify-between items-center">
-             <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
-             <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
-        </div>
-        <div id="drawer-list" class="p-3 space-y-1"></div>
-    </aside>
-
+<body class="flex flex-col min-h-screen text-slate-800">
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
@@ -70,7 +61,7 @@
                     <div id="mobile-search-results-list"></div>
                  </div>
             </div>
-            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm" onclick="toggleDrawer()">
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
                 <i class="fa-solid fa-bars"></i> <span>Tüm Hesaplama Araçları</span>
             </button>
         </div>
@@ -89,64 +80,54 @@
         <main class="col-span-1 lg:col-span-6 space-y-6">
             <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
                 <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div class="p-3 bg-red-100 rounded-2xl text-red-600 shadow-sm"><i class="fa-solid fa-heart-pulse text-xl"></i></div>
+                    <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm"><i class="fa-solid fa-money-bill-trend-up text-xl"></i></div>
                     <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Sigara Bırakma Hesaplama</h1>
-                        <p class="text-xs text-slate-500 mt-1">Sigarayı bırakmanın bütçenize ve sağlığınıza katkısı.</p>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Enflasyon Hesaplama</h1>
+                        <p class="text-xs text-slate-500 mt-1">Geçmişteki paranın bugünkü alım gücünü hesaplayın.</p>
                     </div>
                 </div>
 
-                <div id="content-sigara">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                <div class="grid grid-cols-1 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tutar (TL)</label>
+                        <input type="number" id="enflasyon-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1000">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Paket Fiyatı</label>
-                            <input type="number" id="sigara-price" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="60" step="any">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Başlangıç Yılı</label>
+                            <select id="enflasyon-start" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition"></select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Günlük Adet</label>
-                            <input type="number" id="sigara-daily" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="20" step="any">
-                        </div>
-                        <div class="md:col-span-2">
-                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Bırakma Tarihi</label>
-                            <input type="date" id="sigara-date" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Bitiş Yılı</label>
+                            <select id="enflasyon-end" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition"></select>
                         </div>
                     </div>
-                    <button onclick="calc_sigara()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-red-500/20 flex justify-center items-center gap-2 bg-red-600 hover:bg-red-700 transition">
-                        <i class="fa-solid fa-calculator"></i> Hesapla
-                    </button>
+                </div>
+                <button onclick="calc_enflasyon()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-calculator"></i> Hesapla
+                </button>
 
-                    <div id="res-sigara" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-red-50 border border-red-100">
-                        <button id="btn-copy-sigara" onclick="copyResult('sigara')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                        <p class="text-[10px] font-bold text-red-600 uppercase tracking-widest mb-2">TASARRUF TUTARI</p>
-                        <div id="val-sigara" class="text-3xl font-black text-slate-900 tracking-tight"></div>
-                        <div id="detail-sigara" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
-
-                        <!-- Health Stats -->
-                        <div id="health-stats" class="mt-4 pt-4 border-t border-red-200">
-                             <p class="text-[10px] font-bold text-red-600 uppercase tracking-widest mb-2">SAĞLIK KAZANIMLARI</p>
-                             <div id="health-list" class="space-y-2 text-xs text-slate-600"></div>
-                        </div>
-                    </div>
+                <div id="res-enflasyon" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-blue-50 border border-blue-100">
+                    <button id="btn-copy-enflasyon" onclick="copyResult('enflasyon')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm"><i class="fa-regular fa-copy"></i> Kopyala</button>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">BUGÜNKÜ DEĞERİ</p>
+                    <div id="val-enflasyon" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+                    <div id="detail-enflasyon" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
                 </div>
             </div>
 
             <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-                <h2 class="text-xl font-bold text-slate-800 mb-4">Sigarayı Bırakmanın Faydaları</h2>
-                <p class="mb-4">Sigarayı bıraktığınız andan itibaren vücudunuz kendini onarmaya başlar. İlk 20 dakikada nabız düzelir, 8 saatte kandaki oksijen seviyesi normale döner. Bu araç hem cebinize kalan parayı hem de kazandığınız sağlığı gösterir.</p>
-                <ul class="list-disc pl-5 space-y-2 mb-4 text-sm text-slate-600">
-                    <li>20 Dakika: Nabız ve tansiyon düşer.</li>
-                    <li>24 Saat: Kalp krizi riski azalmaya başlar.</li>
-                    <li>1 Yıl: Koroner kalp hastalığı riski yarıya iner.</li>
-                    <li>10 Yıl: Akciğer kanseri riski yarıya iner.</li>
-                </ul>
+                <h2 class="text-xl font-bold text-slate-800 mb-4">Enflasyon ve Alım Gücü Hakkında</h2>
+                <p class="mb-4">Para zaman içinde değer kaybeder. Özellikle enflasyonist ortamlarda, geçmişteki 1000 TL'nin alım gücü ile bugünkü 1000 TL'nin alım gücü aynı değildir. Bu araç, TÜİK verilerine dayalı (tahmini) enflasyon oranlarını kullanarak paranın zaman içindeki değer değişimini hesaplar.</p>
+                <h3 class="text-lg font-bold text-slate-800 mb-3">Nasıl Hesaplanır?</h3>
+                <p>Başlangıç yılındaki Tüketici Fiyat Endeksi (TÜFE) ile bitiş yılındaki TÜFE oranlanır. Aradaki değişim katsayısı, girilen tutar ile çarpılarak bugünkü eşdeğer alım gücü bulunur.</p>
             </article>
         </main>
 
         <aside class="col-span-1 lg:col-span-3 space-y-6">
              <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar</h4>
-                <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">BMI Hesaplama</li>
+                <ul class="text-sm space-y-2 text-slate-600 font-medium" id="popular-tools-sidebar">
+                    <!-- Populated by JS -->
                 </ul>
             </div>
         </aside>
@@ -159,5 +140,19 @@
         </div>
     </footer>
     <script src="assets/js/calculator.js?v=3"></script>
+    <script>
+        // Init Years
+        const start = document.getElementById('enflasyon-start');
+        const end = document.getElementById('enflasyon-end');
+        const currYear = new Date().getFullYear();
+        for(let i=2000; i<=currYear; i++) {
+            const opt1 = document.createElement('option'); opt1.value=i; opt1.text=i;
+            const opt2 = document.createElement('option'); opt2.value=i; opt2.text=i;
+            start.appendChild(opt1);
+            end.appendChild(opt2);
+        }
+        start.value = 2020;
+        end.value = currYear;
+    </script>
 </body>
 </html>

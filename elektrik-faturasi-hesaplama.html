@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aracınızın km başına ne kadar yaktığını ve yakıt maliyetini hesaplayın. Benzin, Dizel, LPG ve Elektrikli araçlar için uygun.">
-    <title>Yakıt Tüketimi Hesaplama | HesaplaHadi</title>
-    <link rel="canonical" href="https://hesaplahadi.com/yakit-tuketimi-hesaplama.html" />
+    <meta name="description" content="Elektrikli cihazlarınızın faturaya ne kadar yansıdığını hesaplayın. 2026 tahmini elektrik birim fiyatları ile hesaplama yapın.">
+    <title>Elektrik Faturası Tüketim Hesaplama | HesaplaHadi</title>
+    <link rel="canonical" href="https://hesaplahadi.com/elektrik-faturasi-hesaplama.html">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Yakıt Tüketimi Hesaplama",
+      "name": "Elektrik Faturası Hesaplama",
       "applicationCategory": "FinanceApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
     }
@@ -22,7 +22,6 @@
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
-    <!-- Mobile Sidebar Drawer -->
     <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
     <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
         <div class="p-4 border-b border-slate-100 flex justify-between items-center">
@@ -90,55 +89,42 @@
         <main class="col-span-1 lg:col-span-6 space-y-6">
             <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
                 <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div class="p-3 bg-indigo-100 rounded-2xl text-indigo-600 shadow-sm"><i class="fa-solid fa-gas-pump text-xl"></i></div>
+                    <div class="p-3 bg-yellow-100 rounded-2xl text-yellow-600 shadow-sm"><i class="fa-solid fa-lightbulb text-xl"></i></div>
                     <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Yakıt Tüketimi Hesaplama</h1>
-                        <p class="text-xs text-slate-500 mt-1">Aracınızın km başına ne kadar yaktığını hesaplayın.</p>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Elektrik Faturası Hesaplama</h1>
+                        <p class="text-xs text-slate-500 mt-1">Hangi cihazın faturanıza ne kadar yansıdığını hesaplayın.</p>
                     </div>
                 </div>
 
-                <div id="content-yakit">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                        <div class="md:col-span-2">
-                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Araç / Yakıt Tipi</label>
-                             <select id="yakit-type" onchange="updateFuelLabels()" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition">
-                                 <option value="benzin">Benzinli</option>
-                                 <option value="dizel">Dizel (Mazot)</option>
-                                 <option value="lpg">LPG</option>
-                                 <option value="ev">Elektrikli (EV)</option>
-                             </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Gidilecek Yol (km)</label>
-                            <input type="number" id="yakit-km" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="100" step="any">
-                        </div>
-                        <div>
-                            <label id="lbl-consumption" class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Ort. Tüketim (Lt/100km)</label>
-                            <input type="number" id="yakit-lit" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="7" step="any">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label id="lbl-price" class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Litre Fiyatı (TL)</label>
-                            <input type="number" id="yakit-pr" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="42" step="any">
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Cihaz Gücü (Watt)</label>
+                        <input type="number" id="elk-watt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="2000 (Klima, Ütü vb.)">
                     </div>
-                    <button onclick="calc_yakit()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
-                        <i class="fa-solid fa-bolt"></i> Hesapla
-                    </button>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Günlük Çalışma (Saat)</label>
+                        <input type="number" id="elk-hours" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="5">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Elektrik Birim Fiyatı (TL/kWh)</label>
+                        <input type="number" id="elk-price" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="3.5" value="3.5">
+                         <p class="text-[10px] text-slate-400 mt-1 ml-1">*Ortalama 3.5 TL (2025/2026 Tahmini)</p>
+                    </div>
+                </div>
+                <button onclick="calc_elk()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-yellow-500/20 flex justify-center items-center gap-2 bg-yellow-500 hover:bg-yellow-600">
+                    <i class="fa-solid fa-plug"></i> Hesapla
+                </button>
 
-                    <div id="res-yakit" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-indigo-50 border border-indigo-100">
-                        <button id="btn-copy-yakit" onclick="copyResult('yakit')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                        <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">TOPLAM MALİYET</p>
-                        <div id="val-yakit" class="text-3xl font-black text-slate-900 tracking-tight"></div>
-                        <div id="detail-yakit" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
-                    </div>
+                <div id="res-elk" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-yellow-50 border border-yellow-100">
+                    <p class="text-[10px] font-bold text-yellow-600 uppercase tracking-widest mb-2">AYLIK MALİYET</p>
+                    <div id="val-elk" class="text-3xl font-black text-slate-900 tracking-tight"></div>
+                    <div id="detail-elk" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
                 </div>
             </div>
 
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-                <h2 class="text-xl font-bold text-slate-800 mb-4">Yakıt Tüketimi Nasıl Hesaplanır?</h2>
-                <p class="mb-4">İster benzinli, ister dizel, isterse yeni nesil elektrikli bir aracınız olsun; yolculuk maliyetini hesaplamak için temel formül basittir: (Gidilecek Yol / 100) x 100km'deki Ortalama Tüketim x Birim Fiyat.</p>
-                <h3 class="text-lg font-bold text-slate-800 mb-3">Elektrikli Araçlar İçin</h3>
-                <p>Elektrikli araçlarda "Litre" yerine "kWh" birimi kullanılır. Aracınızın 100km'de kaç kWh enerji tükettiğini (genellikle 15-20 kWh arasıdır) ve evinizden veya şarj istasyonundan aldığınız elektriğin birim fiyatını (TL/kWh) girerek hesaplama yapabilirsiniz.</p>
+             <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+                <h2 class="text-xl font-bold text-slate-800 mb-4">Cihazlar Ne Kadar Yakar?</h2>
+                <p class="mb-4">Evinizdeki elektrikli aletlerin faturanıza etkisini bilmek, tasarruf etmenin ilk adımıdır. Örneğin 2000 Watt (2 kW) gücündeki bir klima saatte 2 kWh elektrik harcar. Günde 5 saat çalışırsa 10 kWh eder. Birim fiyat 3.5 TL ise, günlük maliyeti 35 TL, aylık maliyeti 1050 TL olur.</p>
             </article>
         </main>
 
@@ -146,7 +132,7 @@
              <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar</h4>
                 <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='mtv-hesaplama-2026.html'">MTV Hesaplama</li>
+                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='kredi-hesaplama.html'">Kredi Hesaplama</li>
                 </ul>
             </div>
         </aside>
@@ -159,37 +145,5 @@
         </div>
     </footer>
     <script src="assets/js/calculator.js?v=3"></script>
-    <script>
-        function updateFuelLabels() {
-            const type = document.getElementById('yakit-type').value;
-            const lblCons = document.getElementById('lbl-consumption');
-            const lblPrice = document.getElementById('lbl-price');
-
-            if(type === 'ev') {
-                lblCons.innerText = 'Ort. Tüketim (kWh/100km)';
-                lblPrice.innerText = 'Birim Fiyat (TL/kWh)';
-                document.getElementById('yakit-lit').placeholder = "18";
-                document.getElementById('yakit-pr').placeholder = "4.5";
-            } else {
-                lblCons.innerText = 'Ort. Tüketim (Lt/100km)';
-                lblPrice.innerText = 'Litre Fiyatı (TL)';
-                document.getElementById('yakit-lit').placeholder = "7";
-                document.getElementById('yakit-pr').placeholder = "42";
-            }
-        }
-        function toggleDrawer() { /* ... */ } // Handled by main JS mostly, but kept for inline safety
-        // Drawer toggle needs to be globally available or attached
-        window.toggleDrawer = function() {
-            const d = document.getElementById('drawer');
-            const m = document.getElementById('drawer-mask');
-            if(d.classList.contains('drawer-closed')) {
-                d.classList.remove('drawer-closed'); d.classList.add('drawer-open');
-                m.classList.remove('mask-hidden'); m.classList.add('mask-visible');
-            } else {
-                d.classList.remove('drawer-open'); d.classList.add('drawer-closed');
-                m.classList.remove('mask-visible'); m.classList.add('mask-hidden');
-            }
-        };
-    </script>
 </body>
 </html>

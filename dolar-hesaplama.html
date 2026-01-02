@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dolar Hesaplama aracı ile güncel 2026 verileriyle hesaplama yapın.">
-    <meta name="keywords" content="dolar tl, kur hesaplama">
-    <meta name="author" content="HesaplaHadi">
-    <meta name="robots" content="index, follow">
-    <title>Dolar Hesaplama | HesaplaHadi</title>
+    <meta name="description" content="Dolar Hesaplama ve Döviz Kar/Zarar Hesaplama aracı ile yatırımlarınızın net getirisini ve güncel kur karşılığını hesaplayın.">
+    <meta name="keywords" content="dolar hesaplama, döviz kar zarar, dolar ne kadar">
+    <title>Dolar ve Döviz Kar/Zarar Hesaplama | HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/dolar-hesaplama.html">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Calculator",
-      "name": "Dolar Hesaplama",
-      "url": "https://hesaplahadi.com/dolar-hesaplama.html",
-      "description": "Dolar Hesaplama aracı ile güncel 2026 verileriyle hesaplama yapın.",
-      "applicationCategory": "finance",
+      "@type": "SoftwareApplication",
+      "name": "Dolar ve Döviz Kar/Zarar Hesaplama",
+      "applicationCategory": "FinanceApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
     }
     </script>
@@ -26,11 +22,9 @@
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
-    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <!-- Left: Logo -->
                 <div class="flex items-center gap-3">
                      <a href="index.html" class="flex items-center space-x-2 group">
                         <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
@@ -41,158 +35,112 @@
                         </div>
                     </a>
                 </div>
-
-                <!-- Right: Actions -->
                 <div class="flex items-center gap-3">
-                    <!-- Desktop Search Bar -->
                     <div class="hidden md:block relative">
                          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                          <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
-                         <!-- Desktop Search Suggestions (Hidden by default) -->
                          <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
                             <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                            <div id="desktop-search-results-list">
-                                <!-- Populated dynamically by JS -->
-                            </div>
+                            <div id="desktop-search-results-list"></div>
                          </div>
                     </div>
-
-                    <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
                         <a href="index.html" class="hover:text-blue-600 transition">Araçlar</a>
                         <a href="blog/index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
+                        <a href="ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300"><i class="fa-solid fa-wand-magic-sparkles"></i><span>AI Asistan</span></a>
                     </div>
-
-                    <!-- Mobile AI Button -->
-                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-
-                    <!-- Mobile Stylized Blog Button -->
-                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
+                    <a href="ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition"><i class="fa-solid fa-wand-magic-sparkles text-sm"></i></a>
+                    <a href="blog/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1"><span>Blog</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i></a>
                 </div>
             </div>
-
-            <!-- Mobile Search Bar (Below Header) -->
             <div class="md:hidden mt-3 relative group z-50">
                  <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
-
-                 <!-- Search Suggestions -->
+                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Araç ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
                  <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
                     <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                    <div id="mobile-search-results-list">
-                        <!-- Populated dynamically by JS -->
-                    </div>
+                    <div id="mobile-search-results-list"></div>
                  </div>
             </div>
-
-            <!-- Mobile "Tüm Hesaplamalar" Button (Below Search) -->
-            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:from-indigo-700 hover:to-purple-800 transition shadow-sm relative z-30 cursor-pointer" onclick="toggleDrawer()">
-                <i class="fa-solid fa-bars"></i>
-                <span>Tüm Hesaplama Araçları</span>
+            <button class="md:hidden w-full mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-sm" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i> <span>Tüm Hesaplama Araçları</span>
             </button>
         </div>
     </header>
 
     <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-        <!-- Sidebar -->
         <nav class="hidden lg:block lg:col-span-3 space-y-4">
             <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
                 <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
                 </div>
-                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
-                    <!-- Populated via JS -->
-                </div>
+                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
             </div>
         </nav>
 
-        <!-- Main Content -->
         <main class="col-span-1 lg:col-span-6 space-y-6">
             <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
                 <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm">
-                        <i class="fa-solid fa-calculator text-xl"></i>
-                    </div>
+                    <div class="p-3 bg-green-100 rounded-2xl text-green-600 shadow-sm"><i class="fa-solid fa-money-bill-transfer text-xl"></i></div>
                     <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Dolar Hesaplama</h1>
-                        <p class="text-xs text-slate-500 mt-1">Dolar Hesaplama aracı ile güncel 2026 verileriyle hesaplama yapın.</p>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Dolar/Döviz Kar-Zarar</h1>
+                        <p class="text-xs text-slate-500 mt-1">Döviz ve Altın yatırımlarınızın kar/zarar durumunu hesaplayın.</p>
                     </div>
                 </div>
 
-                <!-- DYNAMIC FORM CONTENT -->
+                <div class="mb-6 flex gap-2 p-1 bg-slate-100 rounded-xl">
+                    <button onclick="setDolarMode('calc')" id="btn-mode-calc" class="flex-1 py-2 rounded-lg text-sm font-bold bg-white shadow-sm text-slate-800 transition">Kar/Zarar</button>
+                    <button onclick="setDolarMode('conv')" id="btn-mode-conv" class="flex-1 py-2 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition">Kur Çevirici</button>
+                </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Miktar</label>
-                <input type="number" id="dolar-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1">
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Kur / Fiyat (TL)</label>
-                <input type="number" id="dolar-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="35.50">
-            </div>
-        </div>
-        <button onclick="calc_dolar()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
-            <i class="fa-solid fa-calculator"></i> Hesapla
-        </button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Miktar (Adet/$)</label>
+                        <input type="number" id="dolar-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1000">
+                    </div>
 
+                    <!-- Profit/Loss Fields -->
+                    <div class="dolar-calc-field">
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Alış Fiyatı (TL)</label>
+                        <input type="number" id="dolar-buy" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="30.50">
+                    </div>
+                    <div class="dolar-calc-field">
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Satış/Güncel Fiyat (TL)</label>
+                        <input type="number" id="dolar-sell" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="35.00">
+                    </div>
 
-                <div id="res-dolar" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-                    <button id="btn-copy-dolar" onclick="copyResult('dolar')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Kopyala
-                    </button>
-                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
-                    <div id="val-dolar" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+                    <!-- Converter Fields (Hidden by default) -->
+                    <div class="dolar-conv-field hidden md:col-span-2">
+                         <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Kur (TL)</label>
+                        <input type="number" id="dolar-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="35.00">
+                    </div>
+                </div>
+                <input type="hidden" id="dolar-mode" value="calc">
+
+                <button onclick="calc_dolar()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-green-500/20 flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700">
+                    <i class="fa-solid fa-calculator"></i> Hesapla
+                </button>
+
+                <div id="res-dolar" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-green-50 border border-green-100">
+                    <button id="btn-copy-dolar" onclick="copyResult('dolar')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm"><i class="fa-regular fa-copy"></i> Kopyala</button>
+                    <p class="text-[10px] font-bold text-green-600 uppercase tracking-widest mb-2">SONUÇ</p>
+                    <div id="val-dolar" class="text-3xl font-black text-slate-900 tracking-tight"></div>
                     <div id="detail-dolar" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
                 </div>
-
             </div>
 
-            <!-- SEO Content -->
-
-        <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-            <h2 class="text-xl font-bold text-slate-800 mb-4">Dolar Hesaplama ve Finansal Planlama</h2>
-            <p class="mb-4">Finansal kararlar alırken doğru verilerle hareket etmek hayati önem taşır. <strong>Dolar Hesaplama</strong> aracımız, 2026 yılı güncel ekonomik parametreleri, vergi dilimleri ve enflasyon tahminleri dikkate alınarak tasarlanmıştır. İster yatırım yapın, ister borçlanın, ister maaş hesabınızı kontrol edin; doğru hesaplama size para kazandırır.</p>
-
-            <h3 class="text-lg font-bold text-slate-800 mb-3">2026 Yılında Dikkat Edilmesi Gerekenler</h3>
-            <p class="mb-4">Ocak 2026 itibarıyla değişen asgari ücret, vergi oranları ve harç tutarları, tüm finansal dengeleri etkilemektedir. Aracımız, bu yeni dönemdeki katsayıları ve yasal düzenlemeleri (Resmi Gazete verileri ışığında) baz alarak size en gerçekçi sonucu (tahmini) sunar. Özellikle <strong>dolar tl, kur hesaplama</strong> konularında yapacağınız hatalı bir hesaplama, bütçenizde ciddi sapmalara yol açabilir.</p>
-
-            <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama Mantığı</h3>
-            <p class="mb-4">Finansal hesaplamalarımızda net bugünkü değer, bileşik faiz formülleri ve yasal kesinti oranları (Damga Vergisi, Gelir Vergisi vb.) otomatik olarak uygulanır. Kullanıcı dostu arayüzümüz sayesinde, karmaşık formüllerle uğraşmadan sadece temel verileri girerek net sonuca ulaşabilirsiniz.</p>
-
-            <h3 class="text-lg font-bold text-slate-800 mb-3">Yatırım ve Tasarruf İpuçları</h3>
-            <p class="mb-4">Elde ettiğiniz sonuçları değerlendirirken, enflasyonun etkisini ve paranın zaman değerini göz ardı etmeyin. Aracımız size sadece bugünkü durumu değil, gelecekteki projeksiyonları da anlamanız için yardımcı olur. Ek olarak, yapay zeka asistanımızla sonuçlarınızı detaylıca analiz edebilir, yatırım tavsiyesi olmamak kaydıyla finansal okuryazarlığınızı geliştirecek öneriler alabilirsiniz.</p>
-        </article>
-
-
+            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+                <h2 class="text-xl font-bold text-slate-800 mb-4">Döviz Yatırımı Kar/Zarar Hesabı</h2>
+                <p class="mb-4">Dolar, Euro veya Altın alıp satarken ne kadar kar ettiğinizi net olarak görmek önemlidir. Bu araç, alış maliyetiniz ile satış fiyatınız arasındaki farkı miktar ile çarparak net kazancınızı (veya kaybınızı) TL bazında gösterir.</p>
+                <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama İpuçları</h3>
+                <p>Eğer sadece elinizdeki dövizin TL karşılığını öğrenmek istiyorsanız, yukarıdaki mod seçeneklerinden "Kur Çevirici"yi seçebilirsiniz. Yatırım analizi için ise "Kar/Zarar" modu varsayılan olarak açıktır.</p>
+            </article>
         </main>
 
-        <!-- Right Sidebar -->
         <aside class="col-span-1 lg:col-span-3 space-y-6">
-             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
-                </h4>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar</h4>
                 <ul class="text-sm space-y-2 text-slate-600 font-medium">
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
-                        <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
-                        <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
-                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='mtv-hesaplama-2026.html'">
-                        <span>MTV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
+                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition" onclick="window.location.href='altin-hesaplama.html'">Altın Hesaplama</li>
                 </ul>
             </div>
         </aside>
@@ -201,20 +149,31 @@
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
             <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
-                <a href="index.html" class="hover:text-white transition">Ana Sayfa</a>
-                <a href="blog/index.html" class="hover:text-white transition">Blog</a>
-            </div>
             <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
-            <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
-        </div>
-    </div>
     <script src="assets/js/calculator.js?v=3"></script>
-    <script src="assets/js/tools-2026.js?v=1"></script>
+    <script>
+        function setDolarMode(m) {
+            document.getElementById('dolar-mode').value = m;
+            document.querySelectorAll('.dolar-calc-field').forEach(el => el.style.display = m === 'calc' ? 'block' : 'none');
+            document.querySelectorAll('.dolar-conv-field').forEach(el => {
+                el.classList.remove('hidden');
+                el.style.display = m === 'conv' ? 'block' : 'none';
+            });
+
+            // Buttons
+            const btnCalc = document.getElementById('btn-mode-calc');
+            const btnConv = document.getElementById('btn-mode-conv');
+
+            if(m==='calc') {
+                btnCalc.className = "flex-1 py-2 rounded-lg text-sm font-bold bg-white shadow-sm text-slate-800 transition";
+                btnConv.className = "flex-1 py-2 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition";
+            } else {
+                btnConv.className = "flex-1 py-2 rounded-lg text-sm font-bold bg-white shadow-sm text-slate-800 transition";
+                btnCalc.className = "flex-1 py-2 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition";
+            }
+        }
+    </script>
 </body>
 </html>
