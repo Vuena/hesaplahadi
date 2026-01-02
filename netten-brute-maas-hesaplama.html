@@ -3,30 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.">
-  <meta name="keywords" content="fazla mesai, overtime">
-  <meta name="author" content="HesaplaHadi">
-  <meta name="robots" content="index, follow">
-  <title>Mesai Ücreti Hesaplama | HesaplaHadi</title>
-  <link rel="canonical" href="https://hesaplahadi.com/mesai-hesaplama.html">
+  <meta name="description" content="Net maaşınızdan brüt maaşınızı hesaplayın. SGK ve vergi kesintilerini görün.">
+  <title>Netten Brüte Maaş Hesaplama | HesaplaHadi</title>
+  <link rel="canonical" href="https://hesaplahadi.com/netten-brute-maas-hesaplama.html" />
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
    "@context": "https://schema.org",
-   "@type": "Calculator",
-   "name": "Mesai Ücreti Hesaplama",
-   "url": "https://hesaplahadi.com/mesai-hesaplama.html",
-   "description": "Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.",
-   "applicationCategory": "finance",
+   "@type": "SoftwareApplication",
+   "name": "Netten Brüte Maaş Hesaplama",
+   "url": "https://hesaplahadi.com/netten-brute-maas-hesaplama.html",
+   "description": "Net maaşınızdan brüt maaşınızı hesaplayın. SGK ve vergi kesintilerini görün.",
+   "applicationCategory": "FinanceApplication",
+   "operatingSystem": "All",
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
   }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    .drawer-open { transform: translateX(0); }
+    .drawer-closed { transform: translateX(-100%); }
+    .mask-visible { opacity: 1; pointer-events: auto; }
+    .mask-hidden { opacity: 0; pointer-events: none; }
+  </style>
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 </head>
-<body class="flex flex-col min-h-screen text-slate-800">
-  <!-- Header -->
+<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
+
+  <!-- Mobile Sidebar Drawer -->
+  <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+  <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+    <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+       <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+       <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+    </div>
+    <div id="drawer-list" class="p-3 space-y-1"></div>
+  </aside>
+
+          <!-- Header -->
   <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
     <div class="container mx-auto px-4 py-3">
       <div class="flex justify-between items-center">
@@ -102,65 +118,59 @@
   </header>
 
   <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-    <!-- Sidebar -->
     <nav class="hidden lg:block lg:col-span-3 space-y-4">
       <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
         <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
           <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
         </div>
-        <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
-          <!-- Populated via JS -->
-        </div>
+        <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
       </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="col-span-1 lg:col-span-6 space-y-6">
       <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
         <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-          <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm">
-            <i class="fa-solid fa-calculator text-xl"></i>
-          </div>
+          <div class="p-3 bg-indigo-100 rounded-2xl text-indigo-600 shadow-sm"><i class="fa-solid fa-calculator text-xl"></i></div>
           <div>
-            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mesai Ücreti Hesaplama</h1>
-            <p class="text-xs text-slate-500 mt-1">Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.</p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Netten Brüte Maaş Hesaplama</h1>
+            <p class="text-xs text-slate-500 mt-1">Net maaşınızdan brüt maaşınızı hesaplayın. SGK ve vergi kesintilerini görün.</p>
           </div>
         </div>
 
-        <!-- DYNAMIC FORM CONTENT -->
-        <input type="number" id="mesai-sal" class="w-full p-3 border rounded mb-2" placeholder="Net Maaş"><input type="number" id="mesai-hours" class="w-full p-3 border rounded" placeholder="Fazla Mesai Saati"><button onclick="calc_mesai()" class="btn-calc w-full mt-4 py-3 rounded-xl bg-blue-600 text-white">Hesapla</button>
+        <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
+        <div id="content-net_brut">
+          <div class="grid grid-cols-1 md:grid-cols-1 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Net Maaş (TL)</label><input type="number" id="net_brut-net" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="17002" step="any"></div></div>
+        <button onclick="calc_net_brut()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition">
+          <i class="fa-solid fa-bolt"></i> Hesapla
+        </button>
 
-        <div id="res-mesai" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-          <button id="btn-copy-mesai" onclick="copyResult('mesai')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+        <div id="res-net_brut" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-indigo-50 border border-indigo-100">
+          <button id="btn-copy-net_brut" onclick="copyResult('net_brut')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
             <i class="fa-regular fa-copy"></i> Kopyala
           </button>
-          <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
-          <div id="val-mesai" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
-          <div id="detail-mesai" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+          <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">SONUÇ</p>
+          <div id="val-net_brut" class="text-3xl font-black text-slate-900 tracking-tight"></div>
+          <div id="detail-net_brut" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
         </div>
 
+        </div>
       </div>
 
-      <!-- SEO Content -->
+      <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
+    <h2 class="text-xl font-bold text-slate-800 mb-4">Netten Brüte Maaş Hesaplama</h2>
+    <p class="mb-4">İş görüşmelerinde veya maaş pazarlıklarında genellikle "Net Maaş" konuşulur. Ancak işveren maliyeti ve yasal kesintiler "Brüt Maaş" üzerinden hesaplanır. Netten brüte hesaplama, elinize geçen net paranın, sigorta ve vergiler eklenmiş ham halini bulmanızı sağlar.</p>
 
-    <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-      <h2 class="text-xl font-bold text-slate-800 mb-4">Mesai Ücreti Hesaplama ve Finansal Planlama</h2>
-      <p class="mb-4">Finansal kararlar alırken doğru verilerle hareket etmek hayati önem taşır. <strong>Mesai Ücreti Hesaplama</strong> aracımız, yılı güncel ekonomik parametreleri, vergi dilimleri ve enflasyon tahminleri dikkate alınarak tasarlanmıştır. İster yatırım yapın, ister borçlanın, ister maaş hesabınızı kontrol edin; doğru hesaplama size para kazandırır.</p>
-
-      <h3 class="text-lg font-bold text-slate-800 mb-3">Yılında Dikkat Edilmesi Gerekenler</h3>
-      <p class="mb-4">Ocak itibarıyla değişen asgari ücret, vergi oranları ve harç tutarları, tüm finansal dengeleri etkilemektedir. Aracımız, bu yeni dönemdeki katsayıları ve yasal düzenlemeleri (Resmi Gazete verileri ışığında) baz alarak size en gerçekçi sonucu (tahmini) sunar. Özellikle <strong>fazla mesai, overtime</strong> konularında yapacağınız hatalı bir hesaplama, bütçenizde ciddi sapmalara yol açabilir.</p>
-
-      <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama Mantığı</h3>
-      <p class="mb-4">Finansal hesaplamalarımızda net bugünkü değer, bileşik faiz formülleri ve yasal kesinti oranları (Damga Vergisi, Gelir Vergisi vb.) otomatik olarak uygulanır. Kullanıcı dostu arayüzümüz sayesinde, karmaşık formüllerle uğraşmadan sadece temel verileri girerek net sonuca ulaşabilirsiniz.</p>
-
-      <h3 class="text-lg font-bold text-slate-800 mb-3">Yatırım ve Tasarruf İpuçları</h3>
-      <p class="mb-4">Elde ettiğiniz sonuçları değerlendirirken, enflasyonun etkisini ve paranın zaman değerini göz ardı etmeyin. Aracımız size sadece bugünkü durumu değil, gelecekteki projeksiyonları da anlamanız için yardımcı olur. Ek olarak, yapay zeka asistanımızla sonuçlarınızı detaylıca analiz edebilir, yatırım tavsiyesi olmamak kaydıyla finansal okuryazarlığınızı geliştirecek öneriler alabilirsiniz.</p>
-    </article>
-
-
+    <h3 class="text-lg font-bold text-slate-800 mb-3">Maaş Kesintileri Nelerdir?</h3>
+    <ul class="list-disc pl-5 space-y-2 mb-4">
+      <li><strong>SGK Primi İşçi Payı:</strong> Brüt maaşın %14'ü.</li>
+      <li><strong>İşsizlik Sigortası Primi:</strong> Brüt maaşın %1'i.</li>
+      <li><strong>Gelir Vergisi:</strong> Kümülatif vergi matrahına göre %15, %20, %27, %35 ve %40 oranlarında artan oranlı kesilir.</li>
+      <li><strong>Damga Vergisi:</strong> Brüt maaşın %0.759'u.</li>
+    </ul>
+    <p class="mb-4">Net maaş, aylar geçtikçe vergi diliminin artması nedeniyle (eğer brüt sabit anlaşılmadıysa) düşebilir. Ancak "Netten Brüte" hesaplamada, hedef net tutarı sağlamak için gereken brüt tutar her ay artırılarak hesaplanır.</p>
+  </article>
     </main>
 
-    <!-- Right Sidebar -->
     <aside class="col-span-1 lg:col-span-3 space-y-6">
        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
@@ -170,14 +180,17 @@
           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kdv-hesaplama.html'">
             <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
+            <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
             <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama.html'">
             <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
-           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='mtv-hesaplama.html'">
-            <span>MTV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
+            <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
         </ul>
       </div>
@@ -194,13 +207,44 @@
       <div class="text-xs text-slate-600 mt-6">&copy; HesaplaHadi.</div>
     </div>
   </footer>
-  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-slate-200 p-4 z-50 transform translate-y-full">
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="text-sm text-slate-600 text-center md:text-left">Çerezler deneyiminizi iyileştirmek için kullanılır.</div>
-      <button onclick="acceptCookies()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-xl transition">Tamam</button>
-    </div>
-  </div>
   <script src="assets/js/calculator.js?v=3"></script>
-  <script src="assets/js/tools.js?v=1"></script>
+  <script>
+    // Drawer Logic
+    function toggleDrawer() {
+      const d = document.getElementById('drawer');
+      const m = document.getElementById('drawer-mask');
+      if(d.classList.contains('drawer-closed')) {
+        d.classList.remove('drawer-closed');
+        d.classList.add('drawer-open');
+        m.classList.remove('mask-hidden');
+        m.classList.add('mask-visible');
+      } else {
+        d.classList.remove('drawer-open');
+        d.classList.add('drawer-closed');
+        m.classList.remove('mask-visible');
+        m.classList.add('mask-hidden');
+      }
+    }
+
+    function filterDrawerTools() {
+      const q = document.getElementById('mobile-tool-search').value.toLowerCase();
+      const drawerList = document.getElementById('drawer-list');
+      const items = drawerList.querySelectorAll('a');
+
+      items.forEach(item => {
+        if(item.classList.contains('cat-header')) return;
+        const txt = item.innerText.toLowerCase();
+        item.style.display = txt.includes(q) ? 'flex' : 'none';
+      });
+    }
+
+    // Specific init for this tool
+    window.addEventListener('load', () => {
+       // The drawer is now populated by calculator.js -> renderSidebar()
+       if(typeof renderSingleTool === 'function') {
+         renderSingleTool('net_brut', 'tool-placeholder');
+       }
+    });
+  </script>
 </body>
 </html>

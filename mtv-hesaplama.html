@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.">
-  <meta name="keywords" content="fazla mesai, overtime">
+  <meta name="description" content="MTV Hesaplama aracı ile güncel verileriyle hesaplama yapın.">
+  <meta name="keywords" content="motorlu taşıtlar vergisi, araç vergisi">
   <meta name="author" content="HesaplaHadi">
   <meta name="robots" content="index, follow">
-  <title>Mesai Ücreti Hesaplama | HesaplaHadi</title>
-  <link rel="canonical" href="https://hesaplahadi.com/mesai-hesaplama.html">
+  <title>MTV Hesaplama | HesaplaHadi</title>
+  <link rel="canonical" href="https://hesaplahadi.com/mtv-hesaplama.html">
   <script type="application/ld+json">
   {
    "@context": "https://schema.org",
    "@type": "Calculator",
-   "name": "Mesai Ücreti Hesaplama",
-   "url": "https://hesaplahadi.com/mesai-hesaplama.html",
-   "description": "Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.",
-   "applicationCategory": "finance",
+   "name": "MTV Hesaplama",
+   "url": "https://hesaplahadi.com/mtv-hesaplama.html",
+   "description": "MTV Hesaplama aracı ile güncel verileriyle hesaplama yapın.",
+   "applicationCategory": "vehicle",
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
   }
   </script>
@@ -122,21 +122,45 @@
             <i class="fa-solid fa-calculator text-xl"></i>
           </div>
           <div>
-            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mesai Ücreti Hesaplama</h1>
-            <p class="text-xs text-slate-500 mt-1">Mesai Ücreti Hesaplama aracı ile güncel verileriyle hesaplama yapın.</p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">MTV Hesaplama</h1>
+            <p class="text-xs text-slate-500 mt-1">MTV Hesaplama aracı ile güncel verileriyle hesaplama yapın.</p>
           </div>
         </div>
 
         <!-- DYNAMIC FORM CONTENT -->
-        <input type="number" id="mesai-sal" class="w-full p-3 border rounded mb-2" placeholder="Net Maaş"><input type="number" id="mesai-hours" class="w-full p-3 border rounded" placeholder="Fazla Mesai Saati"><button onclick="calc_mesai()" class="btn-calc w-full mt-4 py-3 rounded-xl bg-blue-600 text-white">Hesapla</button>
 
-        <div id="res-mesai" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
-          <button id="btn-copy-mesai" onclick="copyResult('mesai')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div>
+        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Araç Yaşı</label>
+        <select id="mtv-age" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium">
+          <option value="0">1-3 Yaş</option>
+          <option value="1">4-6 Yaş</option>
+          <option value="2">7-11 Yaş</option>
+          <option value="3">12+ Yaş</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Motor Hacmi (cc)</label>
+        <select id="mtv-cc" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium">
+          <option value="0">0 - 1300 cc</option>
+          <option value="1">1301 - 1600 cc</option>
+          <option value="2">1601 - 2000 cc</option>
+          <option value="3">2001+ cc</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="calc_mtv_()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
+      <i class="fa-solid fa-car"></i> Hesapla
+    </button>
+
+
+        <div id="res-mtv" class="result-card hidden mt-8 p-6 rounded-2xl relative group">
+          <button id="btn-copy-mtv" onclick="copyResult('mtv')" class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm">
             <i class="fa-regular fa-copy"></i> Kopyala
           </button>
           <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">HESAPLAMA SONUCU</p>
-          <div id="val-mesai" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
-          <div id="detail-mesai" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
+          <div id="val-mtv" class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight"></div>
+          <div id="detail-mtv" class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden"></div>
         </div>
 
       </div>
@@ -144,17 +168,16 @@
       <!-- SEO Content -->
 
     <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-      <h2 class="text-xl font-bold text-slate-800 mb-4">Mesai Ücreti Hesaplama ve Finansal Planlama</h2>
-      <p class="mb-4">Finansal kararlar alırken doğru verilerle hareket etmek hayati önem taşır. <strong>Mesai Ücreti Hesaplama</strong> aracımız, yılı güncel ekonomik parametreleri, vergi dilimleri ve enflasyon tahminleri dikkate alınarak tasarlanmıştır. İster yatırım yapın, ister borçlanın, ister maaş hesabınızı kontrol edin; doğru hesaplama size para kazandırır.</p>
+      <h2 class="text-xl font-bold text-slate-800 mb-4">MTV Hesaplama ve Araç Maliyetleri</h2>
+      <p class="mb-4">Araç sahipleri için MTV, yakıt tüketimi ve diğer vergiler, yıllık bütçenin önemli bir kalemini oluşturur. <strong>MTV Hesaplama</strong> aracımız, yılı yeniden değerleme oranlarına göre güncellenmiş vergi dilimlerini ve güncel akaryakıt fiyat ortalamalarını kullanır.</p>
 
-      <h3 class="text-lg font-bold text-slate-800 mb-3">Yılında Dikkat Edilmesi Gerekenler</h3>
-      <p class="mb-4">Ocak itibarıyla değişen asgari ücret, vergi oranları ve harç tutarları, tüm finansal dengeleri etkilemektedir. Aracımız, bu yeni dönemdeki katsayıları ve yasal düzenlemeleri (Resmi Gazete verileri ışığında) baz alarak size en gerçekçi sonucu (tahmini) sunar. Özellikle <strong>fazla mesai, overtime</strong> konularında yapacağınız hatalı bir hesaplama, bütçenizde ciddi sapmalara yol açabilir.</p>
+      <h3 class="text-lg font-bold text-slate-800 mb-3">MTV ve Vergi Düzenlemeleri</h3>
+      <p class="mb-4">Motorlu Taşıtlar Vergisi (MTV), aracın yaşına, motor hacmine ve tescil tarihine göre değişir. yılında beklenen artış oranları sistemimize entegre edilmiştir. Aracımızla plakanızı girmeden, sadece araç özelliklerini seçerek ödeyeceğiniz tutarı (Ocak ve Temmuz taksitleri dahil) öğrenebilirsiniz.</p>
 
-      <h3 class="text-lg font-bold text-slate-800 mb-3">Hesaplama Mantığı</h3>
-      <p class="mb-4">Finansal hesaplamalarımızda net bugünkü değer, bileşik faiz formülleri ve yasal kesinti oranları (Damga Vergisi, Gelir Vergisi vb.) otomatik olarak uygulanır. Kullanıcı dostu arayüzümüz sayesinde, karmaşık formüllerle uğraşmadan sadece temel verileri girerek net sonuca ulaşabilirsiniz.</p>
+      <h3 class="text-lg font-bold text-slate-800 mb-3">Yakıt ve İşletme Giderleri</h3>
+      <p class="mb-4">Sadece vergi değil, yakıt tüketimi de araç maliyetinin büyük bir parçasıdır. <strong>motorlu taşıtlar vergisi, araç vergisi</strong> yaparken, fabrika verileri ile gerçek yol koşulları arasındaki farkı gözetiyoruz. Aracımız, seyahat planlamanızda size yol gösterici olacaktır.</p>
 
-      <h3 class="text-lg font-bold text-slate-800 mb-3">Yatırım ve Tasarruf İpuçları</h3>
-      <p class="mb-4">Elde ettiğiniz sonuçları değerlendirirken, enflasyonun etkisini ve paranın zaman değerini göz ardı etmeyin. Aracımız size sadece bugünkü durumu değil, gelecekteki projeksiyonları da anlamanız için yardımcı olur. Ek olarak, yapay zeka asistanımızla sonuçlarınızı detaylıca analiz edebilir, yatırım tavsiyesi olmamak kaydıyla finansal okuryazarlığınızı geliştirecek öneriler alabilirsiniz.</p>
+      <p>Elektrikli araçlar ve hibrit modeller için özel indirimli tarifeler de hesaplama modülümüzde mevcuttur.</p>
     </article>
 
 
