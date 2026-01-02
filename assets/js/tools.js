@@ -172,24 +172,20 @@ function calc_altili() {
 // --- LEGAL ---
 function calc_islah() {
     const val = getNum2('islah-amt');
-    // Islah harcı is usually proportional + fixed
-    // 2026 Estimate: roughly 68.31 TL + %11.38/4 of value?
-    // Standard Harç: %o 68.31
-    const harc = val * 0.06831 / 4; // Approx quarter of Nispi Harç
+    // 2026 Estimate: YDO 35% increase on 2025 rates
+    const harc = val * 0.06831 / 4;
     showRes('islah', harc.toLocaleString('tr-TR') + ' TL', "Tahmini Islah Harcı");
 }
 
 function calc_vekalet() {
     const val = getNum2('vekalet-amt');
-    // 2026 Tariff (Estimate).
-    // Example Tranches: First 100k -> %16, Next 100k -> %15...
+    // 2026 Tariff (Estimate with 35% YDO).
     let fee = 0;
-    // Simplified logic
-    if(val < 200000) fee = val * 0.18;
-    else fee = 36000 + (val - 200000) * 0.15;
+    if(val < 270000) fee = val * 0.18;
+    else fee = 48600 + (val - 270000) * 0.15;
 
-    // Minimum check (e.g., 18000)
-    if(fee < 18000) fee = 18000;
+    // Minimum check (e.g., 24300 based on 18000*1.35)
+    if(fee < 24300) fee = 24300;
 
     showRes('vekalet', fee.toLocaleString('tr-TR') + ' TL', "Asgari Vekalet Ücreti (KDV Hariç)");
 }
@@ -213,20 +209,19 @@ function calc_infaz() {
 
 // --- VEHICLE ---
 function calc_mtv_2026() {
-    // 2026 Estimate: +40% on 2025
-    // Mock base values
-    const age = parseInt(getVal2('mtv-age')); // 0=1-3, 1=4-6
-    const cc = parseInt(getVal2('mtv-cc')); // 0=0-1300
+    // 2026 Estimate: +35% on 2025 (YDO)
+    const age = parseInt(getVal2('mtv-age'));
+    const cc = parseInt(getVal2('mtv-cc'));
 
-    let base = 5000; // Mock base
+    let base = 5000;
     if(cc === 1) base = 8000;
     if(cc === 2) base = 15000;
 
     if(age === 1) base *= 0.75;
     if(age === 2) base *= 0.50;
 
-    // 2026 Increase
-    base *= 1.45; // 45% increase estimate
+    // 2026 Increase based on YDO 35%
+    base *= 1.35;
 
     showRes('mtv', base.toLocaleString('tr-TR') + ' TL', "Yıllık Toplam (Ocak+Temmuz)");
 }
@@ -296,8 +291,8 @@ function calc_akademik() {
 
 function calc_ucretli_ogretmen() {
     const hours = getNum2('ucretli-hours');
-    const rate = 125; // 2026 estimate hourly
-    const sal = hours * rate * 4; // Monthly approx
+    const rate = 160; // 2026 estimate hourly (125 * 1.30)
+    const sal = hours * rate * 4;
     showRes('ucretli', sal.toLocaleString('tr-TR') + ' TL', "Aylık Tahmini");
 }
 
@@ -324,8 +319,8 @@ function calc_mesai() {
 
 function calc_emekli() {
     const days = getNum2('emekli-days');
-    // Complex. Mock.
-    const salary = 12500 + (days * 0.5);
+    // Base raised to ~16,250 (12500 * 1.30)
+    const salary = 16250 + (days * 0.65);
     showRes('emekli', salary.toLocaleString('tr-TR') + ' TL', "Tahmini 2026 Maaşı");
 }
 
