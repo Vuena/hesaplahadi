@@ -29,10 +29,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body class="flex flex-col min-h-screen text-slate-800">
+<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
                     <!-- Header -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-[50] border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <!-- Left: Logo -->
@@ -53,12 +53,10 @@
                     <div class="hidden md:block relative">
                          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                          <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
-                         <!-- Desktop Search Suggestions (Hidden by default) -->
+                         <!-- Desktop Search Suggestions -->
                          <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
                             <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                            <div id="desktop-search-results-list">
-                                <!-- Populated dynamically by JS -->
-                            </div>
+                            <div id="desktop-search-results-list"></div>
                          </div>
                     </div>
 
@@ -85,16 +83,14 @@
             </div>
 
             <!-- Mobile Search Bar (Below Header) -->
-            <div class="md:hidden mt-3 relative group z-50">
+            <div class="md:hidden mt-3 relative group z-40">
                  <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
-                 <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+                 <input type="text" id="mobile-tool-search" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
 
                  <!-- Search Suggestions -->
-                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
+                 <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-50">
                     <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-                    <div id="mobile-search-results-list">
-                        <!-- Populated dynamically by JS -->
-                    </div>
+                    <div id="mobile-search-results-list"></div>
                  </div>
             </div>
 
@@ -110,7 +106,7 @@
 
         <!-- Sidebar -->
         <nav class="hidden lg:block lg:col-span-3 space-y-4">
-            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24">
+            <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24 shadow-sm border border-slate-200">
                 <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
                 </div>
@@ -123,84 +119,102 @@
         <!-- Main Content -->
         <main class="col-span-1 lg:col-span-6 space-y-6">
 
-            <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up relative">
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 md:p-8 animate-slide-up relative overflow-hidden">
+                <!-- Background Decoration -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -z-0 opacity-50 pointer-events-none"></div>
 
-                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div class="p-3 bg-blue-100 rounded-2xl text-blue-600 shadow-sm">
-                        <i class="fa-solid fa-calculator text-xl"></i>
+                <div class="flex items-center gap-4 mb-8 pb-6 border-b border-slate-100 relative z-10">
+                    <div class="p-4 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl text-blue-600 shadow-inner">
+                        <i class="fa-solid fa-calculator text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">KDV Hesaplama</h1>
-                        <p class="text-xs text-slate-500 mt-1">KDV Dahil ve Hariç tutarları güncel oranlarla hesaplayın.</p>
+                        <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">KDV Hesaplama</h1>
+                        <p class="text-sm text-slate-500 mt-1 font-medium">Güncel 2026 oranları ile hatasız hesaplama.</p>
                     </div>
                 </div>
 
-                <!-- NEW KDV FORM -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Tutar (TL)</label>
-                        <input type="number" id="kdv-amt" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="1000" step="any">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">KDV Oranı</label>
-                        <div class="relative">
-                            <select id="kdv-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium" onchange="toggleCustomRate()">
-                                <option value="20" selected>%20 (Genel - Mobilya, Beyaz Eşya vb.)</option>
-                                <option value="10">%10 (Tekstil, Giyim vb.)</option>
-                                <option value="1">%1 (Temel Gıda vb.)</option>
-                                <option value="custom">Özel Oran Giriniz</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
-                        </div>
-                    </div>
-
-                    <!-- Custom Rate Input (Hidden by default) -->
-                    <div id="kdv-custom-container" class="hidden">
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Özel Oran (%)</label>
-                        <input type="number" id="kdv-custom-rate" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" placeholder="18">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hesaplama Yöntemi</label>
-                        <div class="relative">
-                            <select id="kdv-type" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium appearance-none focus:bg-white transition cursor-pointer input-premium">
-                                <option value="include">KDV Dahil (Toplam Tutar Giriyorum)</option>
-                                <option value="exclude">KDV Hariç (Net Tutar Giriyorum)</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-4.5 text-slate-400 text-xs pointer-events-none"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <button onclick="calc_kdv()" class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-blue-500/20 flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i> Hesapla
-                </button>
-
-                <!-- NEW RESULT TABLE -->
-                <div id="res-kdv" class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-white border border-slate-100 shadow-sm">
-                    <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-2">
-                         <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">HESAPLAMA DETAYI</span>
-                         <button onclick="copyResult('kdv')" class="text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition text-slate-500 flex items-center gap-1">
-                            <i class="fa-regular fa-copy"></i> <span id="btn-copy-kdv-text">Kopyala</span>
+                <!-- NEW REDESIGNED FORM -->
+                <div class="relative z-10 space-y-6">
+                    <!-- Calculation Type Toggle -->
+                    <div class="bg-slate-100 p-1 rounded-xl flex">
+                        <button id="btn-type-include" class="flex-1 py-2.5 rounded-lg text-sm font-bold transition shadow-sm bg-white text-blue-600" onclick="setKdvType('include')">
+                            KDV Dahil
+                        </button>
+                        <button id="btn-type-exclude" class="flex-1 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition" onclick="setKdvType('exclude')">
+                            KDV Hariç
                         </button>
                     </div>
+                    <!-- Hidden input to store type for calculator.js compatibility -->
+                    <input type="hidden" id="kdv-type" value="include">
 
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-slate-500 font-medium">Net Tutar (KDV'siz)</span>
-                            <span id="kdv-res-net" class="text-base font-bold text-slate-700"></span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-slate-500 font-medium">KDV Tutarı</span>
-                            <span id="kdv-res-tax" class="text-base font-bold text-red-500"></span>
-                        </div>
-                        <div class="flex justify-between items-center pt-3 border-t border-slate-100">
-                            <span class="text-sm text-slate-800 font-bold">TOPLAM TUTAR</span>
-                            <span id="kdv-res-total" class="text-2xl font-black text-blue-600 tracking-tight"></span>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Tutar Giriniz</label>
+                        <div class="relative">
+                            <input type="number" id="kdv-amt" class="w-full pl-4 pr-12 py-4 border-2 border-slate-200 rounded-2xl bg-white text-lg font-bold text-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition outline-none" placeholder="Örn: 1000">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">TL</span>
                         </div>
                     </div>
 
-                    <!-- Hidden val for copy function compatibility -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 ml-1">KDV Oranı Seçiniz</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button class="kdv-rate-btn py-3 border-2 border-slate-200 rounded-xl font-bold text-slate-600 hover:border-blue-300 hover:bg-blue-50 transition" onclick="selectRate(1)">%1</button>
+                            <button class="kdv-rate-btn py-3 border-2 border-slate-200 rounded-xl font-bold text-slate-600 hover:border-blue-300 hover:bg-blue-50 transition" onclick="selectRate(10)">%10</button>
+                            <button class="kdv-rate-btn py-3 border-2 border-blue-600 bg-blue-50 rounded-xl font-bold text-blue-700 shadow-sm ring-2 ring-blue-200" onclick="selectRate(20)">%20</button>
+                        </div>
+
+                        <!-- Custom Rate Toggle -->
+                        <div class="mt-3">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="checkbox" id="kdv-custom-check" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500" onchange="toggleCustomRate()">
+                                <span class="text-sm font-medium text-slate-500 group-hover:text-slate-700">Farklı bir oran girmek istiyorum</span>
+                            </label>
+                        </div>
+
+                        <!-- Custom Rate Input -->
+                        <div id="kdv-custom-container" class="hidden mt-3 animate-fade-in">
+                            <div class="relative">
+                                <input type="number" id="kdv-custom-rate" class="w-full pl-4 pr-12 py-3 border border-slate-200 rounded-xl bg-slate-50 text-sm font-bold focus:bg-white focus:border-blue-500 outline-none" placeholder="Oran">
+                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
+                            </div>
+                        </div>
+
+                        <!-- Hidden input for calculator.js compatibility -->
+                        <input type="hidden" id="kdv-rate" value="20">
+                    </div>
+
+                    <button onclick="calc_kdv()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-lg font-bold py-4 rounded-2xl shadow-lg shadow-blue-500/30 transform active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> HESAPLA
+                    </button>
+                </div>
+
+                <!-- RESULT AREA -->
+                <div id="res-kdv" class="hidden mt-8 pt-8 border-t border-slate-100 animate-slide-up">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 relative overflow-hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-receipt text-blue-500"></i> Sonuçlar</h3>
+                            <button onclick="copyResult('kdv')" class="text-xs font-bold text-slate-400 hover:text-blue-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> <span id="btn-copy-kdv-text">Kopyala</span>
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+                                <span class="text-sm font-medium text-slate-500">KDV'siz Tutar (Matrah)</span>
+                                <span id="kdv-res-net" class="text-lg font-bold text-slate-800">0,00 TL</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+                                <span class="text-sm font-medium text-slate-500">KDV Tutarı</span>
+                                <span id="kdv-res-tax" class="text-lg font-bold text-red-500">+0,00 TL</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-blue-600 rounded-xl shadow-lg shadow-blue-500/20 text-white mt-2">
+                                <span class="text-sm font-medium opacity-90">TOPLAM TUTAR</span>
+                                <span id="kdv-res-total" class="text-2xl font-black tracking-tight">0,00 TL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Compatibility Divs -->
                     <div id="val-kdv" class="hidden"></div>
                     <div id="detail-kdv" class="hidden"></div>
                 </div>
@@ -209,27 +223,16 @@
 
             <!-- SEO Content -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">
-        <h2 class="text-xl font-bold text-slate-800 mb-4">KDV Hesaplama Hakkında Detaylı Rehber</h2>
-        <p class="mb-4">Katma Değer Vergisi (KDV), yapılan mal ve hizmet teslimlerinde, malın veya hizmetin teslimi anında doğan ve alıcıdan tahsil edilen bir tüketim vergisidir. Türkiye'de uygulanan KDV oranları %1, %10 ve %20 olarak üç ana kategoride toplanır.</p>
-
-        <h3 class="text-lg font-bold text-slate-800 mb-3">KDV Dahil Hesaplama Nasıl Yapılır?</h3>
-        <p class="mb-4">KDV dahil hesaplama işlemi, net tutarın üzerine KDV oranının eklenmesiyle bulunur. Formül şöyledir:<br>
-        <code>KDV Dahil Tutar = Net Tutar x (1 + KDV Oranı)</code><br>
-        Örneğin 1000 TL'lik bir ürünün %20 KDV dahil fiyatı: 1000 x 1.20 = 1200 TL'dir.</p>
-
-        <h3 class="text-lg font-bold text-slate-800 mb-3">KDV Hariç Hesaplama Nasıl Yapılır?</h3>
-        <p class="mb-4">KDV hariç (matrah) hesaplama, toplam tutardan verginin arındırılması işlemidir. Formül şöyledir:<br>
-        <code>Net Tutar = Toplam Tutar / (1 + KDV Oranı)</code><br>
-        Örneğin 1200 TL (KDV Dahil) olan bir ürünün vergisiz fiyatı: 1200 / 1.20 = 1000 TL'dir.</p>
-
-        <h3 class="text-lg font-bold text-slate-800 mb-3">Güncel KDV Oranları (2026)</h3>
-        <ul class="list-disc pl-5 space-y-2 mb-4">
-            <li><strong>%1 KDV:</strong> Temel gıda maddeleri (ekmek, un vb.), gazete ve dergiler.</li>
-            <li><strong>%10 KDV:</strong> Tekstil ürünleri, giyim, turizm konaklama hizmetleri, yeme-içme hizmetleri.</li>
-            <li><strong>%20 KDV:</strong> Mobilya, beyaz eşya, elektronik cihazlar, kozmetik ve diğer genel kategoriler.</li>
-        </ul>
-        <p>Hesaplama aracımızı kullanarak işlem türünü ve oranını seçerek saniyeler içinde hatasız sonuç alabilirsiniz.</p>
-    </article>
+                <h2 class="text-xl font-bold text-slate-800 mb-4">KDV Hesaplama 2026 Rehberi</h2>
+                <div class="prose prose-sm max-w-none text-slate-600">
+                    <p>Katma Değer Vergisi (KDV), mal ve hizmet teslimlerinde alıcıdan alınan bir tüketim vergisidir. 2026 yılı itibarıyla geçerli olan oranlar üzerinden hesaplama yapmak işletmeler ve tüketiciler için kritiktir.</p>
+                    <h3 class="font-bold text-slate-800 mt-4">Formüller</h3>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong>Dahil Hesaplama:</strong> <code>Toplam / (1 + Oran)</code> formülü ile net tutar bulunur.</li>
+                        <li><strong>Hariç Hesaplama:</strong> <code>Net * (1 + Oran)</code> formülü ile toplam tutar bulunur.</li>
+                    </ul>
+                </div>
+            </article>
 
         </main>
 
@@ -244,13 +247,10 @@
                         <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
-                        <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+                        <span>Tevkifat Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
                         <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
-                    </li>
-                    <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama-2026.html'">
-                        <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
                     </li>
                     <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
                         <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
@@ -281,16 +281,55 @@
         </div>
     </div>
 
-    <script src="assets/js/calculator.js?v=3"></script>
-    <!-- Custom script to handle dynamic UI for this specific tool -->
+    <script src="assets/js/calculator.js?v=4"></script>
     <script>
-        function toggleCustomRate() {
-            const r = document.getElementById('kdv-rate').value;
-            const c = document.getElementById('kdv-custom-container');
-            if(r === 'custom') {
-                c.classList.remove('hidden');
+        // UI Logic for KDV Redesign
+        function setKdvType(type) {
+            document.getElementById('kdv-type').value = type;
+            const btnInc = document.getElementById('btn-type-include');
+            const btnExc = document.getElementById('btn-type-exclude');
+
+            if(type === 'include') {
+                btnInc.className = 'flex-1 py-2.5 rounded-lg text-sm font-bold transition shadow-sm bg-white text-blue-600';
+                btnExc.className = 'flex-1 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition';
             } else {
-                c.classList.add('hidden');
+                btnExc.className = 'flex-1 py-2.5 rounded-lg text-sm font-bold transition shadow-sm bg-white text-blue-600';
+                btnInc.className = 'flex-1 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition';
+            }
+        }
+
+        function selectRate(rate) {
+            document.getElementById('kdv-rate').value = rate;
+            document.getElementById('kdv-custom-check').checked = false;
+            document.getElementById('kdv-custom-container').classList.add('hidden');
+
+            // Update UI classes for buttons
+            const btns = document.querySelectorAll('.kdv-rate-btn');
+            btns.forEach(btn => {
+                if(btn.innerText.includes('%' + rate)) {
+                     btn.className = 'kdv-rate-btn py-3 border-2 border-blue-600 bg-blue-50 rounded-xl font-bold text-blue-700 shadow-sm ring-2 ring-blue-200';
+                } else {
+                     btn.className = 'kdv-rate-btn py-3 border-2 border-slate-200 rounded-xl font-bold text-slate-600 hover:border-blue-300 hover:bg-blue-50 transition';
+                }
+            });
+        }
+
+        function toggleCustomRate() {
+            const isChecked = document.getElementById('kdv-custom-check').checked;
+            const container = document.getElementById('kdv-custom-container');
+            const rateInput = document.getElementById('kdv-rate');
+
+            if(isChecked) {
+                container.classList.remove('hidden');
+                rateInput.value = 'custom';
+                // Reset buttons
+                document.querySelectorAll('.kdv-rate-btn').forEach(btn => {
+                     btn.className = 'kdv-rate-btn py-3 border-2 border-slate-200 rounded-xl font-bold text-slate-600 hover:border-blue-300 hover:bg-blue-50 transition';
+                });
+            } else {
+                container.classList.add('hidden');
+                // Default back to 20
+                selectRate(20);
             }
         }
     </script>

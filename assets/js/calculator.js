@@ -45,7 +45,7 @@ const tools = [
 
     // 5. PRATİK & ARAÇLAR
     { id: 'day', cat: 'Pratik', name: 'Hangi Gün?', link: 'hangi-gun-hesaplama.html', color:'orange' },
-    { id: 'date_add', cat: 'Pratik', name: 'Tarihe Gün Ekleme', link: 'tarihe-gun-ekleme-hesaplama.html', color:'orange' },
+    { id: 'date_add', cat: 'Pratik', name: 'Tarihe Gün Ekleme Hesaplama', link: 'tarihe-gun-ekleme-hesaplama.html', color:'orange' },
     { id: 'asgari', cat: 'Finans', name: '2026 Asgari Ücret Hesaplama', link: 'asgari-ucret-hesaplama.html', color:'blue' },
     { id: 'memur', cat: 'Finans', name: '2026 Memur Zammı Hesaplama', link: 'memur-maas-zammi-hesaplama.html', color:'blue' },
     { id: 'internet', cat: 'Pratik', name: 'İndirme Süresi Hesaplama', link: 'i̇nternet-hizi-i̇ndirme-suresi-hesaplama.html', color:'orange' },
@@ -68,8 +68,6 @@ function renderSidebar() {
         const container = document.getElementById(id);
         if(!container) return;
         container.innerHTML = ''; // Clear
-
-        // Note: "All Tools" link explicitly removed for Mobile Drawer per request
 
         cats.forEach(cat => {
             const header = document.createElement('div');
@@ -94,6 +92,7 @@ function renderSidebar() {
         const links = container.querySelectorAll('a');
         links.forEach(link => {
             const txt = link.innerText.toLowerCase();
+            // Explicitly remove links that look like summary links
             if(txt.includes('tüm hesaplama') || txt.includes('tum hesaplama')) {
                 link.remove();
             }
@@ -217,9 +216,10 @@ function filterDrawerTools() {
 
 function initDrawer() {
     if(!document.getElementById('drawer')) {
+        // High Z-Index to ensure it overlays everything including sticky headers
         const drawerHTML = `
-    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[90] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
-    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[100] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+    <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[990] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+    <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[1000] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
         <div class="p-4 border-b border-slate-100 flex justify-between items-center">
              <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
              <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
@@ -531,6 +531,10 @@ window.addEventListener('load', () => {
     checkCookies();
     initDrawer();
     renderSidebar();
+
+    // Remove legacy conflicting handlers if present on current page inputs
+    const msInput = document.getElementById('mobile-tool-search');
+    if(msInput) msInput.removeAttribute('onkeyup'); // Remove static HTML binding to prefer JS binding below
 
     // Mobile Search Suggestions Logic
     const ms = document.getElementById('mobile-tool-search');
