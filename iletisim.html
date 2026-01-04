@@ -12,8 +12,18 @@
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-slate-50 text-slate-800">
+  <div id="drawer-mask" class="fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 mask-hidden" onclick="toggleDrawer()"></div>
+  <aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white z-[70] shadow-2xl transition-transform duration-300 drawer-closed overflow-y-auto">
+    <div class="p-4 border-b border-slate-100 flex justify-between items-center">
+       <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
+       <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
+    </div>
+    <div id="drawer-list" class="p-3 space-y-1">
+      <!-- Populated by JS -->
+    </div>
+  </aside>
   <!-- Header -->
-  <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-[50] border-b border-slate-100">
+  <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
     <div class="container mx-auto px-4 py-3">
       <div class="flex justify-between items-center">
         <!-- Left: Logo -->
@@ -24,6 +34,7 @@
             </div>
             <div class="leading-tight">
               <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+
             </div>
           </a>
         </div>
@@ -34,10 +45,12 @@
           <div class="hidden md:block relative">
              <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
              <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
-             <!-- Desktop Search Suggestions -->
+             <!-- Desktop Search Suggestions (Hidden by default) -->
              <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden">
               <div id="desktop-search-header" class="p-3 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-              <div id="desktop-search-results-list"></div>
+              <div id="desktop-search-results-list">
+                <!-- Populated dynamically by JS -->
+              </div>
              </div>
           </div>
 
@@ -64,14 +77,16 @@
       </div>
 
       <!-- Mobile Search Bar (Below Header) -->
-      <div class="md:hidden mt-3 relative group z-40">
+      <div class="md:hidden mt-3 relative group z-50">
          <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400 text-sm z-10"></i>
-         <input type="text" id="mobile-tool-search" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
+         <input type="text" id="mobile-tool-search" onkeyup="filterDrawerTools()" placeholder="Hesaplama aracı ara..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:border-blue-500 transition outline-none relative z-0">
 
          <!-- Search Suggestions -->
-         <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-50">
+         <div id="search-suggestions" class="hidden absolute top-full left-0 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 z-20">
           <div id="mobile-search-header" class="p-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Popüler Araçlar</div>
-          <div id="mobile-search-results-list"></div>
+          <div id="mobile-search-results-list">
+            <!-- Populated dynamically by JS -->
+          </div>
          </div>
       </div>
 
@@ -87,12 +102,12 @@
 
     <!-- Sidebar -->
     <nav class="hidden lg:block lg:col-span-3 space-y-4">
-      <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24 shadow-sm border border-slate-200">
+      <div class="bg-white/80 backdrop-blur glass-panel rounded-2xl overflow-hidden flex flex-col sticky top-24 max-h-[calc(100vh-120px)]">
         <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
           <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
         </div>
-        <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
-          <!-- JS Populated via calculator.js -->
+        <div id="sidebar-list" class="overflow-y-auto custom-scroll p-2 space-y-1">
+          <!-- JS Populated -->
         </div>
       </div>
     </nav>
@@ -165,7 +180,7 @@
 
     <!-- Right Sidebar -->
     <aside class="col-span-1 lg:col-span-3 space-y-6">
-       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <h4 class="font-bold text-xs text-slate-500 mb-4 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
           <i class="fa-solid fa-fire text-orange-500"></i> Popüler Araçlar
         </h4>
@@ -174,15 +189,24 @@
             <span>KDV Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='tevkifat-hesaplama.html'">
-            <span>Tevkifat Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+            <span>Tevkifat Hesapla</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='kredi-hesaplama.html'">
             <span>Kredi Hesaplama</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
+          </li>
+          <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='netten-brute-maas-hesaplama.html'">
+            <span>Netten Brüte Maaş</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
           <li class="cursor-pointer hover:text-blue-600 hover:bg-blue-50 p-2.5 rounded-lg transition flex items-center justify-between group" onclick="window.location.href='vucut-kitle-i̇ndeksi-bmi-hesaplama.html'">
             <span>Vücut Kitle İndeksi</span> <i class="fa-solid fa-chevron-right text-xs opacity-30"></i>
           </li>
         </ul>
+      </div>
+
+      <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+        <h4 class="font-bold text-blue-800 mb-4 pb-2 border-b border-blue-200">Blog'da Yeni</h4>
+        <div id="recent-blog-list"></div>
+        <a href="blog/index.html" class="inline-block mt-4 text-xs font-bold text-blue-600 hover:text-blue-800">Tüm Yazılar <i class="fa-solid fa-arrow-right ml-1"></i></a>
       </div>
     </aside>
 
@@ -197,7 +221,8 @@
         <a href="hakkimizda.html" class="hover:text-white transition">Hakkımızda</a>
         <a href="gizlilik-politikasi.html" class="hover:text-white transition">Gizlilik Politikası</a>
         <a href="iletisim.html" class="hover:text-white transition">İletişim</a>
-      </div>
+        <a href="blog/index.html" class="hover:text-white transition">Blog</a>
+        <a href="ai-asistan.html" class="hover:text-white transition">AI Asistan</a></div>
       <div class="text-xs text-slate-600 mt-6">&copy; HesaplaHadi.</div>
     </div>
   </footer>
