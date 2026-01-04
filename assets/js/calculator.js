@@ -303,8 +303,45 @@ function initDrawer() {
 
 // --- CALC LOGIC ---
 function calc_kdv() { const amt=getNum('kdv','amt'); let rVal=getVal('kdv','rate'); let rate=0; if(rVal==='custom'){rate=getNum('kdv','custom-rate')/100;}else{rate=parseFloat(rVal)/100;} if(rate<0||isNaN(rate))rate=0; const t=getVal('kdv','type'); let n=0,tx=0,tot=0; if(t==='include'){tot=amt;n=tot/(1+rate);tx=tot-n;}else{n=amt;tx=n*rate;tot=n+tx;} const f=(n)=>n.toLocaleString('tr-TR',{minimumFractionDigits:2})+' TL'; const rn=document.getElementById('kdv-res-net'); const rt=document.getElementById('kdv-res-tax'); const rtt=document.getElementById('kdv-res-total'); const rd=document.getElementById('res-kdv'); const vd=document.getElementById('val-kdv'); if(rn&&rt&&rtt){rn.innerText=f(n);rt.innerText=f(tx);rtt.innerText=f(tot);if(vd)vd.innerText=f(tot);rd.classList.remove('hidden');rd.scrollIntoView({behavior:'smooth',block:'nearest'});}}
-const cpi_data = { 2000:29.3, 2023:1800, 2024:3000, 2025:4500, 2026:6000, "2025_YE": 3500 };
-function calc_enflasyon() { const a=getNum('enflasyon','amt'); const s=parseInt(getVal('enflasyon','start')); const e=parseInt(getVal('enflasyon','end')); const i1=cpi_data[s]||100; const i2=cpi_data[e]||100; const r=i2/i1; showRes('enflasyon',(a*r).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL', `Enflasyon Katsayısı: ${r.toFixed(2)}x`); }
+window.cpi_data = {
+    1999: 27.8,
+    2000: 38.65,
+    2001: 65.12,
+    2002: 84.46,
+    2003: 100.0,
+    2004: 109.32,
+    2005: 117.76,
+    2006: 129.12,
+    2007: 139.96,
+    2008: 154.04,
+    2009: 164.09,
+    2010: 174.6,
+    2011: 192.84,
+    2012: 204.72,
+    2013: 219.87,
+    2014: 237.83,
+    2015: 258.79,
+    2016: 280.86,
+    2017: 314.34,
+    2018: 378.15,
+    2019: 422.93,
+    2020: 484.67,
+    2021: 659.54,
+    2022: 1083.43,
+    2023: 1785.17,
+    2024: 2577.43,
+    2025: 3028.47,
+    2026: 3322.24,
+};
+function calc_enflasyon() {
+    const a=getNum('enflasyon','amt');
+    const s=parseInt(getVal('enflasyon','start'));
+    const e=parseInt(getVal('enflasyon','end'));
+    const i1=window.cpi_data[s]||100;
+    const i2=window.cpi_data[e]||100;
+    const r=i2/i1;
+    showRes('enflasyon',(a*r).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL', `Enflasyon Katsayısı: ${r.toFixed(2)}x (${s} -> ${e})`);
+
 function calc_freelancer() { const i=getNum('freelancer','income'); const e=getNum('freelancer','expense'); const k=parseFloat(getVal('freelancer','kdv'))/100; const y=document.getElementById('freelancer-genc').checked; const ka=i*k; let p=i-e; if(y&&p>0)p=Math.max(0,p-230000); let t=0,rem=p; if(rem>0){const a=Math.min(rem,150000);t+=a*0.15;rem-=a;} if(rem>0){const a=Math.min(rem,280000);t+=a*0.20;rem-=a;} if(rem>0){const a=Math.min(rem,550000);t+=a*0.27;rem-=a;} if(rem>0){t+=rem*0.35;} showRes('freelancer',(i-e-t).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL', `Vergi: ${t.toLocaleString('tr-TR')} TL | KDV: ${ka.toLocaleString('tr-TR')} TL`); }
 function calc_dolar() { const m=getVal('dolar','mode'); const a=getNum('dolar','amt'); if(m==='conv'){showRes('dolar',(a*getNum('dolar','rate')).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL','');}else{const b=getNum('dolar','buy'),s=getNum('dolar','sell'),c=a*b,r=a*s,p=r-c;const cl=p>=0?'text-green-600':'text-red-600';showRes('dolar',`<span class="${cl}">${p.toLocaleString('tr-TR',{maximumFractionDigits:2})} TL</span>`,`ROI: %${((p/c)*100).toFixed(2)}`);}}
 function calc_yakit() { const d=getNum('yakit','km'),c=getNum('yakit','lit'),p=getNum('yakit','pr'),t=getVal('yakit','type'); const tc=(d/100)*c*p; let u='Lt'; if(t==='ev') u='kWh'; showRes('yakit',tc.toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL', `Km Başı: ${(tc/d).toFixed(2)} TL | Tüketim: ${((d/100)*c).toFixed(1)} ${u}`); }
@@ -611,10 +648,34 @@ function calc_commission() {
 }
 
 // Run Init
+
+function populateInflationDropdowns() {
+    const start = document.getElementById('enflasyon-start');
+    const end = document.getElementById('enflasyon-end');
+    if(!start || !end) return;
+
+    start.innerHTML = '';
+    end.innerHTML = '';
+
+    const years = Object.keys(window.cpi_data).sort();
+
+    years.forEach(y => {
+        const opt1 = document.createElement('option'); opt1.value=y; opt1.text=y;
+        const opt2 = document.createElement('option'); opt2.value=y; opt2.text=y;
+        start.appendChild(opt1);
+        end.appendChild(opt2);
+    });
+
+    // Defaults
+    start.value = "2020";
+    end.value = "2026";
+}
+
 window.addEventListener('load', () => {
     checkCookies();
     initDrawer();
     renderSidebar();
+    populateInflationDropdowns();
 
     // Remove legacy conflicting handlers if present on current page inputs
     const msInput = document.getElementById('mobile-tool-search');

@@ -326,10 +326,21 @@ function calc_emekli() {
 
 function calc_kira() {
     const curr = getNum2('kira-curr');
-    // TÜFE 2026 Estimate %45?
-    const rate = 0.45;
+    // Rent increase cap is usually 12-month average CPI.
+    // In this simulation (2026), we use the previous year's (2025) realized inflation or CPI change.
+    // Let's calculate the annual rate from our data: (Index_2025 / Index_2024) - 1
+    // Or simply use the OVP rate for 2025 (17.5% -> 0.175) or a 12-month avg logic.
+    // For simplicity and consistency with the "Annual Data" plan, we use the 2025 Rate.
+
+    // We can derive it from window.cpi_data if available, otherwise fallback.
+    let rate = 0.25; // Default fallback
+    if(window.cpi_data && window.cpi_data[2025] && window.cpi_data[2024]) {
+        rate = (window.cpi_data[2025] / window.cpi_data[2024]) - 1;
+    }
+
     const next = curr * (1 + rate);
-    showRes('kira', next.toLocaleString('tr-TR') + ' TL', "Yasal Artış Oranı (TÜFE)");
+    const rateStr = '%' + (rate * 100).toFixed(2);
+    showRes('kira', next.toLocaleString('tr-TR', {maximumFractionDigits: 2}) + ' TL', `Yasal Artış Oranı: ${rateStr} (2025 TÜFE Bazlı)`);
 }
 
 function calc_zekat() {

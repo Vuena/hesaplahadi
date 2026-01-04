@@ -253,19 +253,6 @@
       });
     }
   </script>
-<script>
-    // Init Years
-    const start = document.getElementById('enflasyon-start');
-    const end = document.getElementById('enflasyon-end');
-    const currYear = new Date().getFullYear();
-    for(let i=2000; i<=currYear; i++) {
-      const opt1 = document.createElement('option'); opt1.value=i; opt1.text=i;
-      const opt2 = document.createElement('option'); opt2.value=i; opt2.text=i;
-      start.appendChild(opt1);
-      end.appendChild(opt2);
-    }
-    start.value = 2020;
-    end.value = currYear;
-  </script>
+
 </body>
 </html>
