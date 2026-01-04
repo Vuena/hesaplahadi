@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Matematiksel yüzde hesaplamanın en basit yolları. İndirim, zam ve kar marjı hesaplamalarında pratik yöntemler.">
+    <meta name="description" content="Matematiksel yüzde hesaplamanın en basit yolları. İndirim, zam ve kar marjı hesaplamalarında pratik yöntemler ve formüller.">
     <title>Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı - HesaplaHadi Blog</title>
     <link rel="canonical" href="https://hesaplahadi.com/blog/yuzde-hesaplama-formulu-ve-ornekleri.html" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,9 +13,8 @@
         .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
         .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
         .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: #334155; }
-        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
-        .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: #1e293b; font-weight: 700; }
+        .prose code { background-color: #f1f5f9; color: #475569; padding: 0.25rem 0.5rem; border-radius: 0.375rem; font-weight: 600; }
     </style>
     <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
@@ -36,20 +35,8 @@
                     </a>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Ana Sayfa</a>
-                        <a href="../hakkimizda.html" class="hover:text-blue-600 transition">Hakkımızda</a>
-                        <a href="index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
-                    </div>
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+                    <a href="../index.html" class="hidden md:flex items-center text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Hesaplama Araçları
                     </a>
                 </div>
             </div>
@@ -58,103 +45,63 @@
 
     <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            <!-- Main Content -->
             <main class="lg:col-span-8">
-                <!-- Breadcrumb -->
-                <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
-                    <a href="../index.html" class="hover:text-blue-600">Anasayfa</a>
-                    <span class="mx-2">/</span>
-                    <a href="index.html" class="hover:text-blue-600">Blog</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-800" id="crumb-title">Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı</span>
-                </nav>
-
                 <article>
                     <div class="mb-8">
-                        <span id="post-cat" class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full uppercase tracking-wider">Eğitim</span>
-                        <h1 id="post-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı</h1>
-                        <p id="post-summary" class="text-lg text-slate-500 mt-4 leading-relaxed">Matematiksel yüzde hesaplamanın en basit yolları. İndirim, zam ve kar marjı hesaplamalarında pratik yöntemler.</p>
+                        <span class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full uppercase tracking-wider">Eğitim</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı</h1>
+                        <p class="text-lg text-slate-500 mt-4 leading-relaxed">Yüzde hesaplama, bir bütünün 100 eşit parçasından kaçını ifade ettiğimizi gösteren temel bir matematik becerisidir. Alışverişte indirimleri, maaşınızdaki zammı veya bir ürünün KDV'sini anlamak için yüzde hesaplamayı her gün kullanırız.</p>
                     </div>
 
-                    <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300 overflow-hidden relative">
                          <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-slate-100 opacity-50"></div>
-                         <i id="post-icon" class="fa-solid fa-percent text-9xl opacity-20 text-purple-500 transform scale-110"></i>
+                         <i class="fa-solid fa-percent text-9xl opacity-20 text-purple-500 transform scale-110"></i>
                     </div>
 
-                    <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body">
+                    <div class="prose max-w-none prose-lg">
+                        <p>Yüzde hesaplamanın temel mantığı oldukça basittir, ancak farklı senaryolar için farklı yaklaşımlar gerekebilir. Gelin en sık kullanılan yüzde hesaplama yöntemlerini basit formüller ve net örneklerle inceleyelim.</p>
+                        
+                        <h2>1. Bir Sayının Yüzdesini Bulma</h2>
+                        <p>Bu, en temel yüzde hesaplama türüdür. Belirli bir sayının istenen yüzdelik dilimini bulmak için kullanılır.</p>
+                        <p><strong>Formül:</strong> <code>(Sayı × Yüzde) / 100</code></p>
+                        <p><strong>Örnek:</strong> 400 sayısının %30'u kaçtır?</p>
+                        <p><strong>Hesaplama:</strong> <code>(400 × 30) / 100 = 120</code></p>
 
-    <p class="lead text-xl text-slate-600 mb-6 font-light">Matematiksel yüzde hesaplamanın en basit yolları. İndirim, zam ve kar marjı hesaplamalarında pratik yöntemler. Bu yazımızda, konunun tüm detaylarını, hesaplama yöntemlerini ve dikkat edilmesi gereken püf noktalarını kapsamlı bir şekilde inceleyeceğiz.</p>
+                        <h2>2. Bir Sayıyı Belirli Bir Yüzde Kadar Artırma veya Azaltma</h2>
+                        <p>Maaş zammı veya ürün indirimi gibi durumlarda bu hesaplama kullanılır.</p>
+                        <p><strong>Artırma Formülü:</strong> <code>Sayı + [(Sayı × Yüzde) / 100]</code></p>
+                        <p><strong>Örnek (Zam):</strong> 10.000 TL maaş alan bir kişinin maaşına %25 zam yapılırsa yeni maaşı ne olur?</p>
+                        <p><strong>Hesaplama:</strong> Önce zam miktarı bulunur: <code>(10000 × 25) / 100 = 2500 TL</code>. Sonra yeni maaş hesaplanır: <code>10000 + 2500 = 12.500 TL</code>.</p>
+                        <br>
+                        <p><strong>Azaltma Formülü:</strong> <code>Sayı - [(Sayı × Yüzde) / 100]</code></p>
+                        <p><strong>Örnek (İndirim):</strong> Fiyatı 1.200 TL olan bir ayakkabıya %40 indirim uygulanırsa yeni fiyatı ne olur?</p>
+                        <p><strong>Hesaplama:</strong> Önce indirim miktarı bulunur: <code>(1200 × 40) / 100 = 480 TL</code>. Sonra yeni fiyat hesaplanır: <code>1200 - 480 = 720 TL</code>.</p>
 
-    <p>Eğitim hayatında ve kariyer basamaklarında başarıya ulaşmak için doğru stratejileri belirlemek gerekir. Öğrenme yöntemleri ve sınav taktikleri, rakiplerinizin önüne geçmenizi sağlar. Günümüzde pek çok kişi <strong>Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı</strong> konusunda internette araştırma yapmakta ancak doğru ve güvenilir bilgiye ulaşmakta zorlanmaktadır. HesaplaHadi olarak, karmaşık terimleri basitleştirerek ve pratik örnekler sunarak bu rehberi hazırladık.</p>
+                        <h2>3. Bir Sayının Başka Bir Sayının Yüzde Kaçı Olduğunu Bulma</h2>
+                        <p>Bu yöntem, iki sayı arasındaki oransal ilişkiyi anlamak için kullanılır.</p>
+                        <p><strong>Formül:</strong> <code>(Küçük Sayı / Büyük Sayı) × 100</code></p>
+                        <p><strong>Örnek:</strong> 50 sayısı, 200 sayısının yüzde kaçıdır?</p>
+                        <p><strong>Hesaplama:</strong> <code>(50 / 200) × 100 = 25</code>. Yani 50, 200'ün %25'idir.</p>
 
-    <h2>Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı Nedir ve Neden Önemlidir?</h2>
-    <p>Temel olarak ele alacak olursak, bu kavram hayatımızın merkezinde yer alır. İster günlük yaşantınızda ister profesyonel iş hayatınızda olsun, bu konuda bilgi sahibi olmak size avantaj sağlar. Peki, neden bu kadar önemlidir?</p>
-    <ul>
-        <li><strong>Farkındalık Yaratır:</strong> Konu hakkında bilgi sahibi olmak, daha doğru kararlar vermenizi sağlar.</li>
-        <li><strong>Zaman Kazandırır:</strong> Doğru yöntemleri bilmek, deneme-yanılma yoluyla vakit kaybetmenizi önler.</li>
-        <li><strong>Maliyetleri Düşürür:</strong> Özellikle finansal konularda yapılan hatalar ciddi maddi kayıplara yol açabilir.</li>
-    </ul>
-    <p>Örneğin, 2026 yılı verilerine baktığımızda, bu konuya hakim olan bireylerin diğerlerine göre %30 daha avantajlı olduğu gözlemlenmiştir. Bu nedenle, aşağıda detaylandıracağımız başlıkları dikkatlice incelemenizi öneririz.</p>
-
-    <h2>Hesaplama Yöntemleri ve Dikkat Edilmesi Gerekenler</h2>
-    <p>Doğru sonuca ulaşmak için izlenmesi gereken belirli adımlar vardır. Çoğu zaman basit bir formül veya yöntemle çözülebilecek sorunlar, bilgi eksikliği nedeniyle karmaşık hale gelebilir.</p>
-
-    <h3>1. Temel Mantığı Kavrayın</h3>
-    <p>Her şeyden önce, işin mantığını anlamak gerekir. Ezbere dayalı yöntemler, değişkenler farklılaştığında sizi yarı yolda bırakabilir. Bu nedenle, <em>neden</em> ve <em>nasıl</em> sorularını kendinize sormalısınız.</p>
-
-    <h3>2. Güncel Verileri Kullanın</h3>
-    <p>Hesaplama yaparken veya strateji belirlerken, kullandığınız verilerin güncel olması hayati önem taşır. Özellikle 2026 yılı gibi ekonomik veya sosyal değişimlerin hızlı olduğu dönemlerde, eski verilerle hareket etmek yanıltıcı olabilir.</p>
-
-    <h3>3. Profesyonel Araçlardan Destek Alın</h3>
-    <p>Manuel hesaplamalar hata payı içerebilir. Sitemizde bulunan <strong>Hesaplama Araçları</strong> sayesinde, karmaşık formüllerle uğraşmadan saniyeler içinde doğru sonuca ulaşabilirsiniz. Bu araçlar, en güncel algoritmalarla çalışır ve size zaman kazandırır.</p>
-
-    <h2>Sıkça Sorulan Sorular (SSS)</h2>
-    <p>Kullanıcılarımızdan gelen ve konuyla ilgili en çok merak edilen soruları sizler için derledik:</p>
-
-    <div class="space-y-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Bu hesaplama her yıl değişir mi?</h4>
-            <p class="text-sm text-slate-600">Evet, genellikle kullanılan parametreler (vergi oranları, katsayılar, vb.) her yıl güncellenir. Bu nedenle 2026 yılına özel verileri kullanmanız önemlidir.</p>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Yanlış hesaplama yaparsam ne olur?</h4>
-            <p class="text-sm text-slate-600">Yanlış hesaplamalar, bütçe açıklarına veya yanlış kararlara yol açabilir. Bu riski minimize etmek için otomatik hesaplama araçlarımızı kullanmanızı öneririz.</p>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Daha fazla bilgiye nereden ulaşabilirim?</h4>
-            <p class="text-sm text-slate-600">Sitemizdeki diğer blog yazılarını inceleyebilir veya AI Asistanımıza danışarak kişiselleştirilmiş yanıtlar alabilirsiniz.</p>
-        </div>
-    </div>
-
-    <h2>Sonuç</h2>
-    <p>Özetlemek gerekirse, <strong>Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı</strong> konusu üzerinde durulması gereken, hayatınızı kolaylaştıracak önemli bir başlıktır. Yukarıda bahsettiğimiz yöntemleri uygulayarak ve dikkat noktalarını göz önünde bulundurarak, bu süreci en verimli şekilde yönetebilirsiniz.</p>
-    <p>Unutmayın, bilgi güçtür. Daha fazla hesaplama aracı ve rehber içerik için sitemizi takip etmeye devam edin. Başarılar!</p>
-
+                        <h2 class="!mt-12">Sonuç: Formülleri Anlayın, Pratiği Araca Bırakın</h2>
+                        <p>Yüzde hesaplama formüllerini bilmek, konunun temel mantığını kavramak için harikadır. Ancak günlük hayatın temposunda, bir restoranda KDV'yi, mağazada indirimi veya bir projedeki kar marjını hesaplarken hatasız ve hızlı olmak gerekir. Zihinden veya kağıt üzerinde yapılan hesaplamalar kafa karıştırıcı olabilir ve zaman kaybettirebilir.</p>
+                        <p>Teoriyi anladığınıza göre, artık pratik kazanma zamanı. Farklı sayı ve yüzde oranlarını girerek bir sayının yüzdesini bulma, yüzde artış/azalış veya iki sayı arasındaki yüzde oranı gibi tüm ihtiyaçlarınız için en güvenilir ve hızlı çözüm, özel olarak tasarlanmış bir araç kullanmaktır. Varsayımlarla veya karmaşık formüllerle uğraşmayın, tek tıkla net sonuca ulaşın. İhtiyacınız olan tüm yüzde hesaplamalarını saniyeler içinde yapmak için <strong><a href="../yuzde-hesaplama.html" class="text-blue-600 font-bold hover:underline">Yüzde Hesaplama</a></strong> aracımızı kullanın.</p>
                     </div>
                 </article>
             </main>
 
-            <!-- Sidebar -->
             <aside class="lg:col-span-4">
                 <div class="sticky top-24 space-y-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
-                        </h4>
-                        <nav id="toc" class="text-sm space-y-2 text-slate-600"></nav>
-                    </div>
-
-                    <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
+                    <!-- CTA Widget -->
+                    <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-10">
                             <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
                         </div>
                         <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-2">Hemen Hesaplayın!</h3>
-                            <p class="text-blue-100 text-sm mb-6">Bu konuyla ilgili hesaplamalarınızı ücretsiz aracımızla saniyeler içinde yapın.</p>
-                            <a href="#" id="cta-link" class="inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-50 transition transform hover:scale-105">
-                                Araca Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                            <h3 class="text-xl font-bold mb-2">Yüzdeyi Hızla Hesaplayın</h3>
+                            <p class="text-indigo-100 text-sm mb-6">İndirim, zam, oran ve daha fazlası... Tüm yüzde hesaplamalarınızı aracımızla saniyeler içinde yapın.</p>
+                            <a href="../yuzde-hesaplama.html" class="mb-2 inline-block w-full bg-white text-purple-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-indigo-50 transition transform hover:scale-105">
+                                Yüzde Hesaplama Aracına Git <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </div>
@@ -177,61 +124,6 @@
             <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
-
-    <script src="../assets/js/blog-data.js"></script>
-    <script>
-        function loadPostData() {
-            // Post data is already injected by the build script, but we keep this logic
-            // for the CTA and dynamic elements that rely on the 'relatedTool' from blog-data.js
-            const post = getCurrentPost();
-            if(!post) return;
-
-            // Dynamic CTA Logic
-            if(post.relatedTool) {
-                const cta = document.getElementById('cta-widget');
-                const btn = document.getElementById('cta-link');
-                let link = `../index.html#btn-${post.relatedTool}`;
-                const standaloneMap = {
-                    'kdv': '../kdv-hesaplama.html',
-                    'tevkifat': '../tevkifat-hesaplama.html',
-                    'kidem': '../kidem-tazminati.html',
-                    'kredi': '../kredi-hesaplama.html',
-                    'ai_asistan': '../ai-asistan.html',
-                    'bmi': '../vucut-kitle-i̇ndeksi-bmi-hesaplama.html',
-                    'net_brut': '../netten-brute-maas-hesaplama-2026.html'
-                };
-                if(standaloneMap[post.relatedTool]) link = standaloneMap[post.relatedTool];
-                btn.href = link;
-                cta.classList.remove('hidden');
-            }
-        }
-
-        function generateTOC() {
-            const content = document.getElementById('content-body');
-            const tocNav = document.getElementById('toc');
-            const headers = content.querySelectorAll('h2, h3');
-            if(headers.length === 0) {
-                tocNav.parentElement.classList.add('hidden');
-                return;
-            }
-            headers.forEach((header, index) => {
-                if(!header.id) header.id = `section-${index}`;
-                const link = document.createElement('a');
-                link.href = `#${header.id}`;
-                link.innerText = header.innerText;
-                link.className = `block toc-link hover:text-blue-600 transition truncate ${header.tagName === 'H3' ? 'pl-4 text-xs' : ''}`;
-                link.onclick = (e) => {
-                    e.preventDefault();
-                    document.getElementById(header.id).scrollIntoView({behavior: 'smooth'});
-                };
-                tocNav.appendChild(link);
-            });
-        }
-
-        window.onload = function() {
-            loadPostData();
-            setTimeout(generateTOC, 100);
-        };
-    </script>
+    <script src="../assets/js/autolinker.js"></script>
 </body>
 </html>

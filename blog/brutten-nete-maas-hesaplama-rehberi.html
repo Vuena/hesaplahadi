@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Maaşınızdan yapılan kesintiler nelerdir? SGK primi, gelir vergisi ve damga vergisi hesaplamanın mantığı.">
-    <title>Brütten Nete Maaş Hesaplama Rehberi - HesaplaHadi Blog</title>
+    <meta name="description" content="Brüt maaştan net maaşa nasıl ulaşılır? SGK primi, işsizlik sigortası, gelir vergisi dilimleri ve damga vergisi kesintilerini adım adım anlatan rehber.">
+    <title>Brütten Nete Maaş Nasıl Hesaplanır? Adım Adım Kesintiler Rehberi - HesaplaHadi</title>
     <link rel="canonical" href="https://hesaplahadi.com/blog/brutten-nete-maas-hesaplama-rehberi.html" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -14,8 +14,8 @@
         .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
         .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: #334155; }
         .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
-        .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: #1e293b; font-weight: 700; }
+        .prose .highlight { background-color: #eef2ff; color: #312e81; padding: 0.25rem 0.5rem; border-radius: 0.375rem; font-weight: 600; }
     </style>
     <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
@@ -25,136 +25,75 @@
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                     <a href="../index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                        </div>
-                    </a>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Ana Sayfa</a>
-                        <a href="../hakkimizda.html" class="hover:text-blue-600 transition">Hakkımızda</a>
-                        <a href="index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
+                <a href="../index.html" class="flex items-center space-x-2 group">
+                    <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
+                        <i class="fa-solid fa-calculator text-lg"></i>
                     </div>
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                </a>
+                <a href="../brutten-nete-maas-hesaplama.html" class="hidden sm:flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300 text-sm font-bold">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Maaş Hesaplama Aracına Git</span>
+                </a>
             </div>
         </div>
     </header>
 
     <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            <!-- Main Content -->
             <main class="lg:col-span-8">
-                <!-- Breadcrumb -->
-                <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
-                    <a href="../index.html" class="hover:text-blue-600">Anasayfa</a>
-                    <span class="mx-2">/</span>
-                    <a href="index.html" class="hover:text-blue-600">Blog</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-800" id="crumb-title">Brütten Nete Maaş Hesaplama Rehberi</span>
-                </nav>
-
                 <article>
                     <div class="mb-8">
-                        <span id="post-cat" class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">Finans</span>
-                        <h1 id="post-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Brütten Nete Maaş Hesaplama Rehberi</h1>
-                        <p id="post-summary" class="text-lg text-slate-500 mt-4 leading-relaxed">Maaşınızdan yapılan kesintiler nelerdir? SGK primi, gelir vergisi ve damga vergisi hesaplamanın mantığı.</p>
+                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">Finans</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Brütten Nete Maaş Nasıl Hesaplanır? Adım Adım Kesintiler Rehberi</h1>
+                        <p class="text-lg text-slate-500 mt-4 leading-relaxed">İş sözleşmenizde yazan maaş ile ay sonunda banka hesabınıza yatan tutar arasındaki farkın nereden geldiğini hiç merak ettiniz mi? Brütten nete maaş hesaplama sürecini ve kesintileri anlamak, finansal kontrolünüzü elinize almanın ilk adımıdır.</p>
                     </div>
 
-                    <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300 overflow-hidden relative">
-                         <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-slate-100 opacity-50"></div>
-                         <i id="post-icon" class="fa-solid fa-money-bill-wave text-9xl opacity-20 text-blue-500 transform scale-110"></i>
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-slate-100 opacity-50"></div>
+                        <i class="fa-solid fa-money-bill-wave text-9xl opacity-20 text-blue-500 transform scale-110"></i>
                     </div>
 
-                    <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body">
+                    <div class="prose max-w-none prose-lg">
+                        <p><strong>Brüt Maaş</strong>, bir çalışanın sigorta, vergiler ve diğer kesintiler yapılmadan önceki, kağıt üzerindeki toplam kazancıdır. <strong>Net Maaş</strong> ise tüm bu yasal kesintiler yapıldıktan sonra çalışanın eline geçen, yani banka hesabına yatan nihai tutardır. Gelin, brüt maaşın net maaşa dönüşme yolculuğundaki adımları inceleyelim.</p>
 
-    <p class="lead text-xl text-slate-600 mb-6 font-light">Maaşınızdan yapılan kesintiler nelerdir? SGK primi, gelir vergisi ve damga vergisi hesaplamanın mantığı. Bu yazımızda, konunun tüm detaylarını, hesaplama yöntemlerini ve dikkat edilmesi gereken püf noktalarını kapsamlı bir şekilde inceleyeceğiz.</p>
+                        <h2>Brütten Nete Giden Yoldaki Kesintiler</h2>
+                        <p>Brüt maaşınızdan sırasıyla aşağıdaki kesintiler yapılır:</p>
 
-    <p>Finansal okuryazarlığın artmasıyla birlikte, bireylerin ve işletmelerin bütçelerini daha doğru yönetmeleri kritik bir hal almıştır. Özellikle 2026 yılındaki ekonomik dinamikler, bu konunun önemini bir kat daha artırmaktadır. Günümüzde pek çok kişi <strong>Brütten Nete Maaş Hesaplama Rehberi</strong> konusunda internette araştırma yapmakta ancak doğru ve güvenilir bilgiye ulaşmakta zorlanmaktadır. HesaplaHadi olarak, karmaşık terimleri basitleştirerek ve pratik örnekler sunarak bu rehberi hazırladık.</p>
+                        <h3>1. SGK İşçi Payı (%14) + İşsizlik Sigortası İşçi Payı (%1)</h3>
+                        <p>Brüt maaşınızdan ilk olarak toplam %15 oranında bir kesinti yapılır. Bu, emekliliğiniz ve genel sağlık sigortanız için ödenen SGK primi (%14) ile işsiz kalmanız durumunda devreye giren işsizlik sigortası fonu (%1) payından oluşur.</p>
 
-    <h2>Brütten Nete Maaş Hesaplama Rehberi Nedir ve Neden Önemlidir?</h2>
-    <p>Temel olarak ele alacak olursak, bu kavram hayatımızın merkezinde yer alır. İster günlük yaşantınızda ister profesyonel iş hayatınızda olsun, bu konuda bilgi sahibi olmak size avantaj sağlar. Peki, neden bu kadar önemlidir?</p>
-    <ul>
-        <li><strong>Farkındalık Yaratır:</strong> Konu hakkında bilgi sahibi olmak, daha doğru kararlar vermenizi sağlar.</li>
-        <li><strong>Zaman Kazandırır:</strong> Doğru yöntemleri bilmek, deneme-yanılma yoluyla vakit kaybetmenizi önler.</li>
-        <li><strong>Maliyetleri Düşürür:</strong> Özellikle finansal konularda yapılan hatalar ciddi maddi kayıplara yol açabilir.</li>
-    </ul>
-    <p>Örneğin, 2026 yılı verilerine baktığımızda, bu konuya hakim olan bireylerin diğerlerine göre %30 daha avantajlı olduğu gözlemlenmiştir. Bu nedenle, aşağıda detaylandıracağımız başlıkları dikkatlice incelemenizi öneririz.</p>
+                        <h3>2. Gelir Vergisi Matrahının Bulunması</h3>
+                        <p>Gelir vergisi, brüt maaş üzerinden değil, <span class="highlight">Gelir Vergisi Matrahı</span> üzerinden hesaplanır. Bu matrahı bulmak için brüt maaştan, bir önceki adımda hesaplanan SGK İşçi Payı ve İşsizlik Sigortası İşçi Payı toplamı çıkarılır.</p>
+                        <p><strong>Formül:</strong> <code>Gelir Vergisi Matrahı = Brüt Maaş - (SGK İşçi Payı + İşsizlik Sig. İşçi Payı)</code></p>
 
-    <h2>Hesaplama Yöntemleri ve Dikkat Edilmesi Gerekenler</h2>
-    <p>Doğru sonuca ulaşmak için izlenmesi gereken belirli adımlar vardır. Çoğu zaman basit bir formül veya yöntemle çözülebilecek sorunlar, bilgi eksikliği nedeniyle karmaşık hale gelebilir.</p>
+                        <h3>3. Gelir Vergisi (%15'ten Başlayan Oranlarla)</h3>
+                        <p>Hesaplanan gelir vergisi matrahı üzerinden, yıl içinde elde ettiğiniz toplam kazancınıza (kümülatif vergi matrahı) göre belirlenen oranlarda gelir vergisi kesilir. Bu oranlar, <span class="highlight">gelir vergisi dilimleri</span> olarak adlandırılır ve kazancınız arttıkça vergi oranınız da artar. 2026 yılı için geçerli dilimler ve oranlar, yıl başında belirlenir.</p>
 
-    <h3>1. Temel Mantığı Kavrayın</h3>
-    <p>Her şeyden önce, işin mantığını anlamak gerekir. Ezbere dayalı yöntemler, değişkenler farklılaştığında sizi yarı yolda bırakabilir. Bu nedenle, <em>neden</em> ve <em>nasıl</em> sorularını kendinize sormalısınız.</p>
+                        <h3>4. Damga Vergisi (%0,00759)</h3>
+                        <p>Son olarak, brüt maaşınız üzerinden binde 7,59 oranında küçük bir damga vergisi kesintisi yapılır.</p>
 
-    <h3>2. Güncel Verileri Kullanın</h3>
-    <p>Hesaplama yaparken veya strateji belirlerken, kullandığınız verilerin güncel olması hayati önem taşır. Özellikle 2026 yılı gibi ekonomik veya sosyal değişimlerin hızlı olduğu dönemlerde, eski verilerle hareket etmek yanıltıcı olabilir.</p>
+                        <h2>İlgili Haklar ve Tazminatlar</h2>
+                        <p>Maaşınızın yanı sıra, çalışma hayatında haklarınız olan diğer önemli konular hakkında da bilgi sahibi olmanız önemlidir. İşten ayrılma durumlarında karşılaşabileceğiniz haklarınızdan olan <a href="./ihbar-tazminati-hesaplama-rehberi.html" class="text-blue-600 font-bold hover:underline">İhbar Tazminatı</a> veya uzun süreli çalışmalarınızın bir karşılığı olan <a href="./2026-kidem-tazminati-tavani-ve-hesaplama.html" class="text-blue-600 font-bold hover:underline">Kıdem Tazminatı</a> gibi konular, finansal güvenceniz için kritik rol oynar. Bu konular hakkında detaylı bilgi almak için rehberlerimizi okuyabilirsiniz.</p>
 
-    <h3>3. Profesyonel Araçlardan Destek Alın</h3>
-    <p>Manuel hesaplamalar hata payı içerebilir. Sitemizde bulunan <strong>Hesaplama Araçları</strong> sayesinde, karmaşık formüllerle uğraşmadan saniyeler içinde doğru sonuca ulaşabilirsiniz. Bu araçlar, en güncel algoritmalarla çalışır ve size zaman kazandırır.</p>
-
-    <h2>Sıkça Sorulan Sorular (SSS)</h2>
-    <p>Kullanıcılarımızdan gelen ve konuyla ilgili en çok merak edilen soruları sizler için derledik:</p>
-
-    <div class="space-y-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Bu hesaplama her yıl değişir mi?</h4>
-            <p class="text-sm text-slate-600">Evet, genellikle kullanılan parametreler (vergi oranları, katsayılar, vb.) her yıl güncellenir. Bu nedenle 2026 yılına özel verileri kullanmanız önemlidir.</p>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Yanlış hesaplama yaparsam ne olur?</h4>
-            <p class="text-sm text-slate-600">Yanlış hesaplamalar, bütçe açıklarına veya yanlış kararlara yol açabilir. Bu riski minimize etmek için otomatik hesaplama araçlarımızı kullanmanızı öneririz.</p>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Daha fazla bilgiye nereden ulaşabilirim?</h4>
-            <p class="text-sm text-slate-600">Sitemizdeki diğer blog yazılarını inceleyebilir veya AI Asistanımıza danışarak kişiselleştirilmiş yanıtlar alabilirsiniz.</p>
-        </div>
-    </div>
-
-    <h2>Sonuç</h2>
-    <p>Özetlemek gerekirse, <strong>Brütten Nete Maaş Hesaplama Rehberi</strong> konusu üzerinde durulması gereken, hayatınızı kolaylaştıracak önemli bir başlıktır. Yukarıda bahsettiğimiz yöntemleri uygulayarak ve dikkat noktalarını göz önünde bulundurarak, bu süreci en verimli şekilde yönetebilirsiniz.</p>
-    <p>Unutmayın, bilgi güçtür. Daha fazla hesaplama aracı ve rehber içerik için sitemizi takip etmeye devam edin. Başarılar!</p>
-
+                        <h2 class="!mt-12">Sonuç: Kesintileri Anlayın, Net Maaşınızı Kolayca Öğrenin</h2>
+                        <p>Brütten nete maaş hesaplaması, birçok farklı kesinti ve oranın bir araya gelmesiyle karmaşık bir hal alabilir. Özellikle yıl içinde değişen gelir vergisi dilimleri, her ay elinize geçen net maaşın farklılaşmasına neden olabilir. Bu kesintilerin mantığını bilmek, finansal okuryazarlığınız için önemlidir. Ancak her ay bu hesaplamayı manuel olarak yapmak yerine, tüm bu işlemleri sizin için saniyeler içinde ve hatasız bir şekilde yapan bir araç kullanmak en pratik çözümdür.</p>
+                        <p>Brüt maaşınızı, medeni durumunuzu ve diğer bilgileri girerek 2026 yılına ait güncel kesintilerle elinize net olarak ne kadar geçeceğini anında görmek için <strong><a href="../brutten-nete-maas-hesaplama.html" class="text-blue-600 font-bold hover:underline">Brütten Nete Maaş Hesaplama</a></strong> aracımızı kullanın.</p>
                     </div>
                 </article>
             </main>
 
-            <!-- Sidebar -->
             <aside class="lg:col-span-4">
                 <div class="sticky top-24 space-y-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
-                        </h4>
-                        <nav id="toc" class="text-sm space-y-2 text-slate-600"></nav>
-                    </div>
-
-                    <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
+                    <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-10">
                             <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
                         </div>
                         <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-2">Hemen Hesaplayın!</h3>
-                            <p class="text-blue-100 text-sm mb-6">Bu konuyla ilgili hesaplamalarınızı ücretsiz aracımızla saniyeler içinde yapın.</p>
-                            <a href="#" id="cta-link" class="inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-50 transition transform hover:scale-105">
-                                Araca Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                            <h3 class="text-xl font-bold mb-2">Net Maaşınızı Merak mı Ediyorsunuz?</h3>
+                            <p class="text-indigo-100 text-sm mb-6">Brüt maaşınızı girin, 2026 yılı güncel kesintileriyle net maaşınızı saniyeler içinde öğrenin.</p>
+                            <a href="../brutten-nete-maas-hesaplama.html" class="mb-2 inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-indigo-50 transition transform hover:scale-105">
+                                Maaş Hesaplama Aracına Git <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </div>
@@ -177,61 +116,6 @@
             <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
-
-    <script src="../assets/js/blog-data.js"></script>
-    <script>
-        function loadPostData() {
-            // Post data is already injected by the build script, but we keep this logic
-            // for the CTA and dynamic elements that rely on the 'relatedTool' from blog-data.js
-            const post = getCurrentPost();
-            if(!post) return;
-
-            // Dynamic CTA Logic
-            if(post.relatedTool) {
-                const cta = document.getElementById('cta-widget');
-                const btn = document.getElementById('cta-link');
-                let link = `../index.html#btn-${post.relatedTool}`;
-                const standaloneMap = {
-                    'kdv': '../kdv-hesaplama.html',
-                    'tevkifat': '../tevkifat-hesaplama.html',
-                    'kidem': '../kidem-tazminati.html',
-                    'kredi': '../kredi-hesaplama.html',
-                    'ai_asistan': '../ai-asistan.html',
-                    'bmi': '../vucut-kitle-i̇ndeksi-bmi-hesaplama.html',
-                    'net_brut': '../netten-brute-maas-hesaplama-2026.html'
-                };
-                if(standaloneMap[post.relatedTool]) link = standaloneMap[post.relatedTool];
-                btn.href = link;
-                cta.classList.remove('hidden');
-            }
-        }
-
-        function generateTOC() {
-            const content = document.getElementById('content-body');
-            const tocNav = document.getElementById('toc');
-            const headers = content.querySelectorAll('h2, h3');
-            if(headers.length === 0) {
-                tocNav.parentElement.classList.add('hidden');
-                return;
-            }
-            headers.forEach((header, index) => {
-                if(!header.id) header.id = `section-${index}`;
-                const link = document.createElement('a');
-                link.href = `#${header.id}`;
-                link.innerText = header.innerText;
-                link.className = `block toc-link hover:text-blue-600 transition truncate ${header.tagName === 'H3' ? 'pl-4 text-xs' : ''}`;
-                link.onclick = (e) => {
-                    e.preventDefault();
-                    document.getElementById(header.id).scrollIntoView({behavior: 'smooth'});
-                };
-                tocNav.appendChild(link);
-            });
-        }
-
-        window.onload = function() {
-            loadPostData();
-            setTimeout(generateTOC, 100);
-        };
-    </script>
+    <script src="../assets/js/autolinker.js"></script>
 </body>
 </html>
