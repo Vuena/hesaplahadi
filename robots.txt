@@ -1,3 +1,26 @@
+# SEO Best Practices: Guide all web crawlers
 User-agent: *
-Allow: /
+
+# Allow full access to the most important directories
+Allow: /$
+Allow: /blog/
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/img/
+
+# Disallow crawling of non-essential files and directories
+Disallow: /__pycache__/
+Disallow: /verification/
+Disallow: /.idea/
+Disallow: /.git/
+Disallow: /*.py
+Disallow: /*.json
+Disallow: /*.md
+Disallow: /tests/
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /netlify.toml
+
+# Point to the sitemap for comprehensive URL discovery
 Sitemap: https://hesaplahadi.com/sitemap.xml
