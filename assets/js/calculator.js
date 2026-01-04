@@ -341,6 +341,7 @@ function calc_enflasyon() {
     const i2=window.cpi_data[e]||100;
     const r=i2/i1;
     showRes('enflasyon',(a*r).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL', `Enflasyon Katsayısı: ${r.toFixed(2)}x (${s} -> ${e})`);
+}
 
 function calc_freelancer() { const i=getNum('freelancer','income'); const e=getNum('freelancer','expense'); const k=parseFloat(getVal('freelancer','kdv'))/100; const y=document.getElementById('freelancer-genc').checked; const ka=i*k; let p=i-e; if(y&&p>0)p=Math.max(0,p-230000); let t=0,rem=p; if(rem>0){const a=Math.min(rem,150000);t+=a*0.15;rem-=a;} if(rem>0){const a=Math.min(rem,280000);t+=a*0.20;rem-=a;} if(rem>0){const a=Math.min(rem,550000);t+=a*0.27;rem-=a;} if(rem>0){t+=rem*0.35;} showRes('freelancer',(i-e-t).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL', `Vergi: ${t.toLocaleString('tr-TR')} TL | KDV: ${ka.toLocaleString('tr-TR')} TL`); }
 function calc_dolar() { const m=getVal('dolar','mode'); const a=getNum('dolar','amt'); if(m==='conv'){showRes('dolar',(a*getNum('dolar','rate')).toLocaleString('tr-TR',{maximumFractionDigits:2})+' TL','');}else{const b=getNum('dolar','buy'),s=getNum('dolar','sell'),c=a*b,r=a*s,p=r-c;const cl=p>=0?'text-green-600':'text-red-600';showRes('dolar',`<span class="${cl}">${p.toLocaleString('tr-TR',{maximumFractionDigits:2})} TL</span>`,`ROI: %${((p/c)*100).toFixed(2)}`);}}
