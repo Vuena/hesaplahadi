@@ -135,18 +135,49 @@
 </div>
 <!-- Tool Inputs Container - ID MUST MATCH calculator.js expectation -->
 <div id="content-brut_net">
-<div class="grid grid-cols-1 md:grid-cols-1 gap-5 md:gap-6"><div><label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Brüt Maaş (TL)</label><input class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" id="brut_net-brut" placeholder="20002.50" step="any" type="number"/></div></div>
-<button class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition" onclick="calc_brut_net()">
-<i class="fa-solid fa-bolt"></i> Hesapla
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Brüt Maaş (TL)</label>
+            <input class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition input-premium" id="brut_net-brut" placeholder="33030" step="any" type="number"/>
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Hesaplama Yılı</label>
+            <select class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition" id="brut_net-year">
+                <option value="2026" selected>2026</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2 ml-1">Ay</label>
+            <select class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium focus:bg-white transition" id="brut_net-month">
+                <option value="1" selected>Ocak</option>
+                <option value="2">Şubat</option>
+                <option value="3">Mart</option>
+                <option value="4">Nisan</option>
+                <option value="5">Mayıs</option>
+                <option value="6">Haziran</option>
+                <option value="7">Temmuz</option>
+                <option value="8">Ağustos</option>
+                <option value="9">Eylül</option>
+                <option value="10">Ekim</option>
+                <option value="11">Kasım</option>
+                <option value="12">Aralık</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn-calc w-full mt-8 py-4 rounded-xl font-bold text-white text-sm tracking-wide shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition" onclick="calc_brut_net()">
+        <i class="fa-solid fa-bolt"></i> Hesapla
+    </button>
+    <div class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-indigo-50 border border-indigo-100" id="res-brut_net">
+        <button class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm" id="btn-copy-brut_net" onclick="copyResult('brut_net')">
+            <i class="fa-regular fa-copy"></i> Kopyala
         </button>
-<div class="result-card hidden mt-8 p-6 rounded-2xl relative group bg-indigo-50 border border-indigo-100" id="res-brut_net">
-<button class="absolute top-4 right-4 text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition text-slate-500 flex items-center gap-1 shadow-sm" id="btn-copy-brut_net" onclick="copyResult('brut_net')">
-<i class="fa-regular fa-copy"></i> Kopyala
-          </button>
-<p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">SONUÇ</p>
-<div class="text-3xl font-black text-slate-900 tracking-tight" id="val-brut_net"></div>
-<div class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden" id="detail-brut_net"></div>
-</div>
+        <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">SEÇİLEN AY İÇİN SONUÇ</p>
+        <div class="text-3xl font-black text-slate-900 tracking-tight" id="val-brut_net"></div>
+        <div class="text-sm text-slate-500 mt-3 pt-3 border-t border-slate-200/50 empty:hidden" id="detail-brut_net"></div>
+
+        <!-- Detailed Table Container -->
+        <div id="table-brut_net_container" class="hidden"></div>
+    </div>
 </div>
 </div>
 <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 info-panel">

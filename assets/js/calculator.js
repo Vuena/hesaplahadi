@@ -338,7 +338,179 @@ function calc_yas() { const d=new Date(getVal('yas','date')), n=new Date(); let 
 function calc_zam() { const s=getNum('zam','curr'), r=getNum('zam','rate'); showRes('zam', (s*(1+r/100)).toFixed(2)+' TL'); }
 function calc_indirim() { const p=getNum('indirim','price'), r=getNum('indirim','rate'); showRes('indirim', (p*(1-r/100)).toFixed(2)+' TL'); }
 function calc_net_brut() { showRes('net_brut', (getNum('net_brut','net')/0.7149).toFixed(2)+' TL', 'Tahmini Hesap (2026 Ocak)'); }
-function calc_brut_net() { showRes('brut_net', (getNum('brut_net','brut')*0.7149).toFixed(2)+' TL', 'Tahmini Hesap (2026 Ocak)'); }
+
+function calc_brut_net() {
+    // --- 2026 PARAMETERS (EDIT HERE) ---
+    const MIN_WAGE_GROSS = 33030; // 2026 Tahmini Brüt Asgari Ücret
+    const SGK_RATE = 0.14;
+    const UNEMP_RATE = 0.01;
+    const DAMGA_RATE = 0.00759;
+
+    // 2026 Gelir Vergisi Dilimleri (Tahmini)
+    const TAX_BRACKETS = [
+        { limit: 158000, rate: 0.15 },
+        { limit: 380000, rate: 0.20 },
+        { limit: 870000, rate: 0.27 },
+        { limit: 4300000, rate: 0.35 },
+        { limit: Infinity, rate: 0.40 }
+    ];
+    // ------------------------------------
+
+    const inputGross = getNum('brut_net', 'brut');
+    const selectedMonth = parseInt(getVal('brut_net', 'month')) || 1; // 1-12
+    const selectedYear = getVal('brut_net', 'year') || '2026';
+
+    if (inputGross <= 0) {
+        showRes('brut_net', '0,00 TL', 'Lütfen geçerli bir brüt maaş giriniz.');
+        return;
+    }
+
+    let cumMatrahUser = 0;
+    let cumMatrahMin = 0;
+
+    let results = [];
+    let targetResult = null;
+
+    // Helper: Calculate Tax for a specific base amount given the cumulative progress
+    const calcTax = (matrah, cumulative) => {
+        let remaining = matrah;
+        let currentCum = cumulative;
+        let tax = 0;
+
+        for (let i = 0; i < TAX_BRACKETS.length; i++) {
+            if (remaining <= 0) break;
+
+            const bracket = TAX_BRACKETS[i];
+            const prevLimit = i === 0 ? 0 : TAX_BRACKETS[i - 1].limit;
+            const limit = bracket.limit;
+            const rate = bracket.rate;
+
+            // Available space in this bracket
+            const space = limit - currentCum; // How much room left in this bracket from cumulative start
+
+            if (space > 0) {
+                // If we have space, tax as much of 'remaining' as fits
+                const amountInBracket = Math.min(remaining, space);
+                tax += amountInBracket * rate;
+                remaining -= amountInBracket;
+                currentCum += amountInBracket;
+            } else {
+                // We are already past this bracket, continue to next higher bracket
+                continue;
+            }
+        }
+        return tax;
+    };
+
+    // Iterate 12 Months
+    for (let m = 1; m <= 12; m++) {
+        // 1. User Calculation
+        const sgkUser = inputGross * SGK_RATE;
+        const unempUser = inputGross * UNEMP_RATE;
+        const matrahUser = inputGross - sgkUser - unempUser;
+
+        const taxUser = calcTax(matrahUser, cumMatrahUser);
+        cumMatrahUser += matrahUser;
+
+        // 2. Min Wage Calculation (Exemption Base)
+        const sgkMin = MIN_WAGE_GROSS * SGK_RATE;
+        const unempMin = MIN_WAGE_GROSS * UNEMP_RATE;
+        const matrahMin = MIN_WAGE_GROSS - sgkMin - unempMin;
+
+        const taxMin = calcTax(matrahMin, cumMatrahMin);
+        cumMatrahMin += matrahMin; // Important: Min wage cumulative base also grows
+
+        // 3. Exemption Application
+        // The exemption is the TAX calculated on the Min Wage
+        const exemptTax = taxMin;
+        const exemptDamga = MIN_WAGE_GROSS * DAMGA_RATE;
+
+        // 4. Final Payables
+        const finalTax = Math.max(0, taxUser - exemptTax);
+        const calcDamga = inputGross * DAMGA_RATE;
+        const finalDamga = Math.max(0, calcDamga - exemptDamga);
+
+        const totalDeductions = sgkUser + unempUser + finalTax + finalDamga;
+        const netSalary = inputGross - totalDeductions;
+
+        const monthData = {
+            month: m,
+            gross: inputGross,
+            sgk: sgkUser,
+            unemp: unempUser,
+            tax: finalTax,
+            damga: finalDamga,
+            net: netSalary,
+            totalDed: totalDeductions
+        };
+
+        results.push(monthData);
+        if (m === selectedMonth) targetResult = monthData;
+    }
+
+    // Display Main Result (Card)
+    const f = (n) => n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' TL';
+
+    // Update Result Card
+    document.getElementById('val-brut_net').innerText = f(targetResult.net);
+    document.getElementById('detail-brut_net').innerHTML = `
+        <div class="grid grid-cols-2 gap-2 text-xs">
+            <span>SGK Primi:</span> <span class="font-bold">${f(targetResult.sgk)}</span>
+            <span>İşsizlik Sig.:</span> <span class="font-bold">${f(targetResult.unemp)}</span>
+            <span>Gelir Vergisi:</span> <span class="font-bold">${f(targetResult.tax)}</span>
+            <span>Damga Vergisi:</span> <span class="font-bold">${f(targetResult.damga)}</span>
+            <span class="text-indigo-600 font-bold mt-1">Toplam Kesinti:</span> <span class="font-bold mt-1 text-indigo-600">${f(targetResult.totalDed)}</span>
+        </div>
+    `;
+
+    // Render Table
+    const tableContainer = document.getElementById('table-brut_net_container');
+    if(tableContainer) {
+        let html = `
+        <div class="overflow-x-auto mt-6 border border-slate-200 rounded-xl">
+            <table class="w-full text-xs text-left text-slate-600">
+                <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                    <tr>
+                        <th class="p-3">Ay</th>
+                        <th class="p-3">Brüt</th>
+                        <th class="p-3">SGK + İşsizlik</th>
+                        <th class="p-3">G. Vergisi</th>
+                        <th class="p-3">Damga</th>
+                        <th class="p-3 text-indigo-700">NET MAAŞ</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+        `;
+
+        const monthNames = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
+        results.forEach(r => {
+            const isSelected = r.month === selectedMonth;
+            const rowClass = isSelected ? "bg-indigo-50 font-semibold" : "hover:bg-slate-50";
+            const sgkTotal = r.sgk + r.unemp;
+
+            html += `
+                <tr class="${rowClass} transition">
+                    <td class="p-3">${monthNames[r.month-1]}</td>
+                    <td class="p-3">${f(r.gross)}</td>
+                    <td class="p-3">${f(sgkTotal)}</td>
+                    <td class="p-3">${f(r.tax)}</td>
+                    <td class="p-3">${f(r.damga)}</td>
+                    <td class="p-3 font-bold text-indigo-700">${f(r.net)}</td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table></div>`;
+        tableContainer.innerHTML = html;
+        tableContainer.classList.remove('hidden');
+    }
+
+    const rDiv = document.getElementById('res-brut_net');
+    rDiv.classList.remove('hidden');
+    rDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
 function calc_mevduat() { showRes('mevduat', (getNum('mevduat','amt')*getNum('mevduat','rate')*getNum('mevduat','days')/36500*0.95).toFixed(2)+' TL'); }
 function calc_iban() { const i=getVal('iban','code'); showRes('iban', i.length===26&&i.startsWith('TR')?'Geçerli':'Geçersiz'); }
 function calc_idealkilo() { const h=getNum('idealkilo','h'), k=getVal('idealkilo','g')==0?50+0.9*(h-152):45.5+0.9*(h-152); showRes('idealkilo', Math.round(k)+' kg'); }
