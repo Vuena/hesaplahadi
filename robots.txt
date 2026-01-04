@@ -1,3 +1,19 @@
 User-agent: *
-Allow: /
+
+# Disallow development, config, and private directories
+Disallow: /__pycache__/
+Disallow: /verification/
+Disallow: /.idea/
+Disallow: /.git/
+Disallow: /tests/
+Disallow: /node_modules/
+Disallow: /blog/template.html
+
+# Disallow server-side script files and configs by type
+Disallow: /*.py$
+Disallow: /*.json$
+Disallow: /*.md$
+Disallow: /*.txt$
+
+# Explicitly state the path to the sitemap
 Sitemap: https://hesaplahadi.com/sitemap.xml

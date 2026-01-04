@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="25 dakika çalışma, 5 dakika mola. Odaklanma sorunu yaşayanlar için en iyi yöntem.">
+    <meta name="description" content="Pomodoro tekniği ile 25 dakika çalışma, 5 dakika mola vererek odaklanma sorununu çözün ve verimliliğinizi artırın. Adım adım uygulama rehberi.">
     <title>Verimli Ders Çalışma Tekniği: Pomodoro - HesaplaHadi Blog</title>
     <link rel="canonical" href="https://hesaplahadi.com/blog/ders-calisma-teknikleri-pomodoro.html" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,10 +11,9 @@
     <link href="../assets/css/style.css" rel="stylesheet">
     <style>
         .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
-        .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .prose ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+        .prose li { margin-bottom: 1rem; padding-left: 0.5rem; }
         .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: #334155; }
-        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
-        .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: #1e293b; font-weight: 700; }
     </style>
     <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
@@ -36,20 +35,8 @@
                     </a>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Ana Sayfa</a>
-                        <a href="../hakkimizda.html" class="hover:text-blue-600 transition">Hakkımızda</a>
-                        <a href="index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
-                    </div>
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+                    <a href="../index.html" class="hidden md:flex items-center text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Hesaplama Araçları
                     </a>
                 </div>
             </div>
@@ -58,103 +45,62 @@
 
     <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            <!-- Main Content -->
             <main class="lg:col-span-8">
-                <!-- Breadcrumb -->
-                <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
-                    <a href="../index.html" class="hover:text-blue-600">Anasayfa</a>
-                    <span class="mx-2">/</span>
-                    <a href="index.html" class="hover:text-blue-600">Blog</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-800" id="crumb-title">Verimli Ders Çalışma Tekniği: Pomodoro</span>
-                </nav>
-
                 <article>
                     <div class="mb-8">
-                        <span id="post-cat" class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase tracking-wider">Eğitim</span>
-                        <h1 id="post-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Verimli Ders Çalışma Tekniği: Pomodoro</h1>
-                        <p id="post-summary" class="text-lg text-slate-500 mt-4 leading-relaxed">25 dakika çalışma, 5 dakika mola. Odaklanma sorunu yaşayanlar için en iyi yöntem.</p>
+                        <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase tracking-wider">Eğitim</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Verimli Ders Çalışma Tekniği: Pomodoro</h1>
+                        <p class="text-lg text-slate-500 mt-4 leading-relaxed">Ertelemekten sıkıldınız mı? Dikkat dağınıklığı yüzünden saatlerce bir konunun başında beklediğiniz oluyor mu? Pomodoro tekniği, büyük görevleri yönetilebilir parçalara ayırarak odaklanmanızı sağlayan basit ve güçlü bir metottur.</p>
                     </div>
 
-                    <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300 overflow-hidden relative">
                          <div class="absolute inset-0 bg-gradient-to-br from-red-50 to-slate-100 opacity-50"></div>
-                         <i id="post-icon" class="fa-solid fa-stopwatch text-9xl opacity-20 text-red-500 transform scale-110"></i>
+                         <i class="fa-solid fa-stopwatch text-9xl opacity-20 text-red-500 transform scale-110"></i>
                     </div>
 
-                    <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body">
+                    <div class="prose max-w-none prose-lg">
+                        <p>1980'lerde Francesco Cirillo tarafından geliştirilen bu teknik, adını İtalyanca'da "domates" anlamına gelen 'pomodoro' kelimesinden, Cirillo'nun kullandığı domates şeklindeki mutfak zamanlayıcısından alır. Temel mantık, zamanı kısa, odaklanmış çalışma aralıklarına ve ardından gelen kısa molalara bölmektir.</p>
+                        
+                        <h2>Pomodoro Tekniği 5 Basit Adımda Nasıl Uygulanır?</h2>
+                        <p>Bu tekniği uygulamak için ihtiyacınız olan tek şey bir zamanlayıcı (telefonunuzun kronometresi iş görür) ve kararlılıktır.</p>
+                        
+                        <ol>
+                            <li>
+                                <strong>Bir Görev Seçin:</strong> O an tamamlamanız gereken sadece tek bir göreve karar verin. Örneğin, "Matematik Bölüm 3'teki problemleri çözeceğim." Birden fazla işe aynı anda odaklanmaya çalışmayın.
+                            </li>
+                            <li>
+                                <strong>Zamanlayıcıyı 25 Dakikaya Ayarlayın:</strong> Zamanlayıcınızı 25 dakikaya ayarlayın ve başlatın. Bu 25 dakikalık süreye bir "Pomodoro" denir.
+                            </li>
+                            <li>
+                                <strong>Odaklanarak Çalışın:</strong> Zamanlayıcı çalana kadar, seçtiğiniz göreve tüm dikkatinizi verin. Sosyal medya bildirimlerini, telefonunuzu ve diğer tüm dikkat dağıtıcı unsurları ortadan kaldırın. Aklınıza başka bir iş gelirse, bir kenara not alın ve çalışmanıza devam edin.
+                            </li>
+                            <li>
+                                <strong>Kısa Bir Mola Verin:</strong> Zamanlayıcı çaldığında, işi hemen bırakın. <strong>5 dakikalık</strong> bir mola verin. Bu mola sırasında çalıştığınız konuyla ilgilenmeyin. Kalkın, bir su için, esneme hareketleri yapın, pencereden dışarı bakın.
+                            </li>
+                            <li>
+                                <strong>Döngüyü Tekrarla ve Uzun Mola Ver:</strong> Yukarıdaki 4 adımı tekrarlayın. Her 25 dakikalık çalışmanın ardından bir yere bir çentik atabilirsiniz. Dört "Pomodoro" tamamladıktan sonra (yani yaklaşık 2 saat sonra), <strong>15 ila 30 dakika</strong> arasında daha uzun bir mola verin. Bu uzun mola, zihninizin dinlenmesi ve bir sonraki çalışma seansına hazırlanması için kritik öneme sahiptir.
+                            </li>
+                        </ol>
 
-    <p class="lead text-xl text-slate-600 mb-6 font-light">25 dakika çalışma, 5 dakika mola. Odaklanma sorunu yaşayanlar için en iyi yöntem. Bu yazımızda, konunun tüm detaylarını, hesaplama yöntemlerini ve dikkat edilmesi gereken püf noktalarını kapsamlı bir şekilde inceleyeceğiz.</p>
-
-    <p>Eğitim hayatında ve kariyer basamaklarında başarıya ulaşmak için doğru stratejileri belirlemek gerekir. Öğrenme yöntemleri ve sınav taktikleri, rakiplerinizin önüne geçmenizi sağlar. Günümüzde pek çok kişi <strong>Verimli Ders Çalışma Tekniği: Pomodoro</strong> konusunda internette araştırma yapmakta ancak doğru ve güvenilir bilgiye ulaşmakta zorlanmaktadır. HesaplaHadi olarak, karmaşık terimleri basitleştirerek ve pratik örnekler sunarak bu rehberi hazırladık.</p>
-
-    <h2>Verimli Ders Çalışma Tekniği: Pomodoro Nedir ve Neden Önemlidir?</h2>
-    <p>Temel olarak ele alacak olursak, bu kavram hayatımızın merkezinde yer alır. İster günlük yaşantınızda ister profesyonel iş hayatınızda olsun, bu konuda bilgi sahibi olmak size avantaj sağlar. Peki, neden bu kadar önemlidir?</p>
-    <ul>
-        <li><strong>Farkındalık Yaratır:</strong> Konu hakkında bilgi sahibi olmak, daha doğru kararlar vermenizi sağlar.</li>
-        <li><strong>Zaman Kazandırır:</strong> Doğru yöntemleri bilmek, deneme-yanılma yoluyla vakit kaybetmenizi önler.</li>
-        <li><strong>Maliyetleri Düşürür:</strong> Özellikle finansal konularda yapılan hatalar ciddi maddi kayıplara yol açabilir.</li>
-    </ul>
-    <p>Örneğin, 2026 yılı verilerine baktığımızda, bu konuya hakim olan bireylerin diğerlerine göre %30 daha avantajlı olduğu gözlemlenmiştir. Bu nedenle, aşağıda detaylandıracağımız başlıkları dikkatlice incelemenizi öneririz.</p>
-
-    <h2>Hesaplama Yöntemleri ve Dikkat Edilmesi Gerekenler</h2>
-    <p>Doğru sonuca ulaşmak için izlenmesi gereken belirli adımlar vardır. Çoğu zaman basit bir formül veya yöntemle çözülebilecek sorunlar, bilgi eksikliği nedeniyle karmaşık hale gelebilir.</p>
-
-    <h3>1. Temel Mantığı Kavrayın</h3>
-    <p>Her şeyden önce, işin mantığını anlamak gerekir. Ezbere dayalı yöntemler, değişkenler farklılaştığında sizi yarı yolda bırakabilir. Bu nedenle, <em>neden</em> ve <em>nasıl</em> sorularını kendinize sormalısınız.</p>
-
-    <h3>2. Güncel Verileri Kullanın</h3>
-    <p>Hesaplama yaparken veya strateji belirlerken, kullandığınız verilerin güncel olması hayati önem taşır. Özellikle 2026 yılı gibi ekonomik veya sosyal değişimlerin hızlı olduğu dönemlerde, eski verilerle hareket etmek yanıltıcı olabilir.</p>
-
-    <h3>3. Profesyonel Araçlardan Destek Alın</h3>
-    <p>Manuel hesaplamalar hata payı içerebilir. Sitemizde bulunan <strong>Hesaplama Araçları</strong> sayesinde, karmaşık formüllerle uğraşmadan saniyeler içinde doğru sonuca ulaşabilirsiniz. Bu araçlar, en güncel algoritmalarla çalışır ve size zaman kazandırır.</p>
-
-    <h2>Sıkça Sorulan Sorular (SSS)</h2>
-    <p>Kullanıcılarımızdan gelen ve konuyla ilgili en çok merak edilen soruları sizler için derledik:</p>
-
-    <div class="space-y-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Bu hesaplama her yıl değişir mi?</h4>
-            <p class="text-sm text-slate-600">Evet, genellikle kullanılan parametreler (vergi oranları, katsayılar, vb.) her yıl güncellenir. Bu nedenle 2026 yılına özel verileri kullanmanız önemlidir.</p>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Yanlış hesaplama yaparsam ne olur?</h4>
-            <p class="text-sm text-slate-600">Yanlış hesaplamalar, bütçe açıklarına veya yanlış kararlara yol açabilir. Bu riski minimize etmek için otomatik hesaplama araçlarımızı kullanmanızı öneririz.</p>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Daha fazla bilgiye nereden ulaşabilirim?</h4>
-            <p class="text-sm text-slate-600">Sitemizdeki diğer blog yazılarını inceleyebilir veya AI Asistanımıza danışarak kişiselleştirilmiş yanıtlar alabilirsiniz.</p>
-        </div>
-    </div>
-
-    <h2>Sonuç</h2>
-    <p>Özetlemek gerekirse, <strong>Verimli Ders Çalışma Tekniği: Pomodoro</strong> konusu üzerinde durulması gereken, hayatınızı kolaylaştıracak önemli bir başlıktır. Yukarıda bahsettiğimiz yöntemleri uygulayarak ve dikkat noktalarını göz önünde bulundurarak, bu süreci en verimli şekilde yönetebilirsiniz.</p>
-    <p>Unutmayın, bilgi güçtür. Daha fazla hesaplama aracı ve rehber içerik için sitemizi takip etmeye devam edin. Başarılar!</p>
-
+                        <h2 class="!mt-12">Sonuç: Teoriden Pratiğe, İlk Pomodoro'nu Başlat</h2>
+                        <p>Pomodoro tekniğinin etkinliği, onu okumak ya da bilmekten değil, <strong>uygulamaktan</strong> gelir. Bu tekniğin güzelliği, başlamanın ne kadar kolay olduğudur. Büyük, göz korkutucu bir göreve "başlamak" yerine, kendinize sadece "25 dakikalık bir deneme yapacağım" deyin. Bu küçük taahhüt, erteleme zincirini kırmanın en etkili yoludur. Yazıyı okumayı bitirdiğinize göre, şimdi tam zamanı. Bir görev seçin, zamanlayıcınızı 25 dakikaya ayarlayın ve başlayın. Göreceksiniz, o ilk adım en zor olanıdır.</p>
+                        <p>Verimli bir çalışma ortamının önemli bir parçası da iyi bir internet hızıdır. Ders videolarını takılmadan izlemek veya kaynakları hızla indirmek, odaklanmanızı sürdürmenize yardımcı olur. Çalışma seanslarınızın bölünmemesi için, internet hızınızı ve büyük bir dosyayı ne kadar sürede indirebileceğinizi <strong><a href="../internet-hizi-ve-indirme-suresi-hesaplama.html" class="text-blue-600 font-bold hover:underline">İnternet Hızı ve İndirme Süresi Hesaplama</a></strong> aracımızla kontrol edebilirsiniz.</p>
                     </div>
                 </article>
             </main>
 
-            <!-- Sidebar -->
             <aside class="lg:col-span-4">
                 <div class="sticky top-24 space-y-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
-                        </h4>
-                        <nav id="toc" class="text-sm space-y-2 text-slate-600"></nav>
-                    </div>
-
-                    <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
+                    <!-- CTA Widget -->
+                    <div class="bg-gradient-to-br from-red-600 to-orange-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-10">
-                            <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
+                            <i class="fa-solid fa-rocket text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
                         </div>
                         <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-2">Hemen Hesaplayın!</h3>
-                            <p class="text-blue-100 text-sm mb-6">Bu konuyla ilgili hesaplamalarınızı ücretsiz aracımızla saniyeler içinde yapın.</p>
-                            <a href="#" id="cta-link" class="inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-50 transition transform hover:scale-105">
-                                Araca Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                            <h3 class="text-xl font-bold mb-2">Verimliliğini Artır!</h3>
+                            <p class="text-orange-100 text-sm mb-6">Çalışma ortamının bir parçası olan internet hızını kontrol et, zamanını daha verimli yönet.</p>
+                            <a href="../internet-hizi-ve-indirme-suresi-hesaplama.html" class="mb-2 inline-block w-full bg-white text-red-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-orange-50 transition transform hover:scale-105">
+                                İnternet Hızı Hesaplama <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </div>
@@ -177,61 +123,6 @@
             <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
-
-    <script src="../assets/js/blog-data.js"></script>
-    <script>
-        function loadPostData() {
-            // Post data is already injected by the build script, but we keep this logic
-            // for the CTA and dynamic elements that rely on the 'relatedTool' from blog-data.js
-            const post = getCurrentPost();
-            if(!post) return;
-
-            // Dynamic CTA Logic
-            if(post.relatedTool) {
-                const cta = document.getElementById('cta-widget');
-                const btn = document.getElementById('cta-link');
-                let link = `../index.html#btn-${post.relatedTool}`;
-                const standaloneMap = {
-                    'kdv': '../kdv-hesaplama.html',
-                    'tevkifat': '../tevkifat-hesaplama.html',
-                    'kidem': '../kidem-tazminati.html',
-                    'kredi': '../kredi-hesaplama.html',
-                    'ai_asistan': '../ai-asistan.html',
-                    'bmi': '../vucut-kitle-i̇ndeksi-bmi-hesaplama.html',
-                    'net_brut': '../netten-brute-maas-hesaplama-2026.html'
-                };
-                if(standaloneMap[post.relatedTool]) link = standaloneMap[post.relatedTool];
-                btn.href = link;
-                cta.classList.remove('hidden');
-            }
-        }
-
-        function generateTOC() {
-            const content = document.getElementById('content-body');
-            const tocNav = document.getElementById('toc');
-            const headers = content.querySelectorAll('h2, h3');
-            if(headers.length === 0) {
-                tocNav.parentElement.classList.add('hidden');
-                return;
-            }
-            headers.forEach((header, index) => {
-                if(!header.id) header.id = `section-${index}`;
-                const link = document.createElement('a');
-                link.href = `#${header.id}`;
-                link.innerText = header.innerText;
-                link.className = `block toc-link hover:text-blue-600 transition truncate ${header.tagName === 'H3' ? 'pl-4 text-xs' : ''}`;
-                link.onclick = (e) => {
-                    e.preventDefault();
-                    document.getElementById(header.id).scrollIntoView({behavior: 'smooth'});
-                };
-                tocNav.appendChild(link);
-            });
-        }
-
-        window.onload = function() {
-            loadPostData();
-            setTimeout(generateTOC, 100);
-        };
-    </script>
+    <script src="../assets/js/autolinker.js"></script>
 </body>
 </html>
