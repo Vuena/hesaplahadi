@@ -129,6 +129,11 @@ function renderSidebar() {
     containers.forEach(id => {
         const container = document.getElementById(id);
         if(!container) return;
+
+        // Skip if content already exists (static SEO content)
+        // We check for 'cat-header' class as a marker of populated content
+        if(container.querySelector('.cat-header')) return;
+
         container.innerHTML = ''; // Clear
 
         cats.forEach(cat => {
