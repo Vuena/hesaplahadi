@@ -1,5 +1,6 @@
 
 import os
+from layout_generator import get_tools_from_js, generate_sidebar_html
 
 # Tool Data - Map IDs to Metadata
 tools_meta = {
@@ -250,6 +251,9 @@ tools_meta = {
     }
 }
 
+# --- NEW: Get Tools using Shared Layout Manager ---
+tools_list = get_tools_from_js()
+
 html_template = """<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -290,7 +294,9 @@ html_template = """<!DOCTYPE html>
              <span class="font-bold text-lg text-slate-800">Hesaplama Araçları</span>
              <button onclick="toggleDrawer()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-xl"></i></button>
         </div>
-        <div id="drawer-list" class="p-3 space-y-1"></div>
+        <div id="drawer-list" class="p-3 space-y-1">
+            {drawer_content}
+        </div>
     </aside>
 
     <!-- Header -->
@@ -349,7 +355,9 @@ html_template = """<!DOCTYPE html>
                 <div class="bg-slate-50/50 px-5 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wide">Hesaplama Araçları</h3>
                 </div>
-                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1"></div>
+                <div id="sidebar-list" class="overflow-y-auto p-2 space-y-1">
+                    {sidebar_content}
+                </div>
             </div>
         </nav>
 
@@ -446,13 +454,19 @@ for tid, meta in tools_meta.items():
 
     print(f"ID: {tid} -> Slug: {slug}")
 
+    # Generate Static Sidebar Content
+    sidebar_html = generate_sidebar_html(tools_list, current_page_link=slug, is_drawer=False)
+    drawer_html = generate_sidebar_html(tools_list, current_page_link=slug, is_drawer=True)
+
     content = html_template.format(
         title=meta['title'],
         title_short=meta['title'].split(' - ')[0],
         desc=meta['desc'],
         slug=slug,
         tool_id=tid,
-        content=meta['content']
+        content=meta['content'],
+        sidebar_content=sidebar_html,
+        drawer_content=drawer_html
     )
 
     with open(slug, 'w', encoding='utf-8') as f:
