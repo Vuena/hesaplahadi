@@ -1,5 +1,15 @@
 const blogPosts = [
     {
+        "id": "yakit-tasarrufu",
+        "slug": "arac-yakit-tuketimini-dusurme-yollari.html",
+        "title": "Araç Yakıt Tüketimini Düşürmenin Etkili Yolları",
+        "summary": "Yakıt fiyatları artarken, aracınızın verimliliğini artırarak tasarruf etmeniz mümkün. Bu yazıda, yakıt tüketimini azaltmanın pratik ve etkili yollarını bulacaksınız.",
+        "category": "İpuçları",
+        "image": "fa-gas-pump",
+        "color": "green",
+        "relatedTool": "yakit-tuketimi-hesaplama"
+    },
+    {
         "id": "kredi-notu",
         "slug": "kredi-notu-nasil-yukseltilir.html",
         "title": "Kredi Notu Nasıl Yükseltilir? En Etkili 5 Yöntem",
@@ -7,8 +17,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-chart-line",
         "color": "blue",
-        "relatedTool": "kredi",
-        "content": "<p>Kredi notu, finansal geçmişinizin bir özetidir.</p><h2>Ödemeleri Düzenli Yapın</h2><p>Gecikmiş borçlar notunuzu en çok düşüren faktördür.</p>"
+        "relatedTool": "kredi"
     },
     {
         "id": "tevkifat-nedir",
@@ -18,8 +27,7 @@ const blogPosts = [
         "category": "Vergi",
         "image": "fa-receipt",
         "color": "emerald",
-        "relatedTool": "tevkifat",
-        "content": "<p>Tevkifat, verginin bir kısmının alıcı tarafından ödenmesidir.</p>"
+        "relatedTool": "tevkifat"
     },
     {
         "id": "enflasyon-nedir",
@@ -29,8 +37,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-arrow-trend-up",
         "color": "red",
-        "relatedTool": "mevduat",
-        "content": "<p>Enflasyon, fiyatlar genel düzeyindeki artıştır.</p>"
+        "relatedTool": "mevduat"
     },
     {
         "id": "konut-kredisi",
@@ -40,8 +47,7 @@ const blogPosts = [
         "category": "Emlak",
         "image": "fa-house",
         "color": "orange",
-        "relatedTool": "kredi",
-        "content": "<p>Konut kredisi uzun vadeli bir borçlanmadır.</p>"
+        "relatedTool": "kredi"
     },
     {
         "id": "ideal-kilo",
@@ -51,8 +57,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-weight-scale",
         "color": "green",
-        "relatedTool": "idealkilo",
-        "content": "<p>İdeal kilo, sağlıklı yaşamın anahtarıdır.</p>"
+        "relatedTool": "idealkilo"
     },
     {
         "id": "brut-net",
@@ -62,8 +67,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-money-bill-wave",
         "color": "blue",
-        "relatedTool": "brut_net",
-        "content": "<p>Brüt maaş, işverenin kasasından çıkan toplam tutardır (işveren maliyeti hariç).</p>"
+        "relatedTool": "brut_net"
     },
     {
         "id": "bmi-nedir",
@@ -73,8 +77,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-person",
         "color": "green",
-        "relatedTool": "bmi",
-        "content": "<p>BMI, vücut ağırlığının boy uzunluğunun karesine bölünmesiyle hesaplanır.</p>"
+        "relatedTool": "bmi"
     },
     {
         "id": "yuzde-hesaplama",
@@ -84,8 +87,7 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-percent",
         "color": "purple",
-        "relatedTool": "yuzde",
-        "content": "<p>Yüzde hesaplama hayatın her alanında karşımıza çıkar.</p>"
+        "relatedTool": "yuzde"
     },
     {
         "id": "su-tuketimi",
@@ -95,8 +97,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-droplet",
         "color": "cyan",
-        "relatedTool": "su",
-        "content": "<p>Su hayattır.</p>"
+        "relatedTool": "su"
     },
     {
         "slug": "doviz-yatirimi-mantikli-mi.html",
@@ -105,8 +106,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-coins",
         "color": "green",
-        "relatedTool": "mevduat",
-        "content": "<p>Döviz yatırımı...</p>"
+        "relatedTool": "mevduat"
     },
     {
         "slug": "kredi-karti-puanlari-nasil-kullanilir.html",
@@ -115,8 +115,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-credit-card",
         "color": "blue",
-        "relatedTool": "kk_asgari",
-        "content": "<p>Puanları harcamak...</p>"
+        "relatedTool": "kk_asgari"
     },
     {
         "slug": "bireysel-emeklilik-sistemi-bes-nedir.html",
@@ -125,8 +124,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-piggy-bank",
         "color": "purple",
-        "relatedTool": "mevduat",
-        "content": "<p>BES birikim...</p>"
+        "relatedTool": "mevduat"
     },
     {
         "slug": "altin-yatirimi-fiziki-mi-banka-mi.html",
@@ -135,8 +133,7 @@ const blogPosts = [
         "category": "Yatırım",
         "image": "fa-gem",
         "color": "amber",
-        "relatedTool": "mevduat",
-        "content": "<p>Altın yatırımı...</p>"
+        "relatedTool": "mevduat"
     },
     {
         "slug": "intermittent-fasting-aralikli-oruc-nedir.html",
@@ -145,8 +142,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-clock",
         "color": "indigo",
-        "relatedTool": "ai_diyet",
-        "content": "<p>Aralıklı oruç...</p>"
+        "relatedTool": "ai_diyet"
     },
     {
         "slug": "metabolizma-hizlandirma-yollari.html",
@@ -155,8 +151,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-fire",
         "color": "red",
-        "relatedTool": "bmr",
-        "content": "<p>Metabolizma...</p>"
+        "relatedTool": "bmr"
     },
     {
         "slug": "ders-calisma-teknikleri-pomodoro.html",
@@ -165,8 +160,7 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-stopwatch",
         "color": "red",
-        "relatedTool": "sinav",
-        "content": "<p>Pomodoro...</p>"
+        "relatedTool": "sinav"
     },
     {
         "slug": "hizli-okuma-teknikleri.html",
@@ -175,8 +169,7 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-book-open",
         "color": "blue",
-        "relatedTool": "kelime",
-        "content": "<p>Hızlı okuma...</p>"
+        "relatedTool": "kelime"
     },
     {
         "slug": "evde-spor-yaparak-zayiflama.html",
@@ -185,8 +178,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-dumbbell",
         "color": "orange",
-        "relatedTool": "bmi",
-        "content": "<p>Evde spor...</p>"
+        "relatedTool": "bmi"
     },
     {
         "slug": "tasarruf-yapmanin-yollari.html",
@@ -195,8 +187,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-wallet",
         "color": "green",
-        "relatedTool": "mevduat",
-        "content": "<p>Tasarruf yapmak...</p>"
+        "relatedTool": "mevduat"
     },
     {
         "slug": "is-gorusmesinde-maas-pazarligi.html",
@@ -205,8 +196,7 @@ const blogPosts = [
         "category": "Kariyer",
         "image": "fa-briefcase",
         "color": "blue",
-        "relatedTool": "net_brut",
-        "content": "<p>Maaş pazarlığı...</p>"
+        "relatedTool": "net_brut"
     },
     {
         "slug": "kalori-acigi-ile-zayiflama.html",
@@ -215,8 +205,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-apple-whole",
         "color": "red",
-        "relatedTool": "bmr",
-        "content": "<p>Kalori açığı...</p>"
+        "relatedTool": "bmr"
     },
     {
         "slug": "python-ile-yazilima-baslamak.html",
@@ -225,8 +214,7 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-code",
         "color": "yellow",
-        "relatedTool": "kelime",
-        "content": "<p>Python...</p>"
+        "relatedTool": "kelime"
     },
     {
         "slug": "cocuklar-icin-kodlama-egitimi.html",
@@ -235,8 +223,7 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-child",
         "color": "purple",
-        "relatedTool": "dikdortgen",
-        "content": "<p>Kodlama eğitimi...</p>"
+        "relatedTool": "dikdortgen"
     },
     {
         "slug": "gunluk-yuruyusun-faydalari.html",
@@ -245,8 +232,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-person-walking",
         "color": "cyan",
-        "relatedTool": "yakit",
-        "content": "<p>Günlük yürüyüş...</p>"
+        "relatedTool": "yakit"
     },
     {
         "slug": "yapay-zeka-gelecegi.html",
@@ -255,8 +241,7 @@ const blogPosts = [
         "category": "Teknoloji",
         "image": "fa-robot",
         "color": "indigo",
-        "relatedTool": "ai_asistan",
-        "content": "<p>Yapay zeka (AI), sadece bir teknoloji trendi değil, insanlık tarihinin en büyük devrimlerinden biridir.</p>"
+        "relatedTool": "ai_asistan"
     },
     {
         "slug": "ev-almak-mi-kiralamak-mi.html",
@@ -265,8 +250,7 @@ const blogPosts = [
         "category": "Emlak",
         "image": "fa-house-chimney",
         "color": "orange",
-        "relatedTool": "kredi",
-        "content": "<p>Ev sahipliği, güvence hissi verse de finansal açıdan her zaman en iyi seçenek olmayabilir.</p>"
+        "relatedTool": "kredi"
     },
     {
         "slug": "dengeli-beslenme-tabagi.html",
@@ -275,8 +259,7 @@ const blogPosts = [
         "category": "Sağlık",
         "image": "fa-carrot",
         "color": "green",
-        "relatedTool": "makro",
-        "content": "<p>Sağlıklı bir tabak, renkli ve çeşitlidir.</p>"
+        "relatedTool": "makro"
     },
     {
         "slug": "lgs-hazirlik-rehberi.html",
@@ -285,8 +268,7 @@ const blogPosts = [
         "category": "Eğitim",
         "image": "fa-pencil",
         "color": "blue",
-        "relatedTool": "sinav",
-        "content": "<p>LGS, disiplinli bir çalışma gerektirir.</p>"
+        "relatedTool": "sinav"
     },
     {
         "slug": "kisisel-finans-yonetimi.html",
@@ -295,8 +277,7 @@ const blogPosts = [
         "category": "Finans",
         "image": "fa-chart-pie",
         "color": "emerald",
-        "relatedTool": "mevduat",
-        "content": "<p>Bütçe yapmak, zenginleşmenin ilk kuralıdır.</p>"
+        "relatedTool": "mevduat"
     },
     {
         "slug": "su-icmenin-cilde-faydalari.html",
@@ -305,8 +286,7 @@ const blogPosts = [
         "category": "Güzellik",
         "image": "fa-droplet",
         "color": "cyan",
-        "relatedTool": "su",
-        "content": "<p>Cildiniz susuz kaldığında kurur ve yaşlanır.</p>"
+        "relatedTool": "su"
     }
 ];
 
