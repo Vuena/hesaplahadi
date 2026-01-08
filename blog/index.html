@@ -39,7 +39,6 @@
                         </div>
                         <div class="leading-tight">
                             <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                            <span class="block text-[0.6rem] font-bold text-slate-400 tracking-widest uppercase -mt-1">Finansal & Pratik Araçlar</span>
                         </div>
                     </a>
                 </div>
@@ -112,7 +111,7 @@
             const noResults = document.getElementById('no-results');
             const featuredPostContainer = document.getElementById('featured-post');
 
-            let posts = [];
+            let allPosts = [];
 
             function createPostElement(post) {
                 const postElement = document.createElement('a');
@@ -155,23 +154,44 @@
                 return featuredElement;
             }
 
-            function displayPosts(filteredPosts) {
+            function renderPage(searchTerm = '') {
+                const normalizedSearchTerm = searchTerm.toLowerCase().trim();
                 blogGrid.innerHTML = '';
-                if (filteredPosts.length > 0) {
-                    filteredPosts.forEach(post => {
-                        blogGrid.appendChild(createPostElement(post));
-                    });
+                featuredPostContainer.innerHTML = '';
+                
+                let postsToDisplay = allPosts;
+
+                if (normalizedSearchTerm.length > 0) {
+                    postsToDisplay = allPosts.filter(post =>
+                        post.title.toLowerCase().includes(normalizedSearchTerm) ||
+                        post.summary.toLowerCase().includes(normalizedSearchTerm) ||
+                        post.category.toLowerCase().includes(normalizedSearchTerm)
+                    );
+                    featuredPostContainer.style.display = 'none';
+                } else {
+                    featuredPostContainer.style.display = 'block';
+                }
+
+                if (postsToDisplay.length > 0) {
+                    if (normalizedSearchTerm.length === 0 && postsToDisplay.length > 0) {
+                        const featuredPost = postsToDisplay[0];
+                        featuredPostContainer.appendChild(createFeaturedPostElement(featuredPost));
+                        
+                        postsToDisplay.slice(1).forEach(post => {
+                            blogGrid.appendChild(createPostElement(post));
+                        });
+                    } else {
+                        postsToDisplay.forEach(post => {
+                            blogGrid.appendChild(createPostElement(post));
+                        });
+                    }
                     noResults.classList.add('hidden');
                 } else {
                     noResults.classList.remove('hidden');
                 }
             }
             
-            // Initialize posts
-            posts = blogPosts;
-
-            // Sort posts by date (newest first) and then by title
-            posts.sort((a, b) => {
+            allPosts = blogPosts.sort((a, b) => {
                 const yearA = parseInt(a.slug.match(/(\d{4})/)?.[0] || '0');
                 const yearB = parseInt(b.slug.match(/(\d{4})/)?.[0] || '0');
                 if (yearA !== yearB) {
@@ -179,26 +199,11 @@
                 }
                 return b.title.localeCompare(a.title);
             });
-            
-            // Set featured post (latest one)
-            if(posts.length > 0) {
-                const featuredPost = posts[0];
-                featuredPostContainer.appendChild(createFeaturedPostElement(featuredPost));
-                // Display all other posts
-                displayPosts(posts.slice(1));
-            } else {
-                 displayPosts([]);
-            }
 
-            // Search functionality
+            renderPage();
+
             searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const filteredPosts = posts.slice(1).filter(post => 
-                    post.title.toLowerCase().includes(searchTerm) || 
-                    post.summary.toLowerCase().includes(searchTerm) ||
-                    post.category.toLowerCase().includes(searchTerm)
-                );
-                displayPosts(filteredPosts);
+                renderPage(this.value);
             });
         });
     </script>
