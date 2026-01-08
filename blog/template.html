@@ -54,7 +54,7 @@
                 <div class="flex items-center gap-3">
                     <!-- Desktop Nav -->
                     <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Hesaplama Araçları</a>
+                        <a href="/index.html" class="hover:text-blue-600 transition">Hesaplama Araçları</a>
                         <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
                             <span>AI Asistan</span>
@@ -67,7 +67,7 @@
                     </a>
 
                     <!-- Mobile Stylized Button -->
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+                    <a href="/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
                         <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
                     </a>
                 </div>
@@ -82,7 +82,7 @@
             <main class="lg:col-span-8">
                 <!-- Breadcrumb -->
                 <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
-                    <a href="../index.html" class="hover:text-blue-600">Anasayfa</a>
+                    <a href="/index.html" class="hover:text-blue-600">Anasayfa</a>
                     <span class="mx-2">/</span>
                     <a href="index.html" class="hover:text-blue-600">Blog</a>
                     <span class="mx-2">/</span>
@@ -90,47 +90,11 @@
                 </nav>
 
                 <article>
-                        <!-- Header -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Left: Logo -->
-                <div class="flex items-center gap-3">
-                     <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-<span class="block text-[0.6rem] font-bold text-slate-400 tracking-widest uppercase -mt-1">Finansal & Pratik Araçlar</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Right: Actions -->
-                <div class="flex items-center gap-3">
-                    <!-- Desktop Nav -->
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Hesaplama Araçları</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
+                    <div class="mb-8">
+                        <span id="post-cat" class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">...</span>
+                        <h1 id="post-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">...</h1>
+                        <p id="post-summary" class="text-lg text-slate-500 mt-4 leading-relaxed">...</p>
                     </div>
-
-                    <!-- Mobile AI Button -->
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-
-                    <!-- Mobile Stylized Button -->
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
 
                     <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300">
@@ -187,10 +151,13 @@
     <!-- Scripts -->
     <script src="../assets/js/blog-data.js"></script>
     <script>
-        // --- 1. Load Metadata ---
+        // --- 1. Load All Post Data ---
         function loadPostData() {
             const post = getCurrentPost();
-            if(!post) return; // Or redirect to 404
+            if(!post) {
+                 document.getElementById('content-body').innerHTML = '<p>İçerik bulunamadı. Lütfen ana sayfaya dönüp tekrar deneyin.</p>';
+                return; 
+            }
 
             // Update Meta
             document.title = `${post.title} - HesaplaHadi Blog`;
@@ -210,16 +177,21 @@
             document.getElementById('post-cat').innerText = post.category;
             document.getElementById('post-title').innerText = post.title;
             document.getElementById('post-summary').innerText = post.summary;
+            document.getElementById('content-body').innerHTML = post.content || '<p>İçerik korunamadı, lütfen kontrol edin.</p>';
 
             // Icon/Image
             const iconEl = document.getElementById('post-icon');
             iconEl.className = `fa-solid ${post.image} text-8xl text-${post.color}-300`;
+            
+            // Category Color
+            const catEl = document.getElementById('post-cat');
+            catEl.className = `text-xs font-bold bg-${post.color}-50 text-${post.color}-600 px-3 py-1 rounded-full uppercase tracking-wider`;
 
             // CTA Setup
             if(post.relatedTool) {
                 const cta = document.getElementById('cta-widget');
                 const btn = document.getElementById('cta-link');
-                let link = `../index.html#btn-${post.relatedTool}`;
+                let link = `/index.html#btn-${post.relatedTool}`;
 
                 const standaloneMap = {
                     'kdv': '../kdv-hesaplama.html',
@@ -276,7 +248,7 @@
         // --- Init ---
         window.onload = function() {
             loadPostData();
-            // Wait a tick for content to populate if it was dynamic (here it's static in HTML file)
+            // Wait a tick for content to populate
             setTimeout(generateTOC, 100);
         };
     </script>

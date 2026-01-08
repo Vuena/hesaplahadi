@@ -1,288 +1,59 @@
+
 import json
 import os
+import re
 
-# Load blog posts data
-BLOG_POSTS = [
-    {
-        "id": "kredi-notu",
-        "slug": "kredi-notu-nasil-yukseltilir.html",
-        "title": "Kredi Notu Nasıl Yükseltilir? En Etkili 5 Yöntem",
-        "summary": "Bankalardan kredi veya kredi kartı alırken en önemli kriter olan kredi notunuzu yükseltmek için yapmanız gerekenler ve altın kurallar.",
-        "category": "Finans",
-        "image": "fa-chart-line",
-        "color": "blue",
-        "relatedTool": "kredi"
-    },
-    {
-        "id": "tevkifat-nedir",
-        "slug": "kdv-tevkifati-nedir-kimler-yapar.html",
-        "title": "KDV Tevkifatı Nedir? Kimler Tevkifat Yapar?",
-        "summary": "İşletmeler için tevkifatlı fatura kesim süreçleri, 2/10, 5/10 oranlarının anlamı ve dikkat edilmesi gereken noktalar.",
-        "category": "Vergi",
-        "image": "fa-receipt",
-        "color": "emerald",
-        "relatedTool": "tevkifat"
-    },
-    {
-        "id": "enflasyon-nedir",
-        "slug": "enflasyon-nedir-nasil-hesaplanir.html",
-        "title": "Enflasyon Nedir? Bütçenizi Nasıl Etkiler?",
-        "summary": "Enflasyonun alım gücüne etkisi, TÜFE ve ÜFE kavramları ve paranızı enflasyona karşı korumanın yolları.",
-        "category": "Finans",
-        "image": "fa-arrow-trend-up",
-        "color": "red",
-        "relatedTool": "mevduat"
-    },
-    {
-        "id": "konut-kredisi",
-        "slug": "konut-kredisi-cekerken-dikkat-edilmesi-gerekenler.html",
-        "title": "Konut Kredisi Çekerken Dikkat Edilmesi Gerekenler",
-        "summary": "Ev sahibi olma hayali kuranlar için faiz oranları, vade seçenekleri ve ek masraflar hakkında kapsamlı rehber.",
-        "category": "Emlak",
-        "image": "fa-house",
-        "color": "orange",
-        "relatedTool": "kredi"
-    },
-    {
-        "id": "ideal-kilo",
-        "slug": "ideal-kilo-nasil-hesaplanir-formulu-nedir.html",
-        "title": "İdeal Kilo Nasıl Hesaplanır? Bilimsel Formüller",
-        "summary": "Sağlıklı bir yaşam için ideal kilonuzu öğrenin. Boy, yaş ve cinsiyete göre hesaplama yöntemleri.",
-        "category": "Sağlık",
-        "image": "fa-weight-scale",
-        "color": "green",
-        "relatedTool": "idealkilo"
-    },
-    {
-        "id": "brut-net",
-        "slug": "brutten-nete-maas-hesaplama-rehberi.html",
-        "title": "Brütten Nete Maaş Hesaplama Rehberi",
-        "summary": "Maaşınızdan yapılan kesintiler nelerdir? SGK primi, gelir vergisi ve damga vergisi hesaplamanın mantığı.",
-        "category": "Finans",
-        "image": "fa-money-bill-wave",
-        "color": "blue",
-        "relatedTool": "brut_net"
-    },
-    {
-        "id": "bmi-nedir",
-        "slug": "vucut-kitle-indeksi-bmi-nedir.html",
-        "title": "Vücut Kitle İndeksi (BMI) Nedir? Değerler Ne Anlama Gelir?",
-        "summary": "Vücut kitle indeksinizi hesaplayarak obezite riskinizi öğrenin. Dünya Sağlık Örgütü standartlarına göre değerlerin analizi.",
-        "category": "Sağlık",
-        "image": "fa-person",
-        "color": "green",
-        "relatedTool": "bmi"
-    },
-    {
-        "id": "yuzde-hesaplama",
-        "slug": "yuzde-hesaplama-formulu-ve-ornekleri.html",
-        "title": "Yüzde Hesaplama Formülü ve Günlük Hayatta Kullanımı",
-        "summary": "Matematiksel yüzde hesaplamanın en basit yolları. İndirim, zam ve kar marjı hesaplamalarında pratik yöntemler.",
-        "category": "Eğitim",
-        "image": "fa-percent",
-        "color": "purple",
-        "relatedTool": "yuzde"
-    },
-    {
-        "id": "su-tuketimi",
-        "slug": "gunluk-su-tuketimi-ne-kadar-olmali.html",
-        "title": "Günlük Su Tüketimi Ne Kadar Olmalı?",
-        "summary": "Vücudunuzun ihtiyacı olan su miktarını hesaplayın. Yetersiz su tüketiminin zararları ve sağlıklı yaşam için öneriler.",
-        "category": "Sağlık",
-        "image": "fa-droplet",
-        "color": "cyan",
-        "relatedTool": "su"
-    },
-    {
-        "slug": "doviz-yatirimi-mantikli-mi.html",
-        "title": "Döviz Yatırımı Yapmak Mantıklı Mı? Riskler ve Fırsatlar",
-        "summary": "Dolar ve Euro yatırımı yaparken dikkat edilmesi gerekenler. Döviz kurları neden dalgalanır?",
-        "category": "Finans",
-        "image": "fa-coins",
-        "color": "green",
-        "relatedTool": "mevduat"
-    },
-    {
-        "slug": "kredi-karti-puanlari-nasil-kullanilir.html",
-        "title": "Kredi Kartı Puanları En Verimli Nasıl Kullanılır?",
-        "summary": "Bankaların verdiği chip-para, maxipuan ve bonusları nakit gibi kullanmanın yolları.",
-        "category": "Finans",
-        "image": "fa-credit-card",
-        "color": "blue",
-        "relatedTool": "kk_asgari"
-    },
-    {
-        "slug": "bireysel-emeklilik-sistemi-bes-nedir.html",
-        "title": "Bireysel Emeklilik Sistemi (BES) Nedir? Devlet Katkısı %30",
-        "summary": "Geleceğiniz için birikim yapmanın devlet destekli yolu. BES avantajları ve çıkış şartları.",
-        "category": "Finans",
-        "image": "fa-piggy-bank",
-        "color": "purple",
-        "relatedTool": "mevduat"
-    },
-    {
-        "slug": "altin-yatirimi-fiziki-mi-banka-mi.html",
-        "title": "Altın Yatırımı: Fiziki mi Yoksa Banka Hesabı mı?",
-        "summary": "Gram altın alırken hangisi daha karlı? Makas aralıkları ve saklama maliyetleri.",
-        "category": "Yatırım",
-        "image": "fa-gem",
-        "color": "amber",
-        "relatedTool": "mevduat"
-    },
-    {
-        "slug": "intermittent-fasting-aralikli-oruc-nedir.html",
-        "title": "Aralıklı Oruç (Intermittent Fasting) Nedir? Nasıl Yapılır?",
-        "summary": "16/8 kuralı ile kilo verme yöntemi. Açlık penceresinde neler tüketilebilir?",
-        "category": "Sağlık",
-        "image": "fa-clock",
-        "color": "indigo",
-        "relatedTool": "ai_diyet"
-    },
-    {
-        "slug": "metabolizma-hizlandirma-yollari.html",
-        "title": "Metabolizmayı Hızlandırmanın 10 Doğal Yolu",
-        "summary": "Daha hızlı kilo vermek için metabolizma hızınızı artırın. Kahve, yeşil çay ve egzersiz.",
-        "category": "Sağlık",
-        "image": "fa-fire",
-        "color": "red",
-        "relatedTool": "bmr"
-    },
-    {
-        "slug": "ders-calisma-teknikleri-pomodoro.html",
-        "title": "Verimli Ders Çalışma Tekniği: Pomodoro",
-        "summary": "25 dakika çalışma, 5 dakika mola. Odaklanma sorunu yaşayanlar için en iyi yöntem.",
-        "category": "Eğitim",
-        "image": "fa-stopwatch",
-        "color": "red",
-        "relatedTool": "sinav"
-    },
-    {
-        "slug": "hizli-okuma-teknikleri.html",
-        "title": "Hızlı Okuma Teknikleri ile Anlama Oranını Artırın",
-        "summary": "Dakikada okunan kelime sayısını artırma egzersizleri ve göz kaslarını geliştirme.",
-        "category": "Eğitim",
-        "image": "fa-book-open",
-        "color": "blue",
-        "relatedTool": "kelime"
-    },
-    {
-        "slug": "evde-spor-yaparak-zayiflama.html",
-        "title": "Spor Salonuna Gitmeden Evde Zayıflama Rehberi",
-        "summary": "Ekipmansız yapılabilecek en etkili egzersizler. Plank, Squat ve Şınav.",
-        "category": "Sağlık",
-        "image": "fa-dumbbell",
-        "color": "orange",
-        "relatedTool": "bmi"
-    },
-    {
-        "slug": "tasarruf-yapmanin-yollari.html",
-        "title": "Para Biriktirmenin ve Tasarruf Yapmanın 7 Yolu",
-        "summary": "Gereksiz harcamaları kısıp birikim yapmaya başlamak için pratik ipuçları.",
-        "category": "Finans",
-        "image": "fa-wallet",
-        "color": "green",
-        "relatedTool": "mevduat"
-    },
-    {
-        "slug": "is-gorusmesinde-maas-pazarligi.html",
-        "title": "İş Görüşmesinde Maaş Pazarlığı Nasıl Yapılır?",
-        "summary": "Yeni bir işe girerken veya zam isterken maaş beklentinizi nasıl dile getirmelisiniz?",
-        "category": "Kariyer",
-        "image": "fa-briefcase",
-        "color": "blue",
-        "relatedTool": "net_brut"
-    },
-    {
-        "slug": "kalori-acigi-ile-zayiflama.html",
-        "title": "Kalori Açığı Oluşturarak Nasıl Zayıflanır?",
-        "summary": "Kilo vermenin temel mantığı: Kalori açığı. Günlük ne kadar açık oluşturmalısınız?",
-        "category": "Sağlık",
-        "image": "fa-apple-whole",
-        "color": "red",
-        "relatedTool": "bmr"
-    },
-    {
-        "slug": "python-ile-yazilima-baslamak.html",
-        "title": "Python ile Yazılıma Başlamak: Neden İlk Tercih Olmalı?",
-        "summary": "Kodlama öğrenmek isteyenler için Python dilinin avantajları ve kullanım alanları.",
-        "category": "Eğitim",
-        "image": "fa-code",
-        "color": "yellow",
-        "relatedTool": "kelime"
-    },
-    {
-        "slug": "cocuklar-icin-kodlama-egitimi.html",
-        "title": "Çocuklar İçin Kodlama Eğitimi Neden Önemli?",
-        "summary": "Erken yaşta algoritmik düşünme becerisi kazanmanın faydaları.",
-        "category": "Eğitim",
-        "image": "fa-child",
-        "color": "purple",
-        "relatedTool": "dikdortgen"
-    },
-    {
-        "slug": "gunluk-yuruyusun-faydalari.html",
-        "title": "Günde 10 Bin Adım Atmanın Faydaları Nelerdir?",
-        "summary": "Düzenli yürüyüşün kalp sağlığından kilo kontrolüne kadar inanılmaz etkileri.",
-        "category": "Sağlık",
-        "image": "fa-person-walking",
-        "color": "cyan",
-        "relatedTool": "yakit"
-    },
-    {
-        "slug": "yapay-zeka-gelecegi.html",
-        "title": "Yapay Zeka Geleceği Nasıl Şekillendirecek?",
-        "summary": "İş dünyasından sanata, yapay zekanın hayatımıza etkileri ve beklenen büyük değişimler.",
-        "category": "Teknoloji",
-        "image": "fa-robot",
-        "color": "indigo",
-        "relatedTool": "ai_asistan"
-    },
-    {
-        "slug": "ev-almak-mi-kiralamak-mi.html",
-        "title": "Ev Almak mı Yoksa Kiralamak mı Daha Mantıklı?",
-        "summary": "Mevcut faiz oranları ve kira çarpanlarına göre finansal analiz. Hangi durumda ne yapılmalı?",
-        "category": "Emlak",
-        "image": "fa-house-chimney",
-        "color": "orange",
-        "relatedTool": "kredi"
-    },
-    {
-        "slug": "dengeli-beslenme-tabagi.html",
-        "title": "Dengeli Beslenme Tabağı Nasıl Hazırlanır?",
-        "summary": "Her öğünde bulunması gereken besin grupları. Karbonhidrat, protein ve yağ dengesi.",
-        "category": "Sağlık",
-        "image": "fa-carrot",
-        "color": "green",
-        "relatedTool": "makro"
-    },
-    {
-        "slug": "lgs-hazirlik-rehberi.html",
-        "title": "LGS Hazırlık Sürecinde Başarı İçin 7 Altın Kural",
-        "summary": "Sınav stresini yönetme, planlı çalışma ve deneme çözme stratejileri.",
-        "category": "Eğitim",
-        "image": "fa-pencil",
-        "color": "blue",
-        "relatedTool": "sinav"
-    },
-    {
-        "slug": "kisisel-finans-yonetimi.html",
-        "title": "Kişisel Finans Yönetimi: Gelir-Gider Dengesi",
-        "summary": "Para nereye gidiyor? Harcamalarınızı kontrol altına alarak finansal özgürlüğe ulaşın.",
-        "category": "Finans",
-        "image": "fa-chart-pie",
-        "color": "emerald",
-        "relatedTool": "mevduat"
-    },
-    {
-        "slug": "su-icmenin-cilde-faydalari.html",
-        "title": "Su İçmenin Cilt Sağlığına 5 İnanılmaz Faydası",
-        "summary": "Daha parlak ve genç bir cilt için suyun önemi. Nem dengesi ve toksin atımı.",
-        "category": "Güzellik",
-        "image": "fa-droplet",
-        "color": "cyan",
-        "relatedTool": "su"
-    }
-]
+def get_blog_posts_from_js(js_path="assets/js/blog-data.js"):
+    """
+    Parses the blogPosts array from blog-data.js to be used as the source of truth.
+    """
+    if not os.path.exists(js_path):
+        # Fallback for running from root directory
+        if os.path.exists("assets/js/blog-data.js"):
+            js_path = "assets/js/blog-data.js"
+        else:
+            print(f"Error: Cannot find {js_path}")
+            return []
+
+    with open(js_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Use regex to extract the array content
+    match = re.search(r'const blogPosts =\s*(\[[\s\S]*?\]);', content)
+    if not match:
+        print("Could not find blogPosts array in blog-data.js")
+        return []
+
+    json_str = match.group(1)
+    
+    # The string is almost JSON, but keys are not quoted. We need to fix that.
+    # Add quotes around keys
+    json_str = re.sub(r'([{,])\s*([a-zA-Z0-9_]+)\s*:', r'\1"\2":', json_str)
+    
+    # Replace single quotes with double quotes for string values
+    json_str = json_str.replace("\'", '"')
+    json_str = re.sub(r':\s*null', ': "null" ', json_str)
+
+    
+    try:
+        # Final cleanup for any weirdness
+        # Remove trailing commas before closing braces or brackets
+        json_str = re.sub(r',\s*([]}])', r'\1', json_str)
+        
+        data = json.loads(json_str)
+        return data
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON from blog-data.js: {e}")
+        # Find the problematic part
+        line_number = e.lineno
+        col_number = e.colno
+        lines = json_str.split('\n')
+        if line_number <= len(lines):
+            print(f"Problematic line ({line_number}): {lines[line_number-1]}")
+            print(" " * (col_number - 1) + "^")
+        return []
+
+BLOG_POSTS = get_blog_posts_from_js()
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="tr">
@@ -311,33 +82,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                     <a href="../index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                        </div>
-                    </a>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Ana Sayfa</a>
-                        <a href="../hakkimizda.html" class="hover:text-blue-600 transition">Hakkımızda</a>
-                        <a href="index.html" class="hover:text-blue-600 transition">Blog</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
+                <a href="../index.html" class="flex items-center space-x-2 group">
+                    <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                        <i class="fa-solid fa-calculator text-lg"></i>
                     </div>
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
+                    <div class="leading-tight">
+                        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                    </div>
+                </a>
+                <a href="../index.html" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-2">
+                    <span>Tüm Araçlar</span> <i class="fa-solid fa-arrow-right text-xs opacity-70"></i>
+                </a>
             </div>
         </div>
     </header>
@@ -405,14 +160,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
             <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
-                <a href="../index.html" class="hover:text-white transition">Ana Sayfa</a>
-                <a href="../hakkimizda.html" class="hover:text-white transition">Hakkımızda</a>
-                <a href="../gizlilik-politikasi.html" class="hover:text-white transition">Gizlilik Politikası</a>
-                <a href="../iletisim.html" class="hover:text-white transition">İletişim</a>
-                <a href="index.html" class="hover:text-white transition">Blog</a>
-                <a href="../ai-asistan.html" class="hover:text-white transition">AI Asistan</a>
-            </div>
             <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
         </div>
     </footer>
@@ -420,20 +167,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <script src="../assets/js/blog-data.js"></script>
     <script>
         function loadPostData() {
-            // Post data is already injected by the build script, but we keep this logic
-            // for the CTA and dynamic elements that rely on the 'relatedTool' from blog-data.js
             const post = getCurrentPost();
             if(!post) return;
 
-            // Dynamic CTA Logic
-            if(post.relatedTool) {
+            if(post.relatedTool && post.relatedTool !== "null") {
                 const cta = document.getElementById('cta-widget');
                 const btn = document.getElementById('cta-link');
                 let link = `../index.html#btn-${post.relatedTool}`;
                 const standaloneMap = {
                     'kdv': '../kdv-hesaplama.html',
                     'tevkifat': '../tevkifat-hesaplama.html',
-                    'kidem': '../kidem-tazminati.html',
                     'kredi': '../kredi-hesaplama.html',
                     'ai_asistan': '../ai-asistan.html',
                     'bmi': '../vucut-kitle-i̇ndeksi-bmi-hesaplama.html',
@@ -476,100 +219,134 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-def generate_smart_content(post):
-    """
-    Generates structured content based on the post title and summary.
-    This ensures length > 500 words by using a robust template.
-    """
-    title = post['title']
-    summary = post['summary']
-    category = post['category']
-
-    # Generic filler based on category to ensure length and context
-    intro_extra = ""
-    if category == "Finans":
-        intro_extra = "Finansal okuryazarlığın artmasıyla birlikte, bireylerin ve işletmelerin bütçelerini daha doğru yönetmeleri kritik bir hal almıştır. Özellikle 2026 yılındaki ekonomik dinamikler, bu konunun önemini bir kat daha artırmaktadır."
-    elif category == "Sağlık":
-        intro_extra = "Sağlıklı yaşam trendlerinin yükselişe geçmesiyle, bedenimizi tanımak ve ona göre hareket etmek hiç olmadığı kadar önemli. Uzmanların önerileri ve bilimsel veriler ışığında bu konuyu ele alacağız."
-    elif category == "Eğitim":
-        intro_extra = "Eğitim hayatında ve kariyer basamaklarında başarıya ulaşmak için doğru stratejileri belirlemek gerekir. Öğrenme yöntemleri ve sınav taktikleri, rakiplerinizin önüne geçmenizi sağlar."
-
-    content = f"""
-    <p class="lead text-xl text-slate-600 mb-6 font-light">{summary} Bu yazımızda, konunun tüm detaylarını, hesaplama yöntemlerini ve dikkat edilmesi gereken püf noktalarını kapsamlı bir şekilde inceleyeceğiz.</p>
-
-    <p>{intro_extra} Günümüzde pek çok kişi <strong>{title}</strong> konusunda internette araştırma yapmakta ancak doğru ve güvenilir bilgiye ulaşmakta zorlanmaktadır. HesaplaHadi olarak, karmaşık terimleri basitleştirerek ve pratik örnekler sunarak bu rehberi hazırladık.</p>
-
-    <h2>{title} Nedir ve Neden Önemlidir?</h2>
-    <p>Temel olarak ele alacak olursak, bu kavram hayatımızın merkezinde yer alır. İster günlük yaşantınızda ister profesyonel iş hayatınızda olsun, bu konuda bilgi sahibi olmak size avantaj sağlar. Peki, neden bu kadar önemlidir?</p>
-    <ul>
-        <li><strong>Farkındalık Yaratır:</strong> Konu hakkında bilgi sahibi olmak, daha doğru kararlar vermenizi sağlar.</li>
-        <li><strong>Zaman Kazandırır:</strong> Doğru yöntemleri bilmek, deneme-yanılma yoluyla vakit kaybetmenizi önler.</li>
-        <li><strong>Maliyetleri Düşürür:</strong> Özellikle finansal konularda yapılan hatalar ciddi maddi kayıplara yol açabilir.</li>
-    </ul>
-    <p>Örneğin, 2026 yılı verilerine baktığımızda, bu konuya hakim olan bireylerin diğerlerine göre %30 daha avantajlı olduğu gözlemlenmiştir. Bu nedenle, aşağıda detaylandıracağımız başlıkları dikkatlice incelemenizi öneririz.</p>
-
-    <h2>Hesaplama Yöntemleri ve Dikkat Edilmesi Gerekenler</h2>
-    <p>Doğru sonuca ulaşmak için izlenmesi gereken belirli adımlar vardır. Çoğu zaman basit bir formül veya yöntemle çözülebilecek sorunlar, bilgi eksikliği nedeniyle karmaşık hale gelebilir.</p>
-
-    <h3>1. Temel Mantığı Kavrayın</h3>
-    <p>Her şeyden önce, işin mantığını anlamak gerekir. Ezbere dayalı yöntemler, değişkenler farklılaştığında sizi yarı yolda bırakabilir. Bu nedenle, <em>neden</em> ve <em>nasıl</em> sorularını kendinize sormalısınız.</p>
-
-    <h3>2. Güncel Verileri Kullanın</h3>
-    <p>Hesaplama yaparken veya strateji belirlerken, kullandığınız verilerin güncel olması hayati önem taşır. Özellikle 2026 yılı gibi ekonomik veya sosyal değişimlerin hızlı olduğu dönemlerde, eski verilerle hareket etmek yanıltıcı olabilir.</p>
-
-    <h3>3. Profesyonel Araçlardan Destek Alın</h3>
-    <p>Manuel hesaplamalar hata payı içerebilir. Sitemizde bulunan <strong>Hesaplama Araçları</strong> sayesinde, karmaşık formüllerle uğraşmadan saniyeler içinde doğru sonuca ulaşabilirsiniz. Bu araçlar, en güncel algoritmalarla çalışır ve size zaman kazandırır.</p>
-
-    <h2>Sıkça Sorulan Sorular (SSS)</h2>
-    <p>Kullanıcılarımızdan gelen ve konuyla ilgili en çok merak edilen soruları sizler için derledik:</p>
-
-    <div class="space-y-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Bu hesaplama her yıl değişir mi?</h4>
-            <p class="text-sm text-slate-600">Evet, genellikle kullanılan parametreler (vergi oranları, katsayılar, vb.) her yıl güncellenir. Bu nedenle 2026 yılına özel verileri kullanmanız önemlidir.</p>
+BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - HesaplaHadi</title>
+    <meta name="description" content="Finans, sağlık, vergi ve daha birçok konuda en güncel hesaplama yöntemleri ve ipuçları HesaplaHadi blogunda.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="flex items-center space-x-2 group">
+                    <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+                        <i class="fa-solid fa-calculator text-lg"></i>
+                    </div>
+                    <div class="leading-tight">
+                        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
+                    </div>
+                </a>
+                <a href="../index.html" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-2">
+                    <span>Tüm Araçlar</span> <i class="fa-solid fa-arrow-right text-xs opacity-70"></i>
+                </a>
+            </div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Yanlış hesaplama yaparsam ne olur?</h4>
-            <p class="text-sm text-slate-600">Yanlış hesaplamalar, bütçe açıklarına veya yanlış kararlara yol açabilir. Bu riski minimize etmek için otomatik hesaplama araçlarımızı kullanmanızı öneririz.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter">HesaplaHadi Blog</h1>
+            <p class="mt-4 text-lg text-slate-600">Finans, sağlık, vergi ve daha birçok konuda en güncel hesaplama yöntemleri ve ipuçları.</p>
         </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <h4 class="font-bold text-slate-800 mb-2">Daha fazla bilgiye nereden ulaşabilirim?</h4>
-            <p class="text-sm text-slate-600">Sitemizdeki diğer blog yazılarını inceleyebilir veya AI Asistanımıza danışarak kişiselleştirilmiş yanıtlar alabilirsiniz.</p>
+
+        <!-- Blog Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            [[BLOG_CARDS]]
         </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center">
+            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
+            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+        </div>
+    </footer>
+</body>
+</html>
+"""
+
+BLOG_CARD_TEMPLATE = """<a href="[[SLUG]]" class="block bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden group transition hover:shadow-lg hover:-translate-y-1 hover:border-blue-300">
+    <div class="h-40 bg-[[COLOR]]-50 flex items-center justify-center text-[[COLOR]]-300 relative">
+        <i class="fa-solid [[IMAGE]] text-6xl"></i>
+        <div class="absolute top-2 right-2 bg-white/80 text-[[COLOR]]-700 text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">[[CATEGORY]]</div>
     </div>
+    <div class="p-6">
+        <h3 class="font-bold text-slate-900 text-lg mb-2 leading-tight">[[TITLE]]</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">[[SUMMARY]]</p>
+    </div>
+</a>"""
 
-    <h2>Sonuç</h2>
-    <p>Özetlemek gerekirse, <strong>{title}</strong> konusu üzerinde durulması gereken, hayatınızı kolaylaştıracak önemli bir başlıktır. Yukarıda bahsettiğimiz yöntemleri uygulayarak ve dikkat noktalarını göz önünde bulundurarak, bu süreci en verimli şekilde yönetebilirsiniz.</p>
-    <p>Unutmayın, bilgi güçtür. Daha fazla hesaplama aracı ve rehber içerik için sitemizi takip etmeye devam edin. Başarılar!</p>
-    """
-    return content
+def generate_blog_index():
+    """Generates the main blog listing page (index.html) from all posts."""
+    cards_html = []
+    for post in BLOG_POSTS:
+        card = BLOG_CARD_TEMPLATE.replace("[[SLUG]]", post.get("slug", "#"))
+        card = card.replace("[[TITLE]]", post.get("title", "Başlık Yok"))
+        card = card.replace("[[SUMMARY]]", post.get("summary", ""))
+        card = card.replace("[[CATEGORY]]", post.get("category", "Genel"))
+        card = card.replace("[[IMAGE]]", post.get("image", "fa-file-alt"))
+        card = card.replace("[[COLOR]]", post.get("color", "slate"))
+        cards_html.append(card)
 
-def rebuild_blogs():
+    final_html = BLOG_INDEX_TEMPLATE.replace("[[BLOG_CARDS]]", "\n".join(cards_html))
+    
+    filepath = os.path.join("blog", "index.html")
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(final_html)
+    print(f"Blog index page '{filepath}' rebuilt successfully.")
+
+def rebuild_blog_posts():
+    """Rebuilds individual blog post HTML files based on the source of truth."""
+    if not BLOG_POSTS:
+        print("No blog posts found to rebuild. Exiting.")
+        return
+
     if not os.path.exists("blog"):
         os.makedirs("blog")
 
     for post in BLOG_POSTS:
-        slug = post['slug']
+        slug = post.get('slug')
+        if not slug:
+            print(f"Skipping post with missing slug: {post.get('title')}")
+            continue
+
         filepath = os.path.join("blog", slug)
+        
+        content_body = ""
+        if os.path.exists(filepath):
+            with open(filepath, 'r', encoding='utf-8') as f:
+                existing_html = f.read()
+                match = re.search('<div class=\"[^\"]*prose[^\"]*\">([\s\S]*?)<\/div>', existing_html, re.DOTALL)
+                if match:
+                    content_body = match.group(1).strip()
+                else:
+                    content_body = f"<p>İçerik korunamadı, lütfen kontrol edin.</p>"
+        else:
+            content_body = f"<h2>{post.get('title')}</h2><p>{post.get('summary')}</p><p>Bu içerik yakında güncellenecektir.</p>"
 
-        print(f"Generating content for {slug}...")
-
-        # Generate generic but structured content ensuring > 500 words length visually
-        # (The HTML template adds boilerplate, the content function adds ~300-400 words of text, plus the summary makes it solid)
-        content_body = generate_smart_content(post)
-
-        html = HTML_TEMPLATE.replace("[[TITLE]]", post['title']) \
-                            .replace("[[SUMMARY]]", post['summary']) \
-                            .replace("[[SLUG]]", slug) \
-                            .replace("[[CATEGORY]]", post['category']) \
-                            .replace("[[COLOR]]", post['color']) \
-                            .replace("[[IMAGE]]", post['image']) \
-                            .replace("[[CONTENT]]", content_body)
+        html = HTML_TEMPLATE.replace("[[TITLE]]", post.get("title", "Başlık Yok"))\
+                           .replace("[[SUMMARY]]", post.get("summary", ""))\
+                           .replace("[[SLUG]]", slug)\
+                           .replace("[[CATEGORY]]", post.get("category", "Genel"))\
+                           .replace("[[COLOR]]", post.get("color", "slate"))\
+                           .replace("[[IMAGE]]", post.get("image", "fa-file-alt"))\
+                           .replace("[[CONTENT]]", content_body)
 
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(html)
 
-    print("All blog posts rebuilt successfully.")
+    print(f"{len(BLOG_POSTS)} blog posts processed.")
+
 
 if __name__ == "__main__":
-    rebuild_blogs()
+    rebuild_blog_posts()
+    generate_blog_index()
