@@ -1,3 +1,4 @@
+
 const blogPosts = [
     {
         "id": "otomatik-vites",
@@ -108,6 +109,28 @@ const blogPosts = [
         "color": "cyan",
         "relatedTool": "su",
         "content": "<p>Su, insan vücudunun %60'ını oluşturur ve hayati fonksiyonların devamlılığı için kritiktir. Peki günde kaç bardak su içmeliyiz?</p><h2>Genel Kural: Kilo Başına 33ml</h2><p>Uzmanlar genel olarak kilonuzun her bir kilogramı için yaklaşık 33 ml su içmenizi önerir. Örneğin 70 kg olan bir birey için: <code>70 x 0.033 = 2.31 Litre</code>.</p><h2>Su İhtiyacını Artıran Faktörler</h2><ul><li><strong>Egzersiz:</strong> Spor yaparken terle kaybedilen sıvıyı yerine koymak için ekstra su içilmelidir.</li><li><strong>Sıcak Hava:</strong> Yaz aylarında terleme arttığı için tüketim artırılmalıdır.</li><li><strong>Hastalık:</strong> Ateş, kusma veya ishal gibi durumlarda vücut sıvı kaybeder.</li></ul><h2>Susuzluğun Belirtileri</h2><p>Baş ağrısı, yorgunluk, odaklanma sorunu ve idrar renginin koyulaşması yetersiz su tüketiminin en belirgin işaretleridir. Susamayı beklemeden düzenli aralıklarla su içmek en doğrusudur.</p>"
+    },
+    {
+        "id": "yapay-zeka",
+        "slug": "yapay-zeka-gelecegi.html",
+        "title": "Yapay Zeka Geleceği Nasıl Şekillendirecek?",
+        "summary": "İş dünyasından sanata, yapay zekanın hayatımıza etkileri ve beklenen büyük değişimler.",
+        "category": "Teknoloji",
+        "image": "fa-robot",
+        "color": "indigo",
+        "relatedTool": "ai_asistan",
+        "content": "<p>Yapay zeka (AI), son yıllarda teknolojinin en heyecan verici ve en hızlı gelişen alanlarından biri haline geldi. Peki, bu teknoloji gelecekte hayatımızı, iş dünyasını ve hatta toplumun kendisini nasıl şekillendirecek? Bu yazıda, yapay zekanın potansiyel etkilerini ve bizi nelerin beklediğini inceliyoruz.</p><h2>1. İş Dünyasında Yapay Zeka Devrimi</h2><p>Yapay zeka, otomasyon ve verimlilik artışıyla iş dünyasını kökünden değiştiriyor. Tekrarlayan görevler, akıllı sistemler tarafından devralınırken, insanlar daha yaratıcı ve stratejik rollere odaklanabilecek. Müşteri hizmetlerinden pazarlamaya, finanstan üretime kadar her sektörde AI destekli çözümler, karar alma süreçlerini iyileştirecek ve şirketlere rekabet avantajı sağlayacaktır. <strong>HesaplaHadi AI Asistanı</strong> gibi araçlar, bu değişimin sadece bir başlangıcıdır.</p><h2>2. Sağlık Sektöründe Kişiselleştirilmiş Tıp</h2><p>Sağlık, yapay zekanın en büyük etkiyi yaratacağı alanlardan biridir. Teşhis süreçleri, AI destekli görüntü analizi ve veri işleme sayesinde çok daha hızlı ve isabetli hale gelecek. Hastalıkların erken teşhisi, kişiselleştirilmiş tedavi planları ve ilaç geliştirme süreçleri, yapay zeka sayesinde devrim niteliğinde ilerlemeler kaydedecektir.</p><h2>3. Eğitimde Yeni Ufuklar</h2><p>Yapay zeka, her öğrencinin kendi hızında ve kendi öğrenme stiline göre eğitim almasını sağlayabilir. Kişiselleştirilmiş öğrenme platformları, öğrencinin güçlü ve zayıf yönlerini analiz ederek ona özel bir müfredat oluşturabilir. Bu, eğitimin daha verimli ve daha kapsayıcı hale gelmesini sağlayacaktır.</p><h2>4. Günlük Yaşam ve Akıllı Asistanlar</h2><p>Akıllı ev sistemlerinden otonom araçlara kadar yapay zeka, günlük yaşamımızın her anına entegre olacak. Sesli asistanlar, kişisel planlamamızda bize yardımcı olurken, akıllı şehirler trafik akışını optimize edecek ve enerji tüketimini azaltacak. Bu teknolojiler, yaşam kalitemizi artırmayı ve bize zaman kazandırmayı hedefliyor.</p><h2>Sonuç: Fırsatlar ve Zorluklar</h2><p>Yapay zekanın getireceği gelecek, büyük fırsatlarla dolu olsa da, etik ve güvenlik gibi önemli zorlukları da beraberinde getiriyor. Veri gizliliği, algoritmik önyargılar ve iş gücü piyasasındaki değişimler, dikkatle yönetilmesi gereken konulardır. Ancak doğru bir yaklaşımla, yapay zeka insanlığın en büyük sorunlarına çözüm bulmada kilit bir rol oynayabilir.</p>"
+    },
+    {
+        "id": "altin-fiyatlari-2026",
+        "slug": "2026-altin-fiyatlari-ve-yatirim-tavsiyeleri.html",
+        "title": "2026 Altın Fiyatları ve Yatırım Tavsiyeleri",
+        "summary": "2026 yılı için altın fiyatları beklentileri, piyasa analizleri ve uzmanlardan yatırımcılara önemli tavsiyeler. Altın alırken nelere dikkat etmeli?",
+        "category": "Yatırım",
+        "image": "fa-coins",
+        "color": "amber",
+        "relatedTool": null,
+        "content": "<p>Altın, tarih boyunca güvenli liman olarak kabul edilmiş ve ekonomik belirsizlik dönemlerinde yatırımcıların sığınağı olmuştur. Peki, 2026 yılında küresel ve yerel ekonomik gelişmeler ışığında altın fiyatları nasıl bir seyir izleyecek? İşte yatırımcılar için bir yol haritası.</p><h2>1. 2026'da Altın Fiyatlarını Etkileyecek Faktörler</h2><p>Altın fiyatları, birden çok faktörün karmaşık etkileşimiyle şekillenir. 2026'da öne çıkması beklenen ana etkenler şunlar olabilir:</p><ul><li><strong>Küresel Enflasyon Oranları:</strong> Yüksek enflasyon, genellikle altına olan talebi artırır çünkü yatırımcılar paralarının değerini korumak ister.</li><li><strong>Merkez Bankası Politikaları:</strong> Özellikle ABD Merkez Bankası'nın (FED) faiz oranı kararları, doların değerini ve dolayısıyla altın fiyatlarını doğrudan etkiler.</li><li><strong>Jeopolitik Gelişmeler:</strong> Siyasi istikrarsızlıklar ve uluslararası krizler, yatırımcıları güvenli liman olan altına yönlendirir.</li><li><strong>Fiziki Talep:</strong> Mücevherat sektörü ve merkez bankalarının altın rezervlerini artırma eğilimi de fiyatlar üzerinde etkilidir.</li></ul><h2>2. Uzman Beklentileri ve Fiyat Tahminleri</h2><p>Ekonomi analistleri, 2026 yılı için altın fiyatları konusunda farklı senaryolar öngörüyor. Bazı uzmanlar, küresel ekonomideki yavaşlama endişeleri ve devam eden jeopolitik riskler nedeniyle altında yükseliş trendinin devam edeceğini düşünürken, diğerleri merkez bankalarının sıkı para politikalarının altın üzerinde baskı oluşturabileceğini belirtiyor. Ancak genel kanı, altının portföylerdeki önemini koruyacağı yönünde.</p><h2>3. Yatırımcılar İçin Stratejiler</h2><p>Altın yatırımı yaparken dikkatli bir strateji izlemek önemlidir. İşte 2026 için bazı tavsiyeler:</p><ul><li><strong>Portföy Çeşitlendirmesi:</strong> Tüm yatırımınızı tek bir enstrümana bağlamak yerine, riski dağıtmak için altını da içeren dengeli bir portföy oluşturun.</li><li><strong>Kademeli Alım:</strong> Fiyat dalgalanmalarından etkilenmemek için tek seferde büyük bir alım yapmak yerine, düzenli aralıklarla kademeli alımlar yapmayı düşünün.</li><li><strong>Fiziki mi, Dijital mi?:</strong> Fiziki altın (çeyrek, gram) ve banka/borsa üzerinden yapılan altın yatırımlarının (altın hesabı, fonlar) avantaj ve dezavantajlarını değerlendirin. Fiziki altın güven verirken, dijital altın alım-satım kolaylığı sunar.</li></ul><p>Unutmayın, her yatırım kararı kişisel risk toleransınıza ve finansal hedeflerinize uygun olmalıdır. Gelişmeleri takip etmek ve gerekirse bir finansal danışmandan destek almak, en doğru kararları vermenize yardımcı olacaktır.</p>"
     }
 ];
 
@@ -117,22 +140,6 @@ function getCurrentPost() {
     const post = blogPosts.find(p => p.slug === filename);
     if (post) {
         return post;
-    }
-    // Fallback for posts not in the array but have HTML files
-    const allSlugs = blogPosts.map(p => p.slug);
-    if (!allSlugs.includes(filename)) {
-        // This is a post that exists as an HTML file but is not in blogPosts array
-        // We can create a dummy post object from the DOM
-        return {
-            title: document.getElementById('post-title')?.innerText || 'Blog Yazısı',
-            summary: document.getElementById('post-summary')?.innerText || '',
-            slug: filename,
-            category: document.getElementById('post-cat')?.innerText || 'Genel',
-            image: document.getElementById('post-icon')?.className.split(' ')[1] || 'fa-file-alt',
-            color: 'gray',
-            relatedTool: null,
-            content: document.getElementById('content-body').innerHTML
-        };
     }
     return null;
 }

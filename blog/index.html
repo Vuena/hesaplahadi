@@ -19,6 +19,9 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+        .featured-card {
+            grid-template-rows: 200px 1fr auto;
+        }
     </style>
     <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
@@ -72,11 +75,25 @@
             <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">HesaplaHadi Blog</h1>
             <p class="text-lg text-slate-500 mt-4 max-w-3xl mx-auto">Finans, vergi, astroloji ve günlük yaşamla ilgili en güncel ve pratik bilgileri, hesaplama araçlarıyla birlikte keşfedin.</p>
         </section>
+        
+        <!-- Search Bar -->
+        <div class="mb-12 max-w-2xl mx-auto">
+            <div class="relative">
+                <input type="text" id="search-input" placeholder="Blog yazılarında ara..." class="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                <div class="absolute left-0 top-0 h-full flex items-center pl-4 text-slate-400">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+            </div>
+        </div>
 
+        <!-- Featured Post -->
+        <section id="featured-post" class="mb-12"></section>
+        
         <!-- Blog Grid -->
         <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Blog posts will be dynamically inserted here -->
+            <!-- Blog posts will be injected here by JavaScript -->
         </div>
+        <p id="no-results" class="text-center text-slate-500 hidden">Arama sonucunda eşleşen yazi bulunamadi.</p>
     </main>
 
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
@@ -91,17 +108,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const blogGrid = document.getElementById('blog-grid');
-            
-            const sortedPosts = Object.values(blogData).sort((a, b) => {
-                const yearA = parseInt(a.slug.match(/\d{4}/)?.[0] || '0');
-                const yearB = parseInt(b.slug.match(/\d{4}/)?.[0] || '0');
-                if (yearA !== yearB) {
-                    return yearB - yearA;
-                }
-                return b.title.localeCompare(a.title);
-            });
+            const searchInput = document.getElementById('search-input');
+            const noResults = document.getElementById('no-results');
+            const featuredPostContainer = document.getElementById('featured-post');
 
-            sortedPosts.forEach(post => {
+            let posts = [];
+
+            function createPostElement(post) {
                 const postElement = document.createElement('a');
                 postElement.href = post.slug;
                 postElement.className = 'card-hover-effect bg-white rounded-2xl overflow-hidden flex flex-col group border border-slate-200';
@@ -117,7 +130,75 @@
                         <i class="fa-solid fa-arrow-right transform transition-transform group-hover:translate-x-1"></i>
                     </div>
                 `;
-                blogGrid.appendChild(postElement);
+                return postElement;
+            }
+
+            function createFeaturedPostElement(post) {
+                const featuredElement = document.createElement('a');
+                featuredElement.href = post.slug;
+                featuredElement.className = 'grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-2xl border border-slate-200 card-hover-effect';
+                
+                featuredElement.innerHTML = `
+                    <div>
+                        <span class="text-sm font-bold bg-${post.color}-100 text-${post.color}-700 px-4 py-2 rounded-full uppercase tracking-widest">Öne Çıkan Yazı</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mt-6 mb-4">${post.title}</h2>
+                        <p class="text-slate-600 leading-relaxed">${post.summary}</p>
+                        <div class="mt-6 flex items-center gap-3 text-blue-600 font-bold group">
+                            <span>Devamını Oku</span>
+                            <i class="fa-solid fa-arrow-right transform transition-transform group-hover:translate-x-1"></i>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center text-8xl text-${post.color}-400">
+                        <i class="fa-solid ${post.image}"></i>
+                    </div>
+                `;
+                return featuredElement;
+            }
+
+            function displayPosts(filteredPosts) {
+                blogGrid.innerHTML = '';
+                if (filteredPosts.length > 0) {
+                    filteredPosts.forEach(post => {
+                        blogGrid.appendChild(createPostElement(post));
+                    });
+                    noResults.classList.add('hidden');
+                } else {
+                    noResults.classList.remove('hidden');
+                }
+            }
+            
+            // Initialize posts
+            posts = blogPosts;
+
+            // Sort posts by date (newest first) and then by title
+            posts.sort((a, b) => {
+                const yearA = parseInt(a.slug.match(/(\d{4})/)?.[0] || '0');
+                const yearB = parseInt(b.slug.match(/(\d{4})/)?.[0] || '0');
+                if (yearA !== yearB) {
+                    return yearB - yearA;
+                }
+                return b.title.localeCompare(a.title);
+            });
+            
+            // Set featured post (latest one)
+            if(posts.length > 0) {
+                const featuredPost = posts[0];
+                featuredPostContainer.appendChild(createFeaturedPostElement(featuredPost));
+                // Display all other posts
+                displayPosts(posts.slice(1));
+            } else {
+                 displayPosts([]);
+            }
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filteredPosts = posts.slice(1).filter(post => 
+                    post.title.toLowerCase().includes(searchTerm) || 
+                    post.summary.toLowerCase().includes(searchTerm) ||
+                    post.category.toLowerCase().includes(searchTerm)
+                );
+                displayPosts(filteredPosts);
             });
         });
     </script>

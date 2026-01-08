@@ -1,52 +1,88 @@
+<!-- Template for Blog Detail Pages -->
+<!-- Copy this structure for new posts and update content inside <article> -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vücudunuzun ihtiyacı olan su miktarını hesaplayın. Yetersiz su tüketiminin zararları ve sağlıklı yaşam için öneriler.">
+    <!-- Dynamic Meta Tags -->
     <title>Günlük Su Tüketimi Ne Kadar Olmalı? - HesaplaHadi Blog</title>
+    <meta name="description" content="Vücudunuzun ihtiyacı olan su miktarını hesaplayın. Yetersiz su tüketiminin zararları ve sağlıklı yaşam için öneriler.">
     <link rel="canonical" href="https://hesaplahadi.com/blog/gunluk-su-tuketimi-ne-kadar-olmali.html" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     <style>
-        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
+        /* Typography for Blog Content */
+        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; letter-spacing: -0.025em; }
         .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: #334155; }
-        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+        .prose p { margin-bottom: 1.25rem; line-height: 1.75; color: #475569; }
+        .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; }
+        .prose ul { list-style-type: disc; }
+        .prose ol { list-style-type: decimal; }
         .prose li { margin-bottom: 0.5rem; }
-        .prose strong { color: #1e293b; font-weight: 700; }
+        .prose strong { color: #0f172a; font-weight: 700; }
+        .prose blockquote { border-left: 4px solid #cbd5e1; padding-left: 1rem; font-style: italic; color: #64748b; margin: 1.5rem 0; }
+        .prose img { border-radius: 0.75rem; margin: 1.5rem 0; width: 100%; height: auto; }
+
+        /* TOC Styling */
+        .toc-link.active { color: #2563eb; font-weight: 600; border-left: 2px solid #2563eb; padding-left: 0.5rem; margin-left: -0.5rem; }
     </style>
     <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
-    <!-- Header -->
+        <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <a href="../index.html" class="flex items-center space-x-2 group">
-                    <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
-                        <i class="fa-solid fa-calculator text-lg"></i>
+                <!-- Left: Logo -->
+                <div class="flex items-center gap-3">
+                     <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
+                            <i class="fa-solid fa-calculator text-lg"></i>
+                        </div>
+                        <div class="leading-tight">
+                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></p>
+<span class="block text-[0.6rem] font-bold text-slate-400 tracking-widest uppercase -mt-1">Finansal & Pratik Araçlar</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+                        <a href="/index.html" class="hover:text-blue-600 transition">Hesaplama Araçları</a>
+                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>AI Asistan</span>
+                        </a>
                     </div>
-                    <div class="leading-tight">
-                        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                    </div>
-                </a>
-                <a href="../index.html" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-2">
-                    <span>Tüm Araçlar</span> <i class="fa-solid fa-arrow-right text-xs opacity-70"></i>
-                </a>
+
+                    <!-- Mobile AI Button -->
+                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </a>
+
+                    <!-- Mobile Stylized Button -->
+                    <a href="/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
+                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
 
     <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
             <!-- Main Content -->
             <main class="lg:col-span-8">
                 <!-- Breadcrumb -->
                 <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
-                    <a href="../index.html" class="hover:text-blue-600">Anasayfa</a>
+                    <a href="/index.html" class="hover:text-blue-600">Anasayfa</a>
                     <span class="mx-2">/</span>
                     <a href="index.html" class="hover:text-blue-600">Blog</a>
                     <span class="mx-2">/</span>
@@ -55,47 +91,52 @@
 
                 <article>
                     <div class="mb-8">
-                        <span id="post-cat" class="text-xs font-bold text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full uppercase tracking-wider">Sağlık</span>
+                        <span id="post-cat" class="text-xs font-bold bg-cyan-50 text-cyan-600 px-3 py-1 rounded-full uppercase tracking-wider">Sağlık</span>
                         <h1 id="post-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Günlük Su Tüketimi Ne Kadar Olmalı?</h1>
                         <p id="post-summary" class="text-lg text-slate-500 mt-4 leading-relaxed">Vücudunuzun ihtiyacı olan su miktarını hesaplayın. Yetersiz su tüketiminin zararları ve sağlıklı yaşam için öneriler.</p>
                     </div>
 
                     <!-- Featured Image / Icon Area -->
-                    <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300 overflow-hidden relative">
-                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-50 to-slate-100 opacity-50"></div>
-                         <i id="post-icon" class="fa-solid fa-droplet text-9xl opacity-20 text-cyan-500 transform scale-110"></i>
+                    <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300">
+                         <!-- In a real app, this would be an <img> -->
+                         <i id="post-icon" class="fa-solid fa-droplet text-8xl text-cyan-300"></i>
                     </div>
 
                     <!-- Content Body -->
                     <div class="prose max-w-none" id="content-body">
-                        <p>İçerik korunamadı, lütfen kontrol edin.</p>
+                       <!-- Content goes here -->
+                       <p>Su, insan vücudunun %60'ını oluşturur ve hayati fonksiyonların devamlılığı için kritiktir. Peki günde kaç bardak su içmeliyiz?</p><h2>Genel Kural: Kilo Başına 33ml</h2><p>Uzmanlar genel olarak kilonuzun her bir kilogramı için yaklaşık 33 ml su içmenizi önerir. Örneğin 70 kg olan bir birey için: <code>70 x 0.033 = 2.31 Litre</code>.</p><h2>Su İhtiyacını Artıran Faktörler</h2><ul><li><strong>Egzersiz:</strong> Spor yaparken terle kaybedilen sıvıyı yerine koymak için ekstra su içilmelidir.</li><li><strong>Sıcak Hava:</strong> Yaz aylarında terleme arttığı için tüketim artırılmalıdır.</li><li><strong>Hastalık:</strong> Ateş, kusma veya ishal gibi durumlarda vücut sıvı kaybeder.</li></ul><h2>Susuzluğun Belirtileri</h2><p>Baş ağrısı, yorgunluk, odaklanma sorunu ve idrar renginin koyulaşması yetersiz su tüketiminin en belirgin işaretleridir. Susamayı beklemeden düzenli aralıklarla su içmek en doğrusudur.</p>
                     </div>
                 </article>
             </main>
 
             <!-- Sidebar -->
-            <aside class="lg:col-span-4">
-                <div class="sticky top-24 space-y-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
-                        </h4>
-                        <nav id="toc" class="text-sm space-y-2 text-slate-600"></nav>
-                    </div>
+            <aside class="lg:col-span-4 space-y-8">
 
-                    <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-10">
-                            <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
-                        </div>
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-2">Hemen Hesaplayın!</h3>
-                            <p class="text-blue-100 text-sm mb-6">Bu konuyla ilgili hesaplamalarınızı ücretsiz aracımızla saniyeler içinde yapın.</p>
-                            <a href="#" id="cta-link" class="inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-50 transition transform hover:scale-105">
-                                Araca Git <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
+                <!-- Table of Contents -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sticky top-24">
+                    <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
+                    </h4>
+                    <nav id="toc" class="text-sm space-y-2 text-slate-600">
+                        <!-- JS Generated -->
+                    </nav>
+                </div>
+
+                <!-- Dynamic CTA Widget -->
+                <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-2">Hemen Hesaplayın!</h3>
+                        <p class="text-blue-100 text-sm mb-6">Bu konuyla ilgili hesaplamalarınızı ücretsiz aracımızla saniyeler içinde yapın.</p>
+                        <a href="#" id="cta-link" class="inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-50 transition transform hover:scale-105">
+                            Araca Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </div>
+
             </aside>
         </div>
     </div>
@@ -107,56 +148,7 @@
         </div>
     </footer>
 
-    <script src="../assets/js/blog-data.js"></script>
-    <script>
-        function loadPostData() {
-            const post = getCurrentPost();
-            if(!post) return;
-
-            if(post.relatedTool && post.relatedTool !== "null") {
-                const cta = document.getElementById('cta-widget');
-                const btn = document.getElementById('cta-link');
-                let link = `../index.html#btn-${post.relatedTool}`;
-                const standaloneMap = {
-                    'kdv': '../kdv-hesaplama.html',
-                    'tevkifat': '../tevkifat-hesaplama.html',
-                    'kredi': '../kredi-hesaplama.html',
-                    'ai_asistan': '../ai-asistan.html',
-                    'bmi': '../vucut-kitle-i̇ndeksi-bmi-hesaplama.html',
-                    'net_brut': '../netten-brute-maas-hesaplama-2026.html'
-                };
-                if(standaloneMap[post.relatedTool]) link = standaloneMap[post.relatedTool];
-                btn.href = link;
-                cta.classList.remove('hidden');
-            }
-        }
-
-        function generateTOC() {
-            const content = document.getElementById('content-body');
-            const tocNav = document.getElementById('toc');
-            const headers = content.querySelectorAll('h2, h3');
-            if(headers.length === 0) {
-                tocNav.parentElement.classList.add('hidden');
-                return;
-            }
-            headers.forEach((header, index) => {
-                if(!header.id) header.id = `section-${index}`;
-                const link = document.createElement('a');
-                link.href = `#${header.id}`;
-                link.innerText = header.innerText;
-                link.className = `block toc-link hover:text-blue-600 transition truncate ${header.tagName === 'H3' ? 'pl-4 text-xs' : ''}`;
-                link.onclick = (e) => {
-                    e.preventDefault();
-                    document.getElementById(header.id).scrollIntoView({behavior: 'smooth'});
-                };
-                tocNav.appendChild(link);
-            });
-        }
-
-        window.onload = function() {
-            loadPostData();
-            setTimeout(generateTOC, 100);
-        };
-    </script>
+    <!-- Scripts -->
+    
 </body>
 </html>
