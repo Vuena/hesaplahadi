@@ -1,45 +1,96 @@
+
+<!-- STANDARDIZED BLOG POST TEMPLATE -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Minik dostunuzun gagasındaki renk değişimleri veya göz halkaları onun yaşı hakkında ipuçları verir. Kuşunuzun insan yılına göre yaşını hesaplayarak, ona uygun bakım ve beslenme programı uygulayabilirsiniz.">
-    <title>Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı? | HesaplaHadi Blog</title>
+    <title>Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı? | HesaplaHadi Blog | HesaplaHadi Blog</title>
+    <meta name="description" content="Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı?  Blog aracı ile hızlı ve kolayca hesaplama yapın. En doğru ve güncel sonuçlar için HesaplaHadi" />
+    <link rel="canonical" href="https://hesaplahadi.com/blog/muhabbet-kusu-yasi-nasil-anlasilir.html" />
+
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <style>
+        /* Basic Typography Styles to ensure visibility */
+        #content-body h1, #content-body h2, #content-body h3, #content-body h4 {
+            color: #1e293b; /* slate-800 */
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+        }
+        #content-body h2 { font-size: 1.5rem; }
+        #content-body h3 { font-size: 1.25rem; }
+        #content-body p, #content-body ul, #content-body ol {
+            color: #475569; /* slate-600 */
+            line-height: 1.75;
+            margin-bottom: 1em;
+        }
+        #content-body a { color: #2563eb; text-decoration: underline; }
+        #content-body ul { list-style-type: disc; padding-left: 1.5em; }
+        #content-body ol { list-style-type: decimal; padding-left: 1.5em; }
+
+        .toc-link.active { color: #2563eb; font-weight: 600; }
+        .sticky-sidebar { position: sticky; top: 8rem; }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800">
+<body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/index.html" class="flex items-center gap-2 group">
-                <div class="bg-blue-600 text-white p-2 rounded-lg group-hover:bg-blue-700 transition"><i class="fa-solid fa-calculator"></i></div>
-                <span class="text-xl font-bold tracking-tight">Hesapla<span class="text-blue-600">Hadi</span></span>
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+          <a href="/index.html" class="flex items-center space-x-2 group">
+            <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+              <i class="fa-solid fa-calculator text-lg"></i>
+            </div>
+            <p class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></p>
+          </a>
+          <div class="flex items-center gap-3">
+            <div class="hidden md:block relative">
+               <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+               <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+               <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden"></div>
+            </div>
+            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+              <a href="/index.html" class="hover:text-blue-600 transition">Araçlar</a>
+              <a href="/blog/index.html" class="text-blue-600 font-bold transition">Blog</a>
+              <a href="/ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Asistan</span>
+              </a>
+            </div>
+            <a href="/ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+              <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
             </a>
-            <a href="/index.html" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition">
-                <i class="fa-solid fa-arrow-left mr-1"></i> Hesaplama Araçları
-            </a>
+          </div>
         </div>
+      </div>
     </header>
 
-    <!-- Content -->
-    <main class="container mx-auto px-4 py-8 lg:py-12 max-w-4xl">
-        <article class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
-            <div class="p-8 lg:p-12">
-                <div class="flex items-center gap-3 text-xs font-bold text-blue-600 uppercase tracking-widest mb-4">
-                    <span class="bg-blue-50 px-3 py-1 rounded-full">Blog</span>
-                    <span class="text-slate-400">•</span>
-                    <span>Rehber</span>
-                </div>
+    <!-- Main Content Area -->
+    <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
-                <h1 class="text-3xl lg:text-4xl font-black text-slate-900 mb-6 leading-tight">Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı?</p>
+            <!-- Main Blog Post -->
+            <main class="lg:col-span-8">
+                <article>
+                    <div class="mb-8">
+                        <span class="text-xs font-bold bg-slate-50 text-slate-600 px-3 py-1 rounded-full uppercase tracking-wider">Diğer</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı? | HesaplaHadi Blog</h1>
+                        <p class="text-lg text-slate-500 mt-4 leading-relaxed">Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı?  Blog aracı ile hızlı ve kolayca hesaplama yapın. En doğru ve güncel sonuçlar için HesaplaHadi</p>
+                    </div>
 
-                <p class="text-lg text-slate-600 mb-8 leading-relaxed font-medium">Minik dostunuzun gagasındaki renk değişimleri veya göz halkaları onun yaşı hakkında ipuçları verir. Kuşunuzun insan yılına göre yaşını hesaplayarak, ona uygun bakım ve beslenme programı uygulayabilirsiniz.</p>
+                    <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300">
+                         <i class="fa-solid fa-file-alt text-8xl text-slate-300"></i>
+                    </div>
 
-                <div class="prose prose-slate prose-lg max-w-none">
-                    <p>Günümüzde bilgiye ulaşmak kolay olsa da, doğru ve güncel veriyi analiz etmek her zamankinden daha önemli hale geldi. <strong>kuş yaşı hesaplama, evcil hayvan bakımı, kuş ömrü</strong> konularında yaptığımız araştırmalar, kullanıcıların en çok merak ettiği noktaları aydınlatmayı amaçlıyor.</p>
+                    <!-- Removed .prose class and added direct styling in <style> tag -->
+                    <div id="content-body">
+                        <p>Günümüzde bilgiye ulaşmak kolay olsa da, doğru ve güncel veriyi analiz etmek her zamankinden daha önemli hale geldi. <strong>kuş yaşı hesaplama, evcil hayvan bakımı, kuş ömrü</strong> konularında yaptığımız araştırmalar, kullanıcıların en çok merak ettiği noktaları aydınlatmayı amaçlıyor.</p>
 
                     <h3>Hesaplama Neden Önemli?</h3>
                     <p>Özellikle 2026 yılı gibi ekonomik ve yasal parametrelerin sıkça değiştiği dönemlerde, Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı? gibi konuları manuel hesaplamak yanıltıcı olabilir. Sitemizdeki araçlar, en son resmi verilerle güncellenerek size hatasız sonuçlar sunar.</p>
@@ -55,35 +106,84 @@
                     <p>Konunun uzmanları, kuş yaşı hesaplama, evcil hayvan bakımı, kuş ömrü ile ilgili süreçlerde dikkatli olunması gerektiğini vurguluyor. Yapacağınız küçük bir hata, uzun vadede planlarınızı etkileyebilir. Bu nedenle HesaplaHadi üzerindeki ilgili aracı kullanarak simülasyonlar yapmanızı öneriyoruz.</p>
 
                     <div class="my-8 p-6 bg-indigo-50 rounded-2xl border border-indigo-100 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                        <div class="bg-white p-4 rounded-full shadow-sm text-indigo-600 text-2xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                        <div>
-                            <h4 class="font-bold text-indigo-900 text-lg mb-1">Kafanız mı Karıştı?</h4>
-                            <p class="text-indigo-700 text-sm mb-0">Konuyla ilgili özel sorularınızı AI Asistanımıza sorun, size özel yanıtlar alın.</p>
-                        </div>
-                        <a href="../ai-asistan.html" class="whitespace-nowrap bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">Asistana Sor</a>
+                        <div class="bg-white p-4 rounded-full shadow-sm text-indigo-600 text-2xl"><i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                </article>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="lg:col-span-4">
+                <div class="sticky-sidebar">
+                    <!-- Table of Contents -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm mb-8">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4">İçindekiler</h3>
+                        <nav id="toc-container"></nav>
                     </div>
 
-                    <h3>Sonuç</h3>
-                    <p>Bilgi güçtür. Muhabbet Kuşu Yaşı Hesaplama: Kuşunuz Genç mi Yaşlı mı? konusundaki detaylara hakim olmak, hayatınızı kolaylaştırır ve daha doğru kararlar almanızı sağlar. Daha fazla rehber içerik için blogumuzu takip etmeye devam edin.</p>
+                    <!-- Related Tool -->
+                    
                 </div>
-            </div>
-        </article>
-    </main>
+            </aside>
+        </div>
+    </div>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-12">
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
             <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
             <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
                 <a href="/index.html" class="hover:text-white transition">Ana Sayfa</a>
-                <a href="../hakkimizda.html" class="hover:text-white transition">Hakkımızda</a>
-                <a href="../gizlilik-politikasi.html" class="hover:text-white transition">Gizlilik Politikası</a>
-                <a href="../iletisim.html" class="hover:text-white transition">İletişim</a>
-                <a href="index.html" class="hover:text-white transition">Blog</a>
-                <a href="../ai-asistan.html" class="hover:text-white transition">AI Asistan</a>
+                <a href="/hakkimizda.html" class="hover:text-white transition">Hakkımızda</a>
+                <a href="/gizlilik-politikasi.html" class="hover:text-white transition">Gizlilik Politikası</a>
+                <a href="/iletisim.html" class="hover:text-white transition">İletişim</a>
+                <a href="/blog/index.html" class="hover:text-white transition">Blog</a>
             </div>
-            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+            <p class="text-xs text-slate-600 mt-6">&copy; 2024 HesaplaHadi. Tüm hakları saklıdır.</p>
         </div>
     </footer>
+
     <script src="../assets/js/calculator.js"></script>
+    <script>
+        // TOC Generator
+        document.addEventListener('DOMContentLoaded', function () {
+            const content = document.getElementById('content-body');
+            const tocContainer = document.getElementById('toc-container');
+            const headings = content.querySelectorAll('h2');
+
+            if (headings.length > 0) {
+                const tocList = document.createElement('ul');
+                tocList.className = 'space-y-3';
+                headings.forEach(h2 => {
+                    const id = h2.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    h2.id = id;
+
+                    const tocItem = document.createElement('li');
+                    const tocLink = document.createElement('a');
+                    tocLink.href = '#' + id;
+                    tocLink.textContent = h2.textContent;
+                    tocLink.className = 'text-sm font-medium text-slate-500 hover:text-blue-600 toc-link transition';
+                    tocItem.appendChild(tocLink);
+                    tocList.appendChild(tocItem);
+                });
+                tocContainer.appendChild(tocList);
+
+                // Intersection Observer for active link highlighting
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        const id = entry.target.getAttribute('id');
+                        const link = tocContainer.querySelector(`a[href="#${id}"]`);
+                        if (entry.isIntersecting) {
+                            tocContainer.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '0px 0px -75% 0px' });
+
+                headings.forEach(h => observer.observe(h));
+            } else {
+                 tocContainer.parentElement.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

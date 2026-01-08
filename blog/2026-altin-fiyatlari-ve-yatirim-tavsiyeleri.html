@@ -1,153 +1,174 @@
-<!-- Template for Blog Detail Pages -->
-<!-- Copy this structure for new posts and update content inside <article> -->
+
+<!-- STANDARDIZED BLOG POST TEMPLATE -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Dynamic Meta Tags -->
-    <title>2026 Altın Fiyatları ve Yatırım Tavsiyeleri - HesaplaHadi Blog</title>
-    <meta name="description" content="2026 yılı için altın fiyatları beklentileri, piyasa analizleri ve uzmanlardan yatırımcılara önemli tavsiyeler. Altın alırken nelere dikkat etmeli?">
+    <title>2026 Altın Fiyatları ve Yatırım Tavsiyeleri | HesaplaHadi Blog</title>
+    <meta name="description" content="2026 yılı için altın fiyatları beklentileri, piyasa analizleri ve uzmanlardan yatırımcılara önemli tavsiyeler. Altın alırken nelere dikkat etmeli?" />
     <link rel="canonical" href="https://hesaplahadi.com/blog/2026-altin-fiyatlari-ve-yatirim-tavsiyeleri.html" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-    <style>
-        /* Typography for Blog Content */
-        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; letter-spacing: -0.025em; }
-        .prose h3 { font-size: 1.25rem; font-weight: 600; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .prose p { margin-bottom: 1.25rem; line-height: 1.75; color: #475569; }
-        .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; }
-        .prose ul { list-style-type: disc; }
-        .prose ol { list-style-type: decimal; }
-        .prose li { margin-bottom: 0.5rem; }
-        .prose strong { color: #0f172a; font-weight: 700; }
-        .prose blockquote { border-left: 4px solid #cbd5e1; padding-left: 1rem; font-style: italic; color: #64748b; margin: 1.5rem 0; }
-        .prose img { border-radius: 0.75rem; margin: 1.5rem 0; width: 100%; height: auto; }
-
-        /* TOC Styling */
-        .toc-link.active { color: #2563eb; font-weight: 600; border-left: 2px solid #2563eb; padding-left: 0.5rem; margin-left: -0.5rem; }
-    </style>
     <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <style>
+        /* Basic Typography Styles to ensure visibility */
+        #content-body h1, #content-body h2, #content-body h3, #content-body h4 {
+            color: #1e293b; /* slate-800 */
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+        }
+        #content-body h2 { font-size: 1.5rem; }
+        #content-body h3 { font-size: 1.25rem; }
+        #content-body p, #content-body ul, #content-body ol {
+            color: #475569; /* slate-600 */
+            line-height: 1.75;
+            margin-bottom: 1em;
+        }
+        #content-body a { color: #2563eb; text-decoration: underline; }
+        #content-body ul { list-style-type: disc; padding-left: 1.5em; }
+        #content-body ol { list-style-type: decimal; padding-left: 1.5em; }
+
+        .toc-link.active { color: #2563eb; font-weight: 600; }
+        .sticky-sidebar { position: sticky; top: 8rem; }
+    </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
-        <!-- Header -->
+    <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Left: Logo -->
-                <div class="flex items-center gap-3">
-                     <a href="index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Right: Actions -->
-                <div class="flex items-center gap-3">
-                    <!-- Desktop Nav -->
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="/index.html" class="hover:text-blue-600 transition">Hesaplama Araçları</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
-                    </div>
-
-                    <!-- Mobile AI Button -->
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-
-                    <!-- Mobile Stylized Button -->
-                    <a href="/index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Hesaplama Araçları</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+          <a href="/index.html" class="flex items-center space-x-2 group">
+            <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+              <i class="fa-solid fa-calculator text-lg"></i>
             </div>
+            <p class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></p>
+          </a>
+          <div class="flex items-center gap-3">
+            <div class="hidden md:block relative">
+               <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+               <input type="text" id="desktop-tool-search" placeholder="Araç ara..." class="pl-8 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:bg-white focus:border-blue-500 transition outline-none w-48">
+               <div id="desktop-search-suggestions" class="hidden absolute top-full left-0 w-64 bg-white border border-slate-200 rounded-lg shadow-xl mt-2 z-50 overflow-hidden"></div>
+            </div>
+            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+              <a href="/index.html" class="hover:text-blue-600 transition">Araçlar</a>
+              <a href="/blog/index.html" class="text-blue-600 font-bold transition">Blog</a>
+              <a href="/ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Asistan</span>
+              </a>
+            </div>
+            <a href="/ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+              <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+            </a>
+          </div>
         </div>
+      </div>
     </header>
 
+    <!-- Main Content Area -->
     <div class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
-            <!-- Main Content -->
+            <!-- Main Blog Post -->
             <main class="lg:col-span-8">
-                <!-- Breadcrumb -->
-                <nav class="flex text-xs text-slate-500 mb-6 uppercase tracking-wide font-bold">
-                    <a href="/index.html" class="hover:text-blue-600">Anasayfa</a>
-                    <span class="mx-2">/</span>
-                    <a href="index.html" class="hover:text-blue-600">Blog</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-800" id="crumb-title">2026 Altın Fiyatları ve Yatırım Tavsiyeleri</span>
-                </nav>
-
                 <article>
                     <div class="mb-8">
-                        <span id="post-cat" class="text-xs font-bold bg-amber-50 text-amber-600 px-3 py-1 rounded-full uppercase tracking-wider">Yatırım</span>
-                        <h1 id="post-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">2026 Altın Fiyatları ve Yatırım Tavsiyeleri</h1>
-                        <p id="post-summary" class="text-lg text-slate-500 mt-4 leading-relaxed">2026 yılı için altın fiyatları beklentileri, piyasa analizleri ve uzmanlardan yatırımcılara önemli tavsiyeler. Altın alırken nelere dikkat etmeli?</p>
+                        <span class="text-xs font-bold bg-slate-50 text-slate-600 px-3 py-1 rounded-full uppercase tracking-wider">Yatırım</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 leading-tight">2026 Altın Fiyatları ve Yatırım Tavsiyeleri</h1>
+                        <p class="text-lg text-slate-500 mt-4 leading-relaxed">2026 yılı için altın fiyatları beklentileri, piyasa analizleri ve uzmanlardan yatırımcılara önemli tavsiyeler. Altın alırken nelere dikkat etmeli?</p>
                     </div>
 
-                    <!-- Featured Image / Icon Area -->
                     <div class="bg-slate-100 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-10 text-slate-300">
-                         <!-- In a real app, this would be an <img> -->
-                         <i id="post-icon" class="fa-solid fa-coins text-8xl text-amber-300"></i>
+                         <i class="fa-solid fa-file-alt text-8xl text-slate-300"></i>
                     </div>
 
-                    <!-- Content Body -->
-                    <div class="prose max-w-none" id="content-body">
-                       <!-- Content goes here -->
+                    <!-- Removed .prose class and added direct styling in <style> tag -->
+                    <div id="content-body">
+                        <!-- Content goes here -->
                        <p>Altın, tarih boyunca güvenli liman olarak kabul edilmiş ve ekonomik belirsizlik dönemlerinde yatırımcıların sığınağı olmuştur. Peki, 2026 yılında küresel ve yerel ekonomik gelişmeler ışığında altın fiyatları nasıl bir seyir izleyecek? İşte yatırımcılar için bir yol haritası.</p><h2>1. 2026'da Altın Fiyatlarını Etkileyecek Faktörler</h2><p>Altın fiyatları, birden çok faktörün karmaşık etkileşimiyle şekillenir. 2026'da öne çıkması beklenen ana etkenler şunlar olabilir:</p><ul><li><strong>Küresel Enflasyon Oranları:</strong> Yüksek enflasyon, genellikle altına olan talebi artırır çünkü yatırımcılar paralarının değerini korumak ister.</li><li><strong>Merkez Bankası Politikaları:</strong> Özellikle ABD Merkez Bankası'nın (FED) faiz oranı kararları, doların değerini ve dolayısıyla altın fiyatlarını doğrudan etkiler.</li><li><strong>Jeopolitik Gelişmeler:</strong> Siyasi istikrarsızlıklar ve uluslararası krizler, yatırımcıları güvenli liman olan altına yönlendirir.</li><li><strong>Fiziki Talep:</strong> Mücevherat sektörü ve merkez bankalarının altın rezervlerini artırma eğilimi de fiyatlar üzerinde etkilidir.</li></ul><h2>2. Uzman Beklentileri ve Fiyat Tahminleri</h2><p>Ekonomi analistleri, 2026 yılı için altın fiyatları konusunda farklı senaryolar öngörüyor. Bazı uzmanlar, küresel ekonomideki yavaşlama endişeleri ve devam eden jeopolitik riskler nedeniyle altında yükseliş trendinin devam edeceğini düşünürken, diğerleri merkez bankalarının sıkı para politikalarının altın üzerinde baskı oluşturabileceğini belirtiyor. Ancak genel kanı, altının portföylerdeki önemini koruyacağı yönünde.</p><h2>3. Yatırımcılar İçin Stratejiler</h2><p>Altın yatırımı yaparken dikkatli bir strateji izlemek önemlidir. İşte 2026 için bazı tavsiyeler:</p><ul><li><strong>Portföy Çeşitlendirmesi:</strong> Tüm yatırımınızı tek bir enstrümana bağlamak yerine, riski dağıtmak için altını da içeren dengeli bir portföy oluşturun.</li><li><strong>Kademeli Alım:</strong> Fiyat dalgalanmalarından etkilenmemek için tek seferde büyük bir alım yapmak yerine, düzenli aralıklarla kademeli alımlar yapmayı düşünün.</li><li><strong>Fiziki mi, Dijital mi?:</strong> Fiziki altın (çeyrek, gram) ve banka/borsa üzerinden yapılan altın yatırımlarının (altın hesabı, fonlar) avantaj ve dezavantajlarını değerlendirin. Fiziki altın güven verirken, dijital altın alım-satım kolaylığı sunar.</li></ul><p>Unutmayın, her yatırım kararı kişisel risk toleransınıza ve finansal hedeflerinize uygun olmalıdır. Gelişmeleri takip etmek ve gerekirse bir finansal danışmandan destek almak, en doğru kararları vermenize yardımcı olacaktır.</p>
                     </div>
                 </article>
             </main>
 
             <!-- Sidebar -->
-            <aside class="lg:col-span-4 space-y-8">
-
-                <!-- Table of Contents -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sticky top-24">
-                    <h4 class="font-bold text-slate-900 mb-4 border-b pb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-list-ul text-blue-600"></i> İçindekiler
-                    </h4>
-                    <nav id="toc" class="text-sm space-y-2 text-slate-600">
-                        <!-- JS Generated -->
-                    </nav>
-                </div>
-
-                <!-- Dynamic CTA Widget -->
-                <div id="cta-widget" class="hidden bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white text-center relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10">
-                        <i class="fa-solid fa-calculator text-9xl transform rotate-12 translate-x-4 -translate-y-4"></i>
+            <aside class="lg:col-span-4">
+                <div class="sticky-sidebar">
+                    <!-- Table of Contents -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm mb-8">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4">İçindekiler</h3>
+                        <nav id="toc-container"></nav>
                     </div>
-                    <div class="relative z-10">
-                        <h3 class="text-xl font-bold mb-2">Hemen Hesaplayın!</h3>
-                        <p class="text-blue-100 text-sm mb-6">Bu konuyla ilgili hesaplamalarınızı ücretsiz aracımızla saniyeler içinde yapın.</p>
-                        <a href="#" id="cta-link" class="inline-block w-full bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-50 transition transform hover:scale-105">
-                            Araca Git <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
 
+                    <!-- Related Tool -->
+                    
+                </div>
             </aside>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
             <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+            <div class="flex justify-center flex-wrap gap-6 text-sm font-medium mt-6 text-slate-300">
+                <a href="/index.html" class="hover:text-white transition">Ana Sayfa</a>
+                <a href="/hakkimizda.html" class="hover:text-white transition">Hakkımızda</a>
+                <a href="/gizlilik-politikasi.html" class="hover:text-white transition">Gizlilik Politikası</a>
+                <a href="/iletisim.html" class="hover:text-white transition">İletişim</a>
+                <a href="/blog/index.html" class="hover:text-white transition">Blog</a>
+            </div>
+            <p class="text-xs text-slate-600 mt-6">&copy; 2024 HesaplaHadi. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    
+    <script src="../assets/js/calculator.js"></script>
+    <script>
+        // TOC Generator
+        document.addEventListener('DOMContentLoaded', function () {
+            const content = document.getElementById('content-body');
+            const tocContainer = document.getElementById('toc-container');
+            const headings = content.querySelectorAll('h2');
+
+            if (headings.length > 0) {
+                const tocList = document.createElement('ul');
+                tocList.className = 'space-y-3';
+                headings.forEach(h2 => {
+                    const id = h2.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    h2.id = id;
+
+                    const tocItem = document.createElement('li');
+                    const tocLink = document.createElement('a');
+                    tocLink.href = '#' + id;
+                    tocLink.textContent = h2.textContent;
+                    tocLink.className = 'text-sm font-medium text-slate-500 hover:text-blue-600 toc-link transition';
+                    tocItem.appendChild(tocLink);
+                    tocList.appendChild(tocItem);
+                });
+                tocContainer.appendChild(tocList);
+
+                // Intersection Observer for active link highlighting
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        const id = entry.target.getAttribute('id');
+                        const link = tocContainer.querySelector(`a[href="#${id}"]`);
+                        if (entry.isIntersecting) {
+                            tocContainer.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '0px 0px -75% 0px' });
+
+                headings.forEach(h => observer.observe(h));
+            } else {
+                 tocContainer.parentElement.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

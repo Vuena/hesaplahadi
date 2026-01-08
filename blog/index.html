@@ -4,208 +4,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HesaplaHadi Blog - Finansal ve Pratik Bilgiler</title>
-    <meta name="description" content="HesaplaHadi blogunda finans, vergi, astroloji ve günlük yaşamla ilgili en güncel ve pratik bilgileri, hesaplama araçlarıyla birlikte keşfedin.">
-    <link rel="canonical" href="https://hesaplahadi.com/blog/index.html" />
-
+    <title>HesaplaHadi Blog | Finans, Sağlık ve Teknoloji Üzerine Yazılar</title>
+    <meta name="description" content="Hesaplama araçlarımızın yanı sıra, finansal okuryazarlık, sağlıklı yaşam, vergi ve teknoloji konularında güncel ve pratik bilgiler sunan blog sayfamız.">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
-    <style>
-        .card-hover-effect {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card-hover-effect:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .featured-card {
-            grid-template-rows: 200px 1fr auto;
-        }
-    </style>
-    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 bg-slate-50">
 
     <!-- Header -->
     <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Left: Logo -->
-                <div class="flex items-center gap-3">
-                     <a href="../index.html" class="flex items-center space-x-2 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300 flex-shrink-0">
-                            <i class="fa-solid fa-calculator text-lg"></i>
-                        </div>
-                        <div class="leading-tight">
-                            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></h1>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Right: Actions -->
-                <div class="flex items-center gap-3">
-                    <!-- Desktop Nav -->
-                    <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
-                        <a href="../index.html" class="hover:text-blue-600 transition">Hesaplama Araçları</a>
-                        <a href="../ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>AI Asistan</span>
-                        </a>
-                    </div>
-
-                    <!-- Mobile AI Button -->
-                    <a href="../ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                    </a>
-
-                    <!-- Mobile Stylized Button -->
-                    <a href="../index.html" class="md:hidden bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm hover:shadow-md transition flex items-center gap-1">
-                        <span>Araçlar</span> <i class="fa-solid fa-chevron-right text-[8px] opacity-70"></i>
-                    </a>
-                </div>
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+          <a href="/index.html" class="flex items-center space-x-2 group">
+            <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-2.5 rounded-xl group-hover:shadow-lg group-hover:shadow-blue-500/30 transition duration-300">
+              <i class="fa-solid fa-calculator text-lg"></i>
             </div>
+            <p class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Hesapla<span class="text-blue-600">Hadi</span></p>
+          </a>
+          <div class="flex items-center gap-3">
+            <div class="hidden md:flex items-center space-x-3 text-xs font-bold text-slate-600">
+              <a href="/index.html" class="hover:text-blue-600 transition">Araçlar</a>
+              <a href="/blog/index.html" class="text-blue-600 font-bold transition">Blog</a>
+              <a href="/ai-asistan.html" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl border border-indigo-100 transition duration-300">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Asistan</span>
+              </a>
+            </div>
+            <a href="/ai-asistan.html" class="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100 transition">
+              <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+            </a>
+          </div>
         </div>
+      </div>
     </header>
 
+    <!-- Main Content -->
     <main class="container mx-auto px-4 py-8 lg:py-12 flex-grow">
-        <!-- Hero Section -->
-        <section class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">HesaplaHadi Blog</h1>
-            <p class="text-lg text-slate-500 mt-4 max-w-3xl mx-auto">Finans, vergi, astroloji ve günlük yaşamla ilgili en güncel ve pratik bilgileri, hesaplama araçlarıyla birlikte keşfedin.</p>
-        </section>
         
-        <!-- Search Bar -->
-        <div class="mb-12 max-w-2xl mx-auto">
-            <div class="relative">
-                <input type="text" id="search-input" placeholder="Blog yazılarında ara..." class="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                <div class="absolute left-0 top-0 h-full flex items-center pl-4 text-slate-400">
-                    <i class="fa-solid fa-search"></i>
-                </div>
-            </div>
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">HesaplaHadi Blog</h1>
+            <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Finansal okuryazarlıktan sağlıklı yaşama, en güncel ve pratik bilgiler burada.</p>
         </div>
 
-        <!-- Featured Post -->
-        <section id="featured-post" class="mb-12"></section>
-        
+        <!-- Featured Post Section -->
+        <div id="featured-post" class="mb-12">
+            
+<a href="/blog/yapay-zeka-finans-danismaniniz.html" class="block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="md:flex">
+        <div class="md:w-1/2 bg-slate-100 flex items-center justify-center text-slate-300 p-8 min-h-[250px]">
+             <i class="fa-solid fa-robot text-8xl text-indigo-400"></i>
+        </div>
+        <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Teknoloji</span>
+            <h2 class="text-2xl font-extrabold text-slate-900 mt-2 mb-3 group-hover:text-blue-600 transition-colors">Yapay Zeka Finans Danışmanınız Olabilir mi?</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">Yapay zeka destekli robo-danışmanlar ve kişisel finans uygulamaları, yatırım ve bütçe yönetimimizi kökten değiştirme potansiyeline sahip.</p>
+            <div class="mt-4 text-xs font-bold text-blue-600">Devamını Oku &rarr;</div>
+        </div>
+    </div>
+</a>
+
+        </div>
+
         <!-- Blog Grid -->
         <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Blog posts will be injected here by JavaScript -->
+            
+<a href="/blog/2026-altin-fiyatlari-ve-yatirim-tavsiyeleri.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-chart-line text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Yatırım</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">2026 Altın Fiyatları ve Yatırım Tavsiyeleri</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">2026 yılı için altın fiyatları beklentileri, piyasa analizleri ve uzmanlardan yatırımcılara önemli tavsiyeler.</p>
+    </div>
+</a>
+
+<a href="/blog/kredi-notu-nasil-yukseltilir.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Kredi Notu Nasıl Yükseltilir? En Etkili 5 Yöntem</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Bankalardan kredi veya kredi kartı alırken en önemli kriter olan kredi notunuzu yükseltmek için yapmanız gerekenler.</p>
+    </div>
+</a>
+
+<a href="/blog/kdv-tevkifati-nedir-kimler-yapar.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-receipt text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Vergi</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">KDV Tevkifatı Nedir? Kimler Tevkifat Yapar?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">İşletmeler için tevkifatlı fatura kesim süreçleri, 2/10, 5/10 oranlarının anlamı ve dikkat edilmesi gereken noktalar.</p>
+    </div>
+</a>
+
+<a href="/blog/otomatik-vites-arac-nasil-kullanilir.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-lightbulb text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Pratik Bilgiler</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Otomatik Vites Araç Nasıl Kullanılır?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Otomatik vitesli bir aracı ilk kez kullanacaklar için hazırladığımız bu rehberde, vites konumlarından sürüş tekniklerine kadar her şeyi öğrenin.</p>
+    </div>
+</a>
+
+<a href="/blog/2026-altin-piyasasi-yorum.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-chart-line text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Yatırım</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">2026 Altın Piyasası Yorumları ve Uzman Analizleri</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">2026’da altın fiyatlarını ne bekliyor? Küresel ekonomistlerin ve piyasa uzmanlarının en güncel altın yorumları ve analizleri.</p>
+    </div>
+</a>
+
+<a href="/blog/2026-asgari-ucret-tahminleri.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">2026 Asgari Ücret Tahminleri ve Beklentiler</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Ekonomik veriler ve hükümet politikaları ışığında 2026 yılı asgari ücret beklentileri. İşçi ve işverenleri neler bekliyor?</p>
+    </div>
+</a>
+
+<a href="/blog/2026-gelir-vergisi-dilimleri-ve-maas-etkisi.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-receipt text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Vergi</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">2026 Gelir Vergisi Dilimleri ve Maaşlara Etkisi</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Yeni yılda maaşları nasıl etkileyecek? 2026 gelir vergisi dilimleri, oranları ve çalışanların net maaşı üzerindeki etkileri.</p>
+    </div>
+</a>
+
+<a href="/blog/yuzde-hesaplama-formulu-ve-ornekleri.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-graduation-cap text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Eğitim</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Yüzde Hesaplama Formülü ve Pratik Örnekler</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Günlük hayatta ve iş dünyasında sıkça kullanılan yüzde hesaplamalarını kolayca yapabilmek için formüller ve pratik örnekler.</p>
+    </div>
+</a>
+
+<a href="/blog/yukselen-burc-hesaplama-ve-karakter-analizi.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-star text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Astroloji</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Yükselen Burç Hesaplama ve Karakter Analizi</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Doğum saatinize göre yükselen burcunuzu bulun ve kişiliğiniz üzerindeki etkilerini, detaylı karakter analizleriyle keşfedin.</p>
+    </div>
+</a>
+
+<a href="/blog/vucut-kitle-indeksi-bmi-nedir.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-heart-pulse text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Sağlık</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Vücut Kitle İndeksi (BMI) Nedir ve Nasıl Hesaplanır?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Sağlıklı bir yaşam için önemli bir gösterge olan Vücut Kitle İndeksi’ni (BMI) nasıl hesaplayacağınızı ve yorumlayacağınızı öğrenin.</p>
+    </div>
+</a>
+
+<a href="/blog/python-ile-yazilima-baslamak.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-robot text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Teknoloji</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Python ile Yazılıma Başlamak İçin 5 Neden</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Yazılım dünyasına adım atmak istiyorsanız, neden Python’un en iyi başlangıç noktası olduğunu keşfedin.</p>
+    </div>
+</a>
+
+<a href="/blog/yapay-zeka-gelecegi.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-robot text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Teknoloji</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Yapay Zekanın Geleceği ve Hayatımıza Etkileri</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Yapay zeka teknolojileri hızla gelişiyor. Gelecekte bizi nelerin beklediğini ve yapay zekanın hayatımızı nasıl şekillendireceğini inceleyin.</p>
+    </div>
+</a>
+
+<a href="/blog/konut-kredisi-cekerken-dikkat-edilmesi-gerekenler.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Konut Kredisi Çekerken Dikkat Edilmesi Gerekenler</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Ev sahibi olma hayallerinizi gerçekleştirirken doğru adımlar atın. Konut kredisi sürecinde dikkat etmeniz gereken önemli noktalar.</p>
+    </div>
+</a>
+
+<a href="/blog/ideal-kilo-nasil-hesaplanir-formulu-nedir.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-heart-pulse text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Sağlık</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">İdeal Kilo Nasıl Hesaplanır? Formülü ve Yöntemleri</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Boyunuza, yaşınıza ve cinsiyetinize göre ideal kilonuzun ne olması gerektiğini farklı formüllerle hesaplayın.</p>
+    </div>
+</a>
+
+<a href="/blog/brutten-nete-maas-hesaplama-rehberi.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Brütten Nete Maaş Hesaplama Rehberi</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Brüt maaş üzerinden net maaşı hesaplarken hangi kesintilerin yapıldığını ve maaşınızın nasıl şekillendiğini öğrenin.</p>
+    </div>
+</a>
+
+<a href="/blog/dolar-enflasyonu-ve-reel-getiri-hesaplama.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Dolar Enflasyonu ve Reel Getiri Hesaplama</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Doların zaman içindeki değer kaybını ve yatırımlarınızın dolar bazında reel getirisini nasıl hesaplayacağınızı öğrenin.</p>
+    </div>
+</a>
+
+<a href="/blog/emekli-maasi-2026-ocak-zammi-hesaplama.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">2026 Emekli Maaşı Ocak Zammı Hesaplama</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Ocak 2026’da emekli maaşlarına yapılması beklenen zam oranlarını ve yeni maaşınızı nasıl hesaplayacağınızı keşfedin.</p>
+    </div>
+</a>
+
+<a href="/blog/gunluk-su-tuketimi-ne-kadar-olmali.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-heart-pulse text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Sağlık</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Günlük Su Tüketimi Ne Kadar Olmalı?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Sağlıklı bir yaşam için günde ne kadar su içmeniz gerektiğini, yaşınıza ve aktivite seviyenize göre nasıl belirleyeceğinizi öğrenin.</p>
+    </div>
+</a>
+
+<a href="/blog/kalori-acigi-ile-zayiflama.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-heart-pulse text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Sağlık</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Kalori Açığı Oluşturarak Nasıl Zayıflanır?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Kilo vermenin temel prensibi olan kalori açığını nasıl oluşturacağınızı ve sürdürülebilir bir şekilde zayıflamanın yollarını keşfedin.</p>
+    </div>
+</a>
+
+<a href="/blog/kopek-ve-kedi-yasi-hesaplama-insan-yili.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-lightbulb text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Pratik Bilgiler</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Köpek ve Kedi Yaşı İnsan Yılına Göre Nasıl Hesaplanır?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Sevimli dostlarınızın yaşını insan yılına çevirerek onların gelişim evrelerini daha iyi anlayın.</p>
+    </div>
+</a>
+
+<a href="/blog/tasarruf-yapmanin-yollari.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Etkili Tasarruf Yapmanın Kanıtlanmış Yolları</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Bütçenizi kontrol altına alarak nasıl tasarruf yapabileceğinizi ve finansal hedeflerinize ulaşabileceğinizi öğrenin.</p>
+    </div>
+</a>
+
+<a href="/blog/ders-calisma-teknikleri-pomodoro.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-graduation-cap text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Eğitim</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Verimli Ders Çalışma Teknikleri: Pomodoro ve Daha Fazlası</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Ders çalışırken odaklanmanızı artıracak ve daha verimli olmanızı sağlayacak bilimsel yöntemleri keşfedin.</p>
+    </div>
+</a>
+
+<a href="/blog/2026-memur-ve-emekli-zammi.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">2026 Memur ve Emekli Zammı Beklentileri</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Ocak 2026’da memur ve emekli maaşlarına yapılması beklenen zam oranları hakkında en güncel bilgiler ve tahminler.</p>
+    </div>
+</a>
+
+<a href="/blog/bireysel-emeklilik-sistemi-bes-nedir.html" class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group border border-slate-100">
+    <div class="h-40 bg-slate-100 flex items-center justify-center text-slate-300"><i class="fa-solid fa-coins text-5xl"></i></div>
+    <div class="p-5 flex flex-col flex-grow">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Finans</span>
+        <h3 class="text-lg font-bold text-slate-800 mt-2 mb-2 group-hover:text-blue-600 transition-colors flex-grow">Bireysel Emeklilik Sistemi (BES) Nedir, Nasıl Çalışır?</h3>
+        <p class="text-xs text-slate-500 h-12 overflow-hidden">Emeklilik döneminizde ek bir gelir kaynağı oluşturmak için Bireysel Emeklilik Sistemi’nin avantajlarını ve işleyişini öğrenin.</p>
+    </div>
+</a>
+
         </div>
-        <p id="no-results" class="text-center text-slate-500 hidden">Arama sonucunda eşleşen yazi bulunamadi.</p>
+
     </main>
 
+    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <span class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></span>
-            <div class="text-xs text-slate-600 mt-6">&copy; 2026 HesaplaHadi.</div>
+            <a href="/index.html" class="text-2xl font-bold text-white tracking-tight">Hesapla<span class="text-blue-500">Hadi</span></a>
+            <div class="flex justify-center flex-wrap gap-x-6 gap-y-3 text-sm font-medium mt-6 text-slate-300">
+                <a href="/index.html" class="hover:text-white transition">Ana Sayfa</a>
+                <a href="/hakkimizda.html" class="hover:text-white transition">Hakkımızda</a>
+                <a href="/gizlilik-politikasi.html" class="hover:text-white transition">Gizlilik Politikası</a>
+                <a href="/iletisim.html" class="hover:text-white transition">İletişim</a>
+            </div>
+            <p class="text-xs text-slate-600 mt-8">&copy; 2024 HesaplaHadi. Tüm hakları saklıdır.</p>
         </div>
     </footer>
-
-    <!-- Scripts -->
-    <script src="../assets/js/blog-data.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const blogGrid = document.getElementById('blog-grid');
-            const searchInput = document.getElementById('search-input');
-            const noResults = document.getElementById('no-results');
-            const featuredPostContainer = document.getElementById('featured-post');
-
-            let allPosts = [];
-
-            function createPostElement(post) {
-                const postElement = document.createElement('a');
-                postElement.href = post.slug;
-                postElement.className = 'card-hover-effect bg-white rounded-2xl overflow-hidden flex flex-col group border border-slate-200';
-
-                postElement.innerHTML = `
-                    <div class="p-6 flex-grow">
-                        <span class="text-xs font-bold bg-${post.color}-50 text-${post.color}-600 px-3 py-1 rounded-full uppercase tracking-wider">${post.category}</span>
-                        <h3 class="font-extrabold text-slate-900 text-lg mt-4 mb-2">${post.title}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed">${post.summary}</p>
-                    </div>
-                    <div class="bg-slate-50 p-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500">
-                        <span>Devamını Oku</span>
-                        <i class="fa-solid fa-arrow-right transform transition-transform group-hover:translate-x-1"></i>
-                    </div>
-                `;
-                return postElement;
-            }
-
-            function createFeaturedPostElement(post) {
-                const featuredElement = document.createElement('a');
-                featuredElement.href = post.slug;
-                featuredElement.className = 'grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-2xl border border-slate-200 card-hover-effect';
-                
-                featuredElement.innerHTML = `
-                    <div>
-                        <span class="text-sm font-bold bg-${post.color}-100 text-${post.color}-700 px-4 py-2 rounded-full uppercase tracking-widest">Öne Çıkan Yazı</span>
-                        <h2 class="text-3xl font-extrabold text-slate-900 mt-6 mb-4">${post.title}</h2>
-                        <p class="text-slate-600 leading-relaxed">${post.summary}</p>
-                        <div class="mt-6 flex items-center gap-3 text-blue-600 font-bold group">
-                            <span>Devamını Oku</span>
-                            <i class="fa-solid fa-arrow-right transform transition-transform group-hover:translate-x-1"></i>
-                        </div>
-                    </div>
-                    <div class="hidden md:flex items-center justify-center text-8xl text-${post.color}-400">
-                        <i class="fa-solid ${post.image}"></i>
-                    </div>
-                `;
-                return featuredElement;
-            }
-
-            function renderPage(searchTerm = '') {
-                const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-                blogGrid.innerHTML = '';
-                featuredPostContainer.innerHTML = '';
-                
-                let postsToDisplay = allPosts;
-
-                if (normalizedSearchTerm.length > 0) {
-                    postsToDisplay = allPosts.filter(post =>
-                        post.title.toLowerCase().includes(normalizedSearchTerm) ||
-                        post.summary.toLowerCase().includes(normalizedSearchTerm) ||
-                        post.category.toLowerCase().includes(normalizedSearchTerm)
-                    );
-                    featuredPostContainer.style.display = 'none';
-                } else {
-                    featuredPostContainer.style.display = 'block';
-                }
-
-                if (postsToDisplay.length > 0) {
-                    if (normalizedSearchTerm.length === 0 && postsToDisplay.length > 0) {
-                        const featuredPost = postsToDisplay[0];
-                        featuredPostContainer.appendChild(createFeaturedPostElement(featuredPost));
-                        
-                        postsToDisplay.slice(1).forEach(post => {
-                            blogGrid.appendChild(createPostElement(post));
-                        });
-                    } else {
-                        postsToDisplay.forEach(post => {
-                            blogGrid.appendChild(createPostElement(post));
-                        });
-                    }
-                    noResults.classList.add('hidden');
-                } else {
-                    noResults.classList.remove('hidden');
-                }
-            }
-            
-            allPosts = blogPosts.sort((a, b) => {
-                const yearA = parseInt(a.slug.match(/(\d{4})/)?.[0] || '0');
-                const yearB = parseInt(b.slug.match(/(\d{4})/)?.[0] || '0');
-                if (yearA !== yearB) {
-                    return yearB - yearA;
-                }
-                return b.title.localeCompare(a.title);
-            });
-
-            renderPage();
-
-            searchInput.addEventListener('input', function() {
-                renderPage(this.value);
-            });
-        });
-    </script>
 </body>
 </html>
